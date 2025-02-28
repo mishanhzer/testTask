@@ -1,26 +1,63 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "target": "es2021",                                     
+    "jsx": "react-jsx",                    
+    "experimentalDecorators": true, 
+    "module": "ESNext",  
+    "rootDir": "./src", 
+    "moduleResolution": "node10",                  
+    "resolveJsonModule": true, 
+    "allowJs": true,   
+    "declaration": true,                              
+    "sourceMap": true,                        
+    "noEmit": true,                               
+    "outDir": "./build", 
+    "isolatedModules": true,                        
+    "allowSyntheticDefaultImports": true,           
+    "esModuleInterop": true,                            
+    "forceConsistentCasingInFileNames": true,           
+    "strict": true, 
+    "strictNullChecks": true,    // если будет баг, то убрать   // Гарантирует, что null и undefined рассматриваются как отдельные типы, что делает код более предсказуемым, предотвращая случайные операции с null или undefined значениями.                                           /* Ensure 'use strict' is always emitted. */
+    "noUnusedLocals": false,     // если будет баг, то убрать                        /* Enable error reporting when local variables aren't read. */
+    "noUnusedParameters": false, // если будет баг, то убрать                        /* Raise an error when a function parameter isn't read. */
+    "noFallthroughCasesInSwitch": true,              
+    "noUncheckedIndexedAccess": true, // если будет баг, то убрать                /* Add 'undefined' to a type when accessed using an index. */
+    "allowUnreachableCode": false, // убрать, если будет баг    // Установите allowUnreachableCode на false, чтобы предотвратить проникновение недостижимого кода в производство, обеспечивая более чистые и продуманные пути кода.
+    "skipDefaultLibCheck": true,                     
+    "skipLibCheck": true,                               
+    "noErrorTruncation": true,                      
   },
-  "include": [
-    "src"
-  ]
+  "files": [
+    "tsconfig.json"
+  ],
+  "include": ["src/**/*.ts"],
+  "exclude": []
 }
+
+
+// {
+//   "compilerOptions": {
+//     "target": "es5",
+//     "lib": [
+//       "dom",
+//       "dom.iterable",
+//       "esnext"
+//     ],
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "noFallthroughCasesInSwitch": true,
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true,
+//     "jsx": "react-jsx"
+//   },
+//   "include": [
+//     "src"
+//   ]
+// }

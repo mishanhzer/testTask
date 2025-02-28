@@ -1,0 +1,75 @@
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  flex-shrink: 0;
+  height: 100px;
+  align-items: center;
+    &__wrapper {
+      display: flex;
+      flex: 0 1 25%;
+      flex-direction: row;
+      max-width: 25%;
+      justify-content: space-between;
+      order: 1;
+        &_content {
+          display: flex;
+          width: 100px;
+          justify-content: space-between;
+            img {
+              border-radius: 5px;
+              width: 20px;
+            }
+        }
+    }
+    &__img {
+      border: 3px solid white;
+      border-radius: 50%;
+      justify-content: center;
+      order: 2;
+        img {
+          border: 1px solid black;
+          width: 80px;
+          border-radius: 50%;
+          justify-self: center;
+      }
+    }
+    &__contact {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      max-width: 25%;
+      flex: 0 1 25%;
+      order: 4;
+      &_basket {
+        width: 40px;
+      }
+      &_contactBlock {
+        margin-left: 2vh;
+        padding: 1.5em 2.5em;
+        background: #192e2f;
+        font-size: 16px;
+        display: flex;
+        font-family: Lora, serif;
+        color: #ffffff;
+        fill: #ffffff;
+          img {
+            margin-left: .6em;
+            height: 1.4em;
+            width: 1.4em;
+          }
+          &:hover {
+            font-family: Lora, serif;
+            color: #ffffff;
+            fill: #ffffff;
+            background: rgba(25, 46, 47, 0.7);
+            transition: opacity .2sease-out;
+              img {
+                transform: translateX(7px);
+                transition-duration: .2s;
+              }
+          }
+      }
+    }
+}
+
