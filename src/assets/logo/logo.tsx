@@ -1,11 +1,10 @@
-import vkImg from "./vk.svg";
-import instImg from "./inst.png";
-import liveImg from "./live.png";
-import mainLogo from "./mainLogo.jpg";
-import basket from "./basket.png";
-import arrow from './arrow.png'
+import vkImg from './logoHeader/vk.svg'
+import instImg from "./logoHeader/inst.png";
+import liveImg from "./logoHeader/live.png";
+import mainLogo from "./logoHeader/mainLogo.jpg";
+import arrow from './logoHeader/arrow.png'
 
-export { mainLogo, basket, arrow };
+export { mainLogo, arrow };
 
 interface Test {
   name: string;
