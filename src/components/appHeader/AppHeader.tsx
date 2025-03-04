@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { images, mainLogo, arrow } from "../../assets/logo/logo";
@@ -29,25 +28,6 @@ export const AppHeader = () => {
         <a className="w-4" href="#">
           <Basket className="fill-gray-700 w-4 h-4 hover:fill-black hover:transition" />
         </a>
-        {/* <a
-          href="#"
-          className={`flex ml-8 py-6 px-10
-             bg-blue-900 
-             text-base
-              text-white 
-              items-center 
-              font-serif 
-              hover:transition
-              hover:opacity-80
-              group`}
-        >
-          CONTACT ME
-          <img
-            className={`ml-2 w-6 h-6 group-hover:translate-x-1 group-hover: transition`}
-            src={arrow}
-            alt="#"
-          />
-        </a> */}
         <Link
           to="/contact"
           className={`flex ml-8 py-6 px-10
