@@ -7,6 +7,10 @@ module.exports = {
         128: "32rem",
         1200: "1200px",
       },
+      fontSize: {
+        fz15: "15px",
+        fz13: "13px",
+      },
     },
   },
   plugins: [],

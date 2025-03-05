@@ -2,20 +2,25 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { arrow } from "../../assets/logo/logo";
+import { classNamesLinkAndButton } from "./stylesUI_kits";
 
-const classNamesLinkAndButton = `
-  flex
-  py-6 
-  px-10
-  bg-blue-900 
-  text-white 
-  items-center 
-  font-serif 
-  hover:transition
-  hover:opacity-80
-  group`;
+interface ImageTypes {
+  w: string
+  h: string
+}
 
-const Image = ({ w, h }) => {
+interface LinkTypes {
+  ml: string
+  fz: string
+}
+
+interface ButtonTypes {
+  mt: string
+  h: string
+  fz: string
+}
+
+const Image = ({ w, h }: ImageTypes) => {
   return (
     <img
       className={`ml-2 ${w} ${h} group-hover:translate-x-1 group-hover: transition`}
@@ -25,7 +30,7 @@ const Image = ({ w, h }) => {
   );
 };
 
-export const LinkComponent = ({ml, fz}) => {
+export const LinkComponent = ({ml, fz}: LinkTypes) => {
   return (
     <Link 
       to="/contact" 
@@ -37,7 +42,7 @@ export const LinkComponent = ({ml, fz}) => {
   );
 };
 
-export const ButtonComponent = ({mt, h, fz}) => {
+export const ButtonComponent = ({mt, h, fz}: ButtonTypes) => {
   return (
     <div>
       <button 

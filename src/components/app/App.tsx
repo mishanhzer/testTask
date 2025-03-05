@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import { AppHeader } from "../appHeader/AppHeader";
-import { ContactMe } from "../pages/ContactMe";
+import { ContactMe } from "../pages/ContactMe/ContactMe";
 
 import "./app.css";
 
