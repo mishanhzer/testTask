@@ -1,111 +1,169 @@
 import React from "react";
-import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form";
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import { testForm } from "../../../assets/images/Images";
 import { ButtonComponent } from "../../UI_kits/LinkAndButton";
 
-import { classInput, classMailAndMessage, ClassFlex } from "./stylesContactMe";
+import { classInput, classMailAndMessage, classFlex } from "./stylesContactMe";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { register } from "module";
+
+interface PropsMessageTypes {
+  name: string
+  register: UseFormRegister<InputTypes>;
+  errors: FieldErrors<InputTypes>;
+}
+
+interface InputTypes extends PropsMessageTypes {
+  placeholder: string;
+  ml: string;
+}
 
 export const ContactMe = () => {
   const methods = useForm<InputTypes>();
 
-  const { control, handleSubmit, formState: {errors}, register } = methods;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    register,
+  } = methods;
 
-  const onSave = (data) => {
+  const onSubmit = (data) => {
     console.log(data);
   };
 
   return (
     <div className={`flex w-1200 mt-20 mx-auto`}>
       <img className={`w-128 h-15`} src={testForm} alt="test" />
-     <FormProvider {...methods}>
-     <form
-        className={`ml-20`}
-        onSubmit={handleSubmit(onSave)}>
-        <div className={`${ClassFlex} mb-8`}>
-          <label className={`text-gray-500 text-fz15`}>Name *</label>
-          <div className={`flex`}>
-            <TestInput name='firstName' placeholder='First Name' ml='ml-0' register={register} errors={errors}/>
-            <TestInput name='lastName' placeholder='Last Name' ml='ml-4' register={register} errors={errors}/>
+      <FormProvider {...methods}>
+        <form className={`ml-20`} onSubmit={handleSubmit(onSubmit)}>
+          <div className={`${classFlex} mb-8`}>
+            <label className={`text-gray-500 text-fz15`}>Name *</label>
+            <div className={`flex`}>
+              <InputСomponent
+                name="firstName"
+                placeholder="First Name"
+                ml="ml-0"
+                register={register}
+                errors={errors}
+              />
+              <InputСomponent
+                name="lastName"
+                placeholder="Last Name"
+                ml="ml-4"
+                register={register}
+                errors={errors}
+              />
+            </div>
           </div>
-        </div>
-        <TestEmail name='email' label='Email *' register={register} errors={errors} />
-        <TestMessage name='message' mb='mb-0' label='Message *' register={register} errors={errors} />
-        <ButtonComponent mt='mt-10' h='h-16' fz='text-sm' />
-      </form>
-     </FormProvider>
+          <EmailComponent
+            name="email"
+            register={register}
+            errors={errors}
+          />
+          <MessageComponent
+            name="message"
+            register={register}
+            errors={errors}
+          />
+          <ButtonComponent mt="mt-10" h="h-16" fz="text-sm" />
+        </form>
+      </FormProvider>
     </div>
   );
 };
 
-interface InputTypes {
-  name: string
-  placeholder: string
-  ml: string
-  register: UseFormRegister<InputTypes>
-  errors: FieldErrors<InputTypes>
-}
-
-const TestInput = ({name, placeholder, ml, register, errors}: InputTypes) => {
+const InputСomponent = ({ name, placeholder, ml, register, errors }: InputTypes) => {
   return (
     <div>
-    <input
+      <input
         id={name}
-        className={errors[name] ? `${ml} ${classInput} border-red-500` : `${ml} ${classInput}`}
+        className={
+          errors[name]
+            ? `${ml} ${classInput} border-red-500`
+            : `${ml} ${classInput}`
+        }
         {...register(name, { required: true })}
         placeholder={placeholder}
       />
-    {errors[name] && <div className={`mt-1 text-fz13 text-red-600`}>Это поле обязательно!</div>}
-  </div>
-  )
-}
+      {errors[name] && (
+        <div className={`${ml} mt-1 text-fz13 text-red-600`}>
+          Это поле обязательно!
+        </div>
+      )}
+    </div>
+  );
+};
 
-const TestEmail = ({name, label, register, errors}) => {
+const EmailComponent = ({ name, register, errors }: PropsMessageTypes) => {
   return (
-    <div className={`${ClassFlex} mb-8`}>
-    <label className={`text-gray-500 text-fz15`}>{label}</label>
-    <Input name={name} register={register} errors={errors} />
-    {errors.email && <div className={`mt-1 text-fz13 text-red-600`}>Это поле обязательно!</div>}
-  </div>
-  )
-}
+    <div className={`${classFlex} mb-8`}>
+      <label className={`text-gray-500 text-fz15`}>Email *</label>
+      <Input name={name} register={register} errors={errors} />
+      {errors[name] && (
+        <div className={`mt-1 text-fz13 text-red-600`}>
+          Это поле обязательно!
+        </div>
+      )}
+    </div>
+  );
+};
 
-const TestMessage = ({name, mb, label, register, errors}) => {
+const MessageComponent = ({ name, register, errors }: PropsMessageTypes) => {
   return (
-    <div className={`${ClassFlex} ${mb}`}>
-    <label className={`text-gray-500 text-fz15`}>{label}</label>
-    <TextArea name={name} h='h-36' mh='min-h-36' register={register} errors={errors} />
-    {errors.email && <div className={`mt-1 text-fz13 text-red-600`}>Это поле обязательно!</div>}
-  </div>
-  )
-}
+    <div className={`${classFlex}`}>
+      <label className={`text-gray-500 text-fz15`}>Message *</label>
+      <TextArea
+        name={name}
+        register={register}
+        errors={errors}
+      />
+      {errors[name] && (
+        <div className={`mt-1 text-fz13 text-red-600`}>
+          Это поле обязательно!
+        </div>
+      )}
+    </div>
+  );
+};
 
-const Input = ({name, register, errors}) => {
+const Input = ({ name, register, errors }: PropsMessageTypes) => {
   return (
     <input
       id={name}
-      className={errors[name] ? `${classMailAndMessage} border-red-500` : classMailAndMessage}
+      className={
+        errors[name]
+          ? `${classMailAndMessage} border-red-500`
+          : classMailAndMessage
+      }
       {...register(name, { required: true })}
     />
-  )
-}
+  );
+};
 
-const TextArea = ({name, h, mh, register, errors}) => {
+const TextArea = ({ name, register, errors }: PropsMessageTypes) => {
   return (
     <textarea
       id={name}
-      className={`${h} ${mh} ${errors[name] ? `${classMailAndMessage} border-red-500` : classMailAndMessage}`}
+      className={`h-36 min-h-36 ${
+        errors[name]
+          ? `${classMailAndMessage} border-red-500`
+          : classMailAndMessage
+      }`}
       {...register(name, { required: true })}
-    >
-    </textarea>
-  )
-}
+    ></textarea>
+  );
+};
 
 
-
+// Cтарый код для работы
 // export const ContactMe = () => {
 //   const { register, handleSubmit, formState: {errors} } = useForm();
 //   // register - регистрация поля ввода и применение правил валидации
