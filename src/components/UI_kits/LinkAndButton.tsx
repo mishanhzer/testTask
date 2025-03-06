@@ -30,10 +30,10 @@ const Image = ({ w, h }: ImageTypes) => {
   );
 };
 
-export const LinkComponent = ({ml, fz}: LinkTypes) => {
+export const LinkComponent = ({ ml, fz }: LinkTypes) => {
   return (
-    <Link 
-      to="/contact" 
+    <Link
+      to="/contact"
       className={twMerge(ml, fz, classNamesLinkAndButton)}
     >
       CONTACT ME
@@ -42,10 +42,10 @@ export const LinkComponent = ({ml, fz}: LinkTypes) => {
   );
 };
 
-export const ButtonComponent = ({mt, h, fz}: ButtonTypes) => {
+export const ButtonComponent = ({ mt, h, fz }: ButtonTypes) => {
   return (
     <div>
-      <button 
+      <button
         className={twMerge(mt, h, fz, classNamesLinkAndButton)}
         type="submit"
       >
