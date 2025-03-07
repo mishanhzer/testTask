@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 
 import { AppHeader } from "../appHeader/AppHeader";
-import { ContactMe } from "../pages/ContactMe/ContactMe";
+import { ContactMeRhf } from "../pages/ContactMe/ContactMeRhf";
+import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
 
 import "./app.css";
 
@@ -19,7 +20,8 @@ const App = () => {
         <AppHeader />
         <Routes>
           <Route path="/" element="" />
-          <Route path='/contact' element={<ContactMe />} />
+          {/* <Route path='/contact' element={<ContactMeRhf />} /> */}
+          <Route path='/contact' element={<ContactMeAnt />} />
         </Routes>
       </div>
     </Router>
