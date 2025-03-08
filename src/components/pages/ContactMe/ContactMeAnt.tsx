@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 
 import { FormItem } from "react-hook-form-antd";
 import { DevTool } from "@hookform/devtools";
@@ -13,23 +13,36 @@ const { TextArea } = Input;
 import { ButtonComponent } from "../../UI_kits/LinkAndButton";
 import { Label } from "../ContactMe/Label";
 
-import { testForm } from '../../../assets/images/Images'
+import { mainPicture } from '../../../assets/images/Images'
 import '../ContactMe/styles/changeStyleAnt.scss'
-import { classInputAnt, classLabelAnt } from '../ContactMe/styles/stylesContactMe'
+import { classInputAnt, classLabelAnt, classMessageAnt } from '../ContactMe/styles/stylesContactMe'
+
+interface DataForm {
+  name: string
+  lastName: string
+  email: string
+  message: string
+}
 
 const schema = yup.object().shape({
-  firstName: yup.string().required('Это поле обязательно!'),
+  name: yup.string().required('Это поле обязательно!'),
   lastName: yup.string().required('Это поле обязательно!'),
   email: yup.string().email('Вы ввели неверный e-mail').required('Это поле обязательно!'),
   message: yup.string().required('Это поле обязательно!')
 })
 
 export const ContactMeAnt = () => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset, formState, formState: { isSubmitSuccessful, isSubmitting } } = useForm({
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = (data) => {
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ name: '', lastName: '', email: '', message: '' })
+    }
+  }, [formState, reset])
+
+  const onSubmit = (data: DataForm) => {
     console.log(data);
   };
 
@@ -38,8 +51,8 @@ export const ContactMeAnt = () => {
       <div className={`flex w-1200 mt-36 mx-auto`}>
         <img
           className={`w-128 h-15`}
-          src={testForm}
-          alt="test" />
+          src={mainPicture}
+          alt="mainPicture" />
         <Form
           style={{ maxWidth: 600, marginLeft: 70 }}
           onFinish={handleSubmit(onSubmit)}
@@ -47,7 +60,7 @@ export const ContactMeAnt = () => {
           <div className={`flex`}>
             <FormItem
               control={control}
-              name="firstName"
+              name="name"
               style={{ width: 500, alignSelf: 'flex-end' }}>
               <label className={classLabelAnt}>{<Label name='Name' />}</label>
               <Input style={classInputAnt} />
@@ -76,12 +89,11 @@ export const ContactMeAnt = () => {
             style={{ width: '100%', alignSelf: 'flex-end', marginTop: 35 }}>
             <label className={classLabelAnt}>{<Label name='Message' />}</label>
             <TextArea
-              rows={4}
-              style={{ minHeight: 160, fontSize: 18, color: '#636363', fontFamily: 'Lora, serif, sans-serif', fontWeight: 400 }} />
+              style={classMessageAnt} />
           </FormItem>
 
           <Form.Item>
-            <ButtonComponent mt='mt-5' h='h-16' fz='text-sm' />
+            <ButtonComponent disabled={isSubmitting} mt='mt-5' h='h-16' fz='text-sm' />
           </Form.Item>
         </Form>
       </div>

@@ -18,6 +18,7 @@ interface ButtonTypes {
   mt: string
   h: string
   fz: string
+  disabled: boolean
 }
 
 const Image = ({ w, h }: ImageTypes) => {
@@ -42,10 +43,11 @@ export const LinkComponent = ({ ml, fz }: LinkTypes) => {
   );
 };
 
-export const ButtonComponent = ({ mt, h, fz }: ButtonTypes) => {
+export const ButtonComponent = ({ mt, h, fz, disabled }: ButtonTypes) => {
   return (
     <div>
       <button
+        disabled={disabled}
         className={twMerge(mt, h, fz, classNamesLinkAndButton)}
         type="submit"
       >

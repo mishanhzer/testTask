@@ -1,4 +1,4 @@
 import testImgForm from './testImgForm.png'
-import testForm from './testForm.jpg'
+import mainPicture from './mainPicture.jpg'
 
-export { testImgForm, testForm } 
+export { testImgForm, mainPicture } 
