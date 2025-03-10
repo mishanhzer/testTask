@@ -1,0 +1,23 @@
+.underlineAnimation {
+  position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0; 
+      height: 1.5px;
+      display: block;
+      margin-top: 5px;
+      right: 0;
+      background: rgba(156, 163, 175);
+      transition: width .2s ease;
+      -webkit-transition: width .4s ease;
+    }
+    &:hover:after {
+      width: 100%;
+      left: 0;
+      background: rgba(156, 163, 175);
+    }
+}
+
+ 
+
