@@ -11,9 +11,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const { TextArea } = Input;
 
 import { ButtonComponent } from "../../UI_kits/LinkAndButton";
+import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 
-import { mainPicture } from '../../../assets/images/Images'
 import '../ContactMe/styles/changeStyleAnt.scss'
 import { classInputAnt, classLabelAnt, classMessageAnt } from '../ContactMe/styles/stylesContactMe'
 
@@ -49,10 +49,7 @@ export const ContactMeAnt = () => {
   return (
     <>
       <div className={`flex w-1200 mt-36 mx-auto`}>
-        <img
-          className={`w-128 h-15`}
-          src={mainPicture}
-          alt="mainPicture" />
+        <MainPicture />
         <Form
           style={{ maxWidth: 600, marginLeft: 70 }}
           onFinish={handleSubmit(onSubmit)}
@@ -71,7 +68,6 @@ export const ContactMeAnt = () => {
               style={{ width: 500, alignSelf: 'flex-end', marginLeft: 30 }}>
               <label className={classLabelAnt}>{<Label name='Last Name' />}</label>
               <Input style={classInputAnt} />
-
             </FormItem>
           </div>
           <FormItem
@@ -81,8 +77,6 @@ export const ContactMeAnt = () => {
             <label className={classLabelAnt}>{<Label name='Email' />}</label>
             <Input style={classInputAnt} />
           </FormItem>
-
-
           <FormItem
             control={control}
             name="message"
@@ -97,7 +91,8 @@ export const ContactMeAnt = () => {
           </Form.Item>
         </Form>
       </div>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </>
   );
 }
+

@@ -6,12 +6,12 @@ import arrow from './logoHeader/arrow.png'
 
 export { mainLogo, arrow };
 
-interface Test {
+interface TypesLogo {
   name: string;
   src: string;
 }
 
-export const images: Test[] = [
+export const images: TypesLogo[] = [
   {
     name: "vkLogo",
     src: vkImg,

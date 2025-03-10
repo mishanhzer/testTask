@@ -1,7 +1,7 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
-import { arrow } from "../../assets/logo/logo";
+import { arrow, mainLogo } from "../../assets/logo/logo";
 import { classNamesLinkAndButton } from "./stylesUI_kits";
 
 interface ImageTypes {
@@ -21,24 +21,27 @@ interface ButtonTypes {
   disabled: boolean
 }
 
-const Image = ({ w, h }: ImageTypes) => {
+export const LinkMainLogo = () => {
   return (
-    <img
-      className={`ml-2 ${w} ${h} group-hover:translate-x-1 group-hover: transition`}
-      src={arrow}
-      alt="#"
-    />
-  );
-};
+    <Link
+      to='/'>
+      <img
+        className={`w-24 rounded-full border-2 border-black border-solid`}
+        src={mainLogo}
+        alt="mainLogo"
+      />
+    </Link>
+  )
+}
 
-export const LinkComponent = ({ ml, fz }: LinkTypes) => {
+export const LinkButton = ({ ml, fz }: LinkTypes) => {
   return (
     <Link
       to="/contact"
       className={twMerge(ml, fz, classNamesLinkAndButton)}
     >
       CONTACT ME
-      <Image w="w-6" h="h-6" />
+      <ImageBtn w="w-6" h="h-6" />
     </Link>
   );
 };
@@ -52,8 +55,18 @@ export const ButtonComponent = ({ mt, h, fz, disabled }: ButtonTypes) => {
         type="submit"
       >
         Submit
-        <Image w="w-5" h="h-5" />
+        <ImageBtn w="w-5" h="h-5" />
       </button>
     </div>
+  );
+};
+
+const ImageBtn = ({ w, h }: ImageTypes) => {
+  return (
+    <img
+      className={`ml-2 ${w} ${h} group-hover:translate-x-1 group-hover: transition`}
+      src={arrow}
+      alt="#"
+    />
   );
 };

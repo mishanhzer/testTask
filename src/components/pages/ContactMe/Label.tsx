@@ -1,6 +1,10 @@
 import React from "react"
 
-export const Label = ({ name }) => {
+interface NameLabel {
+  name: string
+}
+
+export const Label = ({ name }: NameLabel) => {
   return (
     <div>{<span className={`text-red-500 self-center`}>*</span>} {name}</div>
   )

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       spacing: {
         128: "32rem",
+        420: "420px",
         1200: "1200px",
       },
       fontSize: {
