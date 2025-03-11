@@ -5,7 +5,6 @@ import { LinkButton, LinkMainLogo } from "../UI_kits/LinkAndButton";
 import { ImagesAppheader } from './ImagesAppHeader'
 
 import { images } from "../../assets/logo/logo";
-import "./appHeader.scss";
 
 export const AppHeader = () => {
   return (

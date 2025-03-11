@@ -12,7 +12,7 @@ import { ContactMeRhf } from "../pages/ContactMe/ContactMeRhf";
 import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
 import { NavigateMenu } from "../navigateMenu/NavigateMenu";
 
-import "./app.css";
+import "./app.scss";
 
 const App = () => {
   return (

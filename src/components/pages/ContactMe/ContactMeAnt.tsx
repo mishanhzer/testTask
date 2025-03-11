@@ -14,8 +14,9 @@ import { ButtonComponent } from "../../UI_kits/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 
-import '../ContactMe/styles/changeStyleAnt.scss'
 import { classInputAnt, classLabelAnt, classMessageAnt } from '../ContactMe/styles/stylesContactMe'
+
+import '../ContactMe/styles/changeStyleAnt.scss'
 
 interface DataForm {
   name: string
