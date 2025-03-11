@@ -2,6 +2,7 @@ import React from 'react'
 
 import testImgForm from './testImgForm.png'
 import mainPicture from './mainPicture.jpg'
+import homePicture from './homePicture.jpg'
 
 export { testImgForm, mainPicture }
 
@@ -13,3 +14,13 @@ export const MainPicture = () => {
       alt="mainPicture" />
   )
 }
+
+export const HomePicture = () => {
+  return (
+    <img
+      className={`w-196 h-15`}
+      src={homePicture}
+      alt="homePicture" />
+  )
+}
+
