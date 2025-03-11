@@ -16,6 +16,10 @@ module.exports = {
         fz13: "13px",
       },
     },
+    colors: {
+      textLinkPortfolio: "#828282",
+      purple: "#3f3cbb",
+    },
   },
   plugins: [],
 };
