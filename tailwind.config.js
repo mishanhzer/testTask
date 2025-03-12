@@ -6,6 +6,7 @@ module.exports = {
       spacing: {
         128: "32rem",
         196: "40rem",
+        350: "350px",
         420: "420px",
         510: "510px",
         1200: "1200px",
@@ -15,10 +16,6 @@ module.exports = {
         fz15: "15px",
         fz13: "13px",
       },
-    },
-    colors: {
-      textLinkPortfolio: "#828282",
-      purple: "#3f3cbb",
     },
   },
   plugins: [],
