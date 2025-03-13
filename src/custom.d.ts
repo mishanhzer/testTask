@@ -6,3 +6,4 @@ declare module "*.scss"
 declare module "*.module.scss"
 
 declare module 'react-dom/client'
+declare module "react-helmet";

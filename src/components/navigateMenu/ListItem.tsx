@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-import style from './styles/navigateMenu.module.scss'
+import styles from './styles/navigateMenu.module.scss'
 import { activeClassListItem, classListItem } from './styles/activeClassListItem'
 
 interface TypesListItem {
@@ -18,7 +18,7 @@ export const ListItem = ({ name, path }: TypesListItem) => {
       className={classListItem}>
       <NavLink
         to={path}
-        className={style.underlineAnimation}
+        className={styles.underlineAnimation}
         style={activeClassListItem}>
         {name}
       </NavLink>
@@ -34,7 +34,7 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
         className={classListItem}>
         <NavLink
           to={path}
-          className={style.underlineAnimation}
+          className={styles.underlineAnimation}
           style={activeClassListItem}>
           {name}
         </NavLink>

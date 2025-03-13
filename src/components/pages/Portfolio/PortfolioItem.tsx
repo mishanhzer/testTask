@@ -1,8 +1,12 @@
 import React from "react";
+import { Link, Outlet, useOutlet } from 'react-router-dom';
+
+import { Animals } from "./Animals/Animals.tsx";
 
 import styles from './styles/portfolio.module.scss'
 import { PortfolioAnimals, PortfolioFlowers, PortfolioStillLife } from "../../../assets/images/Images";
 import { descriptionAnimals, descriptionFlowers, descriptionStillLife } from './descriptionGroupsPicture.ts'
+import { Portfolio } from "./Portfolio.tsx";
 
 
 interface TypesPortfolioItem {
@@ -18,14 +22,19 @@ export const dataPortfolioItem = [
 ]
 
 export const PortfolioItem = ({ Component, headText, text }: TypesPortfolioItem) => {
+  const outlet = useOutlet()
   return (
-    <div className={`flex my-8`}>
-      {Component}
-      <div className={`flex flex-col ml-5`}>
-        <a className={`text-center ${styles.portfolioHeadTextStyle}`} href='#'>{headText}</a>
-        <div className={`text-center leading-7 w-1200 ${styles.portfolioTextStyle}`}><span className={`${styles.portfolioMainTextBold}`}>{headText}</span> {text}</div>
+    <>
+      <div className={`flex my-8`}>
+        <Link to='/portfolio/animals'>{Component}</Link>
+        <div className={`flex flex-col ml-5`}>
+          <a className={`text-center ${styles.portfolioHeadTextStyle}`} href='#'>{headText}</a>
+          <div className={`text-center leading-7 w-1200 ${styles.portfolioTextStyle}`}><span className={`${styles.portfolioMainTextBold}`}>{headText}</span> {text}</div>
+        </div>
       </div>
-    </div>
+      <Outlet />
+      {/* {outlet ? <Outlet /> : <Portfolio />} */}
+    </>
   )
 }
 

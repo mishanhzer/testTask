@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { arrow, mainLogo } from "../../assets/logo/logo";
@@ -24,7 +25,7 @@ interface ButtonTypes {
 export const LinkMainLogo = () => {
   return (
     <Link
-      to='/'>
+      to='/home'>
       <img
         className={`w-24 rounded-full border-2 border-black border-solid`}
         src={mainLogo}
@@ -70,3 +71,15 @@ const ImageBtn = ({ w, h }: ImageTypes) => {
     />
   );
 };
+
+export const Title = ({ name, content }) => {
+  return (
+    <Helmet>
+      <meta
+        name={name}
+        content={content}
+      />
+      <title>{name}</title>
+    </Helmet>
+  )
+}

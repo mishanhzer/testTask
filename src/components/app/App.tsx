@@ -12,6 +12,7 @@ import { ContactMeRhf } from "../pages/ContactMe/ContactMeRhf";
 import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
 import { Home } from "../pages/Home/Home";
 import { Portfolio } from "../pages/Portfolio/Portfolio";
+import { Animals } from "../pages/Portfolio/Animals/Animals";
 import { NavigateMenu } from "../navigateMenu/NavigateMenu";
 
 import "./app.scss";
@@ -23,11 +24,12 @@ const App = () => {
         <AppHeader />
         <NavigateMenu />
         <Routes>
-          <Route path="/" element="" />
-          {/* <Route path='/contact' element={<ContactMeRhf />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path='/contact' element={<ContactMeAnt />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/portfolio' element={<Portfolio />} />
+          <Route path='/portfolio' element={<Portfolio />} >
+            <Route path='animals' element={<Animals />} />
+          </Route>
         </Routes>
       </div>
     </Router>

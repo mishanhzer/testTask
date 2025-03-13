@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const { TextArea } = Input;
 
-import { ButtonComponent } from "../../UI_kits/LinkAndButton";
+import { ButtonComponent, Title } from "../../UI_kits/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 
@@ -49,6 +49,7 @@ export const ContactMeAnt = () => {
 
   return (
     <>
+      <Title name='Elena Kozyutenko' content='Main page' />
       <div className={`flex w-1200 mt-36 mx-auto`}>
         <MainPicture />
         <Form
