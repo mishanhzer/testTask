@@ -1,0 +1,56 @@
+.test {
+  grid-template-areas: 
+  "wolf cats tiger"
+  "wolf hedgehog tiger"
+  "leopard cat cat_1"
+  "leopard tiger1 cat_1"
+  
+  "leopards tiger_2 ."
+  "leopards . .";
+}
+
+
+
+// .img {
+//   background-size: cover;
+// }
+
+// .img1 {
+//   grid-area: 1 / 1 / span 2 ;
+// }
+
+// .img2 {
+//   grid-area: 1 / 3;
+// }
+
+// .img3 {
+//   grid-area: 2 / 3;
+// }
+
+// .img4 {
+//   grid-area: 3 / 1;
+// }
+
+// .img5 {
+//   grid-area: 4 / 1;
+// }
+
+// .img6 {
+//   grid-area: 3 / 2 / span 2;
+// }
+
+// .img7 {
+//   grid-area: 1 / 4;
+// }
+
+// .img8 {
+//   grid-area: 1 / 5;
+// }
+
+// .img9 {
+//   grid-area: 2 / 4 / span 2;
+// }
+
+// .img10 {
+//   grid-area: 4 / 4;
+// }
