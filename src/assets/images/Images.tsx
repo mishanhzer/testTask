@@ -31,7 +31,7 @@ export const HomePicture = () => {
 const ImagePortfolio = ({ source, alt }) => {
   return (
     <img
-      className={`w-350 h-350`}
+      className={`min-w-min w-350 h-350`}
       src={source}
       alt={alt} />
   )
