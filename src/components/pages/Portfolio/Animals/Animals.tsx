@@ -1,6 +1,10 @@
 import React from "react";
 
 import { AnimalPicture } from "../../../../assets/images/works/animals/animalImages";
+
+import { filterAnimals } from "../../../../assets/images/works/allWorks/AllWorks";
+import { Content } from "../../../../assets/images/works/allWorks/AllWorks";
+
 import styles from './styles/animals.module.scss'
 
 import wolf from '../../../../assets/images/works/animals/wolf.jpg'
@@ -14,32 +18,7 @@ export const Animals = () => {
   return (
     <>
       <div className={styles.container}>
-        <img
-          id={styles.wolf}
-          src={wolf}
-          alt='#' />
-        <img
-          id={styles.leopard}
-          src={leopard}
-          alt='#' />
-        <img
-          id={styles.cats}
-          src={cats}
-          alt='#' />
-        <img
-          id={styles.tiger}
-          src={tiger}
-          alt='#' />
-        <img
-          className={styles.test}
-          id={styles.cat}
-          src={cat}
-          alt='#' />
-        <img
-          id={styles.hedgehog}
-          src={hedgehog}
-          alt='#' />
-
+        <Content works={filterAnimals} />
         {/* <AnimalPicture /> */}
       </div>
     </>
