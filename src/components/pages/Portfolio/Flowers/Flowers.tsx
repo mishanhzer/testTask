@@ -11,7 +11,7 @@ export const Flowers = () => {
   return (
     <>
       <div className={styles.container}>
-        <Content works={filterFlowers} />
+        {/* <Content works={filterFlowers} /> */}
       </div>
     </>
   )
