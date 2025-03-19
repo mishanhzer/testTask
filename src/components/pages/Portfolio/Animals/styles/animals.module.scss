@@ -12,12 +12,167 @@
 .btn {
   width: 150px;
   min-height: 100px;
-  background-color: red;
   // justify-self: center;
   grid-column-start: 2;
   grid-column-end: 2;
     &:disabled {
       opacity: 0.5;
+    }
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+  background-color: white;
+  grid-column-start: 2;
+  margin-top: 15px;
+  margin-bottom: 50px;
+  text-align: center;
+  align-content: center;
+  border: 1px solid #f2f2f2;
+  border-radius: 8px;
+}
+
+.listItems {
+  display: block;
+  height: 50px;
+  width: 65px;
+  align-self: center;
+  justify-self: center;
+  width: 60px;
+  box-sizing: border-box;
+    &:hover {
+      background-color: #E0FFFF;
+    }
+    a {
+      font-size: 16px;
+      font-weight: 700;
+      color: grey;
+      box-sizing: border-box;
+      padding-top: 11px;
+      display: block;
+      height: 100%;
+      border: 3px solid transparent;
+    }
+}
+
+
+.listItemPrev {
+  display: block;
+  height: 50px;
+  width: 65px;
+  align-self: center;
+  justify-self: center;
+  width: 60px;
+  box-sizing: border-box;
+  position: relative;
+    &:hover {
+      background-color: #E0FFFF;
+    }
+    a {
+      box-sizing: border-box;
+      padding-top: 16px;
+      font-size: 16px;
+      display: block;
+      height: 100%;
+      border: 3px solid transparent;
+        img {
+          display: block;
+          margin: auto;
+          width: 15px;
+          height: 15px;
+        }
+    }
+}
+
+.listItemOnStart {
+  display: block;
+  height: 50px;
+  width: 65px;
+  align-self: center;
+  justify-self: center;
+  width: 60px;
+  box-sizing: border-box;
+  position: relative;
+    &:hover {
+      background-color: #E0FFFF;
+    }
+    a {
+      box-sizing: border-box;
+      padding-top: 16px;
+      font-size: 16px;
+      display: block;
+      height: 100%;
+      border: 3px solid transparent;
+        img {
+          display: block;
+          margin: auto;
+          width: 15px;
+          height: 15px;
+          transform: rotate(0deg);
+        }
+    }
+}
+
+
+.listItemNext {
+  display: block;
+  height: 50px;
+  width: 65px;
+  align-self: center;
+  justify-self: center;
+  width: 60px;
+  box-sizing: border-box;
+  position: relative;
+    &:hover {
+      background-color: #E0FFFF;
+    }
+    a {
+      box-sizing: border-box;
+      padding-top: 16px;
+      font-size: 16px;
+      display: block;
+      height: 100%;
+      border: 3px solid transparent;
+        img {
+          display: block;
+          margin: auto;
+          width: 15px;
+          height: 15px;
+          transform: rotate(180deg);
+        }
+    }
+}
+
+.listItemOnEnd {
+  display: block;
+  height: 50px;
+  width: 65px;
+  align-self: center;
+  justify-self: center;
+  width: 60px;
+  box-sizing: border-box;
+  position: relative;
+    &:hover {
+      background-color: #E0FFFF;
+    }
+    a {
+      box-sizing: border-box;
+      padding-top: 16px;
+      font-size: 16px;
+      display: block;
+      height: 100%;
+      border: 3px solid transparent;
+        img {
+          display: block;
+          margin: auto;
+          width: 15px;
+          height: 15px;
+          transform: rotate(180deg);
+        }
     }
 }
 
