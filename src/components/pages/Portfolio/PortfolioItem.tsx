@@ -14,7 +14,7 @@ interface TypesPortfolioItem {
 }
 
 export const dataPortfolioItem = [
-  { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: '/portfolio/animals', id: 0 },
+  { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: '/portfolio/animals/1', id: 0 },
   { Component: <PortfolioFlowers />, headText: 'Flowers', text: descriptionFlowers, path: '/portfolio/flowers', id: 1 },
   { Component: <PortfolioStillLife />, headText: 'StillLife', text: descriptionStillLife, path: '/portfolio/still_life', id: 2 }
 ]
