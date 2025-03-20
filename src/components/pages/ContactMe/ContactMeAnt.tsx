@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Form, Input } from "antd";
 
 import { FormItem } from "react-hook-form-antd";
-import { DevTool } from "@hookform/devtools";
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';

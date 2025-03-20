@@ -41,7 +41,7 @@ export const LinkButton = ({ ml, fz }: LinkTypes) => {
       to="/contact"
       className={twMerge(ml, fz, classNamesLinkAndButton)}
     >
-      CONTACT ME
+      СВЯЗАТЬСЯ СО МНОЙ
       <ImageBtn w="w-6" h="h-6" />
     </Link>
   );
@@ -55,7 +55,7 @@ export const ButtonComponent = ({ mt, h, fz, disabled }: ButtonTypes) => {
         className={twMerge(mt, h, fz, classNamesLinkAndButton)}
         type="submit"
       >
-        Submit
+        Отправить
         <ImageBtn w="w-5" h="h-5" />
       </button>
     </div>

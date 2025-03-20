@@ -62,23 +62,20 @@
 
 .listItemPrev {
   display: block;
-  height: 50px;
-  width: 65px;
-  align-self: center;
-  justify-self: center;
   width: 60px;
   box-sizing: border-box;
   position: relative;
     &:hover {
       background-color: #E0FFFF;
     }
-    a {
+    button {
+      padding-top: 2px;
       box-sizing: border-box;
-      padding-top: 16px;
       font-size: 16px;
       display: block;
       height: 100%;
       border: 3px solid transparent;
+      justify-self: center;
         img {
           display: block;
           margin: auto;
@@ -90,19 +87,16 @@
 
 .listItemOnStart {
   display: block;
-  height: 50px;
-  width: 65px;
-  align-self: center;
-  justify-self: center;
   width: 60px;
   box-sizing: border-box;
   position: relative;
     &:hover {
       background-color: #E0FFFF;
     }
-    a {
+    button {
+      justify-self: center;
       box-sizing: border-box;
-      padding-top: 16px;
+      padding-top: 2px;
       font-size: 16px;
       display: block;
       height: 100%;
@@ -117,22 +111,18 @@
     }
 }
 
-
 .listItemNext {
   display: block;
-  height: 50px;
-  width: 65px;
-  align-self: center;
-  justify-self: center;
   width: 60px;
   box-sizing: border-box;
   position: relative;
     &:hover {
       background-color: #E0FFFF;
     }
-    a {
+    button {
+      padding-top: 2px;
       box-sizing: border-box;
-      padding-top: 16px;
+      justify-self: center;
       font-size: 16px;
       display: block;
       height: 100%;
@@ -159,9 +149,10 @@
     &:hover {
       background-color: #E0FFFF;
     }
-    a {
+    button {
+      justify-self: center;
       box-sizing: border-box;
-      padding-top: 16px;
+      padding-top: 2px;
       font-size: 16px;
       display: block;
       height: 100%;

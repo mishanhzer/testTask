@@ -9,6 +9,8 @@ import {
 
 interface TypesStore {
   animalWorks: TypesDataWorks[]
+  animalDisplayedDataPageOne: TypesDataWorks[]
+  animalDisplayedDataPageTwo: TypesDataWorks[]
   animalDisplayedData: TypesDataWorks[]
   animalVisibleData: number
   setAnimalVisibleData: () => void
@@ -22,6 +24,9 @@ export const useAnimalStore = create<TypesStore>()(
     immer(
         (set) => ({
           animalWorks: dataWorks.filter(item => item.category === 'animal'),
+          animalDisplayedDataPageOne: dataWorks.filter(item => item.category === 'animal').slice(0, 9),
+          animalDisplayedDataPageTwo: dataWorks.filter(item => item.category === 'animal').slice(9, 18),
+          animalDisplayedDataPageThree: dataWorks.filter(item => item.category === 'animal').slice(18, 27),
           animalDisplayedData: dataWorks.filter(item => item.category === 'animal').slice(0, 9),
           animalVisibleData: 9,
           funcForCall: () => {},

@@ -43,6 +43,7 @@
     "jest-watch-typeahead": "^2.2.2",
     "lozad": "^1.16.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "nanoid": "^5.1.5",
     "next": "^15.2.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-normalize": "^13.0.1",
