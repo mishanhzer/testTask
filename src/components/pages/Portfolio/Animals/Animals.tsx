@@ -17,6 +17,20 @@ interface TypesAnimals {
   handleAnimalLoadMore: () => void
 }
 
+interface TypesAnimalsDataPages {
+  path: string
+  name: number
+  source: string
+  class: string
+  func: () => void
+}
+
+interface TypesButtonNavigate {
+  className: string
+  navigateFunc: () => void
+  source: string
+}
+
 export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
   console.log(animalDisplayedData)
@@ -40,9 +54,6 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
   const idTest = +location.pathname.slice(19, 21)
 
   const navigate = useNavigate()
-
-  const params = useParams()
-  console.log(params)
 
   useEffect(() => {
     navigate('/portfolio/animals/1')
@@ -72,53 +83,22 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
 
   const goStart = () => {
     navigate('/portfolio/animals/1')
+    setTestOne()
   }
 
   const goEnd = () => {
     navigate('/portfolio/animals/6')
+    setTestSix()
   }
 
-  const navigatePageOne = () => {
-    if (params.id === '1') {
-      // navigate('/portfolio/animals/1')
-      setTestOne()
-    }
-  }
-
-  const navigatePageTwo = () => {
-    if (params.id === '2') {
-      // navigate('/portfolio/animals/2')
-      setTestTwo()
-    }
-  }
-
-  const navigatePageThree = () => {
-    if (params.id === '3') {
-      // navigate('/portfolio/animals/3')
-      setTestThree()
-    }
-  }
-
-  const navigatePageFour = () => {
-    if (params.id === '4') {
-      // navigate('/portfolio/animals/4')
-      setTestFour()
-    }
-  }
-
-  const navigatePageFive = () => {
-    if (params.id === '5') {
-      // navigate('/portfolio/animals/5')
-      setTestFive()
-    }
-  }
-
-  const navigatePageSix = () => {
-    if (params.id === '6') {
-      // navigate('/portfolio/animals/6')
-      setTestSix()
-    }
-  }
+  const animalsDataPages: TypesAnimalsDataPages[] = [
+    { path: '/portfolio/animals/1', name: 1, source: '', class: styles.listItems, func: setTestOne },
+    { path: '/portfolio/animals/2', name: 2, source: '', class: styles.listItems, func: setTestTwo },
+    { path: '/portfolio/animals/3', name: 3, source: '', class: styles.listItems, func: setTestThree },
+    { path: '/portfolio/animals/4', name: 4, source: '', class: styles.listItems, func: setTestFour },
+    { path: '/portfolio/animals/5', name: 5, source: '', class: styles.listItems, func: setTestFive },
+    { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setTestSix },
+  ]
 
   return (
     <>
@@ -137,33 +117,14 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
           <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
           <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
           <AnimalsListItemsPage
-            navigatePageOne={navigatePageOne}
-            navigatePageTwo={navigatePageTwo}
-            navigatePageThree={navigatePageThree}
-            navigatePageFour={navigatePageFour}
-            navigatePageFive={navigatePageFive}
-            navigatePageSix={navigatePageSix} />
+            data={animalsDataPages}
+          />
           <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
           <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
         </ul>
       </div>
     </>
   )
-}
-
-const animalsDataPages = [
-  { path: '/portfolio/animals/1', name: 1, source: '', class: styles.listItems, },
-  { path: '/portfolio/animals/2', name: 2, source: '', class: styles.listItems, },
-  { path: '/portfolio/animals/3', name: 3, source: '', class: styles.listItems },
-  { path: '/portfolio/animals/4', name: 4, source: '', class: styles.listItems },
-  { path: '/portfolio/animals/5', name: 5, source: '', class: styles.listItems },
-  { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems },
-]
-
-interface TypesButtonNavigate {
-  className: string
-  navigateFunc: () => void
-  source: string
 }
 
 const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate) => {
@@ -176,21 +137,11 @@ const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate
   )
 }
 
-interface zxc {
-  navigatePageOne: () => void
-  navigatePageTwo: () => void
-  navigatePageThree: () => void
-  navigatePageFour: () => void
-  navigatePageFive: () => void
-  navigatePageSix: () => void
-}
-
-const AnimalsListItemsPage = ({ navigatePageOne, navigatePageTwo, navigatePageThree, navigatePageFour, navigatePageFive, navigatePageSix }: zxc) => {
-  const dataProps = [navigatePageOne, navigatePageTwo, navigatePageThree, navigatePageFour, navigatePageFive, navigatePageSix]
-  return animalsDataPages.map((item) => {
+const AnimalsListItemsPage = ({ data }: { data: TypesAnimalsDataPages[] }) => {
+  return data.map((item) => {
     return (
       <li className={item.class} key={item.name}>
-        <NavLink onClick={navigatePageOne} style={activeClassPage} to={item.path}>{item.name}</NavLink>
+        <NavLink onClick={item.func} style={activeClassPage} to={item.path}>{item.name}</NavLink>
       </li>
     )
   })
