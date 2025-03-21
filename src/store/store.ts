@@ -24,6 +24,11 @@ interface TypesStore {
   setTestNext: () => void
   setTestPrev: () => void
   setTestOne: () => void
+  setTestTwo: () => void
+  setTestThree: () => void
+  setTestFour: () => void
+  setTestFive: () => void
+  setTestSix: () => void
   setTestDisplay: () => void
   setTestDisplayTest: () => void
   setTestDisplayTestik: () => void
@@ -36,13 +41,7 @@ export const useAnimalStore = create<TypesStore>()(
     immer(
       (set) => ({
         animalWorks: dataWorks.filter(item => item.category === 'animal'),
-        // animalDisplayedDataPageOne: dataWorks.filter(item => item.category === 'animal').slice(9, 18),
-        // animalDisplayedDataPageTwo: dataWorks.filter(item => item.category === 'animal').slice(18, 27),
-        // animalDisplayedDataPageThree: dataWorks.filter(item => item.category === 'animal').slice(27, 36),
-        // animalDisplayedDataPageFour: dataWorks.filter(item => item.category === 'animal').slice(36, 45),
-        // animalDisplayedDataPageFive: dataWorks.filter(item => item.category === 'animal').slice(45, 54),
         animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id < 9),
-        // animalDisplayedData: dataWorks.filter(item => item.category === 'animal').slice(0, 9),
         animalVisibleData: 9,
 
         test: 0,
@@ -77,11 +76,40 @@ export const useAnimalStore = create<TypesStore>()(
           })),
         setTestOne: () => 
           set((state) => ({
-            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id > 18 && item.id < 27),
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id >= 0 && item.id <= 8),
+            test: 0,
+            test1: 9
+          })),
+        setTestTwo: () => 
+          set((state) => ({
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id >= 9 && item.id <= 17),
+            test: 9,
+            test1: 18
+          })),
+        setTestThree: () => 
+          set((state) => ({
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id >= 18 && item.id <= 26),
             test: 18,
             test1: 27
           })),
-
+        setTestFour: () => 
+          set((state) => ({
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id > 18 && item.id < 27),
+            test: 27,
+            test1: 36
+          })),
+        setTestFive: () => 
+          set((state) => ({
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id > 18 && item.id < 27),
+            test: 36,
+            test1: 45
+          })),
+        setTestSix: () => 
+          set((state) => ({
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id > 18 && item.id < 27),
+            test: 45,
+            test1: 48
+          })),
         setTestDisplay: () => 
           set((state) => ({
             animalDisplayedData: dataWorks.filter(item => item.category === 'animal').slice(state.test, state.test1)
