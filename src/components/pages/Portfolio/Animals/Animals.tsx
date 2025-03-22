@@ -33,7 +33,7 @@ interface TypesButtonNavigate {
 
 export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
-  console.log(animalDisplayedData)
+
   const setTestPrev = useAnimalStore(state => state.setTestPrev)
   const setTestNext = useAnimalStore(state => state.setTestNext)
   const setTestDisplay = useAnimalStore(state => state.setTestDisplay)
@@ -60,8 +60,9 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
   }, [])
 
   const goBack = () => {
-    if (idTest <= 1) {
+    if (idTest - 1 <= 1) {
       // setTestDisplayTest()
+      setTestOne()
       navigate('/portfolio/animals/1')
     } else {
       setTestPrev()
@@ -71,8 +72,9 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
   }
 
   const goForward = () => {
-    if (idTest >= 6) {
+    if (idTest + 1 >= 6) {
       // setTestDisplayTestik()
+      setTestSix()
       navigate('/portfolio/animals/6')
     } else {
       setTestNext()

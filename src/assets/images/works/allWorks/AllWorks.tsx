@@ -162,6 +162,7 @@ export const dataWorks: TypesDataWorks[] = [
   { category: 'animal', name: 'whiteEagle', source: whiteEagleImg, class: '', id: 46 },
   { category: 'animal', name: 'wolf', source: wolfImg, class: '', id: 47 },
 
+
   { category: 'peopleAndAnimals', name: 'belovedBaby', source: belovedBabyImg, class: '', id: 48 },
   { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 49 },
   { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: '', id: 50 },
