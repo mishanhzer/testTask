@@ -10,7 +10,6 @@ import {
 interface TypesStore {
   animalWorks: TypesDataWorks[]
   animalDisplayedData: TypesDataWorks[]
-  animalVisibleData: number
   setAnimalVisibleData: () => void
   setAnimalDisplayedData: () => void
   funcForCall: () => void
@@ -35,18 +34,15 @@ export const useAnimalStore = create<TypesStore>()(
       (set) => ({
         animalWorks: dataWorks.filter(item => item.category === 'animal'),
         animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id < 9),
-        animalVisibleData: 9,
         idStart: 0,
         idEnd: 9,
         funcForCall: () => {},
         setAnimalVisibleData: () => 
           set((state) => ({
-            // animalVisibleData: state.animalVisibleData + 9,
-            idEnd: state.idEnd + 9
+            idEnd: state.idEnd < 54 ? state.idEnd + 9 : state.idEnd
           })),
         setAnimalDisplayedData: () => 
           set((state) => ({
-            // animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id < state.animalVisibleData)
             animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id >= state.idStart && item.id < state.idEnd)
           })),
         handleAnimalLoadMore: () => 
@@ -108,34 +104,5 @@ export const useAnimalStore = create<TypesStore>()(
     ),
   )
 );
-
-
-
-
-// Cтарый код с persist
-// export const useStore = create<TypesStore>()(
-//   devtools(
-//     immer(
-//       persist(
-//         (set) => ({
-//           displayedData: dataWorks.filter(item => item.category === 'animal').slice(0, 9),
-//           visibleData: 9,
-//           setVisibleData: (prevCount) => 
-//             set((state) => ({
-//               visibleData: state.visibleData + 9
-//             })),
-//           setDisplayedData: () => 
-//             set((state) => ({
-//               displayedData: dataWorks.filter(item => item.category === 'animal').slice(0, state.visibleData)
-//             }))
-//         }),
-//         {
-//           // options (настройки storage)
-//           name: "work-storage",
-//         }
-//       )
-//     )
-//   )
-// );
 
 
