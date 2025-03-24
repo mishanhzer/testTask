@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useTransition, animated } from "@react-spring/web";
 
 import { useAnimalStore } from '../../../../store/store'
 
@@ -11,6 +10,10 @@ import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWork
 import { activeClassPage } from './styles/activeClassPage.ts'
 
 import styles from './styles/animals.module.scss'
+import { Spinner } from "../../../spinner/Spinner.tsx";
+
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
 interface TypesAnimals {
   animalWorks: TypesDataWorks[]
@@ -34,8 +37,9 @@ interface TypesButtonNavigate {
 
 const pathAnimals = '/portfolio/animals/'
 
-export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
+const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
+  console.log(animalDisplayedData)
 
   const setTestPrev = useAnimalStore(state => state.setTestPrev)
   const setTestNext = useAnimalStore(state => state.setTestNext)
@@ -55,23 +59,6 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
     navigate(`${pathAnimals}1`)
   }, [])
 
-  // const transitions = useTransition(animalDisplayedData, {
-  //   from: { opacity: 0, width: 200, transform: "translateY(-100px)" },
-  //   enter: { opacity: 1, transform: "translateY(0px)" },
-  //   leave: [{ transform: "translateY(100px)", opacity: 0 }, { width: 0 }],
-  //   config: {
-  //     duration: 750
-  //   }
-  // });
-
-  // {transitions((style, item) => (
-  //     <div className="nameBody">
-  //       <animated.div style={style} className="nameDiv">
-  //         <img className={`w-56 h-56 lozad`} src={item.source} key={item.name} alt={item.name} />
-  //       </animated.div>
-  //     </div>
-  //   ))
-
   const pathName = location.pathname.slice(0, 19)
   const idTest = +location.pathname.slice(19, 21)
 
@@ -82,6 +69,7 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
       setTestOne()
       navigate(`${pathAnimals}1`)
     } else {
+      setTimeout(() => { }, 500)
       setTestPrev()
       setTestDisplay()
       navigate(`${pathName}${idTest - 1}`)
@@ -89,15 +77,36 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
   }
 
   const goForward = () => {
+    <Spinner />
     if (idTest + 1 >= 6) {
       setTestSix()
       navigate(`${pathAnimals}6`)
     } else {
-      setTestNext()
+      setTimeout(() => { }, 500)
+      setTestNext();
       setTestDisplay()
       navigate(`${pathName}${idTest + 1}`)
     }
   }
+
+  // const goForward = () => {
+  //   if (idTest + 1 >= 6) {
+  //     setTestSix()
+  //     navigate(`${pathAnimals}6`)
+  //   } else {
+  //     if (animalDisplayedData.length === 0) {
+  //       <Spinner />
+  //     } else {
+  //       setTimeout(() => { }, 500)
+  //       setTestNext();
+  //       setTestDisplay()
+  //       navigate(`${pathName}${idTest + 1}`)
+  //     }
+  //   }
+  // }
+
+
+
 
   const goStart = () => {
     navigate(`${pathAnimals}1`)
@@ -118,11 +127,18 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
     { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setTestSix },
   ]
 
+  const fadeInAnimation = keyframes`${fadeIn}`
+  const AnimationDiv = styled.div`
+    animation: 1s ${fadeInAnimation};
+  `
+
   return (
     <>
       <div className={styles.container}>
         {animalDisplayedData.map((item, i) => (
-          <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
+          <AnimationDiv key={i}>
+            <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
+          </AnimationDiv>
         ))}
         <button
           disabled={disableCondition ? true : false}
@@ -140,7 +156,7 @@ export const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => 
           <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
           <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
         </ul>
-      </div>
+      </div >
     </>
   )
 }
@@ -164,3 +180,5 @@ const AnimalsListItemsPage = ({ data }: { data: TypesAnimalsDataPages[] }) => {
     )
   })
 }
+
+export default Animals

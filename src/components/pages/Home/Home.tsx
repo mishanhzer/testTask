@@ -5,7 +5,7 @@ import { HomePicture } from "../../../assets/images/Images";
 import { nameHome, subheaderHome, mainDescriptionHome, subDescriptionHome } from './homeText.ts'
 import styles from './styles/home.module.scss'
 
-export const Home = () => {
+const Home = () => {
   return (
     <>
       <Title name='Elena Kozyutenko' content='Main page' />
@@ -25,3 +25,5 @@ export const Home = () => {
     </>
   )
 }
+
+export default Home

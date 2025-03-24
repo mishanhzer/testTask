@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,13 +7,23 @@ import {
 
 import { useAnimalStore } from '../../store/store'
 
+import { Spinner } from "../spinner/Spinner";
 import { AppHeader } from "../appHeader/AppHeader";
-import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
-import { Home } from "../pages/Home/Home";
-import { Portfolio } from "../pages/Portfolio/Portfolio";
-import { Animals } from "../pages/Portfolio/Animals/Animals";
-import { Flowers } from "../pages/Portfolio/Flowers/Flowers";
 import { NavigateMenu } from "../navigateMenu/NavigateMenu";
+
+// import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
+// import { Home } from "../pages/Home/Home";
+// import { Portfolio } from "../pages/Portfolio/Portfolio";
+// import { Animals } from "../pages/Portfolio/Animals/Animals";
+// import { Flowers } from "../pages/Portfolio/Flowers/Flowers";
+
+const Home = lazy(() => import('../pages/Home/Home.tsx'));
+const Portfolio = lazy(() => import('../pages/Portfolio/Portfolio.tsx'));
+const Animals = lazy(() => import('../pages/Portfolio/Animals/Animals.tsx'));
+const Flowers = lazy(() => import('../pages/Portfolio/Flowers/Flowers.tsx'));
+const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
+
+
 
 import "./app.scss";
 
@@ -27,16 +37,18 @@ const App = () => {
       <div className={`w-full px-10`}>
         <AppHeader />
         <NavigateMenu />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/contact' element={<ContactMeAnt />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/portfolio' element={<Portfolio />} />
-          <Route path='/portfolio/animals' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />}>
-            <Route path=':id' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />} />
-          </Route>
-          <Route path='/portfolio/flowers' element={<Flowers />} />
-        </Routes>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/contact' element={<ContactMeAnt />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/portfolio' element={<Portfolio />} />
+            <Route path='/portfolio/animals' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />}>
+              <Route path=':id' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />} />
+            </Route>
+            <Route path='/portfolio/flowers' element={<Flowers />} />
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );

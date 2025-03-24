@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import { Outlet, useOutlet } from "react-router-dom";
 import styles from './styles/flowers.module.scss'
 
-export const Flowers = () => {
+const Flowers = () => {
   return (
     <>
       <div className={styles.container}>
@@ -16,3 +16,5 @@ export const Flowers = () => {
     </>
   )
 }
+
+export default Flowers

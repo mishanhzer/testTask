@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   message: yup.string().required('Это поле обязательно!')
 })
 
-export const ContactMeAnt = () => {
+const ContactMeAnt = () => {
   const { control, handleSubmit, reset, formState, formState: { isSubmitSuccessful, isSubmitting } } = useForm({
     resolver: yupResolver(schema)
   })
@@ -96,4 +96,6 @@ export const ContactMeAnt = () => {
     </>
   );
 }
+
+export default ContactMeAnt
 

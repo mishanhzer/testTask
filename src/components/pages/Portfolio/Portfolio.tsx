@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
 import { PortfolioItem, dataPortfolioItem } from "./PortfolioItem.tsx";
 
-export const Portfolio = () => {
+const Portfolio = () => {
   return (
     dataPortfolioItem.map(item => {
       return (
@@ -15,3 +15,5 @@ export const Portfolio = () => {
     })
   )
 }
+
+export default Portfolio

@@ -10,9 +10,8 @@
 }
 
 .btn {
-  width: 150px;
-  min-height: 100px;
-  // justify-self: center;
+  min-width: 220px;
+  max-height: 100px;
   grid-column-start: 2;
   grid-column-end: 2;
     &:disabled {
@@ -171,10 +170,7 @@
     }
 }
 
-.test {
-  position: relative;
-  top: -250px;
-}
+
 
 
 
