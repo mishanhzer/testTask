@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
@@ -38,6 +38,7 @@ interface TypesButtonNavigate {
 const pathAnimals = '/portfolio/animals/'
 
 const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
+  const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
   console.log(animalDisplayedData)
 
@@ -65,48 +66,34 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
 
   const goBack = () => {
+    setLoading(true)
+    setTimeout(() => { }, 500)
     if (idTest - 1 <= 1) {
       setTestOne()
       navigate(`${pathAnimals}1`)
+      setLoading(false)
     } else {
-      setTimeout(() => { }, 500)
       setTestPrev()
       setTestDisplay()
       navigate(`${pathName}${idTest - 1}`)
+      setLoading(false)
     }
   }
 
   const goForward = () => {
-    <Spinner />
+    setLoading(true)
+    setTimeout(() => { }, 500)
     if (idTest + 1 >= 6) {
       setTestSix()
       navigate(`${pathAnimals}6`)
+      setLoading(false)
     } else {
-      setTimeout(() => { }, 500)
       setTestNext();
       setTestDisplay()
       navigate(`${pathName}${idTest + 1}`)
+      setLoading(false)
     }
   }
-
-  // const goForward = () => {
-  //   if (idTest + 1 >= 6) {
-  //     setTestSix()
-  //     navigate(`${pathAnimals}6`)
-  //   } else {
-  //     if (animalDisplayedData.length === 0) {
-  //       <Spinner />
-  //     } else {
-  //       setTimeout(() => { }, 500)
-  //       setTestNext();
-  //       setTestDisplay()
-  //       navigate(`${pathName}${idTest + 1}`)
-  //     }
-  //   }
-  // }
-
-
-
 
   const goStart = () => {
     navigate(`${pathAnimals}1`)
@@ -115,7 +102,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
 
   const goEnd = () => {
     navigate(`${pathAnimals}6`)
-    setTestSix()
+    setTestSix();
   }
 
   const animalsDataPages: TypesAnimalsDataPages[] = [
@@ -132,32 +119,39 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
     animation: 1s ${fadeInAnimation};
   `
 
-  return (
-    <>
-      <div className={styles.container}>
-        {animalDisplayedData.map((item, i) => (
-          <AnimationDiv key={i}>
-            <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
-          </AnimationDiv>
-        ))}
-        <button
-          disabled={disableCondition ? true : false}
-          onClick={handleAnimalLoadMore}
-          className={`${styles.btn} ${classNamesLinkAndButton} mt-8 px-4 w-48 justify-center text-2xl`}
-        >Показать еще
-        </button>
 
-        <ul className={styles.links}>
-          <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
-          <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
-          <AnimalsListItemsPage
-            data={animalsDataPages}
-          />
-          <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
-          <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
-        </ul>
-      </div >
-    </>
+  const Content = () => {
+    return (
+      <>
+        <div className={styles.container}>
+          {animalDisplayedData.map((item, i) => (
+            <AnimationDiv key={i}>
+              <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
+            </AnimationDiv>
+          ))}
+          <button
+            disabled={disableCondition ? true : false}
+            onClick={handleAnimalLoadMore}
+            className={`${styles.btn} ${classNamesLinkAndButton} mt-8 px-4 w-48 justify-center text-2xl`}
+          >Показать еще
+          </button>
+
+          <ul className={styles.links}>
+            <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
+            <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
+            <AnimalsListItemsPage
+              data={animalsDataPages}
+            />
+            <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
+            <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
+          </ul>
+        </div >
+      </>
+    )
+  }
+
+  return (
+    loading ? <Spinner /> : <Content />
   )
 }
 
