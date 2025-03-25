@@ -5,7 +5,7 @@ import { persist, devtools } from "zustand/middleware"; // для связи с 
 import {
   dataWorks,
   TypesDataWorks,
-} from "../assets/images/works/allWorks/AllWorks";
+} from "../assets/images/AllWorks"
 
 interface TypesStore {
   animalWorks: TypesDataWorks[]
@@ -98,7 +98,7 @@ export const useAnimalStore = create<TypesStore>()(
           })),
         setTestDisplay: () => 
           set((state) => ({
-            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id > state.idStart && item.id <= state.idEnd),
+            animalDisplayedData: dataWorks.filter(item => item.category === 'animal' && item.id >= state.idStart && item.id < state.idEnd),
           }))
       }),
     ),

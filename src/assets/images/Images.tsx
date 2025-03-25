@@ -1,14 +1,18 @@
 import React from 'react'
 
-import testImgForm from './testImgForm.png'
-import mainPicture from './mainPicture.jpg'
-import homePicture from './homePicture.jpg'
+import mainPicture from './formImage/formPicture.jpg'
+import homePicture from './homeImages/homePicture.jpg'
 
-import portfolioAnimals from './portfolioAnimals.jpg'
-import portfolioFlowers from './portfolioFlowers.jpg'
-import portfolioStillLife from './portfolioStillLife.jpg'
+import portfolioAnimals from './portfolioImages/portfolioAnimals.jpg'
+import portfolioFlowers from './portfolioImages/portfolioFlowers.jpg'
+import portfolioStillLife from './portfolioImages/portfolioStillLife.jpg'
 
-export { testImgForm, mainPicture }
+export { mainPicture }
+
+interface TypesImagePortfolio {
+  source: string
+  alt: string
+}
 
 export const MainPicture = () => {
   return (
@@ -28,7 +32,7 @@ export const HomePicture = () => {
   )
 }
 
-const ImagePortfolio = ({ source, alt }) => {
+const ImagePortfolio = ({ source, alt }: TypesImagePortfolio) => {
   return (
     <img
       className={`min-w-min w-350 h-350`}

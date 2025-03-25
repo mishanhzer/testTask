@@ -11,21 +11,13 @@ import { Spinner } from "../spinner/Spinner";
 import { AppHeader } from "../appHeader/AppHeader";
 import { NavigateMenu } from "../navigateMenu/NavigateMenu";
 
-// import { ContactMeAnt } from "../pages/ContactMe/ContactMeAnt";
-// import { Home } from "../pages/Home/Home";
-// import { Portfolio } from "../pages/Portfolio/Portfolio";
-// import { Animals } from "../pages/Portfolio/Animals/Animals";
-// import { Flowers } from "../pages/Portfolio/Flowers/Flowers";
-
 const Home = lazy(() => import('../pages/Home/Home.tsx'));
 const Portfolio = lazy(() => import('../pages/Portfolio/Portfolio.tsx'));
 const Animals = lazy(() => import('../pages/Portfolio/Animals/Animals.tsx'));
 const Flowers = lazy(() => import('../pages/Portfolio/Flowers/Flowers.tsx'));
 const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
 
-
-
-import "./app.scss";
+import "./app.css";
 
 const App = () => {
   const animalWorks = useAnimalStore(state => state.animalWorks)

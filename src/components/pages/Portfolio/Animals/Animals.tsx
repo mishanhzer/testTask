@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, CSSProperties } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
@@ -40,7 +40,6 @@ const pathAnimals = '/portfolio/animals/'
 const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
-  console.log(animalDisplayedData)
 
   const setTestPrev = useAnimalStore(state => state.setTestPrev)
   const setTestNext = useAnimalStore(state => state.setTestNext)

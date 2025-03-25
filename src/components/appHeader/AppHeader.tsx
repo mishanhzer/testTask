@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Basket } from "../../assets/logo/logoHeader/Basket";
+import { Basket } from './imagesAppHeader/Basket'
 import { LinkButton, LinkMainLogo } from "../UI_kits/LinkAndButton";
-import { ImagesAppheader } from './ImagesAppHeader'
+import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
 
-import { images } from "../../assets/logo/logo";
+import { images } from "./imagesAppHeader/Images";
 
 export const AppHeader = () => {
   return (

@@ -1,101 +1,100 @@
-import React from 'react';
 import lozad from 'lozad';
 
-import akitoInuImg from './akitoInu.jpg' // +
-import beagleImg from './beagle.jpg' // +
-import belovedBabyImg from './belovedBaby.jpg' // +
-import bestFriendImg from './bestFriend.jpg' // +
-import blueAndYellowMacawImg from './blueAndYellowMacaw.jpg' // +
-import blueBirdsOnFloweringBranchImg from './bluebirdsOnFloweringBranch.jpg' // +
-import blueIrisesImg from './blueIrises.jpg' // +
-import branchOfLilacImg from './branchOfLilac.jpg'
-import brightPeoniesImg from './brightPeonies.jpg'
-import brightTulipsImg from './brightTulips.jpg'
-import catImg from './cat.jpg'
-import catMischievousImg from './catMischievous.jpg'
-import catsInLibraryImg from './catsInLibrary.jpg'
-import catWithGreenEyesImg from './catWithGreenEyes.jpg'
-import daisiesOnOldSuitcaseImg from './daisiesOnOldSuitcase.jpg'
-import delicateHydrangeaImg from './delicateHydrangea.jpg'
-import delicateRoseImg from './delicateRose.jpg'
-import delicateScentOfPeoniesImg from './delicateScentOfPeonies.jpg'
-import delicateTulipsImg from './delicateTulips.jpg'
-import domesticCatImg from './domesticCat.jpg'
-import eveningFlowersImg from './eveningFlowers.jpg'
-import flightImg from './flight.jpg'
-import flowersForBelovedImg from './flowersForBeloved.jpg'
-import flowersMoodImg from './flowersMood.jpg'
-import fluffyJoyImg from './fluffyJoy.jpg'
-import foxImg from './fox.jpg'
-import girlAndCatImg from './girlAndCat.jpg'
-import girlAndDucklingsImg from './girlAndDucklings.jpg'
-import goldfishImg from './goldfish.jpg'
-import grapefruitsImg from './grapefruits.jpg'
-import greenWingedMacawImg from './greenWingedMacaw.jpg'
-import hedgehogImg from './hedgehog.jpg'
-import horseImg from './horse.jpg'
-import horseAndFoalImg from './horseAndFoal.jpg'
-import hydrangeaImg from './hydrangea.jpg'
-import irisesImg from './irises.jpg'
-import junoniaImg from './junonia.jpg'
-import ladybugImg from './ladybugOnForgetMeNots.jpg'
-import ladybugsImg from './ladybugs.jpg'
-import largePeoniesImg from './largePeonies.jpg'
-import leopardImg from './leopard.jpg'
-import leopardAtWateringHoleImg from './leopardAtWateringHole.jpg'
-import leopardsAtSunsetImg from './leopardsAtSunset.jpg'
-import leopardsGazeImg from './leopardsGaze.jpg'
-import letsSingMyFriendImg from './letsSingMyFriend.jpg'
-import lionessAndLionCubImg from './lionessAndLionCub.jpg'
-import lionFamilyImg from './lionFamily.jpg'
-import littleRedPandaImg from './littleRedPanda.jpg'
-import luxuriousPeoniesImg from './luxuriousPeonies.jpg'
-import lynxImg from './lynx.jpg'
-import makhaonImg from './makhaon.jpg'
-import monarchImg from './monarch.jpg'
-import narcissistsImg from './narcissists.jpg'
-import ocelotImg from './ocelot.jpg'
-import orangeJuiceFreshImg from './orangeJuiceFresh.jpg'
-import peacocksEyeImg from './peacocksEye.jpg'
-import peoniesByTheWindowImg from './peoniesByTheWindow.jpg'
-import peonyFestivalImg from './peonyFestival.jpg'
-import pinkBloomingImg from './pinkBlooming.jpg'
-import pinkPeoniesImg from './pinkPeonies.jpg'
-import pinkTendernessImg from './pinkTenderness.jpg'
-import pomeranianImg from './pomeranian.jpg'
-import pumaImg from './puma.jpg'
-import redCatOnTheFenceImg from './redCatOnTheFence.jpg'
-import redFlowersOnSunsetImg from './redFowersAtSunset.jpg'
-import redHorseImg from './redHorse.jpg'
-import roseInGardenImg from './roseInGarden.jpg'
-import snailOnStrawberryImg from './snailOnStrawberry.jpg'
-import snowLeopardImg from './snowLeopard.jpg'
-import spanielImg from './spaniel.jpg'
-import squirrelImg from './squirrel.jpg'
-import stillLifeWithBookAndKeysImg from './stillLifeWithBookAndKeys.jpg'
-import stillLifeWithChamomileAndStrawberryImg from './stillLifeWithChamomileAndStrawberry.jpg'
-import stillLifeWithChrysanthemumsAndFruitsImg from './stillLifeWithChrysanthemumsAndFruits.jpg'
-import stillLifeWithFigsAndGrapesImg from './stillLifeWithFigsAndGrapes.jpg'
-import stillLifeWithGreenGrapesImg from './stillLifeWithGreenGrapes.jpg'
-import stillLifeWithLemonsImg from './stillLifeWithLemons.jpg'
-import stillLifeWithPeachImg from './stillLifeWithPeach.jpg'
-import stillLifeWithPomegranatesImg from './stillLifeWithPomegranates.jpg'
-import stillLifeWithSamovarImg from './stillLifeWithSamovar.jpg'
-import swansImg from './swans.jpg'
-import theGirlWithTheWhiteRabbitsImg from './theGirlWithTheWhiteRabbits.jpg'
-import tigerImg from './tiger.jpg'
-import tigerGazeImg from './tigerGaze.jpg'
-import tigerHostImg from './tigerHost.jpg'
-import tigerInTheTicketImg from './tigerInTheTicket.jpg'
-import toygerImg from './toyger.jpg'
-import whiteEagleImg from './whiteEagle.jpg'
-import wildflowersImg from './wildflowersInAVase.jpg'
-import wineAndFruitsImg from './wineAndFruits.jpg'
-import wolfImg from './wolf.jpg'
-import yellowRoseImg from './yellowRose.jpg'
-import lemonsOrangesLimesImg from './lemonsOrangesLimes.jpg'
-import girlWithDogImg from './girlWithDog.jpg'
-import girlWithHorseImg from './girlWithHorse.jpg'
+import akitoInuImg from './allWorks/akitoInu.jpg'
+import beagleImg from './allWorks/beagle.jpg'
+import belovedBabyImg from './allWorks/belovedBaby.jpg'
+import bestFriendImg from './allWorks/belovedBaby.jpg'
+import blueAndYellowMacawImg from './allWorks/blueAndYellowMacaw.jpg'
+import blueBirdsOnFloweringBranchImg from './allWorks/bluebirdsOnFloweringBranch.jpg'
+import blueIrisesImg from './allWorks/blueIrises.jpg'
+import branchOfLilacImg from './allWorks/branchOfLilac.jpg'
+import brightPeoniesImg from './allWorks/brightPeonies.jpg'
+import brightTulipsImg from './allWorks/brightTulips.jpg'
+import catImg from './allWorks/cat.jpg'
+import catMischievousImg from './allWorks/catMischievous.jpg'
+import catsInLibraryImg from './allWorks/catsInLibrary.jpg'
+import catWithGreenEyesImg from './allWorks/catWithGreenEyes.jpg'
+import daisiesOnOldSuitcaseImg from './allWorks/daisiesOnOldSuitcase.jpg'
+import delicateHydrangeaImg from './allWorks/delicateHydrangea.jpg'
+import delicateRoseImg from './allWorks/delicateRose.jpg'
+import delicateScentOfPeoniesImg from './allWorks/delicateScentOfPeonies.jpg'
+import delicateTulipsImg from './allWorks/delicateTulips.jpg'
+import domesticCatImg from './allWorks/domesticCat.jpg'
+import eveningFlowersImg from './allWorks/eveningFlowers.jpg'
+import flightImg from './allWorks/flight.jpg'
+import flowersForBelovedImg from './allWorks/flowersForBeloved.jpg'
+import flowersMoodImg from './allWorks/flowersMood.jpg'
+import fluffyJoyImg from './allWorks/fluffyJoy.jpg'
+import foxImg from './allWorks/fox.jpg'
+import girlAndCatImg from './allWorks/girlAndCat.jpg'
+import girlAndDucklingsImg from './allWorks/girlAndDucklings.jpg'
+import goldfishImg from './allWorks/goldfish.jpg'
+import grapefruitsImg from './allWorks/grapefruits.jpg'
+import greenWingedMacawImg from './allWorks/greenWingedMacaw.jpg'
+import hedgehogImg from './allWorks/hedgehog.jpg'
+import horseImg from './allWorks/horse.jpg'
+import horseAndFoalImg from './allWorks/horseAndFoal.jpg'
+import hydrangeaImg from './allWorks/hydrangea.jpg'
+import irisesImg from './allWorks/irises.jpg'
+import junoniaImg from './allWorks/junonia.jpg'
+import ladybugImg from './allWorks/ladybugOnForgetMeNots.jpg'
+import ladybugsImg from './allWorks/ladybugs.jpg'
+import largePeoniesImg from './allWorks/largePeonies.jpg'
+import leopardImg from './allWorks/leopard.jpg'
+import leopardAtWateringHoleImg from './allWorks/leopardAtWateringHole.jpg'
+import leopardsAtSunsetImg from './allWorks/leopardsAtSunset.jpg'
+import leopardsGazeImg from './allWorks/leopardsGaze.jpg'
+import letsSingMyFriendImg from './allWorks/letsSingMyFriend.jpg'
+import lionessAndLionCubImg from './allWorks/lionessAndLionCub.jpg'
+import lionFamilyImg from './allWorks/lionFamily.jpg'
+import littleRedPandaImg from './allWorks/littleRedPanda.jpg'
+import luxuriousPeoniesImg from './allWorks/luxuriousPeonies.jpg'
+import lynxImg from './allWorks/lynx.jpg'
+import makhaonImg from './allWorks/makhaon.jpg'
+import monarchImg from './allWorks/monarch.jpg'
+import narcissistsImg from './allWorks/narcissists.jpg'
+import ocelotImg from './allWorks/ocelot.jpg'
+import orangeJuiceFreshImg from './allWorks/orangeJuiceFresh.jpg'
+import peacocksEyeImg from './allWorks/peacocksEye.jpg'
+import peoniesByTheWindowImg from './allWorks/peoniesByTheWindow.jpg'
+import peonyFestivalImg from './allWorks/peonyFestival.jpg'
+import pinkBloomingImg from './allWorks/pinkBlooming.jpg'
+import pinkPeoniesImg from './allWorks/pinkPeonies.jpg'
+import pinkTendernessImg from './allWorks/pinkTenderness.jpg'
+import pomeranianImg from './allWorks/pomeranian.jpg'
+import pumaImg from './allWorks/puma.jpg'
+import redCatOnTheFenceImg from './allWorks/redCatOnTheFence.jpg'
+import redFlowersOnSunsetImg from './allWorks/redFowersAtSunset.jpg'
+import redHorseImg from './allWorks/redHorse.jpg'
+import roseInGardenImg from './allWorks/roseInGarden.jpg'
+import snailOnStrawberryImg from './allWorks/snailOnStrawberry.jpg'
+import snowLeopardImg from './allWorks/snowLeopard.jpg'
+import spanielImg from './allWorks/spaniel.jpg'
+import squirrelImg from './allWorks/squirrel.jpg'
+import stillLifeWithBookAndKeysImg from './allWorks/stillLifeWithBookAndKeys.jpg'
+import stillLifeWithChamomileAndStrawberryImg from './allWorks/stillLifeWithChamomileAndStrawberry.jpg'
+import stillLifeWithChrysanthemumsAndFruitsImg from './allWorks/stillLifeWithChrysanthemumsAndFruits.jpg'
+import stillLifeWithFigsAndGrapesImg from './allWorks/stillLifeWithFigsAndGrapes.jpg'
+import stillLifeWithGreenGrapesImg from './allWorks/stillLifeWithGreenGrapes.jpg'
+import stillLifeWithLemonsImg from './allWorks/stillLifeWithLemons.jpg'
+import stillLifeWithPeachImg from './allWorks/stillLifeWithPeach.jpg'
+import stillLifeWithPomegranatesImg from './allWorks/stillLifeWithPomegranates.jpg'
+import stillLifeWithSamovarImg from './allWorks/stillLifeWithSamovar.jpg'
+import swansImg from './allWorks/swans.jpg'
+import theGirlWithTheWhiteRabbitsImg from './allWorks/theGirlWithTheWhiteRabbits.jpg'
+import tigerImg from './allWorks/tiger.jpg'
+import tigerGazeImg from './allWorks/tigerGaze.jpg'
+import tigerHostImg from './allWorks/tigerHost.jpg'
+import tigerInTheTicketImg from './allWorks/tigerInTheTicket.jpg'
+import toygerImg from './allWorks/toyger.jpg'
+import whiteEagleImg from './allWorks/whiteEagle.jpg'
+import wildflowersImg from './allWorks/wildflowersInAVase.jpg'
+import wineAndFruitsImg from './allWorks/wineAndFruits.jpg'
+import wolfImg from './allWorks/wolf.jpg'
+import yellowRoseImg from './allWorks/yellowRose.jpg'
+import lemonsOrangesLimesImg from './allWorks/lemonsOrangesLimes.jpg'
+import girlWithDogImg from './allWorks/girlWithDog.jpg'
+import girlWithHorseImg from './allWorks/girlWithHorse.jpg'
 
 const observer = lozad();
 observer.observe();
@@ -113,6 +112,7 @@ export interface TypesContent {
 }
 
 export const dataWorks: TypesDataWorks[] = [
+  // Категория животных
   { category: 'animal', name: 'akitoInu', source: akitoInuImg, class: '', id: 0 },
   { category: 'animal', name: 'beagle', source: beagleImg, class: '', id: 1 },
   { category: 'animal', name: 'blueAndYellowMacaw', source: blueAndYellowMacawImg, class: '', id: 2 },
@@ -162,7 +162,7 @@ export const dataWorks: TypesDataWorks[] = [
   { category: 'animal', name: 'whiteEagle', source: whiteEagleImg, class: '', id: 46 },
   { category: 'animal', name: 'wolf', source: wolfImg, class: '', id: 47 },
 
-
+  // Категория люди и животные
   { category: 'peopleAndAnimals', name: 'belovedBaby', source: belovedBabyImg, class: '', id: 48 },
   { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 49 },
   { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: '', id: 50 },
@@ -172,6 +172,7 @@ export const dataWorks: TypesDataWorks[] = [
   { category: 'peopleAndAnimals', name: 'letsSingMyFriend', source: letsSingMyFriendImg, class: '', id: 54 },
   { category: 'peopleAndAnimals', name: 'theGirlWithTheWhiteRabbits', source: theGirlWithTheWhiteRabbitsImg, class: '', id: 55 },
 
+  // Категория цветы
   { category: 'flowers', name: 'blueIrises', source: blueIrisesImg, class: '', id: 56 },
   { category: 'flowers', name: 'branchOfLiliac', source: branchOfLilacImg, class: '', id: 57 },
   { category: 'flowers', name: 'brightPeonies', source: brightPeoniesImg, class: '', id: 58 },
@@ -196,6 +197,7 @@ export const dataWorks: TypesDataWorks[] = [
   { category: 'flowers', name: 'roseInGarden', source: roseInGardenImg, class: '', id: 77 },
   { category: 'flowers', name: 'yellowRose', source: yellowRoseImg, class: '', id: 78 },
 
+  // Категория натюрморт
   { category: 'stillLife', name: 'daisiesOnOldSuitcase', source: daisiesOnOldSuitcaseImg, class: '', id: 79 },
   { category: 'stillLife', name: 'grapefruits', source: grapefruitsImg, class: '', id: 80 },
   { category: 'stillLife', name: 'lemonsOrangesLimes', source: lemonsOrangesLimesImg, class: '', id: 81 },
@@ -213,19 +215,3 @@ export const dataWorks: TypesDataWorks[] = [
   { category: 'stillLife', name: 'wildflowers', source: wildflowersImg, class: '', id: 93 },
   { category: 'stillLife', name: 'wineAndFruits', source: wineAndFruitsImg, class: '', id: 94 },
 ]
-
-// export const filterAnimals = dataWorks.filter(item => item.category === 'animal')
-// export const filterFlowers = dataWorks.filter(item => item.category === 'flowers')
-// export const filterPeopleAndAnimals = dataWorks.filter(item => item.category === 'peopleAndAnimals')
-// export const filterStillLife = dataWorks.filter(item => item.category === 'stillLife')
-
-// export const Content = ({ works }: TypesContent) => {
-//   return (
-//     works.map(item => {
-//       return <img className={`w-56 h-56 lozad`} src={item.source} key={item.name} alt={item.name} />
-//     })
-//   )
-// }
-
-// const test = <img className="lozad" data-src="img.jpg"></img>
-
