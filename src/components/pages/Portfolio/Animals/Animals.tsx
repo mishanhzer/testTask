@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
@@ -67,40 +67,40 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
 
   const goBack = () => {
     setLoading(true)
-    setTimeout(() => { }, 500)
+    setTimeout(() => { setLoading(false) }, 200)
     if (idTest - 1 <= 1) {
       setTestOne()
       navigate(`${pathAnimals}1`)
-      setLoading(false)
     } else {
       setTestPrev()
       setTestDisplay()
       navigate(`${pathName}${idTest - 1}`)
-      setLoading(false)
     }
   }
 
   const goForward = () => {
     setLoading(true)
-    setTimeout(() => { }, 500)
+    setTimeout(() => { setLoading(false) }, 200)
     if (idTest + 1 >= 6) {
       setTestSix()
       navigate(`${pathAnimals}6`)
-      setLoading(false)
     } else {
       setTestNext();
       setTestDisplay()
       navigate(`${pathName}${idTest + 1}`)
-      setLoading(false)
     }
   }
 
   const goStart = () => {
+    setLoading(true)
+    setTimeout(() => { setLoading(false) }, 200)
     navigate(`${pathAnimals}1`)
     setTestOne()
   }
 
   const goEnd = () => {
+    setLoading(true)
+    setTimeout(() => { setLoading(false) }, 200)
     navigate(`${pathAnimals}6`)
     setTestSix();
   }
@@ -115,19 +115,18 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   ]
 
   const fadeInAnimation = keyframes`${fadeIn}`
-  const AnimationDiv = styled.div`
-    animation: 1s ${fadeInAnimation};
+  const AnimationContainer = styled.div`
+    animation: 1.5s ${fadeInAnimation};
   `
-
 
   const Content = () => {
     return (
       <>
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
-            <AnimationDiv key={i}>
+            <AnimationContainer key={i}>
               <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
-            </AnimationDiv>
+            </AnimationContainer>
           ))}
           <button
             disabled={disableCondition ? true : false}
@@ -140,6 +139,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
             <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
             <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
             <AnimalsListItemsPage
+              setLoading={setLoading}
               data={animalsDataPages}
             />
             <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
@@ -165,11 +165,16 @@ const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate
   )
 }
 
-const AnimalsListItemsPage = ({ data }: { data: TypesAnimalsDataPages[] }) => {
+const AnimalsListItemsPage = ({ setLoading, data }: { data: TypesAnimalsDataPages[], setLoading: (React.Dispatch<React.SetStateAction<boolean>>) }) => {
   return data.map((item) => {
+    const showSpinner = () => {
+      setLoading(true)
+      setTimeout(() => { setLoading(false) }, 200)
+      item.func()
+    }
     return (
       <li className={item.class} key={item.name}>
-        <NavLink onClick={item.func} style={activeClassPage} to={item.path}>{item.name}</NavLink>
+        <NavLink onClick={showSpinner} style={activeClassPage} to={item.path}>{item.name}</NavLink>
       </li>
     )
   })
