@@ -25,7 +25,7 @@ export const PortfolioItem = ({ Component, headText, text, path }: TypesPortfoli
       <div className={`flex my-8`}>
         <Link to={path}>{Component}</Link>
         <div className={`flex flex-col ml-5`}>
-          <a className={`text-center ${styles.portfolioHeadTextStyle}`} href='#'>{headText}</a>
+          <Link className={`text-center ${styles.portfolioHeadTextStyle}`} to={path}>{headText}</Link>
           <div className={`pl-3 max-w-1200 inline-block break-word text-center leading-7 ${styles.portfolioTextStyle}`}><span className={`${styles.portfolioMainTextBold}`}>{headText}</span> {text}</div>
         </div>
       </div>

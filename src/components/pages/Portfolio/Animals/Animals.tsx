@@ -7,7 +7,7 @@ import { classNamesLinkAndButton } from '../../../UI_kits/stylesUI_kits'
 import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
 import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
 
-import { activeClassPage } from './styles/activeClassPage.ts'
+import { activeClassPage, btnLoadMore } from './styles/activeClassPage.ts'
 
 import styles from './styles/animals.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
@@ -59,8 +59,8 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
     navigate(`${pathAnimals}1`)
   }, [])
 
-  const pathName = location.pathname.slice(0, 19)
-  const idTest = +location.pathname.slice(19, 21)
+  const pathName: string = location.pathname.slice(0, 19)
+  const idTest: number = +location.pathname.slice(19, 21)
 
   const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
 
@@ -131,7 +131,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
           <button
             disabled={disableCondition ? true : false}
             onClick={handleAnimalLoadMore}
-            className={`${styles.btn} ${classNamesLinkAndButton} mt-8 px-4 w-48 justify-center text-2xl`}
+            className={`${styles.btn} ${classNamesLinkAndButton} ${btnLoadMore}`}
           >Показать еще
           </button>
 
@@ -140,7 +140,6 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
             <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
             <AnimalsListItemsPage
               callFuncLoading={callFuncLoading}
-              // setLoading={setLoading}
               data={animalsDataPages}
             />
             <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
