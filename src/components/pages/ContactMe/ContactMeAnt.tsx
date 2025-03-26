@@ -13,7 +13,7 @@ import { ButtonComponent, Title } from "../../UI_kits/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 
-import { classInputAnt, classLabelAnt, classMessageAnt } from '../ContactMe/styles/stylesContactMe'
+import { divContainer, styleForm, classInputAnt, classLabelAnt, classMessageAnt, firstItem, secondItem, thirdItem, fourthItem } from '../ContactMe/styles/stylesContactMe'
 
 import '../ContactMe/styles/changeStyleAnt.scss'
 
@@ -49,40 +49,40 @@ const ContactMeAnt = () => {
   return (
     <>
       <Title name='Elena Kozyutenko' content='Main page' />
-      <div className={`flex w-1200 mt-36 mx-auto`}>
+      <div className={divContainer}>
         <MainPicture />
         <Form
-          style={{ maxWidth: 600, marginLeft: 70 }}
+          style={styleForm}
           onFinish={handleSubmit(onSubmit)}
         >
           <div className={`flex`}>
             <FormItem
               control={control}
               name="name"
-              style={{ width: 500, alignSelf: 'flex-end' }}>
-              <label className={classLabelAnt}>{<Label name='Name' />}</label>
+              style={firstItem}>
+              <Label classLabel={classLabelAnt} nameLabel='Name' />
               <Input style={classInputAnt} />
             </FormItem>
             <FormItem
               control={control}
               name="lastName"
-              style={{ width: 500, alignSelf: 'flex-end', marginLeft: 30 }}>
-              <label className={classLabelAnt}>{<Label name='Last Name' />}</label>
+              style={secondItem}>
+              <Label classLabel={classLabelAnt} nameLabel='Last Name' />
               <Input style={classInputAnt} />
             </FormItem>
           </div>
           <FormItem
             control={control}
             name="email"
-            style={{ width: '100%', alignSelf: 'flex-end', marginTop: 15 }}>
-            <label className={classLabelAnt}>{<Label name='Email' />}</label>
+            style={thirdItem}>
+            <Label classLabel={classLabelAnt} nameLabel='Email' />
             <Input style={classInputAnt} />
           </FormItem>
           <FormItem
             control={control}
             name="message"
-            style={{ width: '100%', alignSelf: 'flex-end', marginTop: 35 }}>
-            <label className={classLabelAnt}>{<Label name='Message' />}</label>
+            style={fourthItem}>
+            <Label classLabel={classLabelAnt} nameLabel='Message' />
             <TextArea
               style={classMessageAnt} />
           </FormItem>
@@ -92,7 +92,6 @@ const ContactMeAnt = () => {
           </Form.Item>
         </Form>
       </div>
-      {/* <DevTool control={control} /> */}
     </>
   );
 }

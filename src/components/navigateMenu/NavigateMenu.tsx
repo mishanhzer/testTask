@@ -3,8 +3,9 @@ import 'reactjs-popup/dist/index.css';
 
 import './styles/changePopupStyle.scss'
 
-import { ListItem, PopupItem } from "./ListItem";
-import { ulClass } from "./styles/activeClassListItem";
+import { ListItem } from "./ListItem";
+import { PopupItem } from "./PopupItem";
+import { ulClass } from "./styles/navigateMenu";
 
 export const NavigateMenu = () => {
   return (

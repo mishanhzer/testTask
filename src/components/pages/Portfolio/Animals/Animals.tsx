@@ -64,9 +64,13 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
 
   const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
 
-  const goBack = () => {
+  const callFuncLoading = () => {
     setLoading(true)
     setTimeout(() => { setLoading(false) }, 200)
+  }
+
+  const goBack = () => {
+    callFuncLoading()
     if (idTest - 1 <= 1) {
       setTestOne()
       navigate(`${pathAnimals}1`)
@@ -78,8 +82,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   }
 
   const goForward = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
+    callFuncLoading()
     if (idTest + 1 >= 6) {
       setTestSix()
       navigate(`${pathAnimals}6`)
@@ -91,15 +94,13 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   }
 
   const goStart = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
+    callFuncLoading()
     navigate(`${pathAnimals}1`)
     setTestOne()
   }
 
   const goEnd = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
+    callFuncLoading()
     navigate(`${pathAnimals}6`)
     setTestSix();
   }
@@ -138,7 +139,8 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
             <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
             <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
             <AnimalsListItemsPage
-              setLoading={setLoading}
+              callFuncLoading={callFuncLoading}
+              // setLoading={setLoading}
               data={animalsDataPages}
             />
             <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
@@ -164,13 +166,13 @@ const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate
   )
 }
 
-const AnimalsListItemsPage = ({ setLoading, data }: { data: TypesAnimalsDataPages[], setLoading: (React.Dispatch<React.SetStateAction<boolean>>) }) => {
+const AnimalsListItemsPage = ({ data, callFuncLoading }: { data: TypesAnimalsDataPages[], callFuncLoading: () => void }) => {
   return data.map((item) => {
     const showSpinner = () => {
-      setLoading(true)
-      setTimeout(() => { setLoading(false) }, 200)
+      callFuncLoading()
       item.func()
     }
+
     return (
       <li className={item.class} key={item.name}>
         <NavLink onClick={showSpinner} style={activeClassPage} to={item.path}>{item.name}</NavLink>

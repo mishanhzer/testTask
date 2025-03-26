@@ -1,7 +1,6 @@
 import React from 'react'
 
 import mainPicture from './formImage/formPicture.jpg'
-import homePicture from './homeImages/homePicture.jpg'
 
 import portfolioAnimals from './portfolioImages/portfolioAnimals.jpg'
 import portfolioFlowers from './portfolioImages/portfolioFlowers.jpg'
@@ -20,15 +19,6 @@ export const MainPicture = () => {
       className={`w-128 h-15`}
       src={mainPicture}
       alt="mainPicture" />
-  )
-}
-
-export const HomePicture = () => {
-  return (
-    <img
-      className={`w-196 h-15`}
-      src={homePicture}
-      alt="homePicture" />
   )
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
-import { HomePicture } from "../../../assets/images/Images";
+import { HomePicture } from "./HomePicture.tsx";
 import { nameHome, subheaderHome, mainDescriptionHome, subDescriptionHome } from './homeText.ts'
 import styles from './styles/home.module.scss'
 
