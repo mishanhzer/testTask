@@ -1,9 +1,9 @@
-import React, { useEffect, useState, CSSProperties } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
 
-import { classNamesLinkAndButton } from '../../../UI_kits/stylesUI_kits'
+import { classNamesLinkAndButton } from '../../../UI_kits/styles/stylesUI_kits'
 import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
 import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
 

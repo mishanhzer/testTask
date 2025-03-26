@@ -5,7 +5,8 @@ export const classNamesLinkAndButton: string = `
   bg-blue-900 
   text-white 
   items-center 
-  font-serif 
+  font-sans
   hover:transition
   hover:opacity-80
+  rounded-lg
   group`;

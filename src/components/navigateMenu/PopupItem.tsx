@@ -9,7 +9,7 @@ import 'reactjs-popup/dist/index.css';
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem, classListItem, stylesPortfolioLinks } from './styles/navigateMenu'
+import { activeClassListItem, classListItem, stylesPortfolioLinks, stylePopupImg } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -62,7 +62,7 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
           style={activeClassListItem}>
           {name}
         </NavLink>
-        <img className={`ml-1 self-center w-3 h-3 -rotate-90 hover:`} src={arrowPages} alt="#" />
+        <img className={stylePopupImg} src={arrowPages} alt="#" />
       </li>}
       position="bottom center">
       <PortoflioLinks />

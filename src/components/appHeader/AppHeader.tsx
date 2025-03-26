@@ -5,12 +5,13 @@ import { LinkButton, LinkMainLogo } from "../UI_kits/LinkAndButton";
 import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
 
 import { images } from "./imagesAppHeader/Images";
+import { styleHeader, styleDivContainer, styleDivContainerImages, styleDivContainerBasket, styleBasket } from './styles/styleAppHeader'
 
 export const AppHeader = () => {
   return (
-    <header className={`flex justify-between pt-8 items-center h-28`}>
-      <div className={`flex flex-row w-1/4 justify-between`}>
-        <div className={`flex w-28 justify-between`}>
+    <header className={styleHeader}>
+      <div className={styleDivContainer}>
+        <div className={styleDivContainerImages}>
           {images.map((item) => {
             return <ImagesAppheader key={item.name} source={item.src} name={item.name} />;
           })}
@@ -19,9 +20,9 @@ export const AppHeader = () => {
       <div>
         <LinkMainLogo />
       </div>
-      <div className={`flex justify-end items-center w-1/4 `}>
+      <div className={styleDivContainerBasket}>
         <a className="w-4" href="#">
-          <Basket className="fill-gray-700 w-4 h-4 hover:fill-black hover:transition" />
+          <Basket className={styleBasket} />
         </a>
         <LinkButton ml='ml-8' fz='text-base' />
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 import { PortfolioAnimals, PortfolioFlowers, PortfolioStillLife } from "../../../assets/images/Images";
-import { descriptionAnimals, descriptionFlowers, descriptionStillLife } from './descriptionGroupsPicture.ts'
+import { descriptionAnimals, descriptionFlowers, descriptionStillLife, styleAdittionTextStyle } from './descriptionGroupsPicture.ts'
 
 import styles from './styles/portfolio.module.scss'
 
@@ -26,7 +26,7 @@ export const PortfolioItem = ({ Component, headText, text, path }: TypesPortfoli
         <Link to={path}>{Component}</Link>
         <div className={`flex flex-col ml-5`}>
           <Link className={`text-center ${styles.portfolioHeadTextStyle}`} to={path}>{headText}</Link>
-          <div className={`pl-3 max-w-1200 inline-block break-word text-center leading-7 ${styles.portfolioTextStyle}`}><span className={`${styles.portfolioMainTextBold}`}>{headText}</span> {text}</div>
+          <div className={`${styleAdittionTextStyle} ${styles.portfolioTextStyle}`}><span className={`${styles.portfolioMainTextBold}`}>{headText}</span> {text}</div>
         </div>
       </div>
     </>

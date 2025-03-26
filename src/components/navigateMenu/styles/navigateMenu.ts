@@ -13,4 +13,6 @@ export const ulClass: string = `w-420 flex mt-8 mx-auto justify-between group pb
 
 export const classListItem: string = `text-sm uppercase text-gray-500 font-medium no-underline`
 
-export const stylesPortfolioLinks = 'w-1/3 outline-none hover:text-black'
+export const stylesPortfolioLinks: string = 'w-1/3 outline-none hover:text-black'
+
+export const stylePopupImg: string = `ml-1 self-center w-3 h-3 -rotate-90 hover:`

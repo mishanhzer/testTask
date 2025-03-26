@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { arrow, mainLogo } from "../../assets/logo/logo";
-import { classNamesLinkAndButton } from "./stylesUI_kits";
+import { classNamesLinkAndButton } from "./styles/stylesUI_kits";
 
 interface ImageTypes {
   w: string
