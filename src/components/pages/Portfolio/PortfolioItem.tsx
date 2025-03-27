@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-import { PortfolioAnimals, PortfolioFlowers, PortfolioStillLife } from "../../../assets/images/Images";
-import { descriptionAnimals, descriptionFlowers, descriptionStillLife, styleAdittionTextStyle } from './descriptionGroupsPicture.ts'
+import { styleAdittionTextStyle } from './descriptionGroupsPicture.ts'
 
 import styles from './styles/portfolio.module.scss'
 
@@ -12,12 +11,6 @@ interface TypesPortfolioItem {
   path: string
   text: string
 }
-
-export const dataPortfolioItem = [
-  { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: '/portfolio/animals/1', id: 0 },
-  { Component: <PortfolioFlowers />, headText: 'Flowers', text: descriptionFlowers, path: '/portfolio/flowers', id: 1 },
-  { Component: <PortfolioStillLife />, headText: 'StillLife', text: descriptionStillLife, path: '/portfolio/still_life', id: 2 }
-]
 
 export const PortfolioItem = ({ Component, headText, text, path }: TypesPortfolioItem) => {
   return (

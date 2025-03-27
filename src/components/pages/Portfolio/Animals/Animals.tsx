@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
 
@@ -54,10 +54,6 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
 
   const navigate = useNavigate()
   const location = useLocation()
-
-  useEffect(() => {
-    navigate(`${pathAnimals}1`)
-  }, [])
 
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
