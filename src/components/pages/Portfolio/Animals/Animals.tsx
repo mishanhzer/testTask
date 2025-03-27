@@ -120,24 +120,28 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   }
 
   const Content = () => {
-    const [element, setElement] = useState(`${styles.imgTest}`)
+    const [element, setElement] = useState(false)
     const handleMouseHover = (e) => {
       console.log(e.target)
-      setElement(`${styles.imgTest} ${styles.imgTestHover}`)
+      setElement(true)
     }
     const handleMouseLeave = (e) => {
       console.log(e.target)
-      setElement(`${styles.imgTest}`)
+      setElement(false)
     }
+
+    const divStyle = {
+      backgroundColor: 'black',
+    };
 
     return (
       <>
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
-              {/* <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad ${styles.img}`} src={item.source} alt={item.name} /> */}
-              <div className={`${styles.wrapperImg}`}>
+              <div style={divStyle} className={`${styles.wrapperImg}`}>
                 <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad`} src={item.source} alt={item.name} />
+                <div className="overlay"></div>
               </div>
             </AnimationContainer>
           ))}
