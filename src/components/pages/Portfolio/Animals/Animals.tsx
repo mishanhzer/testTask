@@ -115,13 +115,30 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
     animation: 1.5s ${fadeInAnimation};
   `
 
+  const handleTest = (e) => {
+    console.log(e)
+  }
+
   const Content = () => {
+    const [element, setElement] = useState(`${styles.imgTest}`)
+    const handleMouseHover = (e) => {
+      console.log(e.target)
+      setElement(`${styles.imgTest} ${styles.imgTestHover}`)
+    }
+    const handleMouseLeave = (e) => {
+      console.log(e.target)
+      setElement(`${styles.imgTest}`)
+    }
+
     return (
       <>
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
-              <img className={`w-56 h-56 lozad`} src={item.source} key={i} alt={item.name} />
+              {/* <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad ${styles.img}`} src={item.source} alt={item.name} /> */}
+              <div className={`${styles.wrapperImg}`}>
+                <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad`} src={item.source} alt={item.name} />
+              </div>
             </AnimationContainer>
           ))}
           <button
