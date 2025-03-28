@@ -5,6 +5,7 @@ import mainPicture from './formImage/formPicture.jpg'
 import portfolioAnimals from './portfolioImages/portfolioAnimals.jpg'
 import portfolioFlowers from './portfolioImages/portfolioFlowers.jpg'
 import portfolioStillLife from './portfolioImages/portfolioStillLife.jpg'
+import portfolioPeopleAndAnimals from './portfolioImages/portfolioPeopleAndAnimals.jpg'
 
 export { mainPicture }
 
@@ -45,6 +46,12 @@ export const PortfolioFlowers = () => {
 export const PortfolioStillLife = () => {
   return (
     <ImagePortfolio source={portfolioStillLife} alt='porfolioStillLife' />
+  )
+}
+
+export const PortfolioPeopleAndAnimals = () => {
+  return (
+    <ImagePortfolio source={portfolioPeopleAndAnimals} alt='portfolioPeopleAndAnimals' />
   )
 }
 

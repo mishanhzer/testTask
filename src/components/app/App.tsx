@@ -15,6 +15,7 @@ const Home = lazy(() => import('../pages/Home/Home.tsx'));
 const Portfolio = lazy(() => import('../pages/Portfolio/Portfolio.tsx'));
 const Animals = lazy(() => import('../pages/Portfolio/Animals/Animals.tsx'));
 const Flowers = lazy(() => import('../pages/Portfolio/Flowers/Flowers.tsx'));
+const PeopleAndAnimals = lazy(() => import('../pages/Portfolio/PeopleAndAnimals/PeopleAndAnimals.tsx'));
 const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
 
 import "./app.css";
@@ -39,6 +40,7 @@ const App = () => {
               <Route path=':id' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />} />
             </Route>
             <Route path='/portfolio/flowers' element={<Flowers />} />
+            <Route path='/portfolio/people_and_animals' element={<PeopleAndAnimals />} />
           </Routes>
         </Suspense>
       </div>
