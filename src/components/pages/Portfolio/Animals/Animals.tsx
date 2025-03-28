@@ -40,6 +40,7 @@ const pathAnimals = '/portfolio/animals/'
 const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
+  console.log(animalDisplayedData)
 
   const setTestPrev = useAnimalStore(state => state.setTestPrev)
   const setTestNext = useAnimalStore(state => state.setTestNext)
@@ -115,18 +116,12 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
     animation: 1.5s ${fadeInAnimation};
   `
 
-  const handleTest = (e) => {
-    console.log(e)
-  }
-
   const Content = () => {
     const [element, setElement] = useState(false)
     const handleMouseHover = (e) => {
-      console.log(e.target)
       setElement(true)
     }
     const handleMouseLeave = (e) => {
-      console.log(e.target)
       setElement(false)
     }
 
@@ -136,7 +131,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
               <div className={`${styles.wrapperImg}`}>
-                <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad`} src={item.source} alt={item.name} />
+                <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`${item.class} lozad`} src={item.source} alt={item.name} />
               </div>
             </AnimationContainer>
           ))}

@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 
+import { useAnimalStore } from '../../store/store'
+
 import 'reactjs-popup/dist/index.css';
 
 import { arrowPages } from '../../assets/logo/logo';
@@ -23,6 +25,7 @@ const initialValueRef = {
 }
 
 export const PopupItem = ({ name, path }: TypesListItem) => {
+  const paramsId = useAnimalStore(state => state.paramsId)
   const ref = useRef<PopupActions>(initialValueRef);
 
   const handleClick = () => {
@@ -34,7 +37,7 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   }
 
   const data = [
-    { name: 'Animals', path: '/portfolio/animals/1', class: stylesPortfolioLinks, func: handleClick },
+    { name: 'Animals', path: `/portfolio/animals/${paramsId}`, class: stylesPortfolioLinks, func: handleClick },
     { name: 'Flowers', path: '/portfolio/flowers', class: stylesPortfolioLinks, func: handleClick },
     { name: 'Still life', path: '/portfolio/still_life', class: stylesPortfolioLinks, func: handleClick },
   ]
