@@ -130,18 +130,13 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
       setElement(false)
     }
 
-    const divStyle = {
-      backgroundColor: 'black',
-    };
-
     return (
       <>
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
-              <div style={divStyle} className={`${styles.wrapperImg}`}>
+              <div className={`${styles.wrapperImg}`}>
                 <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`w-56 h-56 lozad`} src={item.source} alt={item.name} />
-                <div className="overlay"></div>
               </div>
             </AnimationContainer>
           ))}
