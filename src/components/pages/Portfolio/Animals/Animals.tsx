@@ -37,10 +37,14 @@ interface TypesButtonNavigate {
 
 const pathAnimals = '/portfolio/animals/'
 
+const fadeInAnimation = keyframes`${fadeIn}`
+const AnimationContainer = styled.div`
+  animation: 1.5s ${fadeInAnimation};
+`
+
 const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
-  console.log(animalDisplayedData)
 
   const setTestPrev = useAnimalStore(state => state.setTestPrev)
   const setTestNext = useAnimalStore(state => state.setTestNext)
@@ -111,27 +115,25 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
     { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setTestSix },
   ]
 
-  const fadeInAnimation = keyframes`${fadeIn}`
-  const AnimationContainer = styled.div`
-    animation: 1.5s ${fadeInAnimation};
-  `
-
   const Content = () => {
-    const [element, setElement] = useState(false)
-    const handleMouseHover = (e) => {
-      setElement(true)
-    }
-    const handleMouseLeave = (e) => {
-      setElement(false)
-    }
-
     return (
       <>
+        <ul className={styles.links}>
+          <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
+          <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
+          <AnimalsListItemsPage
+            callFuncLoading={callFuncLoading}
+            data={animalsDataPages}
+          />
+          <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
+          <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
+        </ul>
+
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
               <div className={`${styles.wrapperImg}`}>
-                <img onMouseEnter={handleMouseHover} onMouseLeave={handleMouseLeave} className={`${item.class} lozad`} src={item.source} alt={item.name} />
+                <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
               </div>
             </AnimationContainer>
           ))}
@@ -141,17 +143,6 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
             className={`${styles.btn} ${classNamesLinkAndButton} ${btnLoadMore}`}
           >Показать еще
           </button>
-
-          <ul className={styles.links}>
-            <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
-            <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
-            <AnimalsListItemsPage
-              callFuncLoading={callFuncLoading}
-              data={animalsDataPages}
-            />
-            <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
-            <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
-          </ul>
         </div >
       </>
     )
@@ -165,7 +156,10 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
 const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate) => {
   return (
     <li className={className}>
-      <button onClick={navigateFunc}>
+      <button
+        tabIndex={0}
+        onClick={navigateFunc}
+      >
         <img src={source} alt="#" />
       </button>
     </li>
