@@ -111,113 +111,7 @@ export interface TypesContent {
   works: TypesDataWorks[]
 }
 
-export const dataWorks: TypesDataWorks[] = [
-  // Категория животных
-  // { category: 'animal', name: 'akitoInu', source: akitoInuImg, class: ``, id: 0 },
-  // { category: 'animal', name: 'beagle', source: beagleImg, class: '', id: 1 },
-  // { category: 'animal', name: 'blueAndYellowMacaw', source: blueAndYellowMacawImg, class: '', id: 2 },
-  // { category: 'animal', name: 'blueBirds', source: blueBirdsOnFloweringBranchImg, class: '', id: 3 },
-  // { category: 'animal', name: 'cat', source: catImg, class: 'mt-gapFirst', id: 4 },
-  // { category: 'animal', name: 'catMischievous', source: catMischievousImg, class: '', id: 5 },
-  // { category: 'animal', name: 'catsInLibrary', source: catsInLibraryImg, class: 'mt-gapFirst', id: 6 },
-  // { category: 'animal', name: 'catWithGreenEyes', source: catWithGreenEyesImg, class: 'mt-gapFirst', id: 7 },
-  // { category: 'animal', name: 'domesticCat', source: domesticCatImg, class: 'mt-gapFirst', id: 8 },
-  // { category: 'animal', name: 'flight', source: flightImg, class: 'h-600', id: 9 },
-  // { category: 'animal', name: 'fluffyJoy', source: fluffyJoyImg, class: 'h-566', id: 10 },
-  // { category: 'animal', name: 'fox', source: foxImg, class: '', id: 11 },
-  // { category: 'animal', name: 'goldfish', source: goldfishImg, class: '', id: 12 },
-  // { category: 'animal', name: 'greenWingedMacaw', source: greenWingedMacawImg, class: 'mt-gapSecond', id: 13 },
-  // { category: 'animal', name: 'hedgehog', source: hedgehogImg, class: 'mt-gapThird', id: 14 },
-  // { category: 'animal', name: 'horse', source: horseImg, class: '', id: 15 },
-  // { category: 'animal', name: 'horseAndFoal', source: horseAndFoalImg, class: 'mt-gapFourth h-600', id: 16 },
-  // { category: 'animal', name: 'junonia', source: junoniaImg, class: 'mt-gapFifth', id: 17 },
-  // { category: 'animal', name: 'ladybug', source: ladybugImg, class: '', id: 18 },
-  // { category: 'animal', name: 'ladybugs', source: ladybugsImg, class: 'h-566', id: 19 },
-  // { category: 'animal', name: 'leopard', source: leopardImg, class: '', id: 20 },
-  // { category: 'animal', name: 'leopardAtWateringHole', source: leopardAtWateringHoleImg, class: 'mt-gapSecond', id: 21 },
-  // { category: 'animal', name: 'leopardsAtSunset', source: leopardsAtSunsetImg, class: '', id: 22 },
-  // { category: 'animal', name: 'leopardsGaze', source: leopardsGazeImg, class: 'mt-gapFifth', id: 23 },
-  // { category: 'animal', name: 'lionessAndLionCub', source: lionessAndLionCubImg, class: 'mt-gapThird', id: 24 },
-  // { category: 'animal', name: 'lionFamily', source: lionFamilyImg, class: '', id: 25 },
-  // { category: 'animal', name: 'littleRedPanda', source: littleRedPandaImg, class: 'mt-gapSixth', id: 26 },
-  // { category: 'animal', name: 'lynx', source: lynxImg, class: '', id: 27 },
-  // { category: 'animal', name: 'makhaon', source: makhaonImg, class: '', id: 28 },
-  // { category: 'animal', name: 'monarch', source: monarchImg, class: '', id: 29 },
-  // { category: 'animal', name: 'ocelot', source: ocelotImg, class: '', id: 30 },
-  // { category: 'animal', name: 'peacocksEye', source: peacocksEyeImg, class: 'mt-gapFirst', id: 31 },
-  // { category: 'animal', name: 'pomeranian', source: pomeranianImg, class: '', id: 32 },
-  // { category: 'animal', name: 'puma', source: pumaImg, class: '', id: 33 },
-  // { category: 'animal', name: 'redCatOnTheFence', source: redCatOnTheFenceImg, class: 'mt-gapSeventh', id: 34 },
-  // { category: 'animal', name: 'redHorse', source: redHorseImg, class: 'mt-gapFirst', id: 35 },
-  // { category: 'animal', name: 'snailOnStrawberry', source: snailOnStrawberryImg, class: 'h-566', id: 36 },
-  // { category: 'animal', name: 'snowLeopard', source: snowLeopardImg, class: '', id: 37 },
-  // { category: 'animal', name: 'spaniel', source: spanielImg, class: '', id: 38 },
-  // { category: 'animal', name: 'squirell', source: squirrelImg, class: '', id: 39 },
-  // { category: 'animal', name: 'swans', source: swansImg, class: 'h-566 mt-gapSecond', id: 40 },
-  // { category: 'animal', name: 'tiger', source: tigerImg, class: 'mt-gapSecond', id: 41 },
-  // { category: 'animal', name: 'tigerGaze', source: tigerGazeImg, class: 'mt-gapFifth', id: 42 },
-  // { category: 'animal', name: 'tigerHost', source: tigerHostImg, class: 'mt-gapSecond', id: 43 },
-  // { category: 'animal', name: 'tigerInTheTicket', source: tigerInTheTicketImg, class: 'mt-gapThird', id: 44 },
-  // { category: 'animal', name: 'toyger', source: toygerImg, class: 'h-566', id: 45 },
-  // { category: 'animal', name: 'whiteEagle', source: whiteEagleImg, class: '', id: 46 },
-  // { category: 'animal', name: 'wolf', source: wolfImg, class: 'h-566', id: 47 },
-
-  // Категория люди и животные
-  { category: 'peopleAndAnimals', name: 'belovedBaby', source: belovedBabyImg, class: '', id: 48 },
-  { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 49 },
-  { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: '', id: 50 },
-  { category: 'peopleAndAnimals', name: 'girlAndDucklings', source: girlAndDucklingsImg, class: '', id: 51 },
-  { category: 'peopleAndAnimals', name: 'girlWithDog', source: girlWithDogImg, class: '', id: 52 },
-  { category: 'peopleAndAnimals', name: 'girlWithHorse', source: girlWithHorseImg, class: '', id: 53 },
-  { category: 'peopleAndAnimals', name: 'letsSingMyFriend', source: letsSingMyFriendImg, class: '', id: 54 },
-  { category: 'peopleAndAnimals', name: 'theGirlWithTheWhiteRabbits', source: theGirlWithTheWhiteRabbitsImg, class: '', id: 55 },
-
-  // Категория цветы
-  { category: 'flowers', name: 'blueIrises', source: blueIrisesImg, class: '', id: 56 },
-  { category: 'flowers', name: 'branchOfLiliac', source: branchOfLilacImg, class: '', id: 57 },
-  { category: 'flowers', name: 'brightPeonies', source: brightPeoniesImg, class: '', id: 58 },
-  { category: 'flowers', name: 'brightTulips', source: brightTulipsImg, class: '', id: 59 },
-  { category: 'flowers', name: 'delicateHydrangea', source: delicateHydrangeaImg, class: '', id: 60 },
-  { category: 'flowers', name: 'delicateRose', source: delicateRoseImg, class: '', id: 61 },
-  { category: 'flowers', name: 'delicateScentOfPeonies', source: delicateScentOfPeoniesImg, class: '', id: 62 },
-  { category: 'flowers', name: 'delicateTulips', source: delicateTulipsImg, class: '', id: 63 },
-  { category: 'flowers', name: 'eveningFlowers', source: eveningFlowersImg, class: '', id: 64 },
-  { category: 'flowers', name: 'flowersForBeloved', source: flowersForBelovedImg, class: '', id: 65 },
-  { category: 'flowers', name: 'flowersMood', source: flowersMoodImg, class: '', id: 66 },
-  { category: 'flowers', name: 'hydrangea', source: hydrangeaImg, class: '', id: 67 },
-  { category: 'flowers', name: 'irises', source: irisesImg, class: '', id: 68 },
-  { category: 'flowers', name: 'largePeonies', source: largePeoniesImg, class: '', id: 69 },
-  { category: 'flowers', name: 'luxuriousPeonies', source: luxuriousPeoniesImg, class: '', id: 70 },
-  { category: 'flowers', name: 'narcissists', source: narcissistsImg, class: '', id: 71 },
-  { category: 'flowers', name: 'peonyFestival', source: peonyFestivalImg, class: '', id: 72 },
-  { category: 'flowers', name: 'pinkBlooming', source: pinkBloomingImg, class: '', id: 73 },
-  { category: 'flowers', name: 'pinkPeonies', source: pinkPeoniesImg, class: '', id: 74 },
-  { category: 'flowers', name: 'pinkTenderness', source: pinkTendernessImg, class: '', id: 75 },
-  { category: 'flowers', name: 'redFowersAtSunset', source: redFlowersOnSunsetImg, class: '', id: 76 },
-  { category: 'flowers', name: 'roseInGarden', source: roseInGardenImg, class: '', id: 77 },
-  { category: 'flowers', name: 'yellowRose', source: yellowRoseImg, class: '', id: 78 },
-
-  // Категория натюрморт
-  { category: 'stillLife', name: 'daisiesOnOldSuitcase', source: daisiesOnOldSuitcaseImg, class: '', id: 79 },
-  { category: 'stillLife', name: 'grapefruits', source: grapefruitsImg, class: '', id: 80 },
-  { category: 'stillLife', name: 'lemonsOrangesLimes', source: lemonsOrangesLimesImg, class: '', id: 81 },
-  { category: 'stillLife', name: 'orangeJuiceFresh', source: orangeJuiceFreshImg, class: '', id: 82 },
-  { category: 'stillLife', name: 'peoniesByTheWindow', source: peoniesByTheWindowImg, class: '', id: 83 },
-  { category: 'stillLife', name: 'stillLifeWithBookAndKeys', source: stillLifeWithBookAndKeysImg, class: '', id: 84 },
-  { category: 'stillLife', name: 'stillLifeWithChamomileAndStrawberry', source: stillLifeWithChamomileAndStrawberryImg, class: '', id: 85 },
-  { category: 'stillLife', name: 'stillLifeWithChrysanthemumsAndFruits', source: stillLifeWithChrysanthemumsAndFruitsImg, class: '', id: 86 },
-  { category: 'stillLife', name: 'stillLifeWithFigsAndGrapes', source: stillLifeWithFigsAndGrapesImg, class: '', id: 87 },
-  { category: 'stillLife', name: 'stillLifeWithGreenGrapes', source: stillLifeWithGreenGrapesImg, class: '', id: 88 },
-  { category: 'stillLife', name: 'stillLifeWithLemons', source: stillLifeWithLemonsImg, class: '', id: 89 },
-  { category: 'stillLife', name: 'stillLifeWithPeach', source: stillLifeWithPeachImg, class: '', id: 90 },
-  { category: 'stillLife', name: 'stillLifeWithPomegranates', source: stillLifeWithPomegranatesImg, class: '', id: 91 },
-  { category: 'stillLife', name: 'stillLifeWithSamovar', source: stillLifeWithSamovarImg, class: '', id: 92 },
-  { category: 'stillLife', name: 'wildflowers', source: wildflowersImg, class: '', id: 93 },
-  { category: 'stillLife', name: 'wineAndFruits', source: wineAndFruitsImg, class: '', id: 94 },
-]
-
-
-export const dataWorksAnimals = [
+export const dataWorksAnimals: TypesDataWorks[] = [
     // Категория животных
     { category: 'animal', name: 'akitoInu', source: akitoInuImg, class: ``, id: 0 },
     { category: 'animal', name: 'beagle', source: beagleImg, class: '', id: 1 },
@@ -269,7 +163,7 @@ export const dataWorksAnimals = [
     { category: 'animal', name: 'wolf', source: wolfImg, class: 'h-566', id: 47 },
 ]
 
-export const dataWorksFlowers = [
+export const dataWorksFlowers: TypesDataWorks[] = [
   { category: 'flowers', name: 'blueIrises', source: blueIrisesImg, class: '', id: 0 },
   { category: 'flowers', name: 'branchOfLiliac', source: branchOfLilacImg, class: '', id: 1 },
   { category: 'flowers', name: 'brightPeonies', source: brightPeoniesImg, class: '', id: 2 },
@@ -295,7 +189,26 @@ export const dataWorksFlowers = [
   { category: 'flowers', name: 'yellowRose', source: yellowRoseImg, class: '', id: 22 },
 ]
 
-export const dataWorksPeopleAndAnimals = [
+export const dataWorksStillLife: TypesDataWorks[] = [
+  { category: 'stillLife', name: 'daisiesOnOldSuitcase', source: daisiesOnOldSuitcaseImg, class: '', id: 0 },
+  { category: 'stillLife', name: 'grapefruits', source: grapefruitsImg, class: '', id: 1},
+  { category: 'stillLife', name: 'lemonsOrangesLimes', source: lemonsOrangesLimesImg, class: '', id: 2 },
+  { category: 'stillLife', name: 'orangeJuiceFresh', source: orangeJuiceFreshImg, class: '', id: 3 },
+  { category: 'stillLife', name: 'peoniesByTheWindow', source: peoniesByTheWindowImg, class: '', id: 4},
+  { category: 'stillLife', name: 'stillLifeWithBookAndKeys', source: stillLifeWithBookAndKeysImg, class: '', id: 5 },
+  { category: 'stillLife', name: 'stillLifeWithChamomileAndStrawberry', source: stillLifeWithChamomileAndStrawberryImg, class: '', id: 6 },
+  { category: 'stillLife', name: 'stillLifeWithChrysanthemumsAndFruits', source: stillLifeWithChrysanthemumsAndFruitsImg, class: '', id: 7 },
+  { category: 'stillLife', name: 'stillLifeWithFigsAndGrapes', source: stillLifeWithFigsAndGrapesImg, class: '', id: 8 },
+  { category: 'stillLife', name: 'stillLifeWithGreenGrapes', source: stillLifeWithGreenGrapesImg, class: '', id:9 },
+  { category: 'stillLife', name: 'stillLifeWithLemons', source: stillLifeWithLemonsImg, class: '', id: 10 },
+  { category: 'stillLife', name: 'stillLifeWithPeach', source: stillLifeWithPeachImg, class: '', id: 11 },
+  { category: 'stillLife', name: 'stillLifeWithPomegranates', source: stillLifeWithPomegranatesImg, class: '', id: 12 },
+  { category: 'stillLife', name: 'stillLifeWithSamovar', source: stillLifeWithSamovarImg, class: '', id: 13 },
+  { category: 'stillLife', name: 'wildflowers', source: wildflowersImg, class: '', id: 14 },
+  { category: 'stillLife', name: 'wineAndFruits', source: wineAndFruitsImg, class: '', id: 15 },
+]
+
+export const dataWorksPeopleAndAnimals: TypesDataWorks[] = [
   { category: 'peopleAndAnimals', name: 'belovedBaby', source: belovedBabyImg, class: '', id: 0 },
   { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 1 },
   { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: '', id: 2 },

@@ -15,11 +15,6 @@ import { Spinner } from "../../../spinner/Spinner.tsx";
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-interface TypesAnimals {
-  animalWorks: TypesDataWorks[]
-  animalDisplayedData: TypesDataWorks[]
-  handleAnimalLoadMore: () => void
-}
 
 interface TypesAnimalsDataPages {
   path: string
@@ -42,7 +37,7 @@ const AnimationContainer = styled.div`
   animation: 1.5s ${fadeInAnimation};
 `
 
-const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
+const Animals = () => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
 

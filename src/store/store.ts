@@ -6,6 +6,7 @@ import {
   // dataWorks,
   dataWorksAnimals,
   dataWorksFlowers,
+  dataWorksStillLife,
   dataWorksPeopleAndAnimals,
   TypesDataWorks,
 } from "../assets/images/AllWorks"
@@ -188,7 +189,7 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
 // Cтор Flowers
 interface TypesFlowersStore {
   flowersWorks: TypesDataWorks[]
-  flowersDisplayedData: TypesDataWorks[]
+  flowersWorksDisplayedData: TypesDataWorks[]
   setTestNext: () => void
   setTestPrev: () => void
   setTestOne: () => void
@@ -206,7 +207,7 @@ export const useFlowersStore = create<TypesFlowersStore>()(
   immer(
     (set) => ({
       flowersWorks: dataWorksFlowers.filter(item => item.category === 'flowers'),
-      flowersDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id < 9),
+      flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsFlowersId: 0,
@@ -227,26 +228,26 @@ export const useFlowersStore = create<TypesFlowersStore>()(
         set(() => ({
           idStart: 0,
           idEnd: 9,
-          flowersDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 0 && item.id <= 8),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 0 && item.id <= 8),
           paramsFlowersId: 1
         })),
       setTestTwo: () => 
         set(() => ({
           idStart: 9,
           idEnd: 18,
-          flowersDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 9 && item.id <= 17),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 9 && item.id <= 17),
           paramsFlowersId: 2
         })),
       setTestThree: () => 
         set(() => ({
           idStart: 18,
           idEnd: 27,
-          flowersDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 18 && item.id <= 26),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 18 && item.id <= 26),
           paramsFlowersId: 3
         })),
       setTestDisplay: () => 
         set((state) => ({
-          flowersDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= state.idStart && item.id < state.idEnd),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {
@@ -256,6 +257,81 @@ export const useFlowersStore = create<TypesFlowersStore>()(
  )
   )
 );
+
+
+
+
+
+
+// Стор StillLife
+interface TypesStillLifeStore {
+  stillLifeWorks: TypesDataWorks[]
+  stillLifeWorksDisplayedData: TypesDataWorks[]
+  setTestNext: () => void
+  setTestPrev: () => void
+  setTestOne: () => void
+  setTestTwo: () => void
+  idStart: number
+  idEnd: number
+  paramsStillLifeId: number
+  setTestDisplay: () => void
+}
+
+
+export const useStillLifeStore = create<TypesStillLifeStore>()(
+  devtools(
+ persist(
+  immer(
+    (set) => ({
+      stillLifeWorks: dataWorksStillLife.filter(item => item.category === 'stillLife'),
+      stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id < 9),
+      idStart: 0,
+      idEnd: 9,
+      paramsStillLifeId: 0,
+
+      setTestPrev: () => 
+        set((state) => ({
+          idStart: state.idStart - 9,
+          idEnd: state.idEnd - 9,
+          paramsStillLifeId: state.paramsStillLifeId - 1
+        })),
+      setTestNext: () => 
+        set((state) => ({
+          idStart: state.idStart + 9,
+          idEnd: state.idEnd + 9,
+          paramsStillLifeId: state.paramsStillLifeId + 1
+        })),
+      setTestOne: () => 
+        set(() => ({
+          idStart: 0,
+          idEnd: 9,
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= 0 && item.id <= 8),
+          paramsStillLifeId: 1
+        })),
+      setTestTwo: () => 
+        set(() => ({
+          idStart: 9,
+          idEnd: 18,
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= 9 && item.id <= 17),
+          paramsStillLifeId: 2
+        })),
+      setTestDisplay: () => 
+        set((state) => ({
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= state.idStart && item.id < state.idEnd),
+        }))
+    }),
+  ),  {
+    name: 'stillLife-storage',
+    storage: createJSONStorage(() => localStorage)
+  }
+ )
+  )
+);
+
+
+
+
+
 
 
 
