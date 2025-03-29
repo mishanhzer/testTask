@@ -63,7 +63,7 @@ const Animals = ({ animalWorks, handleAnimalLoadMore }: TypesAnimals) => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-  const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
+  // const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
 
   const callFuncLoading = () => {
     setLoading(true)

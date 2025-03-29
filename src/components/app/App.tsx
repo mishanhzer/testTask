@@ -5,7 +5,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { useAnimalStore } from '../../store/store'
+import { useAnimalStore, useFlowersStore } from '../../store/store'
 
 import { Spinner } from "../spinner/Spinner";
 import { AppHeader } from "../appHeader/AppHeader";
@@ -39,8 +39,10 @@ const App = () => {
             <Route path='/portfolio/animals' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />}>
               <Route path=':id' element={<Animals animalWorks={animalWorks} animalDisplayedData={animalDisplayedData} handleAnimalLoadMore={handleAnimalLoadMore} />} />
             </Route>
-            <Route path='/portfolio/flowers' element={<Flowers />} />
-            <Route path='/portfolio/people_and_animals' element={<PeopleAndAnimals />} />
+            <Route path='/portfolio/flowers' element={<Flowers />}>
+              <Route path=':id' element={<Flowers />} />
+            </Route>
+            <Route path='/portfolio/people_and_animals/1' element={<PeopleAndAnimals />} />
           </Routes>
         </Suspense>
       </div>
