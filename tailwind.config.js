@@ -20,6 +20,16 @@ module.exports = {
         gapFifth: "-266px",
         gapSixth: "-300px",
         gapSeventh: "-466px",
+
+        gapFlowersFirst: "-221px",
+        gapFlowersSecond: "-82px",
+        gapFlowersThird: "-327px",
+        gapFlowersFourth: "-286px",
+        gapFlowersFifth: "-133px",
+        gapFlowersSixth: "-118px",
+
+        gapStillLifeFirst: "-299px",
+        gapStillLifeSecond: "-333px",
       },
       fontSize: {
         fz15: "15px",
