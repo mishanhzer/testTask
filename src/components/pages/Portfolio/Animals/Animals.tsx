@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
 
-import { classNamesLinkAndButton } from '../../../UI_kits/styles/stylesUI_kits'
 import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
-import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
 
-import { activeClassPage, btnLoadMore } from './styles/activeClassPage.ts'
+import { activeClassPage } from './styles/activeClassPage.ts'
 
 import styles from './styles/animals.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
@@ -41,16 +39,16 @@ const Animals = () => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
 
-  const setTestPrev = useAnimalStore(state => state.setTestPrev)
-  const setTestNext = useAnimalStore(state => state.setTestNext)
-  const setTestDisplay = useAnimalStore(state => state.setTestDisplay)
+  const setPrevPage = useAnimalStore(state => state.setPrevPage)
+  const setNextPage = useAnimalStore(state => state.setNextPage)
+  const setVisibleDisplay = useAnimalStore(state => state.setVisibleDisplay)
 
-  const setTestOne = useAnimalStore(state => state.setTestOne)
-  const setTestTwo = useAnimalStore(state => state.setTestTwo)
-  const setTestThree = useAnimalStore(state => state.setTestThree)
-  const setTestFour = useAnimalStore(state => state.setTestFour)
-  const setTestFive = useAnimalStore(state => state.setTestFive)
-  const setTestSix = useAnimalStore(state => state.setTestSix)
+  const setOnePage = useAnimalStore(state => state.setOnePage)
+  const setTwoPage = useAnimalStore(state => state.setTwoPage)
+  const setThreePage = useAnimalStore(state => state.setThreePage)
+  const setFourPage = useAnimalStore(state => state.setFourPage)
+  const setFivePage = useAnimalStore(state => state.setFivePage)
+  const setSixPage = useAnimalStore(state => state.setSixPage)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -58,7 +56,6 @@ const Animals = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-  // const disableCondition = animalDisplayedData[animalDisplayedData.length - 1].id === animalWorks.length - 1
 
   const callFuncLoading = () => {
     setLoading(true)
@@ -68,11 +65,11 @@ const Animals = () => {
   const goBack = () => {
     callFuncLoading()
     if (idTest - 1 <= 1) {
-      setTestOne()
+      setOnePage()
       navigate(`${pathAnimals}1`)
     } else {
-      setTestPrev()
-      setTestDisplay()
+      setPrevPage()
+      setVisibleDisplay()
       navigate(`${pathName}${idTest - 1}`)
     }
   }
@@ -80,11 +77,11 @@ const Animals = () => {
   const goForward = () => {
     callFuncLoading()
     if (idTest + 1 >= 6) {
-      setTestSix()
+      setSixPage()
       navigate(`${pathAnimals}6`)
     } else {
-      setTestNext();
-      setTestDisplay()
+      setNextPage();
+      setVisibleDisplay()
       navigate(`${pathName}${idTest + 1}`)
     }
   }
@@ -92,22 +89,22 @@ const Animals = () => {
   const goStart = () => {
     callFuncLoading()
     navigate(`${pathAnimals}1`)
-    setTestOne()
+    setOnePage()
   }
 
   const goEnd = () => {
     callFuncLoading()
     navigate(`${pathAnimals}6`)
-    setTestSix();
+    setSixPage();
   }
 
   const animalsDataPages: TypesAnimalsDataPages[] = [
-    { path: `/portfolio/animals/1`, name: 1, source: '', class: styles.listItems, func: setTestOne },
-    { path: '/portfolio/animals/2', name: 2, source: '', class: styles.listItems, func: setTestTwo },
-    { path: '/portfolio/animals/3', name: 3, source: '', class: styles.listItems, func: setTestThree },
-    { path: '/portfolio/animals/4', name: 4, source: '', class: styles.listItems, func: setTestFour },
-    { path: '/portfolio/animals/5', name: 5, source: '', class: styles.listItems, func: setTestFive },
-    { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setTestSix },
+    { path: `/portfolio/animals/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
+    { path: '/portfolio/animals/2', name: 2, source: '', class: styles.listItems, func: setTwoPage },
+    { path: '/portfolio/animals/3', name: 3, source: '', class: styles.listItems, func: setThreePage },
+    { path: '/portfolio/animals/4', name: 4, source: '', class: styles.listItems, func: setFourPage },
+    { path: '/portfolio/animals/5', name: 5, source: '', class: styles.listItems, func: setFivePage },
+    { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setSixPage },
   ]
 
   const Content = () => {
@@ -132,12 +129,6 @@ const Animals = () => {
               </div>
             </AnimationContainer>
           ))}
-          {/* <button - Кнопка здесь не нужна, но оставил в комментариях
-            disabled={disableCondition ? true : false}
-            onClick={handleAnimalLoadMore}
-            className={`${styles.btn} ${classNamesLinkAndButton} ${btnLoadMore}`}
-          >Показать еще
-          </button> */}
         </div >
       </>
     )

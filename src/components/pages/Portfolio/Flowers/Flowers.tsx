@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 import { useFlowersStore } from '../../../../store/store'
 
 import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
-import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
 
 import { activeClassPage } from './styles/activeClassPage.ts'
 
@@ -39,22 +38,19 @@ const Flowers = () => {
   const [loading, setLoading] = useState(false)
   const flowersWorksDisplayedData = useFlowersStore(state => state.flowersWorksDisplayedData);
 
-  const setTestPrev = useFlowersStore(state => state.setTestPrev)
-  const setTestNext = useFlowersStore(state => state.setTestNext)
-  const setTestDisplay = useFlowersStore(state => state.setTestDisplay)
+  const setPrevPage = useFlowersStore(state => state.setPrevPage)
+  const setNextPage = useFlowersStore(state => state.setNextPage)
+  const setVisibleDisplay = useFlowersStore(state => state.setVisibleDisplay)
 
-  const setTestOne = useFlowersStore(state => state.setTestOne)
-  const setTestTwo = useFlowersStore(state => state.setTestTwo)
-  const setTestThree = useFlowersStore(state => state.setTestThree)
+  const setOnePage = useFlowersStore(state => state.setOnePage)
+  const setTwoPage = useFlowersStore(state => state.setTwoPage)
+  const setThreePage = useFlowersStore(state => state.setThreePage)
 
   const navigate = useNavigate()
   const location = useLocation()
 
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
-
-  console.log(location.pathname)
-  console.log(idTest)
 
   const callFuncLoading = () => {
     setLoading(true)
@@ -64,11 +60,11 @@ const Flowers = () => {
   const goBack = () => {
     callFuncLoading()
     if (idTest - 1 <= 1) {
-      setTestOne()
+      setOnePage()
       navigate(`${pathFlowers}1`)
     } else {
-      setTestPrev()
-      setTestDisplay()
+      setPrevPage()
+      setVisibleDisplay()
       navigate(`${pathName}${idTest - 1}`)
     }
   }
@@ -76,11 +72,11 @@ const Flowers = () => {
   const goForward = () => {
     callFuncLoading()
     if (idTest + 1 >= 3) {
-      setTestThree()
+      setThreePage()
       navigate(`${pathFlowers}3`)
     } else {
-      setTestNext();
-      setTestDisplay()
+      setNextPage();
+      setVisibleDisplay()
       navigate(`${pathName}${idTest + 1}`)
     }
   }
@@ -88,19 +84,19 @@ const Flowers = () => {
   const goStart = () => {
     callFuncLoading()
     navigate(`${pathFlowers}1`)
-    setTestOne()
+    setOnePage()
   }
 
   const goEnd = () => {
     callFuncLoading()
     navigate(`${pathFlowers}3`)
-    setTestThree();
+    setThreePage();
   }
 
   const animalsDataPages: TypesFlowersDataPages[] = [
-    { path: `/portfolio/flowers/1`, name: 1, source: '', class: styles.listItems, func: setTestOne },
-    { path: '/portfolio/flowers/2', name: 2, source: '', class: styles.listItems, func: setTestTwo },
-    { path: '/portfolio/flowers/3', name: 3, source: '', class: styles.listItems, func: setTestThree },
+    { path: `/portfolio/flowers/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
+    { path: '/portfolio/flowers/2', name: 2, source: '', class: styles.listItems, func: setTwoPage },
+    { path: '/portfolio/flowers/3', name: 3, source: '', class: styles.listItems, func: setThreePage },
   ]
 
   const Content = () => {

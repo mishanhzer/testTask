@@ -30,6 +30,8 @@ module.exports = {
 
         gapStillLifeFirst: "-299px",
         gapStillLifeSecond: "-333px",
+
+        gapPeopleAndAnimalsFirst: "-99px",
       },
       fontSize: {
         fz15: "15px",

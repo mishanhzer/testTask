@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { usePeopleAndAnimalsStore } from '../../../../store/store'
 
 import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
-import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
 
 import { activeClassPage } from './styles/activeClassPage.ts'
 
@@ -14,11 +13,6 @@ import { Spinner } from "../../../spinner/Spinner.tsx";
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-interface TypesAnimals {
-  animalWorks: TypesDataWorks[]
-  animalDisplayedData: TypesDataWorks[]
-  handleAnimalLoadMore: () => void
-}
 
 interface TypesAnimalsDataPages {
   path: string
@@ -43,7 +37,7 @@ const PeopleAndAnimals = () => {
   const [loading, setLoading] = useState(false)
   const peopleAndAnimalsDisplayedData = usePeopleAndAnimalsStore(state => state.peopleAndAnimalsDisplayedData);
 
-  const setTestOne = usePeopleAndAnimalsStore(state => state.setTestOne)
+  const setOnePage = usePeopleAndAnimalsStore(state => state.setOnePage)
 
   const location = useLocation()
 
@@ -57,33 +51,33 @@ const PeopleAndAnimals = () => {
   const goBack = () => {
     callFuncLoading()
     if (idTest) {
-      setTestOne()
+      setOnePage()
     }
   }
 
   const goForward = () => {
     callFuncLoading()
     if (idTest) {
-      setTestOne()
+      setOnePage()
     }
   }
 
   const goStart = () => {
     callFuncLoading()
     if (idTest) {
-      setTestOne()
+      setOnePage()
     }
   }
 
   const goEnd = () => {
     callFuncLoading()
     if (idTest) {
-      setTestOne()
+      setOnePage()
     }
   }
 
   const animalsDataPages: TypesAnimalsDataPages[] = [
-    { path: `/portfolio/people_and_animals/1`, name: 1, source: '', class: styles.listItems, func: setTestOne },
+    { path: `/portfolio/people_and_animals/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
   ]
 
   const Content = () => {

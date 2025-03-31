@@ -13,25 +13,21 @@ import {
 
 // Cтор Animals
 interface TypesAnimalsStore {
-  animalWorks: TypesDataWorks[]
   animalDisplayedData: TypesDataWorks[]
-  setAnimalVisibleData: () => void
-  setAnimalDisplayedData: () => void
-  funcForCall: () => void
-  handleAnimalLoadMore: () => void
 
-  setTestNext: () => void
-  setTestPrev: () => void
-  setTestOne: () => void
-  setTestTwo: () => void
-  setTestThree: () => void
-  setTestFour: () => void
-  setTestFive: () => void
-  setTestSix: () => void
+  setPrevPage: () => void
+  setNextPage: () => void
+
+  setOnePage: () => void
+  setTwoPage: () => void
+  setThreePage: () => void
+  setFourPage: () => void
+  setFivePage: () => void
+  setSixPage: () => void
   idStart: number
   idEnd: number
   paramsId: number
-  setTestDisplay: () => void
+  setVisibleDisplay: () => void
 }
 
 export const useAnimalStore = create<TypesAnimalsStore>()(
@@ -39,82 +35,68 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
  persist(
   immer(
     (set) => ({
-      animalWorks: dataWorksAnimals.filter(item => item.category === 'animal'),
-      animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id < 9),
+      animalDisplayedData: dataWorksAnimals.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsId: 0,
-      funcForCall: () => {},
-      setAnimalVisibleData: () => 
-        set((state) => ({
-          idEnd: state.idEnd < 54 ? state.idEnd + 9 : state.idEnd
-        })),
-      setAnimalDisplayedData: () => 
-        set((state) => ({
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= state.idStart && item.id < state.idEnd)
-        })),
-      handleAnimalLoadMore: () => 
-        set((state) => ({
-          funcForCall: [state.setAnimalVisibleData(), state.setAnimalDisplayedData()]
-        })),
 
-      setTestPrev: () => 
+      setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,
           idEnd: state.idEnd - 9,
           paramsId: state.paramsId - 1
         })),
-      setTestNext: () => 
+      setNextPage: () => 
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
           paramsId: state.paramsId + 1
         })),
-      setTestOne: () => 
+      setOnePage: () => 
         set(() => ({
           idStart: 0,
           idEnd: 9,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 0 && item.id <= 8),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 0 && item.id <= 8),
           paramsId: 1
         })),
-      setTestTwo: () => 
+      setTwoPage: () => 
         set(() => ({
           idStart: 9,
           idEnd: 18,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 9 && item.id <= 17),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 9 && item.id <= 17),
           paramsId: 2
         })),
-      setTestThree: () => 
+      setThreePage: () => 
         set(() => ({
           idStart: 18,
           idEnd: 27,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 18 && item.id <= 26),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 18 && item.id <= 26),
           paramsId: 3
         })),
-      setTestFour: () => 
+      setFourPage: () => 
         set(() => ({
           idStart: 27,
           idEnd: 36,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 27 && item.id <= 35),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 27 && item.id <= 35),
           paramsId: 4
         })),
-      setTestFive: () => 
+      setFivePage: () => 
         set(() => ({
           idStart: 36,
           idEnd: 45,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 36 && item.id <= 44),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 36 && item.id <= 44),
           paramsId: 5
         })),
-      setTestSix: () => 
+      setSixPage: () => 
         set(() => ({
           idStart: 45,
           idEnd: 54,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= 45 && item.id <= 53),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 45 && item.id <= 53),
           paramsId: 6
         })),
-      setTestDisplay: () => 
+      setVisibleDisplay: () => 
         set((state) => ({
-          animalDisplayedData: dataWorksAnimals.filter(item => item.category === 'animal' && item.id >= state.idStart && item.id < state.idEnd),
+          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {
@@ -125,18 +107,19 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
   )
 );
 
+
+
 // Cтор People and Animals
 interface TypesPeopleAndAnimalsStore {
-  peopleAndAnimalsWorks: TypesDataWorks[]
   peopleAndAnimalsDisplayedData: TypesDataWorks[]
 
-  setTestNext: () => void
-  setTestPrev: () => void
-  setTestOne: () => void
+  setNextPage: () => void
+  setPrevPage: () => void
+  setOnePage: () => void
   idStart: number
   idEnd: number
   paramsId: number
-  setTestDisplay: () => void
+  setVisibleDisplay: () => void
 }
 
 export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
@@ -144,35 +127,32 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
  persist(
   immer(
     (set) => ({
-      peopleAndAnimalsWorks: dataWorksPeopleAndAnimals.filter(item => item.category === 'peopleAndAnimals'),
-      peopleAndAnimalsDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.category === 'peopleAndAnimals' && item.id <= 8),
-      idStart: 48,
-      idEnd: 55,
+      peopleAndAnimalsDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.id <= 8),
+      idStart: 0,
+      idEnd: 9,
       paramsId: 0,
-      funcForCall: () => {},
-
-      setTestPrev: () => 
+      setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,
           idEnd: state.idEnd - 9,
           paramsId: state.paramsId - 1
         })),
-      setTestNext: () => 
+      setNextPage: () => 
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
           paramsId: state.paramsId + 1
         })),
-      setTestOne: () => 
+      setOnePage: () => 
         set(() => ({
           idStart: 0,
           idEnd: 9,
-          animalDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.category === 'animal' && item.id >= 0 && item.id <= 8),
+          peopleAndAnimalsDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.id >= 0 && item.id <= 8),
           paramsId: 1
         })),
-      setTestDisplay: () => 
+      setVisibleDisplay: () => 
         set((state) => ({
-          animalDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.category === 'animal' && item.id >= state.idStart && item.id < state.idEnd),
+          peopleAndAnimalsDisplayedData: dataWorksPeopleAndAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {
@@ -188,17 +168,17 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
 
 // Cтор Flowers
 interface TypesFlowersStore {
-  flowersWorks: TypesDataWorks[]
   flowersWorksDisplayedData: TypesDataWorks[]
-  setTestNext: () => void
-  setTestPrev: () => void
-  setTestOne: () => void
-  setTestTwo: () => void
-  setTestThree: () => void
+
+  setNextPage: () => void
+  setPrevPage: () => void
+  setOnePage: () => void
+  setTwoPage: () => void
+  setThreePage: () => void
   idStart: number
   idEnd: number
   paramsFlowersId: number
-  setTestDisplay: () => void
+  setVisibleDisplay: () => void
 }
 
 export const useFlowersStore = create<TypesFlowersStore>()(
@@ -206,48 +186,47 @@ export const useFlowersStore = create<TypesFlowersStore>()(
  persist(
   immer(
     (set) => ({
-      flowersWorks: dataWorksFlowers.filter(item => item.category === 'flowers'),
-      flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id < 9),
+      flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsFlowersId: 0,
 
-      setTestPrev: () => 
+      setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,
           idEnd: state.idEnd - 9,
           paramsFlowersId: state.paramsFlowersId - 1
         })),
-      setTestNext: () => 
+      setNextPage: () => 
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
           paramsFlowersId: state.paramsFlowersId + 1
         })),
-      setTestOne: () => 
+      setOnePage: () => 
         set(() => ({
           idStart: 0,
           idEnd: 9,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 0 && item.id <= 8),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 0 && item.id <= 8),
           paramsFlowersId: 1
         })),
-      setTestTwo: () => 
+      setTwoPage: () => 
         set(() => ({
           idStart: 9,
           idEnd: 18,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 9 && item.id <= 17),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 9 && item.id <= 17),
           paramsFlowersId: 2
         })),
-      setTestThree: () => 
+      setThreePage: () => 
         set(() => ({
           idStart: 18,
           idEnd: 27,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= 18 && item.id <= 26),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 18 && item.id <= 26),
           paramsFlowersId: 3
         })),
-      setTestDisplay: () => 
+      setVisibleDisplay: () => 
         set((state) => ({
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.category === 'flowers' && item.id >= state.idStart && item.id < state.idEnd),
+          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {
@@ -284,7 +263,7 @@ export const useStillLifeStore = create<TypesStillLifeStore>()(
   immer(
     (set) => ({
       stillLifeWorks: dataWorksStillLife.filter(item => item.category === 'stillLife'),
-      stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id < 9),
+      stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsStillLifeId: 0,
@@ -305,19 +284,19 @@ export const useStillLifeStore = create<TypesStillLifeStore>()(
         set(() => ({
           idStart: 0,
           idEnd: 9,
-          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= 0 && item.id <= 8),
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= 0 && item.id <= 8),
           paramsStillLifeId: 1
         })),
       setTestTwo: () => 
         set(() => ({
           idStart: 9,
           idEnd: 18,
-          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= 9 && item.id <= 17),
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= 9 && item.id <= 17),
           paramsStillLifeId: 2
         })),
       setTestDisplay: () => 
         set((state) => ({
-          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.category === 'stillLife' && item.id >= state.idStart && item.id < state.idEnd),
+          stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {
