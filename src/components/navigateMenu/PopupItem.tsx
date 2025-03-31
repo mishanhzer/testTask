@@ -11,7 +11,7 @@ import 'reactjs-popup/dist/index.css';
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem, classListItem, stylesPortfolioLinks, stylePopupImg } from './styles/navigateMenu'
+import { activeClassListItem, classListItem, stylesPortfolioLinks, stylePopupImg, activeTest } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -38,7 +38,7 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
     }
   }
 
-  const data = [
+  const dataPortfolioLinks = [
     { name: 'Animals', path: `/portfolio/animals/${paramsId}`, class: stylesPortfolioLinks, func: handleClick },
     { name: 'Flowers', path: `/portfolio/flowers/${paramdFlowersId}`, class: stylesPortfolioLinks, func: handleClick },
     { name: 'Still life', path: `/portfolio/still_life/${paramsStillLifeId}`, class: stylesPortfolioLinks, func: handleClick },
@@ -47,9 +47,9 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
 
   const PortoflioLinks = () => {
     return (
-      data.map((item, i) => {
+      dataPortfolioLinks.map((item, i) => {
         return (
-          <NavLink key={i} onClick={item.func} className={item.class} to={item.path}>{item.name}</NavLink>
+          <NavLink key={i} onClick={item.func} className={`${item.class}`} style={activeTest} to={item.path}>{item.name}</NavLink>
         )
       })
     )
