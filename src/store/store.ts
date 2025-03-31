@@ -107,8 +107,6 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
   )
 );
 
-
-
 // Cтор People and Animals
 interface TypesPeopleAndAnimalsStore {
   peopleAndAnimalsDisplayedData: TypesDataWorks[]
@@ -162,9 +160,6 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
  )
   )
 );
-
-
-
 
 // Cтор Flowers
 interface TypesFlowersStore {
@@ -237,64 +232,56 @@ export const useFlowersStore = create<TypesFlowersStore>()(
   )
 );
 
-
-
-
-
-
 // Стор StillLife
 interface TypesStillLifeStore {
-  stillLifeWorks: TypesDataWorks[]
   stillLifeWorksDisplayedData: TypesDataWorks[]
-  setTestNext: () => void
-  setTestPrev: () => void
-  setTestOne: () => void
-  setTestTwo: () => void
+  setNextPage: () => void
+  setPrevPage: () => void
+  setOnePage: () => void
+  setTwoPage: () => void
   idStart: number
   idEnd: number
   paramsStillLifeId: number
-  setTestDisplay: () => void
+  setVisibleDisplay: () => void
 }
-
 
 export const useStillLifeStore = create<TypesStillLifeStore>()(
   devtools(
  persist(
   immer(
     (set) => ({
-      stillLifeWorks: dataWorksStillLife.filter(item => item.category === 'stillLife'),
       stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsStillLifeId: 0,
 
-      setTestPrev: () => 
+      setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,
           idEnd: state.idEnd - 9,
           paramsStillLifeId: state.paramsStillLifeId - 1
         })),
-      setTestNext: () => 
+      setNextPage: () => 
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
           paramsStillLifeId: state.paramsStillLifeId + 1
         })),
-      setTestOne: () => 
+      setOnePage: () => 
         set(() => ({
           idStart: 0,
           idEnd: 9,
           stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= 0 && item.id <= 8),
           paramsStillLifeId: 1
         })),
-      setTestTwo: () => 
+      setTwoPage: () => 
         set(() => ({
           idStart: 9,
           idEnd: 18,
           stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= 9 && item.id <= 17),
           paramsStillLifeId: 2
         })),
-      setTestDisplay: () => 
+      setVisibleDisplay: () => 
         set((state) => ({
           stillLifeWorksDisplayedData: dataWorksStillLife.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
@@ -306,6 +293,10 @@ export const useStillLifeStore = create<TypesStillLifeStore>()(
  )
   )
 );
+
+
+
+
 
 
 

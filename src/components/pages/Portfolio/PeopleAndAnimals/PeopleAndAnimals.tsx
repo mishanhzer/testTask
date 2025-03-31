@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { usePeopleAndAnimalsStore } from '../../../../store/store'
 
-import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
-
-import { activeClassPage } from './styles/activeClassPage.ts'
+import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
 import styles from './styles/peopleAndAnimals.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
@@ -20,12 +18,6 @@ interface TypesAnimalsDataPages {
   source: string
   class: string
   func: () => void
-}
-
-interface TypesButtonNavigate {
-  className: string
-  navigateFunc: () => void
-  source: string
 }
 
 const fadeInAnimation = keyframes`${fadeIn}`
@@ -83,17 +75,7 @@ const PeopleAndAnimals = () => {
   const Content = () => {
     return (
       <>
-        <ul className={styles.links}>
-          <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
-          <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
-          <AnimalsListItemsPage
-            callFuncLoading={callFuncLoading}
-            data={animalsDataPages}
-          />
-          <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
-          <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
-        </ul>
-
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {peopleAndAnimalsDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
@@ -110,34 +92,6 @@ const PeopleAndAnimals = () => {
   return (
     loading ? <Spinner /> : <Content />
   )
-}
-
-const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate) => {
-  return (
-    <li className={className}>
-      <button
-        tabIndex={0}
-        onClick={navigateFunc}
-      >
-        <img src={source} alt="#" />
-      </button>
-    </li>
-  )
-}
-
-const AnimalsListItemsPage = ({ data, callFuncLoading }: { data: TypesAnimalsDataPages[], callFuncLoading: () => void }) => {
-  return data.map((item) => {
-    const showSpinner = () => {
-      callFuncLoading()
-      item.func()
-    }
-
-    return (
-      <li className={item.class} key={item.name}>
-        <NavLink onClick={showSpinner} style={activeClassPage} to={item.path}>{item.name}</NavLink>
-      </li>
-    )
-  })
 }
 
 export default PeopleAndAnimals

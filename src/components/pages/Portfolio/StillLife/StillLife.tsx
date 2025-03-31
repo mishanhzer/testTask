@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useStillLifeStore } from '../../../../store/store'
 
-import { arrowPages, doubleArrowPages } from "../../../../assets/logo/logo";
-import { TypesDataWorks } from "../../../../assets/images/works/allWorks/AllWorks";
-
-import { activeClassPage } from './styles/activeClassPage.ts'
+import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
 import styles from './styles/animals.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
@@ -22,12 +19,6 @@ interface TypesStillLifeDataPages {
   func: () => void
 }
 
-interface TypesButtonNavigate {
-  className: string
-  navigateFunc: () => void
-  source: string
-}
-
 const pathStillLife = '/portfolio/still_life/'
 
 const fadeInAnimation = keyframes`${fadeIn}`
@@ -38,23 +29,19 @@ const AnimationContainer = styled.div`
 const StillLife = () => {
   const [loading, setLoading] = useState(false)
   const stillLifeWorksDisplayedData = useStillLifeStore(state => state.stillLifeWorksDisplayedData);
-  console.log(stillLifeWorksDisplayedData)
 
-  const setTestPrev = useStillLifeStore(state => state.setTestPrev)
-  const setTestNext = useStillLifeStore(state => state.setTestNext)
-  const setTestDisplay = useStillLifeStore(state => state.setTestDisplay)
+  const setPrevPage = useStillLifeStore(state => state.setPrevPage)
+  const setNextPage = useStillLifeStore(state => state.setNextPage)
+  const setVisibleDisplay = useStillLifeStore(state => state.setVisibleDisplay)
 
-  const setTestOne = useStillLifeStore(state => state.setTestOne)
-  const setTestTwo = useStillLifeStore(state => state.setTestTwo)
+  const setOnePage = useStillLifeStore(state => state.setOnePage)
+  const setTwoPage = useStillLifeStore(state => state.setTwoPage)
 
   const navigate = useNavigate()
   const location = useLocation()
 
   const pathName: string = location.pathname.slice(0, 22)
   const idTest: number = +location.pathname.slice(22, 23)
-
-  console.log(pathName)
-  console.log(idTest)
 
   const callFuncLoading = () => {
     setLoading(true)
@@ -64,11 +51,11 @@ const StillLife = () => {
   const goBack = () => {
     callFuncLoading()
     if (idTest - 1 <= 1) {
-      setTestOne()
+      setOnePage()
       navigate(`${pathStillLife}1`)
     } else {
-      setTestPrev()
-      setTestDisplay()
+      setPrevPage()
+      setVisibleDisplay()
       navigate(`${pathName}${idTest - 1}`)
     }
   }
@@ -76,11 +63,11 @@ const StillLife = () => {
   const goForward = () => {
     callFuncLoading()
     if (idTest + 1 >= 3) {
-      setTestTwo()
+      setTwoPage()
       navigate(`${pathStillLife}3`)
     } else {
-      setTestNext();
-      setTestDisplay()
+      setNextPage();
+      setVisibleDisplay()
       navigate(`${pathName}${idTest + 1}`)
     }
   }
@@ -88,34 +75,24 @@ const StillLife = () => {
   const goStart = () => {
     callFuncLoading()
     navigate(`${pathStillLife}1`)
-    setTestOne()
+    setOnePage()
   }
 
   const goEnd = () => {
     callFuncLoading()
     navigate(`${pathStillLife}2`)
-    setTestTwo();
+    setTwoPage();
   }
 
   const animalsDataPages: TypesStillLifeDataPages[] = [
-    { path: `/portfolio/still_life/1`, name: 1, source: '', class: styles.listItems, func: setTestOne },
-    { path: '/portfolio/still_life/2', name: 2, source: '', class: styles.listItems, func: setTestTwo },
+    { path: `/portfolio/still_life/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
+    { path: '/portfolio/still_life/2', name: 2, source: '', class: styles.listItems, func: setTwoPage },
   ]
 
   const Content = () => {
     return (
       <>
-        <ul className={styles.links}>
-          <ButtonNavigate className={styles.listItemOnStart} navigateFunc={goStart} source={doubleArrowPages} />
-          <ButtonNavigate className={styles.listItemPrev} navigateFunc={goBack} source={arrowPages} />
-          <AnimalsListItemsPage
-            callFuncLoading={callFuncLoading}
-            data={animalsDataPages}
-          />
-          <ButtonNavigate className={styles.listItemNext} navigateFunc={goForward} source={arrowPages} />
-          <ButtonNavigate className={styles.listItemOnEnd} navigateFunc={goEnd} source={doubleArrowPages} />
-        </ul>
-
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {stillLifeWorksDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
@@ -132,34 +109,6 @@ const StillLife = () => {
   return (
     loading ? <Spinner /> : <Content />
   )
-}
-
-const ButtonNavigate = ({ className, navigateFunc, source }: TypesButtonNavigate) => {
-  return (
-    <li className={className}>
-      <button
-        tabIndex={0}
-        onClick={navigateFunc}
-      >
-        <img src={source} alt="#" />
-      </button>
-    </li>
-  )
-}
-
-const AnimalsListItemsPage = ({ data, callFuncLoading }: { data: TypesStillLifeDataPages[], callFuncLoading: () => void }) => {
-  return data.map((item) => {
-    const showSpinner = () => {
-      callFuncLoading()
-      item.func()
-    }
-
-    return (
-      <li className={item.class} key={item.name}>
-        <NavLink onClick={showSpinner} style={activeClassPage} to={item.path}>{item.name}</NavLink>
-      </li>
-    )
-  })
 }
 
 export default StillLife
