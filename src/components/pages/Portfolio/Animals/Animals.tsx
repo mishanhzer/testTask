@@ -5,12 +5,13 @@ import { useAnimalStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import styles from './styles/animals.module.scss'
+import styles from '../styles/mainStylesPictures.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
 
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
+import { callFuncLoading, testBack, animalsForward, testStart, animalsEnd } from "../additionalUI/functions.ts"
 
 interface TypesAnimalsDataPages {
   path: string
@@ -18,12 +19,6 @@ interface TypesAnimalsDataPages {
   source: string
   class: string
   func: () => void
-}
-
-interface TypesButtonNavigate {
-  className: string
-  navigateFunc: () => void
-  source: string
 }
 
 const pathAnimals = '/portfolio/animals/'
@@ -54,46 +49,20 @@ const Animals = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-
-  const callFuncLoading = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
-  }
-
   const goBack = () => {
-    callFuncLoading()
-    if (idTest - 1 <= 1) {
-      setOnePage()
-      navigate(`${pathAnimals}1`)
-    } else {
-      setPrevPage()
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest - 1}`)
-    }
+    testBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
   const goForward = () => {
-    callFuncLoading()
-    if (idTest + 1 >= 6) {
-      setSixPage()
-      navigate(`${pathAnimals}6`)
-    } else {
-      setNextPage();
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest + 1}`)
-    }
+    animalsForward(setLoading, `${pathAnimals}6`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setSixPage)
   }
 
   const goStart = () => {
-    callFuncLoading()
-    navigate(`${pathAnimals}1`)
-    setOnePage()
+    testStart(setLoading, `${pathAnimals}1`, setOnePage, navigate)
   }
 
   const goEnd = () => {
-    callFuncLoading()
-    navigate(`${pathAnimals}6`)
-    setSixPage();
+    animalsEnd(setLoading, `${pathAnimals}6`, setSixPage, navigate)
   }
 
   const animalsDataPages: TypesAnimalsDataPages[] = [
@@ -108,7 +77,7 @@ const Animals = () => {
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>

@@ -5,11 +5,13 @@ import { useFlowersStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import styles from './styles/animals.module.scss'
+import styles from '../styles/mainStylesPictures.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
 
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
+
+import { callFuncLoading, testBack, flowersForward, testStart, flowersEnd } from "../additionalUI/functions.ts";
 
 interface TypesFlowersDataPages {
   path: string
@@ -44,45 +46,20 @@ const Flowers = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-  const callFuncLoading = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
-  }
-
   const goBack = () => {
-    callFuncLoading()
-    if (idTest - 1 <= 1) {
-      setOnePage()
-      navigate(`${pathFlowers}1`)
-    } else {
-      setPrevPage()
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest - 1}`)
-    }
+    testBack(setLoading, `${pathFlowers}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
   const goForward = () => {
-    callFuncLoading()
-    if (idTest + 1 >= 3) {
-      setThreePage()
-      navigate(`${pathFlowers}3`)
-    } else {
-      setNextPage();
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest + 1}`)
-    }
+    flowersForward(setLoading, `${pathFlowers}3`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setThreePage)
   }
 
   const goStart = () => {
-    callFuncLoading()
-    navigate(`${pathFlowers}1`)
-    setOnePage()
+    testStart(setLoading, `${pathFlowers}1`, setOnePage, navigate)
   }
 
   const goEnd = () => {
-    callFuncLoading()
-    navigate(`${pathFlowers}3`)
-    setThreePage();
+    flowersEnd(setLoading, `${pathFlowers}3`, setThreePage, navigate)
   }
 
   const animalsDataPages: TypesFlowersDataPages[] = [
@@ -94,7 +71,7 @@ const Flowers = () => {
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {flowersWorksDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>

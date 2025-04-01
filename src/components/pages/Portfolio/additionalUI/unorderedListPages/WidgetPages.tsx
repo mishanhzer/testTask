@@ -3,7 +3,8 @@ import { ButtonNavigate } from '../buttonNavigate/ButtonNavigate'
 import { ListItemsPage } from '../ListItemsPage/ListItemsPages';
 
 import { arrowPages, doubleArrowPages } from "../../../../../assets/logo/logo";
-import styles from './animals.module.scss'
+
+import styles from '../../styles/mainStylesPictures.module.scss'
 
 export const WidgetPages = ({ goStart, goBack, goForward, goEnd, callFuncLoading, animalsDataPages }) => {
   return (

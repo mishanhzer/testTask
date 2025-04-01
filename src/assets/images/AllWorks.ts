@@ -205,7 +205,7 @@ export const dataWorksStillLife: TypesDataWorks[] = [
   { category: 'stillLife', name: 'stillLifeWithPomegranates', source: stillLifeWithPomegranatesImg, class: 'mt-gapSecond', id: 12 },
   { category: 'stillLife', name: 'stillLifeWithSamovar', source: stillLifeWithSamovarImg, class: 'mt-gapSixth', id: 13 },
   { category: 'stillLife', name: 'wildflowers', source: wildflowersImg, class: 'mt-gapSecond', id: 14 },
-  { category: 'stillLife', name: '', source: '', class: '', id: 15 },
+  { category: 'stillLife', name: '', source: null, class: '', id: 15 },
   { category: 'stillLife', name: 'wineAndFruits', source: wineAndFruitsImg, class: 'mt-gapStillLifeSecond', id: 16 },
 ]
 

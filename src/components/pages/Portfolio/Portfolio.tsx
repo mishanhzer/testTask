@@ -17,7 +17,7 @@ const Portfolio = () => {
     { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: `/portfolio/animals/${paramsId}`, id: 0 },
     { Component: <PortfolioFlowers />, headText: 'Flowers', text: descriptionFlowers, path: `/portfolio/flowers/${paramdFlowersId}`, id: 1 },
     { Component: <PortfolioStillLife />, headText: 'StillLife', text: descriptionStillLife, path: `/portfolio/still_life/${paramsStillLifeId}`, id: 2 },
-    { Component: <PortfolioPeopleAndAnimals />, headText: 'PeopleAndAnimals', text: descriptionStillLife, path: `/portfolio/people_and_animals/1`, id: 2 }
+    { Component: <PortfolioPeopleAndAnimals />, headText: 'PeopleAndAnimals', text: descriptionStillLife, path: `/portfolio/people_and_animals/1`, id: 3 }
   ]
 
   return (

@@ -5,12 +5,13 @@ import { usePeopleAndAnimalsStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import styles from './styles/peopleAndAnimals.module.scss'
+import styles from '../styles/mainStylesPictures.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
 
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
+import { callFuncLoading, expirementalFunc } from "../additionalUI/functions.ts"
 
 interface TypesAnimalsDataPages {
   path: string
@@ -35,37 +36,20 @@ const PeopleAndAnimals = () => {
 
   const idTest: number = +location.pathname.slice(30, 31)
 
-  const callFuncLoading = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
-  }
-
   const goBack = () => {
-    callFuncLoading()
-    if (idTest) {
-      setOnePage()
-    }
+    expirementalFunc(setLoading, idTest, setOnePage)
   }
 
   const goForward = () => {
-    callFuncLoading()
-    if (idTest) {
-      setOnePage()
-    }
+    expirementalFunc(setLoading, idTest, setOnePage)
   }
 
   const goStart = () => {
-    callFuncLoading()
-    if (idTest) {
-      setOnePage()
-    }
+    expirementalFunc(setLoading, idTest, setOnePage)
   }
 
   const goEnd = () => {
-    callFuncLoading()
-    if (idTest) {
-      setOnePage()
-    }
+    expirementalFunc(setLoading, idTest, setOnePage)
   }
 
   const animalsDataPages: TypesAnimalsDataPages[] = [
@@ -75,7 +59,7 @@ const PeopleAndAnimals = () => {
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {peopleAndAnimalsDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>

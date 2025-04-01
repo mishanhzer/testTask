@@ -5,11 +5,13 @@ import { useStillLifeStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import styles from './styles/animals.module.scss'
+import styles from '../styles/mainStylesPictures.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
 
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
+
+import { callFuncLoading, testBack, stillLifeForward, testStart, stillLifeEnd } from "../additionalUI/functions.ts";
 
 interface TypesStillLifeDataPages {
   path: string
@@ -43,45 +45,20 @@ const StillLife = () => {
   const pathName: string = location.pathname.slice(0, 22)
   const idTest: number = +location.pathname.slice(22, 23)
 
-  const callFuncLoading = () => {
-    setLoading(true)
-    setTimeout(() => { setLoading(false) }, 200)
-  }
-
   const goBack = () => {
-    callFuncLoading()
-    if (idTest - 1 <= 1) {
-      setOnePage()
-      navigate(`${pathStillLife}1`)
-    } else {
-      setPrevPage()
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest - 1}`)
-    }
+    testBack(setLoading, `${pathStillLife}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
   const goForward = () => {
-    callFuncLoading()
-    if (idTest + 1 >= 3) {
-      setTwoPage()
-      navigate(`${pathStillLife}3`)
-    } else {
-      setNextPage();
-      setVisibleDisplay()
-      navigate(`${pathName}${idTest + 1}`)
-    }
+    stillLifeForward(setLoading, `${pathStillLife}2`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setTwoPage)
   }
 
   const goStart = () => {
-    callFuncLoading()
-    navigate(`${pathStillLife}1`)
-    setOnePage()
+    testStart(setLoading, `${pathStillLife}1`, setOnePage, navigate)
   }
 
   const goEnd = () => {
-    callFuncLoading()
-    navigate(`${pathStillLife}2`)
-    setTwoPage();
+    stillLifeEnd(setLoading, `${pathStillLife}2`, setTwoPage, navigate)
   }
 
   const animalsDataPages: TypesStillLifeDataPages[] = [
@@ -92,7 +69,7 @@ const StillLife = () => {
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={callFuncLoading} animalsDataPages={animalsDataPages} />
+        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
         <div className={styles.container}>
           {stillLifeWorksDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
