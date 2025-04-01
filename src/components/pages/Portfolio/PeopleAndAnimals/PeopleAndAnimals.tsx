@@ -11,7 +11,7 @@ import { Spinner } from "../../../spinner/Spinner.tsx";
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { callFuncLoading, expirementalFunc } from "../additionalUI/functions.ts"
+import { callFuncLoading, peopleAndAnimalsFunc } from "../additionalUI/functions.ts"
 
 interface TypesAnimalsDataPages {
   path: string
@@ -36,30 +36,30 @@ const PeopleAndAnimals = () => {
 
   const idTest: number = +location.pathname.slice(30, 31)
 
-  const goBack = () => {
-    expirementalFunc(setLoading, idTest, setOnePage)
+  const handleClickBack = () => {
+    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
   }
 
-  const goForward = () => {
-    expirementalFunc(setLoading, idTest, setOnePage)
+  const handleClickForward = () => {
+    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
   }
 
-  const goStart = () => {
-    expirementalFunc(setLoading, idTest, setOnePage)
+  const handleClickStart = () => {
+    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
   }
 
-  const goEnd = () => {
-    expirementalFunc(setLoading, idTest, setOnePage)
+  const handleClickEnd = () => {
+    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
   }
 
-  const animalsDataPages: TypesAnimalsDataPages[] = [
+  const peopleAndAnimalsDataPages: TypesAnimalsDataPages[] = [
     { path: `/portfolio/people_and_animals/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
   ]
 
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
+        <WidgetPages handleClickStart={handleClickStart} handleClickBack={handleClickBack} handleClickForward={handleClickForward} handleClickEnd={handleClickEnd} callFuncLoading={() => callFuncLoading(setLoading)} dataPages={peopleAndAnimalsDataPages} />
         <div className={styles.container}>
           {peopleAndAnimalsDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>

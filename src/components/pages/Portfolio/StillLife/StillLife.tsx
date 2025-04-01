@@ -11,7 +11,7 @@ import { Spinner } from "../../../spinner/Spinner.tsx";
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { callFuncLoading, testBack, stillLifeForward, testStart, stillLifeEnd } from "../additionalUI/functions.ts";
+import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd } from "../additionalUI/functions.ts";
 
 interface TypesStillLifeDataPages {
   path: string
@@ -45,23 +45,23 @@ const StillLife = () => {
   const pathName: string = location.pathname.slice(0, 22)
   const idTest: number = +location.pathname.slice(22, 23)
 
-  const goBack = () => {
-    testBack(setLoading, `${pathStillLife}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+  const handleClickBack = () => {
+    goBack(setLoading, `${pathStillLife}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
-  const goForward = () => {
+  const handleClickForward = () => {
     stillLifeForward(setLoading, `${pathStillLife}2`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setTwoPage)
   }
 
-  const goStart = () => {
-    testStart(setLoading, `${pathStillLife}1`, setOnePage, navigate)
+  const handleClickStart = () => {
+    goStart(setLoading, `${pathStillLife}1`, setOnePage, navigate)
   }
 
-  const goEnd = () => {
+  const handleClickEnd = () => {
     stillLifeEnd(setLoading, `${pathStillLife}2`, setTwoPage, navigate)
   }
 
-  const animalsDataPages: TypesStillLifeDataPages[] = [
+  const stillLifeDataPages: TypesStillLifeDataPages[] = [
     { path: `/portfolio/still_life/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
     { path: '/portfolio/still_life/2', name: 2, source: '', class: styles.listItems, func: setTwoPage },
   ]
@@ -69,7 +69,7 @@ const StillLife = () => {
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
+        <WidgetPages handleClickStart={handleClickStart} handleClickBack={handleClickBack} handleClickForward={handleClickForward} handleClickEnd={handleClickEnd} callFuncLoading={() => callFuncLoading(setLoading)} dataPages={stillLifeDataPages} />
         <div className={styles.container}>
           {stillLifeWorksDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>

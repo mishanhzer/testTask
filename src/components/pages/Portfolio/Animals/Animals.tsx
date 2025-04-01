@@ -11,7 +11,7 @@ import { Spinner } from "../../../spinner/Spinner.tsx";
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { callFuncLoading, testBack, animalsForward, testStart, animalsEnd } from "../additionalUI/functions.ts"
+import { callFuncLoading, goBack, animalsForward, goStart, animalsEnd, testData } from "../additionalUI/functions.ts"
 
 interface TypesAnimalsDataPages {
   path: string
@@ -49,19 +49,19 @@ const Animals = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-  const goBack = () => {
-    testBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+  const handleClickBack = () => {
+    goBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
-  const goForward = () => {
+  const handleClickForward = () => {
     animalsForward(setLoading, `${pathAnimals}6`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setSixPage)
   }
 
-  const goStart = () => {
-    testStart(setLoading, `${pathAnimals}1`, setOnePage, navigate)
+  const handleClickStart = () => {
+    goStart(setLoading, `${pathAnimals}1`, setOnePage, navigate)
   }
 
-  const goEnd = () => {
+  const handleClickEnd = () => {
     animalsEnd(setLoading, `${pathAnimals}6`, setSixPage, navigate)
   }
 
@@ -74,10 +74,13 @@ const Animals = () => {
     { path: '/portfolio/animals/6', name: 6, source: '', class: styles.listItems, func: setSixPage },
   ]
 
+  const arr = testData(styles.listItems, setOnePage, setTwoPage, setThreePage, setFourPage, setFivePage, setSixPage)
+  console.log(arr)
+
   const Content = () => {
     return (
       <>
-        <WidgetPages goStart={goStart} goBack={goBack} goForward={goForward} goEnd={goEnd} callFuncLoading={() => callFuncLoading(setLoading)} animalsDataPages={animalsDataPages} />
+        <WidgetPages handleClickStart={handleClickStart} handleClickBack={handleClickBack} handleClickForward={handleClickForward} handleClickEnd={handleClickEnd} callFuncLoading={() => callFuncLoading(setLoading)} dataPages={animalsDataPages} />
         <div className={styles.container}>
           {animalDisplayedData.map((item, i) => (
             <AnimationContainer key={i}>
