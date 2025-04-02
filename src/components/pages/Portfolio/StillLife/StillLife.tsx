@@ -5,28 +5,14 @@ import { useStillLifeStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import styles from '../styles/mainStylesPictures.module.scss'
 import { Spinner } from "../../../spinner/Spinner.tsx";
+import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import styled, { keyframes } from 'styled-components';
-import { fadeIn } from 'react-animations';
+import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd, stillLifeDataPages, AnimationContainer } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
-import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd } from "../additionalUI/functions.ts";
-
-interface TypesStillLifeDataPages {
-  path: string
-  name: number
-  source: string
-  class: string
-  func: () => void
-}
+import styles from '../styles/mainStylesPictures.module.scss'
 
 const pathStillLife = '/portfolio/still_life/'
-
-const fadeInAnimation = keyframes`${fadeIn}`
-const AnimationContainer = styled.div`
-  animation: 1.5s ${fadeInAnimation};
-`
 
 const StillLife = () => {
   const [loading, setLoading] = useState(false)
@@ -61,24 +47,25 @@ const StillLife = () => {
     stillLifeEnd(setLoading, `${pathStillLife}2`, setTwoPage, navigate)
   }
 
-  const stillLifeDataPages: TypesStillLifeDataPages[] = [
-    { path: `/portfolio/still_life/1`, name: 1, source: '', class: styles.listItems, func: setOnePage },
-    { path: '/portfolio/still_life/2', name: 2, source: '', class: styles.listItems, func: setTwoPage },
-  ]
+  const stillLifeData = stillLifeDataPages(pathStillLife, styles.listItems, setOnePage, setTwoPage)
 
   const Content = () => {
     return (
       <>
-        <WidgetPages handleClickStart={handleClickStart} handleClickBack={handleClickBack} handleClickForward={handleClickForward} handleClickEnd={handleClickEnd} callFuncLoading={() => callFuncLoading(setLoading)} dataPages={stillLifeDataPages} />
-        <div className={styles.container}>
-          {stillLifeWorksDisplayedData.map((item, i) => (
-            <AnimationContainer key={i}>
-              <div className={`${styles.wrapperImg}`}>
-                <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
-              </div>
-            </AnimationContainer>
-          ))}
-        </div >
+        <WidgetPages
+          handleClickStart={handleClickStart}
+          handleClickBack={handleClickBack}
+          handleClickForward={handleClickForward}
+          handleClickEnd={handleClickEnd}
+          callFuncLoading={() => callFuncLoading(setLoading)}
+          dataPages={stillLifeData}
+        />
+        <PicturesContent
+          displayedData={stillLifeWorksDisplayedData}
+          stylesContainer={styles.container}
+          AnimationContainer={AnimationContainer}
+          stylesWrapperImg={styles.wrapperImg}
+        />
       </>
     )
   }
