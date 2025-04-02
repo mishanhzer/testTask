@@ -3,7 +3,6 @@ import { immer } from "zustand/middleware/immer";
 import { persist, devtools, createJSONStorage } from "zustand/middleware"; // для связи с localStorage
 
 import {
-  // dataWorks,
   dataWorksAnimals,
   dataWorksFlowers,
   dataWorksStillLife,

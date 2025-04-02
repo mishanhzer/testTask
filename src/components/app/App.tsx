@@ -5,8 +5,6 @@ import {
   Routes,
 } from "react-router-dom";
 
-// import { useAnimalStore, useFlowersStore } from '../../store/store'
-
 import { Spinner } from "../spinner/Spinner";
 import { AppHeader } from "../appHeader/AppHeader";
 import { NavigateMenu } from "../navigateMenu/NavigateMenu";
