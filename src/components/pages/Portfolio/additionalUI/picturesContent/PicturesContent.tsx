@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { IStyledComponentBase, FastOmit } from "styled-components/dist/types";
 
+import Modal from 'react-modal';
+
 import styles from '../../styles/mainStylesPictures.module.scss'
 
 interface TypesTest {
@@ -28,16 +30,18 @@ export const PicturesContent = (
   }: TypesPicturesContent) => {
   const [overlay, setOverlay] = useState(false)
   const [pictureName, setPictureName] = useState('')
-  // console.log(overlay)
+  console.log(overlay)
+  console.log(pictureName)
 
   const handleClick = (e) => {
     setOverlay(true)
     setPictureName(e.currentTarget.getAttribute('data-name'))
   }
 
-  const handleClose = (e) => {
-    console.log(e.target)
+  const handleClose = () => {
     setOverlay(false)
+    setPictureName('')
+    console.log('test')
   }
 
   return (
@@ -45,10 +49,12 @@ export const PicturesContent = (
       {displayedData.map((item, i) => (
         <AnimationContainer key={i}>
           <div onClick={handleClick} className={`${stylesWrapperImg}`} data-name={item.name}>
-            {overlay && pictureName === item.name ?
-              <div className={overlay ? styles.overlay : styles.noneDisplay}>
-                <img className={`${styles.img} lozad`} src={item.source} alt={item.name} />
-                <div onClick={handleClose} className={styles.close}></div>
+            {pictureName === item.name ?
+              <div className={styles.overlay}>
+                <div className={styles.modalWrapper}>
+                  <button onClick={handleClose} className={styles.close}></button>
+                  <img className={`${styles.img} lozad`} src={item.source} alt={item.name} />
+                </div>
               </div> : null
             }
             <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
