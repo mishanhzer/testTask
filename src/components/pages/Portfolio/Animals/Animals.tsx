@@ -50,10 +50,6 @@ const Animals = () => {
     animalsEnd(setLoading, `${pathAnimals}6`, setSixPage, navigate)
   }
 
-  const handleTest = (e) => {
-    console.log(e.target)
-  }
-
   const animalsData = animalsDataPages(pathAnimals, styles.listItems, setOnePage, setTwoPage, setThreePage, setFourPage, setFivePage, setSixPage)
 
   const Content = () => {

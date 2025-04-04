@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import { IStyledComponentBase, FastOmit } from "styled-components/dist/types";
 
-import Modal from 'react-modal';
+import { ModalPortal } from "./Modal";
 
 import styles from '../../styles/mainStylesPictures.module.scss'
-import './modal.scss'
 
 interface TypesTest {
   category: string;
@@ -30,6 +29,7 @@ export const PicturesContent = (
     stylesWrapperImg,
   }: TypesPicturesContent) => {
   const [pictureName, setPictureName] = useState<string | null>('')
+  console.log(pictureName)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
@@ -40,25 +40,21 @@ export const PicturesContent = (
     setPictureName('')
   }
 
-  const Modal = ({ source, alt }: { source: string, alt: string }) => {
-    return (
-      <div onClick={(e) => e.stopPropagation()}>
-        <div onClick={handleClose} className={styles.overlay}>
-          <div onClick={(e) => e.stopPropagation()} className={styles.modalWrapper}>
-            <button onClick={handleClose} className={styles.close}></button>
-            <img className={`${styles.img} lozad`} src={source} alt={alt} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className={`${stylesContainer}`}>
       {displayedData.map((item, i) => (
         <AnimationContainer key={i}>
           <div onClick={handleClick} className={`${stylesWrapperImg}`} data-name={item.name}>
-            {pictureName === item.name ? <Modal source={item.source} alt={item.name} /> : null}
+            {pictureName === item.name ?
+              <ModalPortal
+                handleClose={handleClose}
+                stylesOverlay={styles.overlay}
+                stylesModalWrapper={styles.modalWrapper}
+                stylesImg={styles.img}
+                stylesClose={styles.close}
+                source={item.source}
+                alt={item.name}
+                name={item.name} /> : null}
             <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
           </div>
         </AnimationContainer>
