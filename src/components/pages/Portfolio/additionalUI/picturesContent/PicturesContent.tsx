@@ -7,8 +7,8 @@ import styles from '../../styles/mainStylesPictures.module.scss'
 
 interface TypesTest {
   category: string;
-  name: string;
-  source: string;
+  name?: string;
+  source?: string;
   class: string;
   id: number;
 }
@@ -29,7 +29,6 @@ export const PicturesContent = (
     stylesWrapperImg,
   }: TypesPicturesContent) => {
   const [pictureName, setPictureName] = useState<string | null>('')
-  console.log(pictureName)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
@@ -53,8 +52,7 @@ export const PicturesContent = (
                 stylesImg={styles.img}
                 stylesClose={styles.close}
                 source={item.source}
-                alt={item.name}
-                name={item.name} /> : null}
+                alt={item.name} /> : null}
             <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
           </div>
         </AnimationContainer>
