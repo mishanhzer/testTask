@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { KeyboardEventHandler, useState } from "react"
 import { IStyledComponentBase, FastOmit } from "styled-components/dist/types";
 
 import { ModalPortal } from "./Modal";
@@ -29,6 +29,7 @@ export const PicturesContent = (
     stylesWrapperImg,
   }: TypesPicturesContent) => {
   const [pictureName, setPictureName] = useState<string | null>('')
+  console.log(pictureName)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
@@ -43,12 +44,15 @@ export const PicturesContent = (
     <div className={`${stylesContainer}`}>
       {displayedData.map((item, i) => (
         <AnimationContainer key={i}>
-          <div onClick={handleClick} className={`${stylesWrapperImg}`} data-name={item.name}>
+          <div
+            onClick={handleClick}
+            className={`${stylesWrapperImg}`} data-name={item.name}>
             {pictureName === item.name ?
               <ModalPortal
                 handleClose={handleClose}
                 stylesOverlay={styles.overlay}
                 stylesModalWrapper={styles.modalWrapper}
+                stylesLittleWindow={styles.littleWindow}
                 stylesImg={styles.img}
                 stylesClose={styles.close}
                 source={item.source}

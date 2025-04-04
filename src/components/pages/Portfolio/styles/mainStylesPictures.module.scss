@@ -79,6 +79,15 @@
   transform: scale(1.4);
 }
 
+.littleWindow {
+  position: relative;
+  margin: 250px auto;
+  min-width: 400px;
+  max-height: 600px;
+  z-index: 10;
+  transform: scale(1.5);
+}
+
 .img {
   position: absolute;
 }

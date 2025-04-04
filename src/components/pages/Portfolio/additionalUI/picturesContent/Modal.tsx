@@ -6,14 +6,17 @@ interface TypesModalPortal {
   stylesOverlay: string
   stylesImg: string
   stylesModalWrapper: string
+  stylesLittleWindow: string
   stylesClose: string
   source?: string
   alt?: string
 }
 
-export const ModalPortal = ({ handleClose, stylesOverlay, stylesImg, stylesModalWrapper, stylesClose, source, alt }: TypesModalPortal) => {
+
+
+export const ModalPortal = ({ handleClose, stylesOverlay, stylesImg, stylesModalWrapper, stylesClose, source, alt, stylesLittleWindow }: TypesModalPortal) => {
   const [heightImage, setHeightImage] = useState()
-  console.log(heightImage)
+  const [key, setKey] = useState(false)
 
   const refTest = useRef(null)
   useEffect(() => {
@@ -23,10 +26,28 @@ export const ModalPortal = ({ handleClose, stylesOverlay, stylesImg, stylesModal
 
   const portalDiv = document.getElementById('modal-root')!;
 
+  useEffect(() => {
+    if (e.keyCode === 27) {
+      setKey(true)
+    }
+    return () => {
+      setKey(false)
+    }
+  }, [key])
+
   return ReactDOM.createPortal(
     <div onClick={(e) => e.stopPropagation()}>
-      <div onClick={handleClose} className={stylesOverlay}>
-        <div onClick={(e) => e.stopPropagation()} className={stylesModalWrapper}>
+      {/* <div onClick={handleClose} onKeyPress={keyClose} className={stylesOverlay}> */}
+      <div
+        onClick={() => {
+          handleClose();
+        }}
+        onKeyPress={(e) => {
+          if (e.key === 'Escape' || e.key === "Enter") {
+            handleClose();
+          }
+        }} className={stylesOverlay}>
+        <div onClick={(e) => e.stopPropagation()} className={heightImage === 420 ? stylesLittleWindow : stylesModalWrapper}>
           <button onClick={handleClose} className={stylesClose} />
           <img ref={refTest} className={`${stylesImg} lozad`} src={source} alt={alt} />
         </div>
