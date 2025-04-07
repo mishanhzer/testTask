@@ -8,7 +8,7 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd, stillLifeDataPages, AnimationContainer } from "../additionalUI/dataPicturesAndFuncWidget.ts";
+import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd, stillLifeDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
@@ -63,7 +63,6 @@ const StillLife = () => {
         <PicturesContent
           displayedData={stillLifeWorksDisplayedData}
           stylesContainer={styles.container}
-          AnimationContainer={AnimationContainer}
           stylesWrapperImg={styles.wrapperImg}
         />
       </>

@@ -1,58 +1,53 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useState, useEffect } from 'react';
 
+import { AnimationContainer } from '../dataPicturesAndFuncWidget'
+
+import styles from '../../styles/mainStylesPictures.module.scss'
+
 interface TypesModalPortal {
   handleClose: () => void
-  stylesOverlay: string
-  stylesImg: string
-  stylesModalWrapper: string
-  stylesLittleWindow: string
-  stylesClose: string
   source?: string
   alt?: string
 }
 
+export const ModalPortal = ({ handleClose, source, alt }: TypesModalPortal) => {
+  const [heightImage, setHeightImage] = useState<number>(0)
+  const ref = useRef(null)
 
-
-export const ModalPortal = ({ handleClose, stylesOverlay, stylesImg, stylesModalWrapper, stylesClose, source, alt, stylesLittleWindow }: TypesModalPortal) => {
-  const [heightImage, setHeightImage] = useState()
-  const [key, setKey] = useState(false)
-
-  const refTest = useRef(null)
   useEffect(() => {
-
-    setHeightImage(refTest.current.getBoundingClientRect().height);
-  }, [refTest])
+    if (ref.current) {
+      setHeightImage((ref.current as unknown as HTMLElement).getBoundingClientRect().height); // преобразовываем сначала в тип unknown, а затем приводим его к типу HTMLElement (assertions - приведение к определенному типу)
+    }
+  }, [ref])
 
   const portalDiv = document.getElementById('modal-root')!;
 
   useEffect(() => {
-    if (e.keyCode === 27) {
-      setKey(true)
+    const closeModal = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose()
+      }
     }
+    window.addEventListener('keydown', closeModal)
     return () => {
-      setKey(false)
+      window.removeEventListener('keydown', closeModal)
     }
-  }, [key])
+  }, [])
 
   return ReactDOM.createPortal(
-    <div onClick={(e) => e.stopPropagation()}>
-      {/* <div onClick={handleClose} onKeyPress={keyClose} className={stylesOverlay}> */}
-      <div
-        onClick={() => {
-          handleClose();
-        }}
-        onKeyPress={(e) => {
-          if (e.key === 'Escape' || e.key === "Enter") {
-            handleClose();
-          }
-        }} className={stylesOverlay}>
-        <div onClick={(e) => e.stopPropagation()} className={heightImage === 420 ? stylesLittleWindow : stylesModalWrapper}>
-          <button onClick={handleClose} className={stylesClose} />
-          <img ref={refTest} className={`${stylesImg} lozad`} src={source} alt={alt} />
+    <AnimationContainer>
+      <div onClick={(e) => e.stopPropagation()}>
+        <div
+          onClick={() => handleClose()}
+          className={styles.overlay}>
+          <div onClick={(e) => e.stopPropagation()} className={heightImage === 420 ? styles.littleWindow : styles.modalWrapper}>
+            <button onClick={handleClose} className={styles.close} />
+            <img ref={ref} className={`${styles.img} lozad`} src={source} alt={alt} />
+          </div>
         </div>
       </div>
-    </div>,
+    </AnimationContainer>,
     portalDiv
   );
 };

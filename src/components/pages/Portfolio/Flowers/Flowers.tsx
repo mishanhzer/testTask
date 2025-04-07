@@ -8,7 +8,7 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, goBack, flowersForward, goStart, flowersEnd, flowersDataPages, AnimationContainer } from "../additionalUI/dataPicturesAndFuncWidget.ts";
+import { callFuncLoading, goBack, flowersForward, goStart, flowersEnd, flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
@@ -64,7 +64,6 @@ const Flowers = () => {
         <PicturesContent
           displayedData={flowersWorksDisplayedData}
           stylesContainer={styles.container}
-          AnimationContainer={AnimationContainer}
           stylesWrapperImg={styles.wrapperImg}
         />
       </>

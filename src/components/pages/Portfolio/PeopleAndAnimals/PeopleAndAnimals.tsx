@@ -8,7 +8,7 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, peopleAndAnimalsFunc, peopleAndAnimalsDataPages, AnimationContainer } from "../additionalUI/dataPicturesAndFuncWidget.ts"
+import { callFuncLoading, peopleAndAnimalsFunc, peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
@@ -56,7 +56,6 @@ const PeopleAndAnimals = () => {
         <PicturesContent
           displayedData={peopleAndAnimalsDisplayedData}
           stylesContainer={styles.container}
-          AnimationContainer={AnimationContainer}
           stylesWrapperImg={styles.wrapperImg}
         />
       </>

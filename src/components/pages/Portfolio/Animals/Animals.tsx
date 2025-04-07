@@ -6,7 +6,7 @@ import { useAnimalStore } from '../../../../store/store'
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
-import { callFuncLoading, goBack, animalsForward, goStart, animalsEnd, animalsDataPages, AnimationContainer } from "../additionalUI/dataPicturesAndFuncWidget.ts"
+import { callFuncLoading, goBack, animalsForward, goStart, animalsEnd, animalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx"
 
 import styles from '../styles/mainStylesPictures.module.scss'
@@ -66,7 +66,6 @@ const Animals = () => {
         <PicturesContent
           displayedData={animalDisplayedData}
           stylesContainer={styles.container}
-          AnimationContainer={AnimationContainer}
           stylesWrapperImg={styles.wrapperImg}
         />
       </>

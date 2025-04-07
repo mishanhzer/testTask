@@ -1,11 +1,9 @@
-import React, { KeyboardEventHandler, useState } from "react"
-import { IStyledComponentBase, FastOmit } from "styled-components/dist/types";
+import React, { useState } from "react"
+import { AnimationContainer } from "../dataPicturesAndFuncWidget";
 
 import { ModalPortal } from "./Modal";
 
-import styles from '../../styles/mainStylesPictures.module.scss'
-
-interface TypesTest {
+interface TypesDisplayedData {
   category: string;
   name?: string;
   source?: string;
@@ -15,21 +13,12 @@ interface TypesTest {
 
 interface TypesPicturesContent {
   stylesContainer: string;
-  displayedData: TypesTest[];
-  AnimationContainer: IStyledComponentBase<"web", FastOmit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string
+  displayedData: TypesDisplayedData[];
   stylesWrapperImg: string;
 }
 
-
-export const PicturesContent = (
-  {
-    stylesContainer,
-    displayedData,
-    AnimationContainer,
-    stylesWrapperImg,
-  }: TypesPicturesContent) => {
+export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperImg }: TypesPicturesContent) => {
   const [pictureName, setPictureName] = useState<string | null>('')
-  console.log(pictureName)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
@@ -50,11 +39,6 @@ export const PicturesContent = (
             {pictureName === item.name ?
               <ModalPortal
                 handleClose={handleClose}
-                stylesOverlay={styles.overlay}
-                stylesModalWrapper={styles.modalWrapper}
-                stylesLittleWindow={styles.littleWindow}
-                stylesImg={styles.img}
-                stylesClose={styles.close}
                 source={item.source}
                 alt={item.name} /> : null}
             <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
