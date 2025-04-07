@@ -211,11 +211,11 @@ export const dataWorksStillLife: TypesDataWorks[] = [
 
 export const dataWorksPeopleAndAnimals: TypesDataWorks[] = [
   { category: 'peopleAndAnimals', name: 'belovedBaby', source: belovedBabyImg, class: 'h-566', id: 0 },
-  { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 1 },
-  { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: 'h-600', id: 2 },
+  { category: 'peopleAndAnimals', name: 'bestFriends', source: bestFriendImg, class: '', id: 1},
+  { category: 'peopleAndAnimals', name: 'girlAndCat', source: girlAndCatImg, class: 'h-600', id: 2},
   { category: 'peopleAndAnimals', name: 'girlAndDucklings', source: girlAndDucklingsImg, class: 'mt-gapSecond', id: 3 },
   { category: 'peopleAndAnimals', name: 'girlWithDog', source: girlWithDogImg, class: 'mt-gapThird', id: 4 },
-  { category: 'peopleAndAnimals', name: 'girlWithHorse', source: girlWithHorseImg, class: '', id: 5 },
+  { category: 'peopleAndAnimals', name: 'girlWithHorse', source: girlWithHorseImg, class: '', id: 5  },
   { category: 'peopleAndAnimals', name: 'letsSingMyFriend', source: letsSingMyFriendImg, class: 'mt-gapPeopleAndAnimalsFirst', id: 6 },
   { category: 'peopleAndAnimals', name: 'theGirlWithTheWhiteRabbits', source: theGirlWithTheWhiteRabbitsImg, class: 'mt-gapFlowersFifth', id: 7 },
 ]

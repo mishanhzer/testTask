@@ -38,7 +38,6 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
       idStart: 0,
       idEnd: 9,
       paramsId: 0,
-
       setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,

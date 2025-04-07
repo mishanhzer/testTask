@@ -34,7 +34,11 @@ export const goStart = (setLoading: TypeLoading, pathPictures: string, setOnePag
 const fadeInAnimation = keyframes`${fadeIn}`
 export const AnimationContainer = styled.div`
   animation: 1.5s ${fadeInAnimation};
-`
+`;
+
+export const AnimationSinglePicture = styled.div`
+  animation: 0.5s ${fadeInAnimation}
+`;
 
 // 3. Данные животных
 export const animalsDataPages = (path: string, styles: string, setOnePage: TypeStateFunc, setTwoPage: TypeStateFunc, setThreePage: TypeStateFunc, setFourPage: TypeStateFunc, setFivePage: TypeStateFunc, setSixPage: TypeStateFunc) => {

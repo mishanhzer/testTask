@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useState, useEffect } from 'react';
 
-import { AnimationContainer } from '../dataPicturesAndFuncWidget'
+import { AnimationSinglePicture } from '../dataPicturesAndFuncWidget'
 
 import styles from '../../styles/mainStylesPictures.module.scss'
 
@@ -36,18 +36,18 @@ export const ModalPortal = ({ handleClose, source, alt }: TypesModalPortal) => {
   }, [])
 
   return ReactDOM.createPortal(
-    <AnimationContainer>
+    <AnimationSinglePicture>
       <div onClick={(e) => e.stopPropagation()}>
         <div
           onClick={() => handleClose()}
-          className={styles.overlay}>
+          className={`${styles.overlay}`}>
           <div onClick={(e) => e.stopPropagation()} className={heightImage === 420 ? styles.littleWindow : styles.modalWrapper}>
             <button onClick={handleClose} className={styles.close} />
             <img ref={ref} className={`${styles.img} lozad`} src={source} alt={alt} />
           </div>
         </div>
       </div>
-    </AnimationContainer>,
+    </AnimationSinglePicture >,
     portalDiv
   );
 };

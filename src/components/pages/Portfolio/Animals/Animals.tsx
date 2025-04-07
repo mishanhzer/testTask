@@ -16,6 +16,7 @@ const pathAnimals: string = '/portfolio/animals/'
 const Animals = () => {
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
+  console.log(animalDisplayedData)
 
   const setPrevPage = useAnimalStore(state => state.setPrevPage)
   const setNextPage = useAnimalStore(state => state.setNextPage)

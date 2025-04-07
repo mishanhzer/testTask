@@ -32,7 +32,7 @@ export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperI
   return (
     <div className={`${stylesContainer}`}>
       {displayedData.map((item, i) => (
-        <AnimationContainer key={i}>
+        <AnimationContainer key={i} >
           <div
             onClick={handleClick}
             className={`${stylesWrapperImg}`} data-name={item.name}>
