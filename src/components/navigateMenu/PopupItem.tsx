@@ -11,7 +11,7 @@ import 'reactjs-popup/dist/index.css';
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem, classListItem, stylesPortfolioLinks, stylePopupImg, activeTest } from './styles/navigateMenu'
+import { activeClassListItem, activeTest } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -39,10 +39,10 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   }
 
   const dataPortfolioLinks = [
-    { name: 'Animals', path: `/portfolio/animals/${paramsId}`, class: stylesPortfolioLinks, func: handleClick },
-    { name: 'Flowers', path: `/portfolio/flowers/${paramdFlowersId}`, class: stylesPortfolioLinks, func: handleClick },
-    { name: 'Still life', path: `/portfolio/still_life/${paramsStillLifeId}`, class: stylesPortfolioLinks, func: handleClick },
-    { name: 'People and Animals', path: '/portfolio/people_and_animals/1', class: stylesPortfolioLinks, func: handleClick },
+    { name: 'Animals', path: `/portfolio/animals/${paramsId}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Flowers', path: `/portfolio/flowers/${paramdFlowersId}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Still life', path: `/portfolio/still_life/${paramsStillLifeId}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'People and Animals', path: '/portfolio/people_and_animals/1', class: styles.stylesPortfolioLinks, func: handleClick },
   ]
 
   const PortoflioLinks = () => {
@@ -61,14 +61,14 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
       closeOnDocumentClick
       on='hover'
       trigger={<li
-        className={`flex ${classListItem}`}>
+        className={`flex ${styles.classListItem} relative`}>
         <NavLink
           to={path}
           className={styles.underlineAnimation}
           style={activeClassListItem}>
           {name}
         </NavLink>
-        <img className={stylePopupImg} src={arrowPages} alt="#" />
+        <img className={styles.stylePopupImg} src={arrowPages} alt="#" />
       </li>}
       position="bottom center">
       <PortoflioLinks />

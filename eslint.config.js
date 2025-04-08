@@ -8,5 +8,8 @@ export default [
       "no-unused-vars": "warn",
       "no-undef": "warn",
     },
+    plugins: {
+      plugins: ["prettier-plugin-tailwindcss"],
+    },
   },
 ];
