@@ -37,6 +37,9 @@ module.exports = {
         fz15: "15px",
         fz13: "13px",
       },
+      colors: {
+        customColor: "rgba(156, 163, 175)",
+      },
     },
   },
   plugins: [],

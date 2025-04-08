@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
@@ -11,7 +12,7 @@ import 'reactjs-popup/dist/index.css';
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem, activeTest } from './styles/navigateMenu'
+import { activeClassListItem, activePicturesBlock, activeTest } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -49,7 +50,14 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
     return (
       dataPortfolioLinks.map((item, i) => {
         return (
-          <NavLink key={i} onClick={item.func} className={`${item.class}`} style={activeTest} to={item.path}>{item.name}</NavLink>
+          <NavLink
+            key={i}
+            onClick={item.func}
+            // className={item.class}
+            className={({ isActive }) => isActive ? classNames(item.class, styles.activePicturesBlock) : classNames(item.class, styles.nonActivePicturesBlock)}
+            // style={activePicturesBlock}
+            to={item.path}>{item.name}
+          </NavLink>
         )
       })
     )
