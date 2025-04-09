@@ -5,7 +5,6 @@ import './styles/changePopupStyle.scss'
 
 import { ListItem } from "./ListItem";
 import { PopupItem } from "./PopupItem";
-// import { ulClass } from "./styles/navigateMenu";
 import styles from './styles/navigateMenu.module.scss'
 
 export const NavigateMenu = () => {

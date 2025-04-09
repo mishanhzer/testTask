@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import 'reactjs-popup/dist/index.css';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -15,12 +14,13 @@ interface TypesListItem {
 export const ListItem = ({ name, path }: TypesListItem) => {
   return (
     <li
-      className={`${styles.classListItem} relative`}
+      className={`flex ${styles.classListItem} relative`}
     >
       <NavLink
         to={path}
-        className={({ isActive }) =>
-          isActive ? classNames(styles.activeClassListItem, styles.underlineAnimation) : classNames(styles.nonActiceClassListItem, styles.underlineAnimation)}
+        className={({ isActive }) => isActive
+          ? classNames(styles.activeClassListItem, styles.underlineAnimation)
+          : classNames(styles.underlineAnimation, `border-none`)}
       >
         {name}
       </NavLink>

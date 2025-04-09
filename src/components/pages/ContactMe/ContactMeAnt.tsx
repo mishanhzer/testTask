@@ -13,7 +13,7 @@ import { ButtonComponent, Title } from "../../UI_kits/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 
-import { divContainer, styleForm, classInputAnt, classLabelAnt, classMessageAnt, firstItem, secondItem, thirdItem, fourthItem } from '../ContactMe/styles/stylesContactMe'
+import styles from './styles/stylesContactMe.module.scss'
 
 import '../ContactMe/styles/changeStyleAnt.scss'
 
@@ -49,42 +49,50 @@ const ContactMeAnt = () => {
   return (
     <>
       <Title name='Elena Kozyutenko' content='Main page' />
-      <div className={divContainer}>
+      <div className={styles.divContainer}>
         <MainPicture />
         <Form
-          style={styleForm}
+          className={styles.styleForm}
           onFinish={handleSubmit(onSubmit)}
         >
           <div className={`flex`}>
             <FormItem
               control={control}
               name="name"
-              style={firstItem}>
-              <Label classLabel={classLabelAnt} nameLabel='Name' />
-              <Input style={classInputAnt} />
+              className={`w-[500px] ${styles.item}`}
+            >
+              <Label
+                classLabel={styles.classLabelAnt}
+                nameLabel='Name'
+              />
+              <Input className={styles.classInputAnt} />
             </FormItem>
             <FormItem
               control={control}
               name="lastName"
-              style={secondItem}>
-              <Label classLabel={classLabelAnt} nameLabel='Last Name' />
-              <Input style={classInputAnt} />
+              className={`w-[500px] ml-[30px] ${styles.item}`}
+            >
+              <Label classLabel={styles.classLabelAnt} nameLabel='Last Name' />
+              <Input className={styles.classInputAnt} />
             </FormItem>
           </div>
           <FormItem
             control={control}
             name="email"
-            style={thirdItem}>
-            <Label classLabel={classLabelAnt} nameLabel='Email' />
-            <Input style={classInputAnt} />
+            className={`w-full mt-[15px] ${styles.item}`}
+          >
+            <Label classLabel={styles.classLabelAnt} nameLabel='Email' />
+            <Input className={styles.classInputAnt} />
           </FormItem>
           <FormItem
             control={control}
             name="message"
-            style={fourthItem}>
-            <Label classLabel={classLabelAnt} nameLabel='Message' />
+            className={`w-full mt-[35px] ${styles.item}`}
+          >
+            <Label classLabel={styles.classLabelAnt} nameLabel='Message' />
             <TextArea
-              style={classMessageAnt} />
+              className={styles.classMessageAnt}
+            />
           </FormItem>
 
           <Form.Item>

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Popup from 'reactjs-popup';
@@ -12,7 +12,6 @@ import 'reactjs-popup/dist/index.css';
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
-import { activeClassListItem, activePicturesBlock, activeTest } from './styles/navigateMenu'
 
 interface TypesListItem {
   name: string
@@ -30,9 +29,6 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
   const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
   const ref = useRef<PopupActions>(initialValueRef);
-
-  const location = useLocation()
-  console.log(location.pathname)
 
   const handleClick = () => {
     if (ref.current) {
@@ -56,9 +52,9 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
           <NavLink
             key={i}
             onClick={item.func}
-            // className={item.class}
-            className={({ isActive }) => isActive ? classNames(item.class, styles.activePicturesBlock) : classNames(item.class, styles.nonActivePicturesBlock)}
-            // style={activePicturesBlock}
+            className={({ isActive }) => isActive
+              ? classNames(item.class, styles.activePicturesBlock)
+              : classNames(item.class, styles.nonActivePicturesBlock)}
             to={item.path}>{item.name}
           </NavLink>
         )
@@ -71,17 +67,12 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
       ref={ref}
       closeOnDocumentClick
       on='hover'
-      trigger={<li
-        className={location.pathname === '/portfolio'
-          ? classNames(`flex relative`, styles.activeClassListItem, styles.underlineAnimation, styles.classListItem)
-          : classNames(`flex relative`, styles.nonActiceClassListItem, styles.underlineAnimation, styles.classListItem)}
-      // className={`flex ${styles.classListItem} relative`}
-      >
+      trigger={<li className={`flex ${styles.classListItem} relative`}>
         <NavLink
           to={path}
-          // className={({ isActive }) => isActive ? classNames(styles.activeClassListItem, styles.underlineAnimation, `flex`) : classNames(styles.nonActiceClassListItem, styles.underlineAnimation, `flex`)}
-          className={`flex`}
-        // style={activeClassListItem}
+          className={({ isActive }) => isActive
+            ? classNames(styles.activeClassListItem, styles.underlineAnimation, `flex`)
+            : classNames(styles.underlineAnimation, `flex border-none`)}
         >
           {name}
           <img className={styles.stylePopupImg} src={arrowPages} alt="#" />

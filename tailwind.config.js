@@ -37,6 +37,11 @@ module.exports = {
         fz15: "15px",
         fz13: "13px",
       },
+      fontFamily: {
+        lora: ["Lora", "serif", "sans-serif"],
+        display: ["Oswald"],
+        body: ['"Open Sans"'],
+      },
       colors: {
         customColor: "rgba(156, 163, 175)",
         testColor: "rgb(107 114 128)",
