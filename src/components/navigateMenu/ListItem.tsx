@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import 'reactjs-popup/dist/index.css';
 
@@ -14,11 +15,13 @@ interface TypesListItem {
 export const ListItem = ({ name, path }: TypesListItem) => {
   return (
     <li
-      className={`${styles.classListItem} relative`}>
+      className={`${styles.classListItem} relative`}
+    >
       <NavLink
         to={path}
-        className={styles.underlineAnimation}
-        style={activeClassListItem}>
+        className={({ isActive }) =>
+          isActive ? classNames(styles.activeClassListItem, styles.underlineAnimation) : classNames(styles.nonActiceClassListItem, styles.underlineAnimation)}
+      >
         {name}
       </NavLink>
     </li>

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Popup from 'reactjs-popup';
@@ -30,6 +30,9 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
   const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
   const ref = useRef<PopupActions>(initialValueRef);
+
+  const location = useLocation()
+  console.log(location.pathname)
 
   const handleClick = () => {
     if (ref.current) {
@@ -69,14 +72,20 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
       closeOnDocumentClick
       on='hover'
       trigger={<li
-        className={`flex ${styles.classListItem} relative`}>
+        className={location.pathname === '/portfolio'
+          ? classNames(`flex relative`, styles.activeClassListItem, styles.underlineAnimation, styles.classListItem)
+          : classNames(`flex relative`, styles.nonActiceClassListItem, styles.underlineAnimation, styles.classListItem)}
+      // className={`flex ${styles.classListItem} relative`}
+      >
         <NavLink
           to={path}
-          className={styles.underlineAnimation}
-          style={activeClassListItem}>
+          // className={({ isActive }) => isActive ? classNames(styles.activeClassListItem, styles.underlineAnimation, `flex`) : classNames(styles.nonActiceClassListItem, styles.underlineAnimation, `flex`)}
+          className={`flex`}
+        // style={activeClassListItem}
+        >
           {name}
+          <img className={styles.stylePopupImg} src={arrowPages} alt="#" />
         </NavLink>
-        <img className={styles.stylePopupImg} src={arrowPages} alt="#" />
       </li>}
       position="bottom center">
       <PortoflioLinks />

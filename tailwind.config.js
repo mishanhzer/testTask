@@ -39,6 +39,7 @@ module.exports = {
       },
       colors: {
         customColor: "rgba(156, 163, 175)",
+        testColor: "rgb(107 114 128)",
       },
     },
   },

@@ -1,13 +1,13 @@
-interface ActiveClass {
-  isActive: boolean
-}
+// interface ActiveClass {
+//   isActive: boolean
+// }
 
-export const activeClassListItem = ({ isActive }: ActiveClass) => ({
-  color: isActive ? 'rgba(156, 163, 175)' : 'inherit',
-  textUnderlineOffset: isActive ? '10px' : '0px',
-  textDecoration: isActive ? 'underline' : 'none',
-  textDecorationThickness: isActive ? '1.5px' : '0px'
-})
+// export const activeClassListItem = ({ isActive }: ActiveClass) => ({
+//   color: isActive ? 'rgba(156, 163, 175)' : 'rgb(107 114 128)',
+//   textUnderlineOffset: isActive ? '10px' : '0px',
+//   textDecoration: isActive ? 'underline' : 'none',
+//   textDecorationThickness: isActive ? '1.5px' : '0px'
+// })
 
 // export const activePicturesBlock = ({ isActive }: ActiveClass) => ({
 //   color: isActive ? 'rgba(156, 163, 175, 0.8)' : 'text-gray-500',
