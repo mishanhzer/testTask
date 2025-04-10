@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 
 import { AnimationSinglePicture } from '../dataPicturesAndFuncWidget'
 
@@ -17,7 +17,7 @@ export const ModalPortal = ({ handleClose, source, alt }: TypesModalPortal) => {
 
   useEffect(() => {
     if (ref.current) {
-      setHeightImage((ref.current as unknown as HTMLElement).getBoundingClientRect().height); // преобразовываем сначала в тип unknown, а затем приводим его к типу HTMLElement (assertions - приведение к определенному типу)
+      setHeightImage((ref.current as unknown as HTMLElement).getBoundingClientRect().height);
     }
   }, [ref])
 
@@ -35,15 +35,32 @@ export const ModalPortal = ({ handleClose, source, alt }: TypesModalPortal) => {
     }
   }, [])
 
+  const handleClass = useMemo(() => {
+    if (heightImage < 400) {
+      return styles.smallWindow
+    }
+    if (heightImage >= 420 && heightImage <= 450) {
+      return styles.littleWindow
+    }
+    if (heightImage > 795 && heightImage < 800) {
+      return styles.modalWrapper
+    }
+    else {
+      return styles.bigWindow
+    }
+  }, [heightImage > 0])
+
   return ReactDOM.createPortal(
     <AnimationSinglePicture>
       <div onClick={(e) => e.stopPropagation()}>
         <div
           onClick={() => handleClose()}
           className={`${styles.overlay}`}>
-          <div onClick={(e) => e.stopPropagation()} className={heightImage === 420 ? styles.littleWindow : styles.modalWrapper}>
+          <div onClick={(e) => e.stopPropagation()}
+            className={handleClass}
+          >
             <button onClick={handleClose} className={styles.close} />
-            <img ref={ref} className={`${styles.img} lozad`} src={source} alt={alt} />
+            <img ref={ref} className={`absolute lozad`} src={source} alt={alt} />
           </div>
         </div>
       </div>

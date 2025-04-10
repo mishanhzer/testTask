@@ -52,70 +52,111 @@
   }
 }
 
+// .overlay {
+//   position: fixed;
+//   display: flex;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   z-index: 5;
+//   width: 100vw;
+//   height: 100vh;
+// }
+
 .overlay {
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 5;
-  width: 100vw;
-  height: 100vh;
+  @apply fixed flex top-0 left-0 right-0 bottom-0 bg-black bg-opacity-[0.6] z-[5] w-screen h-screen
 }
+
+// .modalWrapper {
+//   position: relative;
+//   margin: 150px auto;
+//   min-width: 400px;
+//   max-height: 600px;
+//   z-index: 10;
+//   transform: scale(1.4);
+// }
 
 .modalWrapper {
-  position: relative;
-  margin: 145px auto;
-  min-width: 400px;
-  max-height: 600px;
-  z-index: 10;
-  transform: scale(1.4);
+  @apply mt-[165px] mx-auto relative min-w-[400px] max-h-[600px] z-[10] transform scale-[1.4]
 }
+
+// .littleWindow {
+//   position: relative;
+//   margin: 260px auto;
+//   min-width: 400px;
+//   max-height: 600px;
+//   z-index: 10;
+//   transform: scale(1.5);
+// }
 
 .littleWindow {
-  position: relative;
-  margin: 250px auto;
-  min-width: 400px;
-  max-height: 600px;
-  z-index: 10;
-  transform: scale(1.5);
+  @apply relative mt-[310px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.5]
 }
 
-.img {
-  position: absolute;
+// .smallWindow {
+//   position: relative;
+//   margin: 280px auto;
+//   min-width: 400px;
+//   max-height: 600px;
+//   z-index: 10;
+//   transform: scale(1.5);
+// }
+
+.smallWindow {
+  @apply relative mt-[325px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.5]
 }
+
+
+// .bigWindow {
+//   position: relative;
+//   margin: 115px auto;
+//   min-width: 400px;
+//   max-height: 600px;
+//   z-index: 10;
+//   transform: scale(1.2);
+// }
+
+.bigWindow {
+  @apply relative mt-[115px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.2]
+}
+
+// .close {
+//   display: block;
+//   position: absolute;
+//   top: 10px;
+//   right: 10px;
+//   cursor: pointer;
+//   width: 20px;
+//   height: 20px;
+//   z-index: 15;
+//     &:before {
+//       content: '';
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%) rotate(45deg);
+//       width: 20px;
+//       height: 2px;
+//       background-color: white;
+//     }
+//     &:after {
+//       content: '';
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%) rotate(-45deg);
+//       width: 20px;
+//       height: 2px;
+//       background-color: white;
+//     }
+// }
 
 .close {
-  display: block;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  z-index: 15;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-      width: 20px;
-      height: 2px;
-      background-color: white;
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      width: 20px;
-      height: 2px;
-      background-color: white;
-    }
+  @apply block absolute top-[10px] right-[10px] cursor-pointer w-[20px] h-[20px] z-[15] 
+  before:absolute before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rotate-[45deg] before:w-[20px] before:h-[2px] before:bg-white 
+  after:absolute after:top-[50%] after:left-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:rotate-[-45deg] after:w-[20px] after:h-[2px] after:bg-white
 }
 
 .btn {
@@ -128,21 +169,24 @@
     }
 }
 
+// .links {
+//   display: flex;
+//   margin: 15px auto;
+//   justify-content: center;
+//   width: 35%;
+//   height: 50px;
+//   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+//   background-color: white;
+//   grid-column-start: 2;
+//   margin-bottom: 50px;
+//   text-align: center;
+//   align-content: center;
+//   border: 1px solid #f2f2f2;
+//   border-radius: 8px;
+// }
+
 .links {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-  width: 35%;
-  height: 50px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
-  background-color: white;
-  grid-column-start: 2;
-  margin-top: 15px;
-  margin-bottom: 50px;
-  text-align: center;
-  align-content: center;
-  border: 1px solid #f2f2f2;
-  border-radius: 8px;
+  @apply flex mt-[15px] mx-auto justify-center w-[35%] h-[50px] shadow-[0_1px_2px_0_rgba(0,0,0,.2)] bg-white col-start-2 mb-[50px] text-center content-center border-[1px] border-[#f2f2f2] rounded-[8px]
 }
 
 .listItems {
@@ -278,6 +322,12 @@
         }
     }
 }
+
+
+.styleAdittionTextStyle {
+  @apply pl-3 max-w-1200 inline-block break-words text-center leading-7
+}
+
 
 
 

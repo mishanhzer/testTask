@@ -1,8 +1,6 @@
 import React from "react"
 import { NavLink } from "react-router"
 
-import { activeClassPage } from "./styles/activeClassPage"
-
 interface TypesAnimalsDataPages {
   path: string
   name: number
@@ -20,7 +18,13 @@ export const ListItemsPage = ({ data, callFuncLoading }: { data: TypesAnimalsDat
 
     return (
       <li className={item.class} key={item.name}>
-        <NavLink onClick={showSpinner} style={activeClassPage} to={item.path}>{item.name}</NavLink>
+        <NavLink
+          onClick={showSpinner}
+          className={({ isActive }) => isActive ? 'border-b-2 border-navigateLinkColor' : 'none'}
+          to={item.path}
+        >
+          {item.name}
+        </NavLink>
       </li>
     )
   })

@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { arrow, mainLogo } from "../../assets/logo/logo";
-import { classNamesLinkAndButton } from "./styles/stylesUI_kits";
 
 interface ImageTypes {
   w: string
@@ -39,7 +38,7 @@ export const LinkButton = ({ ml, fz }: LinkTypes) => {
   return (
     <Link
       to="/contact"
-      className={twMerge(ml, fz, classNamesLinkAndButton)}
+      className={twMerge(ml, fz, 'flex py-6 px-10 bg-blue-900 text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group')}
     >
       СВЯЗАТЬСЯ СО МНОЙ
       <ImageBtn w="w-6" h="h-6" />
@@ -52,7 +51,7 @@ export const ButtonComponent = ({ mt, h, fz, disabled }: ButtonTypes) => {
     <div>
       <button
         disabled={disabled}
-        className={twMerge(mt, h, fz, classNamesLinkAndButton)}
+        className={twMerge(mt, h, fz, 'flex py-6 px-10 bg-blue-900 text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group')}
         type="submit"
       >
         Отправить
