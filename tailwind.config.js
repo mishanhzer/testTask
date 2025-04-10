@@ -45,6 +45,17 @@ export default {
         testColor: "rgb(107 114 128)",
         navigateLinkColor: "rgb(30 58 138)",
       },
+      animation: {
+        animateOpacityBefore: "animateOpacity 0.5s ease",
+        animateOpacityAfter: "animateOpacity 0.25s ease",
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
+      keyframes: {
+        animateOpacity: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
     },
   },
   plugins: [],
