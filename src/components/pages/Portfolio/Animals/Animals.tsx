@@ -11,9 +11,21 @@ import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
+import useHttp from '../../../../hooks/http.hook.ts';
+
 const pathAnimals: string = '/portfolio/animals/'
 
+const oauthToken: string = 'y0__xDhp46KCBix9TYgwMrU5RI6D6AT0_pw5h6mSh8Ef8vWokUbTg'
+
 const Animals = () => {
+  const { request } = useHttp()
+  const test = async () => {
+    const res = await request(`https://cloud-api.yandex.net/v1/disk/`)
+    return res
+  }
+
+  console.log(test())
+
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
 
