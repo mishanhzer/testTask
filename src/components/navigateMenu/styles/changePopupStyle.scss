@@ -1,27 +1,16 @@
 .popup-content {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  box-shadow: none;
-  padding: 15px;
-  left: 708px !important;
+  @apply flex flex-col border-none shadow-none p-[15px] left-[708px] !important;
     svg {
-      display: none;
+      @apply hidden;
     }
 }
 
 [role=tooltip].popup-content {
-  min-width: 250px;
-  box-shadow: none;
-  border-radius:5px;
-  animation-name: Appearance;
-  animation-duration: 400ms;
+  @apply min-w-[250px] shadow-none rounded-[5px] animate-animateOpacityBefore;
 }
 
-@keyframes Appearance {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
+
+
 
 
 

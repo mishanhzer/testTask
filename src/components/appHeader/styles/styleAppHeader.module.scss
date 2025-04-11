@@ -15,5 +15,8 @@
 }
 
 .styleBasket {
-  @apply fill-gray-700 w-4 h-4 hover:fill-black hover:transition !important
+  @apply fill-gray-700 w-4 h-4 !important;
+    &:hover {
+      @apply fill-black transition !important;
+    }
 }
