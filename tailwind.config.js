@@ -47,7 +47,7 @@ export default {
       },
       animation: {
         animateOpacityBefore: "animateOpacity 0.5s ease",
-        animateOpacityAfter: "animateOpacity 0.25s ease",
+        animateOpacityAfter: "animateOpacity 0.5s ease",
         wiggle: "wiggle 1s ease-in-out infinite",
       },
       keyframes: {

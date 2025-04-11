@@ -1,375 +1,77 @@
-// .container {
-//   margin-top: 15px;
-//   justify-content: center;
-//   display: grid;
-//   grid-template-columns: 400px 400px 400px;
-//   grid-template-rows: 1fr 1fr 1fr;
-//   grid-auto-flow: row;
-//   gap: 15px;
-//   justify-items: center;
-// }
-
 .container {
   @apply mt-[15px] justify-center grid grid-cols-[400px_400px_400px] grid-rows-3 grid-flow-row gap-[15px] justify-items-center
 }
 
-// .wrapperImg {
-//   position: relative;
-//   opacity: 1;
-//     &:hover {
-//       cursor: pointer;
-//     &:before {
-//       content: '';
-//       width: 45px;
-//       height: 45px;
-//       background-size: 45px 45px;
-//       background-image: url('../../../../assets/logo/logoPictures/view.png');
-//       position: absolute;
-//       top: 45%;
-//       margin: auto;
-//       right: 0;
-//       left: 0;
-//       display: block;
-//       opacity: 1;
-//       z-index: 1;
-//       animation: animate 0.5s ease;
-//     }
-//     &:after {
-//       content: '';
-//       position: absolute;
-//       top: 0;
-//       left: 0; 
-//       background-color: rgba(19, 117, 183, 0.6);
-//       height: 100%;
-//       width: 100%;
-//       animation: animate 0.25s ease;
-//     }
-//   }
-// }
-
 .wrapperImg {
-  @apply relative opacity-100 
-  hover:cursor-pointer 
-  before:content-[''] before:w-[45px] before:h-[45px] before:bg-cover before:hover:bg-[url('../../../../assets/logo/logoPictures/view.png')] before:absolute before:top-[45%] before:m-auto before:right-0 before:left-0 before:block before:opacity-[1] before:z-[1] 
-  before:hover:animate-animateOpacityBefore
-  after:content-[''] after:absolute after:top-0 after:left-0 after:hover:bg-[rgba(19,117,183,0.6)] after:h-full after:w-full 
-  after:hover:animate-animateOpacityAfter
+  @apply relative opacity-100 ;
+    &:hover {
+      @apply cursor-pointer;
+    }
+    &:before {
+      @apply content-[''] w-[45px] h-[45px] bg-cover hover:bg-[url('../../../../assets/logo/logoPictures/view.png')] absolute top-[45%] m-auto right-0 left-0 block opacity-[1] z-[1];
+    }
+    &:before:hover {
+      @apply animate-animateOpacityBefore
+    }
+    &:after {
+      @apply content-[''] absolute top-0 left-0 hover:bg-[rgba(19,117,183,0.6)] h-full w-full
+    }
+    &:after:hover {
+      @apply animate-animateOpacityAfter
+    }
 }
-
-// @keyframes animate {
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }
-
-// .overlay {
-//   position: fixed;
-//   display: flex;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: rgba(0, 0, 0, 0.6);
-//   z-index: 5;
-//   width: 100vw;
-//   height: 100vh;
-// }
 
 .overlay {
   @apply fixed flex top-0 left-0 right-0 bottom-0 bg-black bg-opacity-[0.6] z-[5] w-screen h-screen
 }
 
-// .modalWrapper {
-//   position: relative;
-//   margin: 150px auto;
-//   min-width: 400px;
-//   max-height: 600px;
-//   z-index: 10;
-//   transform: scale(1.4);
-// }
-
-.modalWrapper {
-  @apply mt-[165px] mx-auto relative min-w-[400px] max-h-[600px] z-[10] transform scale-[1.4]
+.mainWrapperStyle {
+  @apply mx-auto relative min-w-[400px] max-h-[600px] z-[10]
 }
-
-// .littleWindow {
-//   position: relative;
-//   margin: 260px auto;
-//   min-width: 400px;
-//   max-height: 600px;
-//   z-index: 10;
-//   transform: scale(1.5);
-// }
-
-.littleWindow {
-  @apply relative mt-[310px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.5]
-}
-
-// .smallWindow {
-//   position: relative;
-//   margin: 280px auto;
-//   min-width: 400px;
-//   max-height: 600px;
-//   z-index: 10;
-//   transform: scale(1.5);
-// }
-
-.smallWindow {
-  @apply relative mt-[325px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.5]
-}
-
-
-// .bigWindow {
-//   position: relative;
-//   margin: 115px auto;
-//   min-width: 400px;
-//   max-height: 600px;
-//   z-index: 10;
-//   transform: scale(1.2);
-// }
-
-.bigWindow {
-  @apply relative mt-[115px] mx-auto min-w-[400px] max-h-[600px] z-[10] transform scale-[1.2]
-}
-
-// .close {
-//   display: block;
-//   position: absolute;
-//   top: 10px;
-//   right: 10px;
-//   cursor: pointer;
-//   width: 20px;
-//   height: 20px;
-//   z-index: 15;
-//     &:before {
-//       content: '';
-//       position: absolute;
-//       top: 50%;
-//       left: 50%;
-//       transform: translate(-50%, -50%) rotate(45deg);
-//       width: 20px;
-//       height: 2px;
-//       background-color: white;
-//     }
-//     &:after {
-//       content: '';
-//       position: absolute;
-//       top: 50%;
-//       left: 50%;
-//       transform: translate(-50%, -50%) rotate(-45deg);
-//       width: 20px;
-//       height: 2px;
-//       background-color: white;
-//     }
-// }
-
-// .close {
-//   @apply block absolute top-[10px] right-[10px] cursor-pointer w-[20px] h-[20px] z-[15] 
-//   before:absolute before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rotate-[45deg] before:w-[20px] before:h-[2px] before:bg-white 
-//   after:absolute after:top-[50%] after:left-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:rotate-[-45deg] after:w-[20px] after:h-[2px] after:bg-white
-// }
 
 .close {
   @apply block absolute top-[10px] right-[10px] cursor-pointer w-[20px] h-[20px] z-[15];
-  &:before {
-    @apply content-[''] block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rotate-[45deg] w-[20px] h-[2px] bg-white;
-  }
-  &:after {
-    @apply content-[''] block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rotate-[-45deg] w-[20px] h-[2px] bg-white;
-  }
+    &:before {
+      @apply content-[''] block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rotate-[45deg] w-[20px] h-[2px] bg-white;
+    }
+    &:after {
+      @apply content-[''] block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rotate-[-45deg] w-[20px] h-[2px] bg-white;
+    }
 } 
-
-
-
-// .links {
-//   display: flex;
-//   margin: 15px auto;
-//   justify-content: center;
-//   width: 35%;
-//   height: 50px;
-//   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
-//   background-color: white;
-//   grid-column-start: 2;
-//   margin-bottom: 50px;
-//   text-align: center;
-//   align-content: center;
-//   border: 1px solid #f2f2f2;
-//   border-radius: 8px;
-// }
 
 .links {
   @apply flex mt-[15px] mx-auto justify-center w-[35%] h-[50px] shadow-[0_1px_2px_0_rgba(0,0,0,.2)] bg-white col-start-2 mb-[50px] text-center content-center border-[1px] border-[#f2f2f2] rounded-[8px]
 }
 
-// .listItems {
-//   display: block;
-//   height: 50px;
-//   width: 65px;
-//   align-self: center;
-//   justify-self: center;
-//   width: 60px;
-//   box-sizing: border-box;
-//     &:hover {
-//       background-color: #E0FFFF;
-//     }
-//     a {
-//       font-size: 16px;
-//       font-weight: 700;
-//       color: grey;
-//       box-sizing: border-box;
-//       padding-top: 15px;
-//       display: block;
-//       height: 100%;
-//     }
-// }
-
-
 .listItems {
   @apply block h-[50px] w-[65px] self-center justify-self-center box-border;
-  &:hover {
-    @apply bg-[#E0FFFF];
-  }
-  a {
-    @apply text-[16px] font-[700] text-[grey] box-border pt-[15px] block h-[100%]
-  }
+    &:hover {
+      @apply bg-[#E0FFFF];
+    }
+    a {
+      @apply text-[16px] font-[700] text-[grey] box-border pt-[15px] block h-[100%]
+    }
 }
 
-
-// .listItemPrev {
-//   display: block;
-//   width: 60px;
-//   box-sizing: border-box;
-//   position: relative;
-//     &:hover {
-//       background-color: #E0FFFF;
-//     }
-//     button {
-//       width: 100%;
-//       padding-top: 5px;
-//       box-sizing: border-box;
-//       font-size: 16px;
-//       display: block;
-//       height: 100%;
-//       border: 3px solid transparent;
-//       justify-self: center;
-//         img {
-//           display: block;
-//           margin: auto;
-//           width: 15px;
-//           height: 15px;
-//         }
-//     }
-// }
-
-.listItemPrev {
+.listItemCommonStyle {
   @apply block relative w-[60px] box-border;
-  &:hover {
-    @apply bg-[#E0FFFF];
-  }
-  button {
-    @apply w-[100%] pt-[5px] box-border text-[16px] block h-[100%] border-[3px] border-transparent justify-self-center;
-    img {
-      @apply block m-auto w-[15px] h-[15px]
-    }
-  }
-}
-
-.listItemOnStart {
-  display: block;
-  width: 60px;
-  box-sizing: border-box;
-  position: relative;
     &:hover {
-      background-color: #E0FFFF;
+      @apply bg-[#E0FFFF];
     }
     button {
-      width: 100%;
-      justify-self: center;
-      box-sizing: border-box;
-      padding-top: 5px;
-      font-size: 16px;
-      display: block;
-      height: 100%;
-      border: 3px solid transparent;
-        img {
-          display: block;
-          margin: auto;
-          width: 15px;
-          height: 15px;
-          transform: rotate(0deg);
-        }
+      @apply w-[100%] pt-[5px] box-border text-[16px] block h-[100%] border-[3px] border-transparent justify-self-center;
     }
 }
 
-.listItemNext {
-  display: block;
-  width: 60px;
-  box-sizing: border-box;
-  position: relative;
-    &:hover {
-      background-color: #E0FFFF;
-    }
-    button {
-      width: 100%;
-      padding-top: 5px;
-      box-sizing: border-box;
-      justify-self: center;
-      font-size: 16px;
-      display: block;
-      height: 100%;
-      border: 3px solid transparent;
-        img {
-          display: block;
-          margin: auto;
-          width: 15px;
-          height: 15px;
-          transform: rotate(180deg);
-        }
-    }
+.listItemPrevAndStart {
+  @apply block m-auto w-[15px] h-[15px];
 }
 
-.listItemOnEnd {
-  display: block;
-  height: 50px;
-  width: 65px;
-  align-self: center;
-  justify-self: center;
-  width: 60px;
-  box-sizing: border-box;
-  position: relative;
-    &:hover {
-      background-color: #E0FFFF;
-    }
-    button {
-      width: 100%;
-      justify-self: center;
-      box-sizing: border-box;
-      padding-top: 5px;
-      font-size: 16px;
-      display: block;
-      height: 100%;
-      border: 3px solid transparent;
-        img {
-          display: block;
-          margin: auto;
-          width: 15px;
-          height: 15px;
-          transform: rotate(180deg);
-        }
-    }
+.listItemNextAndEnd {
+  @apply block m-auto w-[15px] h-[15px] rotate-180;
 }
 
 
 .styleAdittionTextStyle {
   @apply pl-3 max-w-1200 inline-block break-words text-center leading-7
 }
-
-
-
-
-
-
-

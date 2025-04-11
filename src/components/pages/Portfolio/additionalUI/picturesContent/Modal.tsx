@@ -36,17 +36,17 @@ export const ModalPortal = ({ handleClose, source, alt }: TypesModalPortal) => {
   }, [])
 
   const handleClass = useMemo(() => {
-    if (heightImage < 400) {
-      return styles.smallWindow
+    if (heightImage > 0 && heightImage < 350) {
+      return `${styles.mainWrapperStyle} mt-[325px] scale-[1.5]`
     }
-    if (heightImage >= 420 && heightImage <= 450) {
-      return styles.littleWindow
+    if (heightImage > 0 && heightImage > 350 && heightImage <= 450) {
+      return `${styles.mainWrapperStyle} mt-[310px] scale-[1.5]`
     }
-    if (heightImage > 795 && heightImage < 800) {
-      return styles.modalWrapper
+    if (heightImage > 0 && heightImage > 600 && heightImage < 700) {
+      return `${styles.mainWrapperStyle} mt-[165px] scale-[1.4]`
     }
     else {
-      return styles.bigWindow
+      return `${styles.mainWrapperStyle} mt-[115px] scale-[1.2]`
     }
   }, [heightImage > 0])
 
