@@ -2,6 +2,16 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { persist, devtools, createJSONStorage } from "zustand/middleware"; // для связи с localStorage
 
+import axios from "axios";
+
+import {
+  _transformAnimals,
+  linkAnimals,
+  linkFlowers,
+  linkStillLife,
+  linkPeopleAndAnimals,
+} from '../utils/useTest'
+
 import {
   dataWorksAnimals,
   dataWorksFlowers,
@@ -13,6 +23,11 @@ import {
 // Cтор Animals
 interface TypesAnimalsStore {
   animalDisplayedData: TypesDataWorks[]
+
+  animals: TypesDataWorks[]
+  getAnimals: () => void
+  response: number
+  loadingTest: string
 
   setPrevPage: () => void
   setNextPage: () => void
@@ -34,6 +49,14 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
  persist(
   immer(
     (set) => ({
+      animals: [],
+      response: 0,
+      loadingTest: 'loading',
+      getAnimals: async () => {
+        const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+        set({animals: res.data._embedded.items.map(_transformAnimals), response: res.status, loadingTest: 'confirmed'})
+      },
+
       animalDisplayedData: dataWorksAnimals.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,

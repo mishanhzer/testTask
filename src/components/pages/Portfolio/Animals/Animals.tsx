@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
+import { useTest } from '../../../../utils/useTest.ts'
 
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
@@ -15,16 +16,14 @@ import useHttp from '../../../../hooks/http.hook.ts';
 
 const pathAnimals: string = '/portfolio/animals/'
 
-const oauthToken: string = 'y0__xDhp46KCBix9TYgwMrU5RI6D6AT0_pw5h6mSh8Ef8vWokUbTg'
-
 const Animals = () => {
-  const { request } = useHttp()
-  const test = async () => {
-    const res = await request(`https://cloud-api.yandex.net/v1/disk/`)
-    return res
-  }
-
-  console.log(test())
+  const animals = useAnimalStore(state => state.animals)
+  const response = useAnimalStore(state => state.response)
+  const getAnimals = useAnimalStore(state => state.getAnimals)
+  const loadingTest = useAnimalStore(state => state.loadingTest)
+  console.log(loadingTest)
+  console.log(animals)
+  console.log(response)
 
   const [loading, setLoading] = useState(false)
   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
@@ -47,7 +46,11 @@ const Animals = () => {
   const idTest: number = +location.pathname.slice(19, 21)
 
   const handleClickBack = () => {
-    goBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+    setLoading(true)
+    if (response === 200) {
+      goBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+      getAnimals()
+    }
   }
 
   const handleClickForward = () => {
