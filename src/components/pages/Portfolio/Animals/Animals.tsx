@@ -41,12 +41,7 @@ const Animals = () => {
   const getAnimalsFifthPage = useAnimalStore(state => state.getAnimalsFifthPage)
   const getAnimalsSixthPage = useAnimalStore(state => state.getAnimalsSixthPage)
 
-  const setOnePage = useAnimalStore(state => state.setOnePage)
-  const setTwoPage = useAnimalStore(state => state.setTwoPage)
-  const setThreePage = useAnimalStore(state => state.setThreePage)
-  const setFourPage = useAnimalStore(state => state.setFourPage)
-  const setFivePage = useAnimalStore(state => state.setFivePage)
-  const setSixPage = useAnimalStore(state => state.setSixPage)
+  const getPrevAnimals = useAnimalStore(state => state.getPrevAnimals)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -62,8 +57,8 @@ const Animals = () => {
   const handleClickBack = () => {
     // setLoadingLoading()
     // goBack(`${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
-    goBack(`${pathAnimals}1`, getAnimalsFirstPage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
-    getAnimals()
+    goBack(`${pathAnimals}1`, getAnimalsFirstPage, getPrevAnimals, setVisibleDisplay, navigate, pathName, idTest)
+    getPrevAnimals()
     // setLoadingConfirmed()
   }
 

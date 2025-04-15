@@ -9,12 +9,12 @@ type TypeStateFunc  = () => void
 
 // 1. Функции, которые адаптированы под все блоки картин
 
-export const goBack = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, setPrevPage: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number) => {
+export const goBack = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, getPrevAnimals: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number) => {
   if (idTest - 1 <= 1) {
     getAnimalsFirstPage()
     navigate(pathPictures)
   } else {
-    setPrevPage()
+    getPrevAnimals()
     setVisibleDisplay()
     navigate(`${pathName}${idTest - 1}`)
   }
