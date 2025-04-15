@@ -9,10 +9,9 @@ interface TypesAnimalsDataPages {
   func: () => void
 }
 
-export const ListItemsPage = ({ data, callFuncLoading }: { data: TypesAnimalsDataPages[], callFuncLoading: () => void }) => {
+export const ListItemsPage = ({ data }: { data: TypesAnimalsDataPages[] }) => {
   return data.map((item) => {
     const showSpinner = () => {
-      callFuncLoading()
       item.func()
     }
 

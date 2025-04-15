@@ -8,14 +8,14 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, peopleAndAnimalsFunc, peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
+import { peopleAndAnimalsFunc, peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
 const pathPeopleAndAnimals: string = '/portfolio/people_and_animals/'
 
 const PeopleAndAnimals = () => {
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const peopleAndAnimalsDisplayedData = usePeopleAndAnimalsStore(state => state.peopleAndAnimalsDisplayedData);
 
   const setOnePage = usePeopleAndAnimalsStore(state => state.setOnePage)
@@ -25,19 +25,19 @@ const PeopleAndAnimals = () => {
   const idTest: number = +location.pathname.slice(30, 31)
 
   const handleClickBack = () => {
-    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
+    peopleAndAnimalsFunc(idTest, setOnePage)
   }
 
   const handleClickForward = () => {
-    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
+    peopleAndAnimalsFunc(idTest, setOnePage)
   }
 
   const handleClickStart = () => {
-    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
+    peopleAndAnimalsFunc(idTest, setOnePage)
   }
 
   const handleClickEnd = () => {
-    peopleAndAnimalsFunc(setLoading, idTest, setOnePage)
+    peopleAndAnimalsFunc(idTest, setOnePage)
   }
 
   const peopleAndAnimalsData = peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems, setOnePage)
@@ -50,7 +50,6 @@ const PeopleAndAnimals = () => {
           handleClickBack={handleClickBack}
           handleClickForward={handleClickForward}
           handleClickEnd={handleClickEnd}
-          callFuncLoading={() => callFuncLoading(setLoading)}
           dataPages={peopleAndAnimalsData}
         />
         <PicturesContent

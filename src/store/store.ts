@@ -22,12 +22,21 @@ import {
 
 // Cтор Animals
 interface TypesAnimalsStore {
-  animalDisplayedData: TypesDataWorks[]
+  // animalDisplayedData: TypesDataWorks[]
 
   animals: TypesDataWorks[]
   getAnimals: () => void
   response: number
   loadingTest: string
+  setLoadingLoading: () => void
+  setLoadingConfirmed: () => void
+  setVisiblePage: () => void
+  getAnimalsFirstPage: () => void
+  getAnimalsSecondPage: () => void
+  getAnimalsThirdPage: () => void
+  getAnimalsFourthPage: () => void
+  getAnimalsFifthPage: () => void
+  getAnimalsSixthPage: () => void
 
   setPrevPage: () => void
   setNextPage: () => void
@@ -51,16 +60,95 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
     (set) => ({
       animals: [],
       response: 0,
-      loadingTest: 'loading',
+      loadingTest: 'waiting',
       getAnimals: async () => {
-        const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
-        set({animals: res.data._embedded.items.map(_transformAnimals), response: res.status, loadingTest: 'confirmed'})
-      },
+        set({loadingTest: 'loading'})
+        try {
+          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+          set({animals: res.data._embedded.items.map(_transformAnimals).slice(0, 9), response: res.status, loadingTest: 'confirmed'})
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+      setLoadingLoading: () => set({loadingTest: 'loading'}),
+      setLoadingConfirmed: () => set({loadingTest: 'confirmed'}),
 
-      animalDisplayedData: dataWorksAnimals.filter(item => item.id < 9),
+      setVisiblePage: () => 
+        set((state) => ({
+          animals: state.animals.slice(0, 9),
+        })),
+      // animalDisplayedData: dataWorksAnimals.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsId: 0,
+
+      getAnimalsFirstPage: async () => {
+        set({loadingTest: 'loading'})
+        try {
+          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+          set({animals: res.data._embedded.items.map(_transformAnimals).slice(0, 9), response: res.status, loadingTest: 'confirmed', paramsId: 1, idStart: 0, idEnd: 9})
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
+      getAnimalsSecondPage: async () => {
+        set({loadingTest: 'loading'})
+        try {
+          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+          set({animals: res.data._embedded.items.map(_transformAnimals).slice(9, 18), response: res.status, loadingTest: 'confirmed', paramsId: 2, idStart: 9, idEnd: 18})
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
+      getAnimalsThirdPage: async () => {
+        set({loadingTest: 'loading'})
+        try {
+          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+          set({animals: res.data._embedded.items.map(_transformAnimals).slice(18, 27), response: res.status, loadingTest: 'confirmed', paramsId: 3, idStart: 18, idEnd: 27})
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
+        getAnimalsFourthPage: async () => {
+          set({loadingTest: 'loading'})
+          try {
+            const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+            set({animals: res.data._embedded.items.map(_transformAnimals).slice(27, 36), response: res.status, loadingTest: 'confirmed', paramsId: 2, idStart: 27, idEnd: 36})
+          } catch(e) {
+            set({loadingTest: 'error'})
+            throw(e)
+          }
+          },
+
+        getAnimalsFifthPage: async () => {
+          set({loadingTest: 'loading'})
+          try {
+            const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+            set({animals: res.data._embedded.items.map(_transformAnimals).slice(36, 45), response: res.status, loadingTest: 'confirmed', paramsId: 2, idStart: 36, idEnd: 45})
+          } catch(e) {
+            set({loadingTest: 'error'})
+            throw(e)
+          }
+          },
+
+        getAnimalsSixthPage: async () => {
+          set({loadingTest: 'loading'})
+          try {
+            const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
+            set({animals: res.data._embedded.items.map(_transformAnimals).slice(45, 54), response: res.status, loadingTest: 'confirmed', paramsId: 2, idStart: 45, idEnd: 54})
+          } catch(e) {
+            set({loadingTest: 'error'})
+            throw(e)
+          }
+          },
+        
       setPrevPage: () => 
         set((state) => ({
           idStart: state.idStart - 9,
@@ -74,50 +162,57 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
           paramsId: state.paramsId + 1
         })),
       setOnePage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 0,
           idEnd: 9,
+          animals: state.animals.slice(0, 9),
           animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 0 && item.id <= 8),
           paramsId: 1
         })),
       setTwoPage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 9,
           idEnd: 18,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 9 && item.id <= 17),
+          animals: state.animals.slice(9, 18),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 9 && item.id <= 17),
           paramsId: 2
         })),
       setThreePage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 18,
           idEnd: 27,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 18 && item.id <= 26),
+          animals: state.animals.slice(18, 27),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 18 && item.id <= 26),
           paramsId: 3
         })),
       setFourPage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 27,
           idEnd: 36,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 27 && item.id <= 35),
+          animals: state.animals.slice(27, 36),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 27 && item.id <= 35),
           paramsId: 4
         })),
       setFivePage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 36,
           idEnd: 45,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 36 && item.id <= 44),
+          animals: state.animals.slice(36, 45),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 36 && item.id <= 44),
           paramsId: 5
         })),
       setSixPage: () => 
-        set(() => ({
+        set((state) => ({
           idStart: 45,
           idEnd: 54,
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 45 && item.id <= 53),
+          animals: state.animals.slice(45, 54),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= 45 && item.id <= 53),
           paramsId: 6
         })),
       setVisibleDisplay: () => 
         set((state) => ({
-          animalDisplayedData: dataWorksAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+          animals: state.animals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {

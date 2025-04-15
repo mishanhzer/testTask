@@ -7,6 +7,8 @@ export let id = 0;
 export const _transformAnimals = (item: any) => {  
   return {
     category: 'Animals',
+    file: item.file,
+    preview: item.preview,
     name: item.name,
     path: item.path,
     sizes: item.sizes,

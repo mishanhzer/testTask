@@ -8,7 +8,7 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, goBack, stillLifeForward, goStart, stillLifeEnd, stillLifeDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
+import { goBack, stillLifeForward, goStart, stillLifeEnd, stillLifeDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
@@ -32,19 +32,19 @@ const StillLife = () => {
   const idTest: number = +location.pathname.slice(22, 23)
 
   const handleClickBack = () => {
-    goBack(setLoading, `${pathStillLife}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+    goBack(`${pathStillLife}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
   const handleClickForward = () => {
-    stillLifeForward(setLoading, `${pathStillLife}2`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setTwoPage)
+    stillLifeForward(`${pathStillLife}2`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setTwoPage)
   }
 
   const handleClickStart = () => {
-    goStart(setLoading, `${pathStillLife}1`, setOnePage, navigate)
+    goStart(`${pathStillLife}1`, setOnePage, navigate)
   }
 
   const handleClickEnd = () => {
-    stillLifeEnd(setLoading, `${pathStillLife}2`, setTwoPage, navigate)
+    stillLifeEnd(`${pathStillLife}2`, setTwoPage, navigate)
   }
 
   const stillLifeData = stillLifeDataPages(pathStillLife, styles.listItems, setOnePage, setTwoPage)
@@ -57,7 +57,6 @@ const StillLife = () => {
           handleClickBack={handleClickBack}
           handleClickForward={handleClickForward}
           handleClickEnd={handleClickEnd}
-          callFuncLoading={() => callFuncLoading(setLoading)}
           dataPages={stillLifeData}
         />
         <PicturesContent

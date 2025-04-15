@@ -8,14 +8,14 @@ import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx"
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { callFuncLoading, goBack, flowersForward, goStart, flowersEnd, flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
+import { goBack, flowersForward, goStart, flowersEnd, flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
 const pathFlowers: string = '/portfolio/flowers/'
 
 const Flowers = () => {
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const flowersWorksDisplayedData = useFlowersStore(state => state.flowersWorksDisplayedData);
 
   const setPrevPage = useFlowersStore(state => state.setPrevPage)
@@ -33,19 +33,19 @@ const Flowers = () => {
   const idTest: number = +location.pathname.slice(19, 21)
 
   const handleClickBack = () => {
-    goBack(setLoading, `${pathFlowers}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+    goBack(`${pathFlowers}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
   }
 
   const handleClickForward = () => {
-    flowersForward(setLoading, `${pathFlowers}3`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setThreePage)
+    flowersForward(`${pathFlowers}3`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setThreePage)
   }
 
   const handleClickStart = () => {
-    goStart(setLoading, `${pathFlowers}1`, setOnePage, navigate)
+    goStart(`${pathFlowers}1`, setOnePage, navigate)
   }
 
   const handleClickEnd = () => {
-    flowersEnd(setLoading, `${pathFlowers}3`, setThreePage, navigate)
+    flowersEnd(`${pathFlowers}3`, setThreePage, navigate)
   }
 
   const flowersData = flowersDataPages(pathFlowers, styles.listItems, setOnePage, setTwoPage, setThreePage)
@@ -58,7 +58,6 @@ const Flowers = () => {
           handleClickBack={handleClickBack}
           handleClickForward={handleClickForward}
           handleClickEnd={handleClickEnd}
-          callFuncLoading={() => callFuncLoading(setLoading)}
           dataPages={flowersData}
         />
         <PicturesContent

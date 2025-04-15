@@ -6,7 +6,9 @@ import { ModalPortal } from "./Modal";
 interface TypesDisplayedData {
   category: string;
   name?: string;
-  source?: string;
+  path?: string;
+  file?: string;
+  preview?: string
   class: string;
   id: number;
 }
@@ -18,6 +20,7 @@ interface TypesPicturesContent {
 }
 
 export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperImg }: TypesPicturesContent) => {
+  console.log(displayedData)
   const [pictureName, setPictureName] = useState<string | null>('')
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
@@ -39,9 +42,10 @@ export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperI
             {pictureName === item.name ?
               <ModalPortal
                 handleClose={handleClose}
-                source={item.source}
+                source={item.file}
                 alt={item.name} /> : null}
-            <img className={`${item.class} lozad`} src={item.source} alt={item.name} />
+            {/* <img className={`${item.class} lozad`} src={item.source} alt={item.name} /> */}
+            <img className={`w-[300px] h-[300px] lozad`} src={item.file} alt={item.name} />
           </div>
         </AnimationContainer>
       ))
