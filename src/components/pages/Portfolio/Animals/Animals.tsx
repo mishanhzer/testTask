@@ -19,19 +19,9 @@ const pathAnimals: string = '/portfolio/animals/'
 
 const Animals = () => {
   const animals = useAnimalStore(state => state.animals)
-  const response = useAnimalStore(state => state.response)
-  const getAnimals = useAnimalStore(state => state.getAnimals)
   const loadingTest = useAnimalStore(state => state.loadingTest)
-  const setVisiblePage = useAnimalStore(state => state.setVisiblePage)
+  // const setVisiblePage = useAnimalStore(state => state.setVisiblePage)
 
-  console.log(animals)
-  console.log(response)
-  console.log(loadingTest)
-
-  const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
-
-  const setPrevPage = useAnimalStore(state => state.setPrevPage)
-  const setNextPage = useAnimalStore(state => state.setNextPage)
   const setVisibleDisplay = useAnimalStore(state => state.setVisibleDisplay)
 
   const getAnimalsFirstPage = useAnimalStore(state => state.getAnimalsFirstPage)
@@ -42,6 +32,7 @@ const Animals = () => {
   const getAnimalsSixthPage = useAnimalStore(state => state.getAnimalsSixthPage)
 
   const getPrevAnimals = useAnimalStore(state => state.getPrevAnimals)
+  const getNextAnimals = useAnimalStore(state => state.getNextAnimals)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -49,22 +40,20 @@ const Animals = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
+  // Добавить в useEffect вызов запроса
   // useEffect(() => {
   //   setVisiblePage()
   // }, [])
 
 
   const handleClickBack = () => {
-    // setLoadingLoading()
-    // goBack(`${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
     goBack(`${pathAnimals}1`, getAnimalsFirstPage, getPrevAnimals, setVisibleDisplay, navigate, pathName, idTest)
     getPrevAnimals()
-    // setLoadingConfirmed()
   }
 
   const handleClickForward = () => {
-    animalsForward(`${pathAnimals}6`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, getAnimalsSixthPage)
-    getAnimals()
+    animalsForward(`${pathAnimals}6`, getNextAnimals, setVisibleDisplay, navigate, pathName, idTest, getAnimalsSixthPage)
+    getNextAnimals()
   }
 
   const handleClickStart = () => {

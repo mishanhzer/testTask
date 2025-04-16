@@ -45,7 +45,7 @@ export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperI
                 source={item.file}
                 alt={item.name} /> : null}
             {/* <img className={`${item.class} lozad`} src={item.source} alt={item.name} /> */}
-            <img className={`w-[300px] h-[300px] lozad`} src={item.file} alt={item.name} />
+            <img className={`w-[300px] h-[300px] lozad`} src={item.sizes[0].url} alt={item.name} />
           </div>
         </AnimationContainer>
       ))

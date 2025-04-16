@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useFlowersStore } from '../../../../store/store'
@@ -16,15 +16,21 @@ const pathFlowers: string = '/portfolio/flowers/'
 
 const Flowers = () => {
   // const [loading, setLoading] = useState(false)
-  const flowersWorksDisplayedData = useFlowersStore(state => state.flowersWorksDisplayedData);
+  // const flowersWorksDisplayedData = useFlowersStore(state => state.flowersWorksDisplayedData);
+  const flowers = useFlowersStore(state => state.flowers);
+  const loadingTest = useFlowersStore(state => state.loadingTest);
 
-  const setPrevPage = useFlowersStore(state => state.setPrevPage)
-  const setNextPage = useFlowersStore(state => state.setNextPage)
+  const getFlowersFirstPage = useFlowersStore(state => state.getFlowersFirstPage)
+  const getFlowersSecondPage = useFlowersStore(state => state.getFlowersSecondPage)
+  const getFlowersThirdPage = useFlowersStore(state => state.getFlowersThirdPage)
+  const getFlowersFourthPage = useFlowersStore(state => state.getFlowersFourthPage)
+
+  const getPrevFlowers = useFlowersStore(state => state.getPrevFlowers)
+  const getNextFlowers = useFlowersStore(state => state.getNextFlowers)
+
+  // const setPrevPage = useFlowersStore(state => state.setPrevPage)
+  // const setNextPage = useFlowersStore(state => state.setNextPage)
   const setVisibleDisplay = useFlowersStore(state => state.setVisibleDisplay)
-
-  const setOnePage = useFlowersStore(state => state.setOnePage)
-  const setTwoPage = useFlowersStore(state => state.setTwoPage)
-  const setThreePage = useFlowersStore(state => state.setThreePage)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -32,23 +38,29 @@ const Flowers = () => {
   const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
+  // useEffect(() => {
+  //   getFlowersFirstPage()
+  // }, [])
+
   const handleClickBack = () => {
-    goBack(`${pathFlowers}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
+    goBack(`${pathFlowers}1`, getFlowersFirstPage, getPrevFlowers, setVisibleDisplay, navigate, pathName, idTest)
+    getPrevFlowers()
   }
 
   const handleClickForward = () => {
-    flowersForward(`${pathFlowers}3`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setThreePage)
+    flowersForward(`${pathFlowers}3`, getNextFlowers, setVisibleDisplay, navigate, pathName, idTest, getFlowersThirdPage)
+    getNextFlowers()
   }
 
   const handleClickStart = () => {
-    goStart(`${pathFlowers}1`, setOnePage, navigate)
+    goStart(`${pathFlowers}1`, getFlowersFirstPage, navigate)
   }
 
   const handleClickEnd = () => {
-    flowersEnd(`${pathFlowers}3`, setThreePage, navigate)
+    flowersEnd(`${pathFlowers}3`, getFlowersThirdPage, navigate)
   }
 
-  const flowersData = flowersDataPages(pathFlowers, styles.listItems, setOnePage, setTwoPage, setThreePage)
+  const flowersData = flowersDataPages(pathFlowers, styles.listItems, getFlowersFirstPage, getFlowersSecondPage, getFlowersThirdPage)
 
   const Content = () => {
     return (
@@ -61,7 +73,7 @@ const Flowers = () => {
           dataPages={flowersData}
         />
         <PicturesContent
-          displayedData={flowersWorksDisplayedData}
+          displayedData={flowers}
           stylesContainer={styles.container}
           stylesWrapperImg={styles.wrapperImg}
         />
@@ -70,7 +82,7 @@ const Flowers = () => {
   }
 
   return (
-    loading ? <Spinner /> : <Content />
+    loadingTest === 'loading' ? <Spinner /> : <Content />
   )
 }
 

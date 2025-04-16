@@ -4,10 +4,10 @@ import { persist, devtools, createJSONStorage } from "zustand/middleware"; // д
 
 import axios from "axios";
 
-import { getData} from "../utils/useTest";
+import { getData, getPrevAnimals, urlAnimals, urlFlowers } from "../utils/useTest";
 
 import {
-  _transformAnimals,
+  _transform,
   linkAnimals,
   linkFlowers,
   linkStillLife,
@@ -24,14 +24,8 @@ import {
 
 // Cтор Animals
 interface TypesAnimalsStore {
-  // animalDisplayedData: TypesDataWorks[]
-
   animals: TypesDataWorks[]
-  getAnimals: () => void
-  response: number
   loadingTest: string
-  setLoadingLoading: () => void
-  setLoadingConfirmed: () => void
   setVisiblePage: () => void
   getAnimalsFirstPage: () => Promise<void>
   getAnimalsSecondPage: () => void
@@ -40,9 +34,7 @@ interface TypesAnimalsStore {
   getAnimalsFifthPage: () => void
   getAnimalsSixthPage: () => void
   getPrevAnimals: () => void
-
-  setPrevPage: () => void
-  setNextPage: () => void
+  getNextAnimals: () => void
 
   idStart: number
   idEnd: number
@@ -56,60 +48,55 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
   immer(
     (set) => ({
       animals: [],
-      response: 0,
       loadingTest: 'waiting',
-      getAnimals: async () => {
-        set({loadingTest: 'loading'})
-        try {
-          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
-          set({animals: res.data._embedded.items.map(_transformAnimals).slice(0, 9), response: res.status, loadingTest: 'confirmed'})
-        } catch(e) {
-          set({loadingTest: 'error'})
-          throw(e)
-        }
-        },
-      setLoadingLoading: () => set({loadingTest: 'loading'}),
-      setLoadingConfirmed: () => set({loadingTest: 'confirmed'}),
-
       setVisiblePage: () => 
         set((state) => ({
           animals: state.animals.slice(0, 9),
         })),
-      // animalDisplayedData: dataWorksAnimals.filter(item => item.id < 9),
       idStart: 0,
       idEnd: 9,
       paramsId: 0,
 
-      getAnimalsFirstPage: () => getData(set, 0, 9),
-      getAnimalsSecondPage: () => getData(set, 9, 18),  
-      getAnimalsThirdPage: () => getData(set, 18, 27),
-      getAnimalsFourthPage: () => getData(set, 27, 36),
-      getAnimalsFifthPage: () => getData(set, 36, 45),
-      getAnimalsSixthPage: () => getData(set, 45, 54),
-
+      getAnimalsFirstPage: () => getData(set, 0, 9, 1, urlAnimals, 'animals'),
+      getAnimalsSecondPage: () => getData(set, 9, 18, 2, urlAnimals, 'animals'),
+      getAnimalsThirdPage: () => getData(set, 18, 27, 3, urlAnimals, 'animals'),
+      getAnimalsFourthPage: () => getData(set, 27, 36, 4, urlAnimals, 'animals'),
+      getAnimalsFifthPage: () => getData(set, 36, 45, 5, urlAnimals, 'animals'),
+      getAnimalsSixthPage: () => getData(set, 45, 54, 6, urlAnimals, 'animals'),
 
       getPrevAnimals: async () => {
         set({loadingTest: 'loading'})
+        set((state) => ({
+          idStart: state.idStart - 9,
+          idEnd: state.idEnd - 9,
+          paramsId: state.paramsId - 1
+        }))
         try {
-          const res = await axios.get(`https://cloud-api.yandex.net/v1/disk/public/resources?public_key=${linkAnimals}&limit=100`)
-          set(state => ({animals: res.data._embedded.items.map(_transformAnimals).slice(state.idStart - 9, state.idEnd - 9), loadingTest: 'confirmed'}))
+          const res = await axios.get(urlAnimals)
+          set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
         } catch(e) {
           set({loadingTest: 'error'})
           throw(e)
         }
         },
-      setPrevPage: () => 
-        set((state) => ({
-          idStart: state.idStart - 9,
-          idEnd: state.idEnd - 9,
-          paramsId: state.paramsId - 1
-        })),
-      setNextPage: () => 
+
+      getNextAnimals: async () => {
+        set({loadingTest: 'loading'})
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
           paramsId: state.paramsId + 1
-        })),
+        }))
+        try {
+          const res = await axios.get(urlAnimals)
+          set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
+      
       setVisibleDisplay: () => 
         set((state) => ({
           animals: state.animals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
@@ -180,16 +167,18 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
 
 // Cтор Flowers
 interface TypesFlowersStore {
-  flowersWorksDisplayedData: TypesDataWorks[]
+  flowers: TypesDataWorks[]
+  loadingTest: string
+  getFlowersFirstPage: () => void
+  getFlowersSecondPage: () => void
+  getFlowersThirdPage: () => void
+  getFlowersFourthPage: () => void
+  getPrevFlowers: () => void
+  getNextFlowers: () => void
 
-  setNextPage: () => void
-  setPrevPage: () => void
-  setOnePage: () => void
-  setTwoPage: () => void
-  setThreePage: () => void
   idStart: number
   idEnd: number
-  paramsFlowersId: number
+  paramsId: number
   setVisibleDisplay: () => void
 }
 
@@ -198,47 +187,52 @@ export const useFlowersStore = create<TypesFlowersStore>()(
  persist(
   immer(
     (set) => ({
-      flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id < 9),
+      flowers: [],
+      loadingTest: 'waiting',
       idStart: 0,
       idEnd: 9,
-      paramsFlowersId: 0,
+      paramsId: 0,
 
-      setPrevPage: () => 
+      getFlowersFirstPage: () => getData(set, 0, 9, 1, urlFlowers, 'flowers'),
+      getFlowersSecondPage: () => getData(set, 9, 18, 2, urlFlowers, 'flowers'),
+      getFlowersThirdPage: () => getData(set, 18, 27, 3, urlFlowers, 'flowers'),
+      getFlowersFourthPage: () => getData(set, 27, 36, 4, urlFlowers, 'flowers'),
+
+      getPrevFlowers: async () => {
+        set({loadingTest: 'loading'})
         set((state) => ({
           idStart: state.idStart - 9,
           idEnd: state.idEnd - 9,
-          paramsFlowersId: state.paramsFlowersId - 1
-        })),
-      setNextPage: () => 
+          paramsId: state.paramsId - 1
+        }))
+        try {
+          const res = await axios.get(urlFlowers)
+          set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
+      getNextFlowers: async () => {
+        set({loadingTest: 'loading'})
         set((state) => ({
           idStart: state.idStart + 9,
           idEnd: state.idEnd + 9,
-          paramsFlowersId: state.paramsFlowersId + 1
-        })),
-      setOnePage: () => 
-        set(() => ({
-          idStart: 0,
-          idEnd: 9,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 0 && item.id <= 8),
-          paramsFlowersId: 1
-        })),
-      setTwoPage: () => 
-        set(() => ({
-          idStart: 9,
-          idEnd: 18,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 9 && item.id <= 17),
-          paramsFlowersId: 2
-        })),
-      setThreePage: () => 
-        set(() => ({
-          idStart: 18,
-          idEnd: 27,
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= 18 && item.id <= 26),
-          paramsFlowersId: 3
-        })),
+          paramsId: state.paramsId + 1
+        }))
+        try {
+          const res = await axios.get(urlFlowers)
+          set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+        } catch(e) {
+          set({loadingTest: 'error'})
+          throw(e)
+        }
+        },
+
       setVisibleDisplay: () => 
         set((state) => ({
-          flowersWorksDisplayedData: dataWorksFlowers.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+          flowers: state.flowers.filter(item => item.id >= state.idStart && item.id < state.idEnd),
         }))
     }),
   ),  {

@@ -14,15 +14,16 @@ export const goBack = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc,
     getAnimalsFirstPage()
     navigate(pathPictures)
   } else {
-    getPrevAnimals()
+    // getPrevAnimals()
     setVisibleDisplay()
     navigate(`${pathName}${idTest - 1}`)
   }
 }
 
-export const goStart = (pathPictures: string, setOnePage: TypeStateFunc, navigate: NavigateFunction) => {
+export const goStart = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, navigate: NavigateFunction) => {
   navigate(pathPictures)
-  setOnePage()
+  getAnimalsFirstPage()
+  // setOnePage()
 }
 
 // 2. Анимация показа картин
@@ -48,12 +49,12 @@ export const animalsDataPages = (path: string, styles: string, getAnimalsFirstPa
 }
 
 // Функции виджета животных
-export const animalsForward = (pathPictures: string, setNextPage: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number, getAnimalsSixthPage: TypeStateFunc) => {
+export const animalsForward = (pathPictures: string, getNextAnimals: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number, getAnimalsSixthPage: TypeStateFunc) => {
   if (idTest + 1 >= 6) {
     getAnimalsSixthPage()
     navigate(pathPictures)
   } else {
-    setNextPage();
+    /* setNextPage(); */
     setVisibleDisplay()
     navigate(`${pathName}${idTest + 1}`)
   }
@@ -65,29 +66,29 @@ export const animalsEnd = (pathPictures: string, getAnimalsSixthPage: TypeStateF
 }
 
 // 4. Данные цветов
-export const flowersDataPages = (path: string, styles: string, setOnePage: TypeStateFunc, setTwoPage: TypeStateFunc, setThreePage: TypeStateFunc) => {
+export const flowersDataPages = (path: string, styles: string, getFlowersFirstPage: TypeStateFunc, getFlowersSecondPage: TypeStateFunc, getFlowersThirdPage: TypeStateFunc) => {
   return [
-    { path: `${path}1`, name: 1, source: '', class: styles, func: setOnePage },
-    { path: `${path}2`, name: 2, source: '', class: styles, func: setTwoPage },
-    { path: `${path}3`, name: 3, source: '', class: styles, func: setThreePage },
+    { path: `${path}1`, name: 1, source: '', class: styles, func: getFlowersFirstPage },
+    { path: `${path}2`, name: 2, source: '', class: styles, func: getFlowersSecondPage },
+    { path: `${path}3`, name: 3, source: '', class: styles, func: getFlowersThirdPage },
   ]
 }
 
 // Функции виджета цветов
-export const flowersForward = (pathPictures: string, setNextPage: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number, setThreePage: TypeStateFunc) => {
+export const flowersForward = (pathPictures: string, getNextFlowers: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number, getFlowersThirdPage: TypeStateFunc) => {
   if (idTest + 1 >= 3) {
-    setThreePage()
+    getFlowersThirdPage()
     navigate(pathPictures)
   } else {
-    setNextPage();
+    /* getNextFlowers(); */
     setVisibleDisplay()
     navigate(`${pathName}${idTest + 1}`)
   }
 }
 
-export const flowersEnd = (pathPictures: string, setThreePage: TypeStateFunc, navigate: NavigateFunction) => {
+export const flowersEnd = (pathPictures: string, getFlowersThirdPage: TypeStateFunc, navigate: NavigateFunction) => {
   navigate(pathPictures)
-  setThreePage();
+  getFlowersThirdPage();
 }
 
 
