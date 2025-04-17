@@ -11,19 +11,18 @@ type TypeStateFunc  = () => void
 
 export const goBack = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, getPrevAnimals: TypeStateFunc, setVisibleDisplay: TypeStateFunc, navigate: NavigateFunction, pathName: string, idTest: number) => {
   if (idTest - 1 <= 1) {
-    getAnimalsFirstPage()
     navigate(pathPictures)
   } else {
-    // getPrevAnimals()
-    setVisibleDisplay()
     navigate(`${pathName}${idTest - 1}`)
   }
 }
 
+export const testBack = () => {
+
+}
+
 export const goStart = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, navigate: NavigateFunction) => {
   navigate(pathPictures)
-  getAnimalsFirstPage()
-  // setOnePage()
 }
 
 // 2. Анимация показа картин

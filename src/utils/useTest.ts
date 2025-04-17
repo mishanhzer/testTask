@@ -7,7 +7,7 @@ export const linkPeopleAndAnimals: string = 'https://disk.yandex.ru/d/a7CJ9FA93i
 const _apiUrl = 'https://cloud-api.yandex.net/v1/disk/public/resources?public_key='
 export let id = 0;
 
-export const urlAnimals = `${_apiUrl}${linkAnimals}&limit=100`
+export const urlAnimals = `${_apiUrl}${linkAnimals}&limit=9`
 export const urlFlowers = `${_apiUrl}${linkFlowers}&limit=100`
 
 
@@ -22,6 +22,7 @@ export const getData = async (set, startNumber: number, endNumber: number, param
   }
   }
 
+  
   export const _transform = (item: any) => {  
     return {
       file: item.file,
@@ -32,7 +33,6 @@ export const getData = async (set, startNumber: number, endNumber: number, param
     }
   }
   
-
   // const tryPrev = async (set, state) => {
   //   try {
   //     const res = await axios.get(`${_apiUrl}${linkAnimals}&limit=100`)

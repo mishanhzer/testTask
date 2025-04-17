@@ -23,23 +23,12 @@ import {
 } from "../assets/images/AllWorks"
 
 // Cтор Animals
+
 interface TypesAnimalsStore {
   animals: TypesDataWorks[]
   loadingTest: string
-  setVisiblePage: () => void
-  getAnimalsFirstPage: () => Promise<void>
-  getAnimalsSecondPage: () => void
-  getAnimalsThirdPage: () => void
-  getAnimalsFourthPage: () => void
-  getAnimalsFifthPage: () => void
-  getAnimalsSixthPage: () => void
-  getPrevAnimals: () => void
-  getNextAnimals: () => void
-
-  idStart: number
-  idEnd: number
-  paramsId: number
-  setVisibleDisplay: () => void
+  getAnimals: (url: string, offset: number) => void
+  offset: number
 }
 
 export const useAnimalStore = create<TypesAnimalsStore>()(
@@ -48,60 +37,20 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
   immer(
     (set) => ({
       animals: [],
+      data: [],
       loadingTest: 'waiting',
-      setVisiblePage: () => 
-        set((state) => ({
-          animals: state.animals.slice(0, 9),
-        })),
-      idStart: 0,
-      idEnd: 9,
-      paramsId: 0,
-
-      getAnimalsFirstPage: () => getData(set, 0, 9, 1, urlAnimals, 'animals'),
-      getAnimalsSecondPage: () => getData(set, 9, 18, 2, urlAnimals, 'animals'),
-      getAnimalsThirdPage: () => getData(set, 18, 27, 3, urlAnimals, 'animals'),
-      getAnimalsFourthPage: () => getData(set, 27, 36, 4, urlAnimals, 'animals'),
-      getAnimalsFifthPage: () => getData(set, 36, 45, 5, urlAnimals, 'animals'),
-      getAnimalsSixthPage: () => getData(set, 45, 54, 6, urlAnimals, 'animals'),
-
-      getPrevAnimals: async () => {
+      offset: 0,
+      page: 0,
+      getAnimals: async (url, offset) => {
         set({loadingTest: 'loading'})
-        set((state) => ({
-          idStart: state.idStart - 9,
-          idEnd: state.idEnd - 9,
-          paramsId: state.paramsId - 1
-        }))
         try {
-          const res = await axios.get(urlAnimals)
-          set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+          const res = await axios.get(`${url}&offset=${offset}`)
+          set(({animals: res.data._embedded.items.map(_transform), loadingTest: 'confirmed', offset: offset}))
         } catch(e) {
           set({loadingTest: 'error'})
           throw(e)
         }
-        },
-
-      getNextAnimals: async () => {
-        set({loadingTest: 'loading'})
-        set((state) => ({
-          idStart: state.idStart + 9,
-          idEnd: state.idEnd + 9,
-          paramsId: state.paramsId + 1
-        }))
-        try {
-          const res = await axios.get(urlAnimals)
-          set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
-        } catch(e) {
-          set({loadingTest: 'error'})
-          throw(e)
         }
-        },
-
-      
-      setVisibleDisplay: () => 
-        set((state) => ({
-          animals: state.animals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
-          // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
-        }))
     }),
   ),  {
     name: 'animal-storage',
@@ -110,6 +59,98 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
  )
   )
 );
+
+
+
+
+// interface TypesAnimalsStore {
+//   animals: TypesDataWorks[]
+//   loadingTest: string
+//   setVisiblePage: () => void
+//   getAnimalsFirstPage: () => Promise<void>
+//   getAnimalsSecondPage: () => void
+//   getAnimalsThirdPage: () => void
+//   getAnimalsFourthPage: () => void
+//   getAnimalsFifthPage: () => void
+//   getAnimalsSixthPage: () => void
+//   getPrevAnimals: () => void
+//   getNextAnimals: () => void
+
+//   idStart: number
+//   idEnd: number
+//   paramsId: number
+//   setVisibleDisplay: () => void
+// }
+
+// export const useAnimalStore = create<TypesAnimalsStore>()(
+//   devtools(
+//  persist(
+//   immer(
+//     (set) => ({
+//       animals: [],
+//       loadingTest: 'waiting',
+//       setVisiblePage: () => 
+//         set((state) => ({
+//           animals: state.animals.slice(0, 9),
+//         })),
+//       idStart: 0,
+//       idEnd: 9,
+//       paramsId: 0,
+
+//       getAnimalsFirstPage: () => getData(set, 0, 9, 1, urlAnimals, 'animals'),
+//       getAnimalsSecondPage: () => getData(set, 9, 18, 2, urlAnimals, 'animals'),
+//       getAnimalsThirdPage: () => getData(set, 18, 27, 3, urlAnimals, 'animals'),
+//       getAnimalsFourthPage: () => getData(set, 27, 36, 4, urlAnimals, 'animals'),
+//       getAnimalsFifthPage: () => getData(set, 36, 45, 5, urlAnimals, 'animals'),
+//       getAnimalsSixthPage: () => getData(set, 45, 54, 6, urlAnimals, 'animals'),
+
+//       getPrevAnimals: async () => {
+//         set({loadingTest: 'loading'})
+//         set((state) => ({
+//           idStart: state.idStart - 9,
+//           idEnd: state.idEnd - 9,
+//           paramsId: state.paramsId - 1
+//         }))
+//         try {
+//           const res = await axios.get(urlAnimals)
+//           set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+//         } catch(e) {
+//           set({loadingTest: 'error'})
+//           throw(e)
+//         }
+//         },
+
+//       getNextAnimals: async () => {
+//         set({loadingTest: 'loading'})
+//         set((state) => ({
+//           idStart: state.idStart + 9,
+//           idEnd: state.idEnd + 9,
+//           paramsId: state.paramsId + 1
+//         }))
+//         try {
+//           const res = await axios.get(urlAnimals)
+//           set(state => ({animals: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+//         } catch(e) {
+//           set({loadingTest: 'error'})
+//           throw(e)
+//         }
+//         },
+
+      
+//       setVisibleDisplay: () => 
+//         set((state) => ({
+//           animals: state.animals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+//           // animalDisplayedData: dataWorksAnimals.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+//         }))
+//     }),
+//   ),  {
+//     name: 'animal-storage',
+//     storage: createJSONStorage(() => localStorage)
+//   }
+//  )
+//   )
+// );
+
 
 // Cтор People and Animals
 interface TypesPeopleAndAnimalsStore {
