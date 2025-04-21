@@ -17,10 +17,6 @@ export const goBack = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc,
   }
 }
 
-export const testBack = () => {
-
-}
-
 export const goStart = (pathPictures: string, getAnimalsFirstPage: TypeStateFunc, navigate: NavigateFunction) => {
   navigate(pathPictures)
 }

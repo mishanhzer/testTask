@@ -26,9 +26,13 @@ import {
 
 interface TypesAnimalsStore {
   animals: TypesDataWorks[]
-  loadingTest: string
-  getAnimals: (url: string, offset: number) => void
+  flowers: TypesDataWorks[]
+  stillLife: TypesDataWorks[]
+  peopleAndAnimals: TypesDataWorks[]
+  loading: string
+  getAnimals: (category: string, url: string, offset: number, page: number) => void
   offset: number
+  page: string
 }
 
 export const useAnimalStore = create<TypesAnimalsStore>()(
@@ -37,17 +41,19 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
   immer(
     (set) => ({
       animals: [],
-      data: [],
-      loadingTest: 'waiting',
+      flowers: [],
+      stillLife: [],
+      peopleAndAnimals: [],
+      loading: 'waiting',
       offset: 0,
-      page: 0,
-      getAnimals: async (url, offset) => {
-        set({loadingTest: 'loading'})
+      page: '0',
+      getAnimals: async (category, url, offset, page) => {
+        set({loading: 'loading'})
         try {
           const res = await axios.get(`${url}&offset=${offset}`)
-          set(({animals: res.data._embedded.items.map(_transform), loadingTest: 'confirmed', offset: offset}))
+          set(({[category]: res.data._embedded.items.map(_transform), loading: 'confirmed', offset, page}))
         } catch(e) {
-          set({loadingTest: 'error'})
+          set({loading: 'error'})
           throw(e)
         }
         }

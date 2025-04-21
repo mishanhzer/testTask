@@ -1,59 +1,73 @@
-import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { usePeopleAndAnimalsStore } from '../../../../store/store'
+import { useAnimalStore } from '../../../../store/store'
+import { urlPeopleAndAnimals } from "../../../../utils/useTest.ts";
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
 
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { peopleAndAnimalsFunc, peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
+import { peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
 const pathPeopleAndAnimals: string = '/portfolio/people_and_animals/'
 
 const PeopleAndAnimals = () => {
-  // const [loading, setLoading] = useState(false)
-  const peopleAndAnimalsDisplayedData = usePeopleAndAnimalsStore(state => state.peopleAndAnimalsDisplayedData);
+  const peopleAndAnimals = useAnimalStore(state => state.peopleAndAnimals)
+  const loading = useAnimalStore(state => state.loading)
+  const offset = useAnimalStore(state => state.offset)
+  const getAnimals = useAnimalStore(state => state.getAnimals)
 
-  const setOnePage = usePeopleAndAnimalsStore(state => state.setOnePage)
-
+  const navigate = useNavigate()
   const location = useLocation()
-
   const idTest: number = +location.pathname.slice(30, 31)
 
-  const handleClickBack = () => {
-    peopleAndAnimalsFunc(idTest, setOnePage)
+  useEffect(() => {
+    navigate(`${pathPeopleAndAnimals}1`)
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+  }, [])
+
+  const getPrev = () => {
+    if (offset === 0) {
+      getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+      navigate(`${pathPeopleAndAnimals}1`)
+    }
   }
 
-  const handleClickForward = () => {
-    peopleAndAnimalsFunc(idTest, setOnePage)
+  const getNext = () => {
+    if (offset >= 0) {
+      getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+      navigate(`${pathPeopleAndAnimals}1`)
+    }
   }
 
-  const handleClickStart = () => {
-    peopleAndAnimalsFunc(idTest, setOnePage)
+  const getStart = () => {
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+    navigate(`${pathPeopleAndAnimals}1`)
   }
 
-  const handleClickEnd = () => {
-    peopleAndAnimalsFunc(idTest, setOnePage)
+  const getEnd = () => {
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+    navigate(`${pathPeopleAndAnimals}1`)
   }
 
-  const peopleAndAnimalsData = peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems, setOnePage)
+  const peopleAndAnimalsData = peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems, () => getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0))
 
   const Content = () => {
     return (
       <>
         <WidgetPages
-          handleClickStart={handleClickStart}
-          handleClickBack={handleClickBack}
-          handleClickForward={handleClickForward}
-          handleClickEnd={handleClickEnd}
+          getStart={getStart}
+          getEnd={getEnd}
+          getNext={getNext}
+          getPrev={getPrev}
           dataPages={peopleAndAnimalsData}
         />
         <PicturesContent
-          displayedData={peopleAndAnimalsDisplayedData}
+          displayedData={peopleAndAnimals}
           stylesContainer={styles.container}
           stylesWrapperImg={styles.wrapperImg}
         />
@@ -62,7 +76,7 @@ const PeopleAndAnimals = () => {
   }
 
   return (
-    loading ? <Spinner /> : <Content />
+    loading === 'loading' ? <Spinner /> : <Content />
   )
 }
 

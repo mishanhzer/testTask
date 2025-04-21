@@ -8,7 +8,9 @@ const _apiUrl = 'https://cloud-api.yandex.net/v1/disk/public/resources?public_ke
 export let id = 0;
 
 export const urlAnimals = `${_apiUrl}${linkAnimals}&limit=9`
-export const urlFlowers = `${_apiUrl}${linkFlowers}&limit=100`
+export const urlFlowers = `${_apiUrl}${linkFlowers}&limit=9`
+export const urlStillLife = `${_apiUrl}${linkStillLife}&limit=9`
+export const urlPeopleAndAnimals = `${_apiUrl}${linkPeopleAndAnimals}&limit=9`
 
 
 export const getData = async (set, startNumber: number, endNumber: number, params: number, url: string, category: string) => {

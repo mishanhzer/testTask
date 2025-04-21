@@ -1,75 +1,78 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useFlowersStore } from '../../../../store/store'
+import { useAnimalStore } from '../../../../store/store'
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
+import { urlFlowers } from "../../../../utils/useTest.ts";
 
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
 
-import { goBack, flowersForward, goStart, flowersEnd, flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
+import { flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
 import styles from '../styles/mainStylesPictures.module.scss'
 
 const pathFlowers: string = '/portfolio/flowers/'
 
 const Flowers = () => {
-  // const [loading, setLoading] = useState(false)
-  // const flowersWorksDisplayedData = useFlowersStore(state => state.flowersWorksDisplayedData);
-  const flowers = useFlowersStore(state => state.flowers);
-  const loadingTest = useFlowersStore(state => state.loadingTest);
-
-  const getFlowersFirstPage = useFlowersStore(state => state.getFlowersFirstPage)
-  const getFlowersSecondPage = useFlowersStore(state => state.getFlowersSecondPage)
-  const getFlowersThirdPage = useFlowersStore(state => state.getFlowersThirdPage)
-  const getFlowersFourthPage = useFlowersStore(state => state.getFlowersFourthPage)
-
-  const getPrevFlowers = useFlowersStore(state => state.getPrevFlowers)
-  const getNextFlowers = useFlowersStore(state => state.getNextFlowers)
-
-  // const setPrevPage = useFlowersStore(state => state.setPrevPage)
-  // const setNextPage = useFlowersStore(state => state.setNextPage)
-  const setVisibleDisplay = useFlowersStore(state => state.setVisibleDisplay)
+  const flowers = useAnimalStore(state => state.flowers)
+  const loading = useAnimalStore(state => state.loading)
+  const offset = useAnimalStore(state => state.offset)
+  const getAnimals = useAnimalStore(state => state.getAnimals)
 
   const navigate = useNavigate()
   const location = useLocation()
 
-  const pathName: string = location.pathname.slice(0, 19)
   const idTest: number = +location.pathname.slice(19, 21)
 
-  // useEffect(() => {
-  //   getFlowersFirstPage()
-  // }, [])
+  useEffect(() => {
+    navigate(`${pathFlowers}1`)
+    getAnimals('flowers', urlFlowers, 0)
+  }, [])
 
-  const handleClickBack = () => {
-    goBack(`${pathFlowers}1`, getFlowersFirstPage, getPrevFlowers, setVisibleDisplay, navigate, pathName, idTest)
-    getPrevFlowers()
+  const getPrev = () => {
+    if (offset === 0) {
+      getAnimals('flowers', urlFlowers, 0)
+      navigate(`${pathFlowers}1`)
+    }
+    if (offset > 0) {
+      getAnimals('flowers', urlFlowers, offset - 9)
+      navigate(`${pathFlowers}${idTest - 1}`)
+    }
   }
 
-  const handleClickForward = () => {
-    flowersForward(`${pathFlowers}3`, getNextFlowers, setVisibleDisplay, navigate, pathName, idTest, getFlowersThirdPage)
-    getNextFlowers()
+  const getNext = () => {
+    if (offset >= 18) {
+      getAnimals('flowers', urlFlowers, 18)
+      navigate(`${pathFlowers}3`)
+    }
+    if (offset >= 0 && offset < 18) {
+      getAnimals('flowers', urlFlowers, offset + 9)
+      navigate(`${pathFlowers}${idTest + 1}`)
+    }
   }
 
-  const handleClickStart = () => {
-    goStart(`${pathFlowers}1`, getFlowersFirstPage, navigate)
+  const getStart = () => {
+    getAnimals('flowers', urlFlowers, 0)
+    navigate(`${pathFlowers}1`)
   }
 
-  const handleClickEnd = () => {
-    flowersEnd(`${pathFlowers}3`, getFlowersThirdPage, navigate)
+  const getEnd = () => {
+    getAnimals('flowers', urlFlowers, 18)
+    navigate(`${pathFlowers}3`)
   }
 
-  const flowersData = flowersDataPages(pathFlowers, styles.listItems, getFlowersFirstPage, getFlowersSecondPage, getFlowersThirdPage)
+  const flowersData = flowersDataPages(pathFlowers, styles.listItems, () => getAnimals('flowers', urlFlowers, 0), () => getAnimals('flowers', urlFlowers, 9), () => getAnimals('flowers', urlFlowers, 18))
 
   const Content = () => {
     return (
       <>
         <WidgetPages
-          handleClickStart={handleClickStart}
-          handleClickBack={handleClickBack}
-          handleClickForward={handleClickForward}
-          handleClickEnd={handleClickEnd}
+          getStart={getStart}
+          getEnd={getEnd}
+          getNext={getNext}
+          getPrev={getPrev}
           dataPages={flowersData}
         />
         <PicturesContent
@@ -82,7 +85,7 @@ const Flowers = () => {
   }
 
   return (
-    loadingTest === 'loading' ? <Spinner /> : <Content />
+    loading === 'loading' ? <Spinner /> : <Content />
   )
 }
 
