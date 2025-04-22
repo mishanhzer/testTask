@@ -4,14 +4,10 @@ import { persist, devtools, createJSONStorage } from "zustand/middleware"; // д
 
 import axios from "axios";
 
-import { getData, getPrevAnimals, urlAnimals, urlFlowers } from "../utils/useTest";
+import { getData, urlFlowers } from "../utils/useTest";
 
 import {
   _transform,
-  linkAnimals,
-  linkFlowers,
-  linkStillLife,
-  linkPeopleAndAnimals,
 } from '../utils/useTest'
 
 import {
@@ -30,9 +26,10 @@ interface TypesAnimalsStore {
   stillLife: TypesDataWorks[]
   peopleAndAnimals: TypesDataWorks[]
   loading: string
-  getAnimals: (category: string, url: string, offset: number, page: number) => void
+  setPage: (page: number) => void
+  getAnimals: (category: string, url: string, offset: number, page?: number) => void
   offset: number
-  page: string
+  page: number
 }
 
 export const useAnimalStore = create<TypesAnimalsStore>()(
@@ -46,8 +43,9 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
       peopleAndAnimals: [],
       loading: 'waiting',
       offset: 0,
-      page: '0',
-      getAnimals: async (category, url, offset, page) => {
+      page: 1,
+      setPage: (page) => set({page}),
+      getAnimals: async (category, url, offset, page?: number) => {
         set({loading: 'loading'})
         try {
           const res = await axios.get(`${url}&offset=${offset}`)

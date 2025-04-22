@@ -21,38 +21,44 @@ const Animals = () => {
   const loading = useAnimalStore(state => state.loading)
   const getAnimals = useAnimalStore(state => state.getAnimals)
   const offset = useAnimalStore(state => state.offset)
+  const setPage = useAnimalStore(state => state.setPage)
+  const page = useAnimalStore(state => state.page)
+  console.log(page)
 
   const navigate = useNavigate()
   const location = useLocation()
-  const params = useParams()
-  console.log(params.id)
 
-  const idTest: number = +location.pathname.slice(19, 21)
+  const pageId: number = +location.pathname.slice(19, 21)
 
   useEffect(() => {
-    navigate(`${pathAnimals}1`)
-    getAnimals('animals', urlAnimals, 0)
+    navigate(`${pathAnimals}${pageId}`)
+    setPage(pageId)
+    getAnimals('animals', urlAnimals, offset)
   }, [])
 
   const getPrev = () => {
     if (offset === 0) {
       getAnimals('animals', urlAnimals, 0)
+      setPage(1)
       navigate(`${pathAnimals}1`)
     }
     if (offset > 0) {
       getAnimals('animals', urlAnimals, offset - 9)
-      navigate(`${pathAnimals}${idTest - 1}`)
+      setPage(pageId - 1)
+      navigate(`${pathAnimals}${pageId - 1}`)
     }
   }
 
   const getNext = () => {
     if (offset >= 45) {
       getAnimals('animals', urlAnimals, 45)
+      setPage(6)
       navigate(`${pathAnimals}6`)
     }
     if (offset >= 0 && offset < 45) {
       getAnimals('animals', urlAnimals, offset + 9)
-      navigate(`${pathAnimals}${idTest + 1}`)
+      setPage(pageId + 1)
+      navigate(`${pathAnimals}${pageId + 1}`)
     }
   }
 
@@ -66,7 +72,7 @@ const Animals = () => {
     navigate(`${pathAnimals}6`)
   }
 
-  const animalsData = animalsDataPages(pathAnimals, styles.listItems, () => getAnimals('animals', urlAnimals, 0), () => getAnimals('animals', urlAnimals, 9), () => getAnimals('animals', urlAnimals, 18), () => getAnimals('animals', urlAnimals, 27), () => getAnimals('animals', urlAnimals, 36), () => getAnimals('animals', urlAnimals, 45))
+  const animalsData = animalsDataPages(pathAnimals, styles.listItems, () => getAnimals('animals', urlAnimals, 0, 1), () => getAnimals('animals', urlAnimals, 9, 2), () => getAnimals('animals', urlAnimals, 18, 3), () => getAnimals('animals', urlAnimals, 27, 4), () => getAnimals('animals', urlAnimals, 36, 5), () => getAnimals('animals', urlAnimals, 45, 6))
 
   const Content = () => {
     return (

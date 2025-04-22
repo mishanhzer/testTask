@@ -20,7 +20,6 @@ interface TypesPicturesContent {
 }
 
 export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperImg }: TypesPicturesContent) => {
-  console.log(displayedData)
   const [pictureName, setPictureName] = useState<string | null>('')
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {

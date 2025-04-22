@@ -25,8 +25,9 @@ const initialValueRef = {
 }
 
 export const PopupItem = ({ name, path }: TypesListItem) => {
-  const paramsId = useAnimalStore(state => state.paramsId)
-  const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
+  const page = useAnimalStore(state => state.page)
+  // const paramsId = useAnimalStore(state => state.paramsId)
+  // const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
   const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
   const ref = useRef<PopupActions>(initialValueRef);
 
@@ -39,8 +40,8 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   }
 
   const dataPortfolioLinks = [
-    { name: 'Animals', path: `/portfolio/animals/${paramsId}`, class: styles.stylesPortfolioLinks, func: handleClick },
-    { name: 'Flowers', path: `/portfolio/flowers/${paramdFlowersId}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Animals', path: `/portfolio/animals/${page}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Flowers', path: `/portfolio/flowers/${page}`, class: styles.stylesPortfolioLinks, func: handleClick },
     { name: 'Still life', path: `/portfolio/still_life/${paramsStillLifeId}`, class: styles.stylesPortfolioLinks, func: handleClick },
     { name: 'People and Animals', path: '/portfolio/people_and_animals/1', class: styles.stylesPortfolioLinks, func: handleClick },
   ]
