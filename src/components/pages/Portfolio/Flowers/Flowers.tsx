@@ -17,6 +17,7 @@ const pathFlowers: string = '/portfolio/flowers/'
 
 const Flowers = () => {
   const flowers = useAnimalStore(state => state.flowers)
+
   const loading = useAnimalStore(state => state.loading)
   const offset = useAnimalStore(state => state.offset)
   const getAnimals = useAnimalStore(state => state.getAnimals)
@@ -24,46 +25,36 @@ const Flowers = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const idTest: number = +location.pathname.slice(19, 21)
+  const pageId: number = +location.pathname.slice(19, 21)
 
   useEffect(() => {
-    navigate(`${pathFlowers}1`)
-    getAnimals('flowers', urlFlowers, 0)
+    navigate(`${pathFlowers}${pageId}`)
+    getAnimals('flowers', urlFlowers, offset, pageId)
   }, [])
 
-  const getPrev = () => {
-    if (offset === 0) {
-      getAnimals('flowers', urlFlowers, 0)
-      navigate(`${pathFlowers}1`)
-    }
-    if (offset > 0) {
-      getAnimals('flowers', urlFlowers, offset - 9)
-      navigate(`${pathFlowers}${idTest - 1}`)
-    }
-  }
+  const paginate = (direction: string) => {
+    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(18, offset + 9)
+    const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(3, pageId + 1)
 
-  const getNext = () => {
-    if (offset >= 18) {
-      getAnimals('flowers', urlFlowers, 18)
-      navigate(`${pathFlowers}3`)
-    }
-    if (offset >= 0 && offset < 18) {
-      getAnimals('flowers', urlFlowers, offset + 9)
-      navigate(`${pathFlowers}${idTest + 1}`)
-    }
+    getAnimals('flowers', urlFlowers, newOffset, newPage)
+    navigate(`${pathFlowers}${newPage}`)
   }
 
   const getStart = () => {
-    getAnimals('flowers', urlFlowers, 0)
+    getAnimals('flowers', urlFlowers, 0, 1)
     navigate(`${pathFlowers}1`)
   }
 
   const getEnd = () => {
-    getAnimals('flowers', urlFlowers, 18)
+    getAnimals('flowers', urlFlowers, 18, 3)
     navigate(`${pathFlowers}3`)
   }
 
-  const flowersData = flowersDataPages(pathFlowers, styles.listItems, () => getAnimals('flowers', urlFlowers, 0), () => getAnimals('flowers', urlFlowers, 9), () => getAnimals('flowers', urlFlowers, 18))
+  const flowersData =
+    flowersDataPages(pathFlowers, styles.listItems,
+      () => getAnimals('flowers', urlFlowers, 0, 1),
+      () => getAnimals('flowers', urlFlowers, 9, 2),
+      () => getAnimals('flowers', urlFlowers, 18, 3))
 
   const Content = () => {
     return (
@@ -71,8 +62,7 @@ const Flowers = () => {
         <WidgetPages
           getStart={getStart}
           getEnd={getEnd}
-          getNext={getNext}
-          getPrev={getPrev}
+          paginate={paginate}
           dataPages={flowersData}
         />
         <PicturesContent

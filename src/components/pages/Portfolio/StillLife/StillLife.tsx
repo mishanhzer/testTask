@@ -26,46 +26,35 @@ const StillLife = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const idTest: number = +location.pathname.slice(22, 23)
+  const pageId: number = +location.pathname.slice(22, 23)
 
   useEffect(() => {
-    navigate(`${pathStillLife}1`)
-    getAnimals('stillLife', urlStillLife, 0)
+    navigate(`${pathStillLife}${pageId}`)
+    getAnimals('stillLife', urlStillLife, offset, pageId)
   }, [])
 
-  const getPrev = () => {
-    if (offset === 0) {
-      getAnimals('stillLife', urlStillLife, 0)
-      navigate(`${pathStillLife}1`)
-    }
-    if (offset > 0) {
-      getAnimals('stillLife', urlStillLife, offset - 9)
-      navigate(`${pathStillLife}${idTest - 1}`)
-    }
-  }
+  const paginate = (direction: string) => {
+    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(9, offset + 9)
+    const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(2, pageId + 1)
 
-  const getNext = () => {
-    if (offset >= 9) {
-      getAnimals('stillLife', urlStillLife, 9)
-      navigate(`${pathStillLife}2`)
-    }
-    if (offset >= 0 && offset < 9) {
-      getAnimals('stillLife', urlStillLife, offset + 9)
-      navigate(`${pathStillLife}${idTest + 1}`)
-    }
+    getAnimals('stillLife', urlStillLife, newOffset, newPage)
+    navigate(`${pathStillLife}${newPage}`)
   }
 
   const getStart = () => {
-    getAnimals('stillLife', urlStillLife, 0)
+    getAnimals('stillLife', urlStillLife, 0, 1)
     navigate(`${pathStillLife}1`)
   }
 
   const getEnd = () => {
-    getAnimals('stillLife', urlStillLife, 9)
+    getAnimals('stillLife', urlStillLife, 9, 2)
     navigate(`${pathStillLife}2`)
   }
 
-  const stillLifeData = stillLifeDataPages(pathStillLife, styles.listItems, () => getAnimals('stillLife', urlStillLife, 0), () => getAnimals('stillLife', urlStillLife, 9))
+  const stillLifeData =
+    stillLifeDataPages(pathStillLife, styles.listItems,
+      () => getAnimals('stillLife', urlStillLife, 0),
+      () => getAnimals('stillLife', urlStillLife, 9))
 
   const Content = () => {
     return (
@@ -73,8 +62,7 @@ const StillLife = () => {
         <WidgetPages
           getStart={getStart}
           getEnd={getEnd}
-          getNext={getNext}
-          getPrev={getPrev}
+          paginate={paginate}
           dataPages={stillLifeData}
         />
         <PicturesContent

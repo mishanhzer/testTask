@@ -26,7 +26,6 @@ interface TypesAnimalsStore {
   stillLife: TypesDataWorks[]
   peopleAndAnimals: TypesDataWorks[]
   loading: string
-  setPage: (page: number) => void
   getAnimals: (category: string, url: string, offset: number, page?: number) => void
   offset: number
   page: number
@@ -44,7 +43,6 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
       loading: 'waiting',
       offset: 0,
       page: 1,
-      setPage: (page) => set({page}),
       getAnimals: async (category, url, offset, page?: number) => {
         set({loading: 'loading'})
         try {

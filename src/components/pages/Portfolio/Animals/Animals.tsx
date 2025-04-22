@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useAnimalStore } from '../../../../store/store'
 
@@ -21,9 +21,6 @@ const Animals = () => {
   const loading = useAnimalStore(state => state.loading)
   const getAnimals = useAnimalStore(state => state.getAnimals)
   const offset = useAnimalStore(state => state.offset)
-  const setPage = useAnimalStore(state => state.setPage)
-  const page = useAnimalStore(state => state.page)
-  console.log(page)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -32,47 +29,35 @@ const Animals = () => {
 
   useEffect(() => {
     navigate(`${pathAnimals}${pageId}`)
-    setPage(pageId)
-    getAnimals('animals', urlAnimals, offset)
+    getAnimals('animals', urlAnimals, offset, pageId)
   }, [])
 
-  const getPrev = () => {
-    if (offset === 0) {
-      getAnimals('animals', urlAnimals, 0)
-      setPage(1)
-      navigate(`${pathAnimals}1`)
-    }
-    if (offset > 0) {
-      getAnimals('animals', urlAnimals, offset - 9)
-      setPage(pageId - 1)
-      navigate(`${pathAnimals}${pageId - 1}`)
-    }
-  }
-
-  const getNext = () => {
-    if (offset >= 45) {
-      getAnimals('animals', urlAnimals, 45)
-      setPage(6)
-      navigate(`${pathAnimals}6`)
-    }
-    if (offset >= 0 && offset < 45) {
-      getAnimals('animals', urlAnimals, offset + 9)
-      setPage(pageId + 1)
-      navigate(`${pathAnimals}${pageId + 1}`)
-    }
-  }
-
   const getStart = () => {
-    getAnimals('animals', urlAnimals, 0)
     navigate(`${pathAnimals}1`)
+    getAnimals('animals', urlAnimals, 0, 1)
   }
 
   const getEnd = () => {
-    getAnimals('animals', urlAnimals, 45)
     navigate(`${pathAnimals}6`)
+    getAnimals('animals', urlAnimals, 45, 6)
   }
 
-  const animalsData = animalsDataPages(pathAnimals, styles.listItems, () => getAnimals('animals', urlAnimals, 0, 1), () => getAnimals('animals', urlAnimals, 9, 2), () => getAnimals('animals', urlAnimals, 18, 3), () => getAnimals('animals', urlAnimals, 27, 4), () => getAnimals('animals', urlAnimals, 36, 5), () => getAnimals('animals', urlAnimals, 45, 6))
+  const paginate = (direction: string) => {
+    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(45, offset + 9)
+    const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(6, pageId + 1)
+
+    getAnimals('animals', urlAnimals, newOffset, newPage)
+    navigate(`${pathAnimals}${newPage}`)
+  }
+
+  const animalsData =
+    animalsDataPages(pathAnimals, styles.listItems,
+      () => getAnimals('animals', urlAnimals, 0, 1),
+      () => getAnimals('animals', urlAnimals, 9, 2),
+      () => getAnimals('animals', urlAnimals, 18, 3),
+      () => getAnimals('animals', urlAnimals, 27, 4),
+      () => getAnimals('animals', urlAnimals, 36, 5),
+      () => getAnimals('animals', urlAnimals, 45, 6))
 
   const Content = () => {
     return (
@@ -80,8 +65,7 @@ const Animals = () => {
         <WidgetPages
           getStart={getStart}
           getEnd={getEnd}
-          getNext={getNext}
-          getPrev={getPrev}
+          paginate={paginate}
           dataPages={animalsData}
         />
         <PicturesContent
@@ -99,216 +83,3 @@ const Animals = () => {
 }
 
 export default Animals
-
-
-
-
-
-
-
-// import React, { use, useEffect, useState } from "react";
-// import { useNavigate, useLocation } from 'react-router-dom';
-
-// import { useAnimalStore } from '../../../../store/store'
-// import { useTest } from '../../../../utils/useTest.ts'
-
-// import { Spinner } from "../../../spinner/Spinner.tsx";
-// import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
-
-// import { goBack, animalsForward, goStart, animalsEnd, animalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
-// import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx"
-
-// import styles from '../styles/mainStylesPictures.module.scss'
-
-// import useHttp from '../../../../hooks/http.hook.ts';
-
-// const pathAnimals: string = '/portfolio/animals/'
-
-
-// const Animals = () => {
-//   const animals = useAnimalStore(state => state.animals)
-//   console.log(animals)
-//   const loadingTest = useAnimalStore(state => state.loadingTest)
-//   // const setVisiblePage = useAnimalStore(state => state.setVisiblePage)
-
-//   const setVisibleDisplay = useAnimalStore(state => state.setVisibleDisplay)
-
-//   const getAnimalsFirstPage = useAnimalStore(state => state.getAnimalsFirstPage)
-//   const getAnimalsSecondPage = useAnimalStore(state => state.getAnimalsSecondPage)
-//   const getAnimalsThirdPage = useAnimalStore(state => state.getAnimalsThirdPage)
-//   const getAnimalsFourthPage = useAnimalStore(state => state.getAnimalsFourthPage)
-//   const getAnimalsFifthPage = useAnimalStore(state => state.getAnimalsFifthPage)
-//   const getAnimalsSixthPage = useAnimalStore(state => state.getAnimalsSixthPage)
-
-//   const getPrevAnimals = useAnimalStore(state => state.getPrevAnimals)
-//   const getNextAnimals = useAnimalStore(state => state.getNextAnimals)
-
-//   const navigate = useNavigate()
-//   const location = useLocation()
-
-//   const pathName: string = location.pathname.slice(0, 19)
-//   const idTest: number = +location.pathname.slice(19, 21)
-
-//   // Добавить в useEffect вызов запроса
-//   useEffect(() => {
-//     getAnimalsFirstPage()
-//   }, [])
-
-
-//   const handleClickBack = () => {
-//     goBack(`${pathAnimals}1`, getAnimalsFirstPage, getPrevAnimals, setVisibleDisplay, navigate, pathName, idTest)
-//     getPrevAnimals()
-//   }
-
-//   const handleClickForward = () => {
-//     animalsForward(`${pathAnimals}6`, getNextAnimals, setVisibleDisplay, navigate, pathName, idTest, getAnimalsSixthPage)
-//     getNextAnimals()
-//   }
-
-//   const handleClickStart = () => {
-//     goStart(`${pathAnimals}1`, getAnimalsFirstPage, navigate)
-//   }
-
-//   const handleClickEnd = () => {
-//     animalsEnd(`${pathAnimals}6`, getAnimalsSixthPage, navigate)
-//   }
-
-//   const animalsData = animalsDataPages(pathAnimals, styles.listItems, getAnimalsFirstPage, getAnimalsSecondPage, getAnimalsThirdPage, getAnimalsFourthPage, getAnimalsFifthPage, getAnimalsSixthPage)
-
-//   const Content = () => {
-//     return (
-//       <>
-//         <WidgetPages
-//           handleClickStart={handleClickStart}
-//           handleClickBack={handleClickBack}
-//           handleClickForward={handleClickForward}
-//           handleClickEnd={handleClickEnd}
-//           dataPages={animalsData}
-//         />
-//         <PicturesContent
-//           displayedData={animals}
-//           stylesContainer={styles.container}
-//           stylesWrapperImg={styles.wrapperImg}
-//         />
-//       </>
-//     )
-//   }
-
-//   return (
-//     loadingTest === 'loading' ? <Spinner /> : <Content />
-//   )
-// }
-
-// export default Animals
-
-
-
-
-
-
-
-
-
-
-// import React, { use, useState } from "react";
-// import { useNavigate, useLocation } from 'react-router-dom';
-
-// import { useAnimalStore } from '../../../../store/store'
-// import { useTest } from '../../../../utils/useTest.ts'
-
-// import { Spinner } from "../../../spinner/Spinner.tsx";
-// import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
-
-// import { callFuncLoading, goBack, animalsForward, goStart, animalsEnd, animalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
-// import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx"
-
-// import styles from '../styles/mainStylesPictures.module.scss'
-
-// import useHttp from '../../../../hooks/http.hook.ts';
-
-// const pathAnimals: string = '/portfolio/animals/'
-
-
-// const Animals = () => {
-//   const animals = useAnimalStore(state => state.animals)
-//   const response = useAnimalStore(state => state.response)
-//   const getAnimals = useAnimalStore(state => state.getAnimals)
-//   const loadingTest = useAnimalStore(state => state.loadingTest)
-//   const setLoadingLoading = useAnimalStore(state => state.setLoadingLoading)
-//   const setLoadingConfirmed = useAnimalStore(state => state.setLoadingConfirmed)
-
-//   console.log(animals)
-//   console.log(response)
-//   console.log(loadingTest)
-
-//   const [loading, setLoading] = useState(false)
-//   const animalDisplayedData = useAnimalStore(state => state.animalDisplayedData);
-
-//   const setPrevPage = useAnimalStore(state => state.setPrevPage)
-//   const setNextPage = useAnimalStore(state => state.setNextPage)
-//   const setVisibleDisplay = useAnimalStore(state => state.setVisibleDisplay)
-
-//   const setOnePage = useAnimalStore(state => state.setOnePage)
-//   const setTwoPage = useAnimalStore(state => state.setTwoPage)
-//   const setThreePage = useAnimalStore(state => state.setThreePage)
-//   const setFourPage = useAnimalStore(state => state.setFourPage)
-//   const setFivePage = useAnimalStore(state => state.setFivePage)
-//   const setSixPage = useAnimalStore(state => state.setSixPage)
-
-//   const navigate = useNavigate()
-//   const location = useLocation()
-
-//   const pathName: string = location.pathname.slice(0, 19)
-//   const idTest: number = +location.pathname.slice(19, 21)
-
-
-//   const handleClickBack = () => {
-//     setLoading(true)
-//     if (response === 200) {
-//       setLoadingLoading()
-//       goBack(setLoading, `${pathAnimals}1`, setOnePage, setPrevPage, setVisibleDisplay, navigate, pathName, idTest)
-//       getAnimals()
-//       setLoadingConfirmed()
-//     }
-//   }
-
-//   const handleClickForward = () => {
-//     animalsForward(setLoading, `${pathAnimals}6`, setNextPage, setVisibleDisplay, navigate, pathName, idTest, setSixPage)
-//   }
-
-//   const handleClickStart = () => {
-//     goStart(setLoading, `${pathAnimals}1`, setOnePage, navigate)
-//   }
-
-//   const handleClickEnd = () => {
-//     animalsEnd(setLoading, `${pathAnimals}6`, setSixPage, navigate)
-//   }
-
-//   const animalsData = animalsDataPages(pathAnimals, styles.listItems, setOnePage, setTwoPage, setThreePage, setFourPage, setFivePage, setSixPage)
-
-//   const Content = () => {
-//     return (
-//       <>
-//         <WidgetPages
-//           handleClickStart={handleClickStart}
-//           handleClickBack={handleClickBack}
-//           handleClickForward={handleClickForward}
-//           handleClickEnd={handleClickEnd}
-//           callFuncLoading={() => callFuncLoading(setLoading)}
-//           dataPages={animalsData}
-//         />
-//         <PicturesContent
-//           displayedData={animalDisplayedData}
-//           stylesContainer={styles.container}
-//           stylesWrapperImg={styles.wrapperImg}
-//         />
-//       </>
-//     )
-//   }
-
-//   return (
-//     loading ? <Spinner /> : <Content />
-//   )
-// }
-
-// export default Animals

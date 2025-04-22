@@ -17,44 +17,42 @@ const pathPeopleAndAnimals: string = '/portfolio/people_and_animals/'
 
 const PeopleAndAnimals = () => {
   const peopleAndAnimals = useAnimalStore(state => state.peopleAndAnimals)
+
   const loading = useAnimalStore(state => state.loading)
   const offset = useAnimalStore(state => state.offset)
   const getAnimals = useAnimalStore(state => state.getAnimals)
 
   const navigate = useNavigate()
   const location = useLocation()
-  const idTest: number = +location.pathname.slice(30, 31)
+
+  const pageId: number = +location.pathname.slice(30, 31)
 
   useEffect(() => {
-    navigate(`${pathPeopleAndAnimals}1`)
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+    navigate(`${pathPeopleAndAnimals}${pageId}`)
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, offset, pageId)
   }, [])
 
-  const getPrev = () => {
-    if (offset === 0) {
-      getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
-      navigate(`${pathPeopleAndAnimals}1`)
-    }
-  }
+  const paginate = (direction: string) => {
+    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(0, offset + 9)
+    const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(1, pageId + 1)
 
-  const getNext = () => {
-    if (offset >= 0) {
-      getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
-      navigate(`${pathPeopleAndAnimals}1`)
-    }
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, newOffset, newPage)
+    navigate(`${pathPeopleAndAnimals}${newPage}`)
   }
 
   const getStart = () => {
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1)
     navigate(`${pathPeopleAndAnimals}1`)
   }
 
   const getEnd = () => {
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0)
+    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1)
     navigate(`${pathPeopleAndAnimals}1`)
   }
 
-  const peopleAndAnimalsData = peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems, () => getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0))
+  const peopleAndAnimalsData =
+    peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems,
+      () => getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1))
 
   const Content = () => {
     return (
@@ -62,8 +60,7 @@ const PeopleAndAnimals = () => {
         <WidgetPages
           getStart={getStart}
           getEnd={getEnd}
-          getNext={getNext}
-          getPrev={getPrev}
+          paginate={paginate}
           dataPages={peopleAndAnimalsData}
         />
         <PicturesContent
