@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useAnimalStore } from '../../../../store/store'
+import { useAnimalStore, useStore } from '../../../../store/store'
 
 import { urlStillLife } from "../../../../utils/useTest.ts";
 
@@ -17,11 +17,11 @@ import styles from '../styles/mainStylesPictures.module.scss'
 const pathStillLife = '/portfolio/still_life/'
 
 const StillLife = () => {
-  const stillLife = useAnimalStore(state => state.stillLife)
+  const stillLife = useStore(state => state.stillLife)
 
-  const loading = useAnimalStore(state => state.loading)
-  const offset = useAnimalStore(state => state.offset)
-  const getAnimals = useAnimalStore(state => state.getAnimals)
+  const loading = useStore(state => state.loading)
+  const offsetStillLife = useStore(state => state.offsetStillLife)
+  const getData = useStore(state => state.getData)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -30,31 +30,31 @@ const StillLife = () => {
 
   useEffect(() => {
     navigate(`${pathStillLife}${pageId}`)
-    getAnimals('stillLife', urlStillLife, offset, pageId)
+    getData('stillLife', urlStillLife, 'offsetStillLife', offsetStillLife, 'pageStillLife', pageId)
   }, [])
 
   const paginate = (direction: string) => {
-    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(9, offset + 9)
+    const newOffset = direction === 'prev' ? Math.max(0, offsetStillLife - 9) : Math.min(9, offsetStillLife + 9)
     const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(2, pageId + 1)
 
-    getAnimals('stillLife', urlStillLife, newOffset, newPage)
+    getData('stillLife', urlStillLife, 'offsetStillLife', newOffset, 'pageStillLife', newPage)
     navigate(`${pathStillLife}${newPage}`)
   }
 
   const getStart = () => {
-    getAnimals('stillLife', urlStillLife, 0, 1)
+    getData('stillLife', urlStillLife, 'offsetStillLife', 0, 'pageStillLife', 1)
     navigate(`${pathStillLife}1`)
   }
 
   const getEnd = () => {
-    getAnimals('stillLife', urlStillLife, 9, 2)
+    getData('stillLife', urlStillLife, 'offsetStillLife', 9, 'pageStillLife', 2)
     navigate(`${pathStillLife}2`)
   }
 
   const stillLifeData =
     stillLifeDataPages(pathStillLife, styles.listItems,
-      () => getAnimals('stillLife', urlStillLife, 0),
-      () => getAnimals('stillLife', urlStillLife, 9))
+      () => getData('stillLife', urlStillLife, 'offsetStillLife', 0, 'pageStillLife', 1),
+      () => getData('stillLife', urlStillLife, 'offsetStillLife', 9, 'pageStillLife', 2))
 
   const Content = () => {
     return (

@@ -22,16 +22,100 @@ import {
 
 interface TypesAnimalsStore {
   animals: TypesDataWorks[]
+  loading: string
+  getAnimals: (url: string, offset: number, page?: number) => void
+  offsetAnimals: number
+  pageAnimals: number
+}
+
+export const useAnimalStore = create<TypesAnimalsStore>()(
+  devtools(
+ persist(
+  immer(
+    (set) => ({
+      animals: [],
+      loading: 'waiting',
+      offsetAnimals: 0,
+      pageAnimals: 0,
+      getAnimals: async (url, offsetAnimals, page?: number) => {
+        set({loading: 'loading'})
+        try {
+          const res = await axios.get(`${url}&offset=${offsetAnimals}`)
+          set(({animals: res.data._embedded.items.map(_transform), loading: 'confirmed', offsetAnimals, pageAnimals: page}))
+        } catch(e) {
+          set({loading: 'error'})
+          throw(e)
+        }
+        },
+    }),
+  ), {
+    name: 'animal-storage',
+    storage: createJSONStorage(() => localStorage)
+  }
+ )
+  )
+);
+
+
+
+
+interface TypesFlowersStore {
+  flowers: TypesDataWorks[]
+  loading: string
+  getFlowers: (url: string, offset: number, page?: number) => void
+  offsetFlowers: number
+  pageFlowers: number
+}
+
+export const useFlowersStore = create<TypesFlowersStore>()(
+  devtools(
+ persist(
+  immer(
+    (set) => ({
+      flowers: [],
+      loading: 'waiting',
+      offsetFlowers: 0,
+      pageFlowers: 0,
+      getFlowers: async (url, offsetFlowers, page?: number) => {
+        set({loading: 'loading'})
+        try {
+          const res = await axios.get(`${url}&offset=${offsetFlowers}`)
+          set(({flowers: res.data._embedded.items.map(_transform), loading: 'confirmed', offsetFlowers, pageFlowers: page}))
+        } catch(e) {
+          set({loading: 'error'})
+          throw(e)
+        }
+        },
+    }),
+  ), {
+    name: 'flowers-storage',
+    storage: createJSONStorage(() => localStorage)
+  }
+ )
+  )
+);
+
+
+
+
+interface TypesStore {
+  animals: TypesDataWorks[]
   flowers: TypesDataWorks[]
   stillLife: TypesDataWorks[]
   peopleAndAnimals: TypesDataWorks[]
   loading: string
-  getAnimals: (category: string, url: string, offset: number, page?: number) => void
-  offset: number
-  page: number
+  getData: (cateogry: string, url: string, offsetName: string, offset: number, pageName: string, page?: number) => void
+  offsetAnimals: number
+  offsetFlowers: number
+  offsetStillLife: number
+  offsetPeopleAndAnimals: number
+  pageAnimals: number
+  pageFlowers: number
+  pageStillLife: number
+  pagePeopleAndAnimals: number
 }
 
-export const useAnimalStore = create<TypesAnimalsStore>()(
+export const useStore = create<TypesStore>()(
   devtools(
  persist(
   immer(
@@ -41,27 +125,32 @@ export const useAnimalStore = create<TypesAnimalsStore>()(
       stillLife: [],
       peopleAndAnimals: [],
       loading: 'waiting',
-      offset: 0,
-      page: 1,
-      getAnimals: async (category, url, offset, page?: number) => {
+      offsetAnimals: 0,
+      offsetFlowers: 0,
+      offsetStillLife: 0,
+      offsetPeopleAndAnimals: 0,
+      pageAnimals: 1,
+      pageFlowers: 1,
+      pageStillLife: 1,
+      pagePeopleAndAnimals: 1,
+      getData: async (category, url, offsetName, offset, pageName, page) => {
         set({loading: 'loading'})
         try {
           const res = await axios.get(`${url}&offset=${offset}`)
-          set(({[category]: res.data._embedded.items.map(_transform), loading: 'confirmed', offset, page}))
+          set(({[category]: res.data._embedded.items.map(_transform), loading: 'confirmed', [offsetName]: offset, [pageName]: page}))
         } catch(e) {
           set({loading: 'error'})
           throw(e)
         }
-        }
+        },
     }),
-  ),  {
-    name: 'animal-storage',
+  ), {
+    name: 'main-storage',
     storage: createJSONStorage(() => localStorage)
   }
  )
   )
 );
-
 
 
 
@@ -208,83 +297,83 @@ export const usePeopleAndAnimalsStore = create<TypesPeopleAndAnimalsStore>()(
   )
 );
 
-// Cтор Flowers
-interface TypesFlowersStore {
-  flowers: TypesDataWorks[]
-  loadingTest: string
-  getFlowersFirstPage: () => void
-  getFlowersSecondPage: () => void
-  getFlowersThirdPage: () => void
-  getFlowersFourthPage: () => void
-  getPrevFlowers: () => void
-  getNextFlowers: () => void
+// // Cтор Flowers
+// interface TypesFlowersStore {
+//   flowers: TypesDataWorks[]
+//   loadingTest: string
+//   getFlowersFirstPage: () => void
+//   getFlowersSecondPage: () => void
+//   getFlowersThirdPage: () => void
+//   getFlowersFourthPage: () => void
+//   getPrevFlowers: () => void
+//   getNextFlowers: () => void
 
-  idStart: number
-  idEnd: number
-  paramsId: number
-  setVisibleDisplay: () => void
-}
+//   idStart: number
+//   idEnd: number
+//   paramsId: number
+//   setVisibleDisplay: () => void
+// }
 
-export const useFlowersStore = create<TypesFlowersStore>()(
-  devtools(
- persist(
-  immer(
-    (set) => ({
-      flowers: [],
-      loadingTest: 'waiting',
-      idStart: 0,
-      idEnd: 9,
-      paramsId: 0,
+// export const useFlowersStore = create<TypesFlowersStore>()(
+//   devtools(
+//  persist(
+//   immer(
+//     (set) => ({
+//       flowers: [],
+//       loadingTest: 'waiting',
+//       idStart: 0,
+//       idEnd: 9,
+//       paramsId: 0,
 
-      getFlowersFirstPage: () => getData(set, 0, 9, 1, urlFlowers, 'flowers'),
-      getFlowersSecondPage: () => getData(set, 9, 18, 2, urlFlowers, 'flowers'),
-      getFlowersThirdPage: () => getData(set, 18, 27, 3, urlFlowers, 'flowers'),
-      getFlowersFourthPage: () => getData(set, 27, 36, 4, urlFlowers, 'flowers'),
+//       getFlowersFirstPage: () => getData(set, 0, 9, 1, urlFlowers, 'flowers'),
+//       getFlowersSecondPage: () => getData(set, 9, 18, 2, urlFlowers, 'flowers'),
+//       getFlowersThirdPage: () => getData(set, 18, 27, 3, urlFlowers, 'flowers'),
+//       getFlowersFourthPage: () => getData(set, 27, 36, 4, urlFlowers, 'flowers'),
 
-      getPrevFlowers: async () => {
-        set({loadingTest: 'loading'})
-        set((state) => ({
-          idStart: state.idStart - 9,
-          idEnd: state.idEnd - 9,
-          paramsId: state.paramsId - 1
-        }))
-        try {
-          const res = await axios.get(urlFlowers)
-          set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
-        } catch(e) {
-          set({loadingTest: 'error'})
-          throw(e)
-        }
-        },
+//       getPrevFlowers: async () => {
+//         set({loadingTest: 'loading'})
+//         set((state) => ({
+//           idStart: state.idStart - 9,
+//           idEnd: state.idEnd - 9,
+//           paramsId: state.paramsId - 1
+//         }))
+//         try {
+//           const res = await axios.get(urlFlowers)
+//           set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+//         } catch(e) {
+//           set({loadingTest: 'error'})
+//           throw(e)
+//         }
+//         },
 
-      getNextFlowers: async () => {
-        set({loadingTest: 'loading'})
-        set((state) => ({
-          idStart: state.idStart + 9,
-          idEnd: state.idEnd + 9,
-          paramsId: state.paramsId + 1
-        }))
-        try {
-          const res = await axios.get(urlFlowers)
-          set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
-        } catch(e) {
-          set({loadingTest: 'error'})
-          throw(e)
-        }
-        },
+//       getNextFlowers: async () => {
+//         set({loadingTest: 'loading'})
+//         set((state) => ({
+//           idStart: state.idStart + 9,
+//           idEnd: state.idEnd + 9,
+//           paramsId: state.paramsId + 1
+//         }))
+//         try {
+//           const res = await axios.get(urlFlowers)
+//           set(state => ({flowers: res.data._embedded.items.map(_transform).slice(state.idStart, state.idEnd), loadingTest: 'confirmed'}))
+//         } catch(e) {
+//           set({loadingTest: 'error'})
+//           throw(e)
+//         }
+//         },
 
-      setVisibleDisplay: () => 
-        set((state) => ({
-          flowers: state.flowers.filter(item => item.id >= state.idStart && item.id < state.idEnd),
-        }))
-    }),
-  ),  {
-    name: 'flowers-storage',
-    storage: createJSONStorage(() => localStorage)
-  }
- )
-  )
-);
+//       setVisibleDisplay: () => 
+//         set((state) => ({
+//           flowers: state.flowers.filter(item => item.id >= state.idStart && item.id < state.idEnd),
+//         }))
+//     }),
+//   ),  {
+//     name: 'flowers-storage',
+//     storage: createJSONStorage(() => localStorage)
+//   }
+//  )
+//   )
+// );
 
 // Стор StillLife
 interface TypesStillLifeStore {

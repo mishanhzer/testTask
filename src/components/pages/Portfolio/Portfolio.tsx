@@ -3,21 +3,26 @@ import React, { Fragment } from "react";
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
 import { PortfolioItem } from "./PortfolioItem.tsx";
 
-import { useAnimalStore, useFlowersStore, useStillLifeStore } from '../../../store/store.ts'
+import { useAnimalStore, useFlowersStore, useStillLifeStore, useStore } from '../../../store/store.ts'
 
 import { PortfolioAnimals, PortfolioFlowers, PortfolioStillLife, PortfolioPeopleAndAnimals } from "../../../assets/images/Images";
 import { descriptionAnimals, descriptionFlowers, descriptionStillLife } from './descriptionGroupsPicture.ts'
 
 const Portfolio = () => {
+  const pageAnimals = useStore(state => state.pageAnimals)
+  const pageFlowers = useStore(state => state.pageFlowers)
+  const pageStillLife = useStore(state => state.pageStillLife)
+  const pagePeopleAndAnimals = useStore(state => state.pagePeopleAndAnimals)
+
   const paramsId = useAnimalStore(state => state.paramsId)
   const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
   const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
 
   const dataPortfolioItem = [
-    { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: `/portfolio/animals/${paramsId}`, id: 0 },
-    { Component: <PortfolioFlowers />, headText: 'Flowers', text: descriptionFlowers, path: `/portfolio/flowers/${paramdFlowersId}`, id: 1 },
-    { Component: <PortfolioStillLife />, headText: 'StillLife', text: descriptionStillLife, path: `/portfolio/still_life/${paramsStillLifeId}`, id: 2 },
-    { Component: <PortfolioPeopleAndAnimals />, headText: 'PeopleAndAnimals', text: descriptionStillLife, path: `/portfolio/people_and_animals/1`, id: 3 }
+    { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: `/portfolio/animals/${pageAnimals}`, id: 0 },
+    { Component: <PortfolioFlowers />, headText: 'Flowers', text: descriptionFlowers, path: `/portfolio/flowers/${pageFlowers}`, id: 1 },
+    { Component: <PortfolioStillLife />, headText: 'StillLife', text: descriptionStillLife, path: `/portfolio/still_life/${pageStillLife}`, id: 2 },
+    { Component: <PortfolioPeopleAndAnimals />, headText: 'PeopleAndAnimals', text: descriptionStillLife, path: `/portfolio/people_and_animals/${pagePeopleAndAnimals}`, id: 3 }
   ]
 
   return (

@@ -5,13 +5,15 @@ import classNames from 'classnames';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 
-import { useAnimalStore, useFlowersStore, useStillLifeStore } from '../../store/store'
+import { useAnimalStore, useFlowersStore, useStillLifeStore, useStore } from '../../store/store'
 
 import 'reactjs-popup/dist/index.css';
 
 import { arrowPages } from '../../assets/logo/logo';
 
 import styles from './styles/navigateMenu.module.scss'
+
+import { urlAnimals, urlFlowers, urlStillLife } from '../../utils/useTest';
 
 interface TypesListItem {
   name: string
@@ -25,10 +27,20 @@ const initialValueRef = {
 }
 
 export const PopupItem = ({ name, path }: TypesListItem) => {
-  const page = useAnimalStore(state => state.page)
-  // const paramsId = useAnimalStore(state => state.paramsId)
-  // const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
-  const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
+
+  const getData = useStore(state => state.getData)
+  const offsetAnimals = useStore(state => state.offsetAnimals)
+  const pageAnimals = useStore(state => state.pageAnimals)
+
+  const offsetFlowers = useStore(state => state.offsetFlowers)
+  const pageFlowers = useStore(state => state.pageFlowers)
+
+  const offsetStillLife = useStore(state => state.offsetStillLife)
+  const pageStillLife = useStore(state => state.pageStillLife)
+
+  const offsetPeopleAndAnimals = useStore(state => state.offsetPeopleAndAnimals)
+  const pagePeopleAndAnimals = useStore(state => state.pagePeopleAndAnimals)
+
   const ref = useRef<PopupActions>(initialValueRef);
 
   const handleClick = () => {
@@ -40,10 +52,13 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
   }
 
   const dataPortfolioLinks = [
-    { name: 'Animals', path: `/portfolio/animals/${page}`, class: styles.stylesPortfolioLinks, func: handleClick },
-    { name: 'Flowers', path: `/portfolio/flowers/${page}`, class: styles.stylesPortfolioLinks, func: handleClick },
-    { name: 'Still life', path: `/portfolio/still_life/${paramsStillLifeId}`, class: styles.stylesPortfolioLinks, func: handleClick },
-    { name: 'People and Animals', path: '/portfolio/people_and_animals/1', class: styles.stylesPortfolioLinks, func: handleClick },
+    // { name: 'Animals', path: `/portfolio/animals/${pageAnimals}`, class: styles.stylesPortfolioLinks, func: () => { getData('animals', urlAnimals, 'offsetAnimals', offsetAnimals, 'pageAnimals', pageAnimals); handleClick() } },
+    // { name: 'Flowers', path: `/portfolio/flowers/${pageFlowers}`, class: styles.stylesPortfolioLinks, func: () => { getData('flowers', urlFlowers, 'offsetFlowers', offsetFlowers, 'pageFlowers', pageFlowers); handleClick() } },
+    // { name: 'Still life', path: `/portfolio/still_life/${pageStillLife}`, class: styles.stylesPortfolioLinks, func: () => { getData('stillLife', urlStillLife, 'offsetStillLife', offsetStillLife, 'pageStillLife', pageStillLife); handleClick() } },
+    { name: 'Animals', path: `/portfolio/animals/${pageAnimals === 0 ? 1 : pageAnimals}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Flowers', path: `/portfolio/flowers/${pageFlowers === 0 ? 1 : pageFlowers}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'Still life', path: `/portfolio/still_life/${pageStillLife === 0 ? 1 : pageStillLife}`, class: styles.stylesPortfolioLinks, func: handleClick },
+    { name: 'People and Animals', path: `/portfolio/people_and_animals/${pagePeopleAndAnimals === 0 ? 1 : pagePeopleAndAnimals}`, class: styles.stylesPortfolioLinks, func: handleClick },
   ]
 
   const PortoflioLinks = () => {

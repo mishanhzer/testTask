@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAnimalStore } from '../../../../store/store'
+import { useAnimalStore, useStore } from '../../../../store/store'
 import { urlPeopleAndAnimals } from "../../../../utils/useTest.ts";
 
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
@@ -16,11 +16,11 @@ import styles from '../styles/mainStylesPictures.module.scss'
 const pathPeopleAndAnimals: string = '/portfolio/people_and_animals/'
 
 const PeopleAndAnimals = () => {
-  const peopleAndAnimals = useAnimalStore(state => state.peopleAndAnimals)
+  const peopleAndAnimals = useStore(state => state.peopleAndAnimals)
 
-  const loading = useAnimalStore(state => state.loading)
-  const offset = useAnimalStore(state => state.offset)
-  const getAnimals = useAnimalStore(state => state.getAnimals)
+  const loading = useStore(state => state.loading)
+  const offsetPeopleAndAnimals = useStore(state => state.offsetPeopleAndAnimals)
+  const getData = useStore(state => state.getData)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -29,30 +29,30 @@ const PeopleAndAnimals = () => {
 
   useEffect(() => {
     navigate(`${pathPeopleAndAnimals}${pageId}`)
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, offset, pageId)
+    getData('peopleAndAnimals', urlPeopleAndAnimals, 'offsetPeopleAndAnimals', offsetPeopleAndAnimals, 'pagePeopleAndAnimals', pageId)
   }, [])
 
   const paginate = (direction: string) => {
-    const newOffset = direction === 'prev' ? Math.max(0, offset - 9) : Math.min(0, offset + 9)
+    const newOffset = direction === 'prev' ? Math.max(0, offsetPeopleAndAnimals - 9) : Math.min(0, offsetPeopleAndAnimals + 9)
     const newPage = direction === 'prev' ? Math.max(1, pageId - 1) : Math.min(1, pageId + 1)
 
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, newOffset, newPage)
+    getData('peopleAndAnimals', urlPeopleAndAnimals, 'offsetPeopleAndAnimals', newOffset, 'pagePeopleAndAnimals', newPage)
     navigate(`${pathPeopleAndAnimals}${newPage}`)
   }
 
   const getStart = () => {
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1)
+    getData('peopleAndAnimals', urlPeopleAndAnimals, 'offsetPeopleAndAnimals', 0, 'pagePeopleAndAnimals', 1)
     navigate(`${pathPeopleAndAnimals}1`)
   }
 
   const getEnd = () => {
-    getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1)
+    getData('peopleAndAnimals', urlPeopleAndAnimals, 'offsetPeopleAndAnimals', 0, 'pagePeopleAndAnimals', 1)
     navigate(`${pathPeopleAndAnimals}1`)
   }
 
   const peopleAndAnimalsData =
     peopleAndAnimalsDataPages(pathPeopleAndAnimals, styles.listItems,
-      () => getAnimals('peopleAndAnimals', urlPeopleAndAnimals, 0, 1))
+      () => getData('peopleAndAnimals', urlPeopleAndAnimals, 'offsetPeopleAndAnimals', 0, 'pagePeopleAndAnimals', 1))
 
   const Content = () => {
     return (
