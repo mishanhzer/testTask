@@ -23,7 +23,7 @@ const Flowers = () => {
   const getData = useStore(state => state.getData)
 
   const navigate = useNavigate()
-  const location = useLocation()
+  const location = useLocation() as { pathname: string }
 
   const pageId: number = +location.pathname.slice(19, 21)
 

@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
 import { PortfolioItem } from "./PortfolioItem.tsx";
 
-import { useAnimalStore, useFlowersStore, useStillLifeStore, useStore } from '../../../store/store.ts'
+import { useStore } from '../../../store/store.ts'
 
 import { PortfolioAnimals, PortfolioFlowers, PortfolioStillLife, PortfolioPeopleAndAnimals } from "../../../assets/images/Images";
 import { descriptionAnimals, descriptionFlowers, descriptionStillLife } from './descriptionGroupsPicture.ts'
@@ -13,10 +13,6 @@ const Portfolio = () => {
   const pageFlowers = useStore(state => state.pageFlowers)
   const pageStillLife = useStore(state => state.pageStillLife)
   const pagePeopleAndAnimals = useStore(state => state.pagePeopleAndAnimals)
-
-  const paramsId = useAnimalStore(state => state.paramsId)
-  const paramdFlowersId = useFlowersStore(state => state.paramsFlowersId)
-  const paramsStillLifeId = useStillLifeStore(state => state.paramsStillLifeId)
 
   const dataPortfolioItem = [
     { Component: <PortfolioAnimals />, headText: 'Animals', text: descriptionAnimals, path: `/portfolio/animals/${pageAnimals}`, id: 0 },
