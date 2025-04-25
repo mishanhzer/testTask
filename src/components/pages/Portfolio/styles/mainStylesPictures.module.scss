@@ -22,11 +22,23 @@
 }
 
 .overlay {
-  @apply fixed flex top-0 left-0 right-0 bottom-0 bg-black bg-opacity-[0.6] z-[5] w-screen h-screen
+  @apply fixed flex top-0 left-0 right-0 bottom-0 bg-black bg-opacity-[0.6] z-[5] w-screen h-screen 
 }
 
 .mainWrapperStyle {
-  @apply mx-auto relative min-w-[400px] max-h-[600px] z-[10]
+  @apply min-w-[400px] min-h-[300px] max-h-[600px] z-[10] absolute scale-[1.2] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] 
+}
+
+// .mainWrapperStyle {
+//   @apply min-w-[400px] min-h-[300px] max-h-[600px] z-[10] relative scale-[1.2] 
+// }
+
+.vertical {
+  @apply absolute top-[35%]
+}
+
+.gorizontal {
+  @apply absolute top-[50%]
 }
 
 .close {

@@ -41,6 +41,7 @@ export const PicturesContent = ({ stylesContainer, displayedData, stylesWrapperI
             className={`${stylesWrapperImg}`} data-name={item.name}>
             {pictureName === item.name ?
               <ModalPortal
+                position={pictureName}
                 handleClose={handleClose}
                 source={item.file}
                 alt={item.name} /> : null}
