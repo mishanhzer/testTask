@@ -4,28 +4,29 @@ import { persist, devtools, createJSONStorage } from "zustand/middleware"; // д
 
 import axios from "axios";
 
-import { getData, urlFlowers } from "../utils/useTest";
-
 import {
   _transform,
 } from '../utils/useTest'
 
 import {
   TypesDataWorks,
-} from "../assets/images/AllWorks"
+} from "../assets/images/Images"
 
 
 interface TypesStore {
+  works: TypesDataWorks[]
   animals: TypesDataWorks[]
   flowers: TypesDataWorks[]
   stillLife: TypesDataWorks[]
   peopleAndAnimals: TypesDataWorks[]
   loading: string
-  getData: (cateogry: string, url: string, offsetName: string, offset: number, pageName: string, page?: number) => void
+  getData: (category: string, url: string, offsetName: string, offset: number, pageName: string, page?: number) => void
+  offsetAllWorks: number
   offsetAnimals: number
   offsetFlowers: number
   offsetStillLife: number
   offsetPeopleAndAnimals: number
+  pageAllWorks: number
   pageAnimals: number
   pageFlowers: number
   pageStillLife: number
@@ -37,20 +38,23 @@ export const useStore = create<TypesStore>()(
  persist(
   immer(
     (set) => ({
+      works: [],
       animals: [],
       flowers: [],
       stillLife: [],
       peopleAndAnimals: [],
       loading: 'waiting',
+      offsetAllWorks: 0,
       offsetAnimals: 0,
       offsetFlowers: 0,
       offsetStillLife: 0,
       offsetPeopleAndAnimals: 0,
+      pageAllWorks: 0,
       pageAnimals: 1,
       pageFlowers: 1,
       pageStillLife: 1,
       pagePeopleAndAnimals: 1,
-      getData: async (category, url, offsetName, offset = 0, pageName, page = 1) => {
+      getData: async (category, url, offsetName, offset, pageName, page) => {
         set({loading: 'loading'})
         try {
           const res = await axios.get(`${url}&offset=${offset}`)

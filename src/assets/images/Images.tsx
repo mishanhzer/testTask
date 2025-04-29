@@ -9,6 +9,19 @@ import portfolioPeopleAndAnimals from './portfolioImages/portfolioPeopleAndAnima
 
 export { mainPicture }
 
+interface TypesSizes {
+  name: string
+  url: string
+}
+
+export interface TypesDataWorks {
+  file: string
+  name: string
+  path: string
+  preview: string
+  sizes: TypesSizes[]
+}
+
 interface TypesImagePortfolio {
   source: string
   alt: string

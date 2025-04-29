@@ -17,6 +17,7 @@ import { urlAnimals } from "../../../../utils/useTest.ts";
 
 const Animals = () => {
   const animals = useStore(state => state.animals)
+  console.log(animals)
 
   const loading = useStore(state => state.loading)
   const offsetAnimals = useStore(state => state.offsetAnimals)
