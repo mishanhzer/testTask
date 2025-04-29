@@ -50,7 +50,7 @@ export const useStore = create<TypesStore>()(
       pageFlowers: 1,
       pageStillLife: 1,
       pagePeopleAndAnimals: 1,
-      getData: async (category, url, offsetName, offset, pageName, page) => {
+      getData: async (category, url, offsetName, offset = 0, pageName, page = 1) => {
         set({loading: 'loading'})
         try {
           const res = await axios.get(`${url}&offset=${offset}`)

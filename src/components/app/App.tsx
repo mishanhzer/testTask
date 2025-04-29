@@ -16,13 +16,14 @@ const Flowers = lazy(() => import('../pages/Portfolio/Flowers/Flowers.tsx'));
 const StillLife = lazy(() => import('../pages/Portfolio/StillLife/StillLife.tsx'));
 const PeopleAndAnimals = lazy(() => import('../pages/Portfolio/PeopleAndAnimals/PeopleAndAnimals.tsx'));
 const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
+const About = lazy(() => import('../pages/About/About.tsx'))
 
 import "./app.css";
 
 const App = () => {
   return (
     <Router>
-      <div className={`w-full px-10`}>
+      <div className={`w-full`}>
         <AppHeader />
         <NavigateMenu />
         <Suspense fallback={<Spinner />}>
@@ -41,6 +42,7 @@ const App = () => {
               <Route path=':id' element={<StillLife />} />
             </Route>
             <Route path='/portfolio/people_and_animals/1' element={<PeopleAndAnimals />} />
+            <Route path='/about' element={<About />} />
           </Routes>
         </Suspense>
       </div>
