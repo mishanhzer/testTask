@@ -18,6 +18,7 @@ const PeopleAndAnimals = lazy(() => import('../pages/Portfolio/PeopleAndAnimals/
 const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
 const About = lazy(() => import('../pages/About/About.tsx'))
 const Shop = lazy(() => import('../pages/Shop/Shop.tsx'))
+const ShopAnimals = lazy(() => import('../pages/Shop/categories/ShopAnimals/ShopAnimals.tsx'))
 
 import "./app.css";
 
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path='/contact' element={<ContactMeAnt />} />
             <Route path='/home' element={<Home />} />
+
             <Route path='/portfolio' element={<Portfolio />} />
             <Route path='/portfolio/animals' element={<Animals />}>
               <Route path=':id' element={<Animals />} />
@@ -43,8 +45,12 @@ const App = () => {
               <Route path=':id' element={<StillLife />} />
             </Route>
             <Route path='/portfolio/people_and_animals/1' element={<PeopleAndAnimals />} />
+
             <Route path='/about' element={<About />} />
             <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/shop_animals' element={<ShopAnimals />}>
+
+            </Route>
           </Routes>
         </Suspense>
       </div>
