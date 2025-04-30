@@ -12,6 +12,8 @@ export const urlFlowers = `${_apiUrl}${linkFlowers}&limit=9`
 export const urlStillLife = `${_apiUrl}${linkStillLife}&limit=9`
 export const urlPeopleAndAnimals = `${_apiUrl}${linkPeopleAndAnimals}&limit=9`
 
+export const urlAnimalsShop = `${_apiUrl}${linkAnimals}&limit=12`
+
 export const _transform = (item: any) => {  
   return {
     file: item.file,

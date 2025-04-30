@@ -20,7 +20,7 @@ const Shop = () => {
     <div className={styles.shopContainer}>
       {dataShop.map(item => {
         return (
-          <NavLink to={item.link}>
+          <NavLink to={item.link} key={item.name}>
             <div className={styles.shopBlock}>
               <img className={styles.shopImg} src={item.src} alt={item.name} />
             </div>
