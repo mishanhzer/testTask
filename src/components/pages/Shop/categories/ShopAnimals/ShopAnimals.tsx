@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from '../../../../../store/store'
 
-import { urlAnimals } from "../../../../../utils/useTest"
+import { urlAnimals, linkAllWorks } from "../../../../../utils/useTest"
 
 import styles from './styles/shopAnimals.module.scss'
 
 const ShopAnimals = () => {
   const animals = useStore(state => state.animals)
   const getData = useStore(state => state.getData)
+
   const loading = useStore(state => state.loading)
 
-  const [trashActive, setTrashActive] = useState('')
+  const [trashActive, setTrashActive] = useState<string | null>('')
 
   useEffect(() => {
     getData('animals', urlAnimals, 'offsetAnimals', 0, 'pageAnimals')
   }, [])
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
     setTrashActive(dataTarget)
   }
@@ -31,6 +32,7 @@ const ShopAnimals = () => {
               onMouseEnter={handleClick}
               className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
               data-name={item.name}
+              key={item.name}
             >
               <img className={styles.shopImg} src={item.sizes[0].url} alt={item.name} />
               <div className={styles.salary}>1500 <span>₽</span></div>
@@ -43,7 +45,7 @@ const ShopAnimals = () => {
           )
         })}
       </div>
-      <button>click!</button>
+      <button className={styles.loadMore}>Load more</button>
     </div>
   )
 }

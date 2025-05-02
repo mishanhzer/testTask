@@ -12,7 +12,6 @@ import {
   TypesDataWorks,
 } from "../assets/images/Images"
 
-
 interface TypesStore {
   works: TypesDataWorks[]
   animals: TypesDataWorks[]

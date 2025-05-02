@@ -4,6 +4,7 @@ export const linkFlowers: string = 'https://disk.yandex.ru/d/59Fax6UsF26zww'
 export const linkStillLife: string = 'https://disk.yandex.ru/d/5yEFzsxVPTdx7A'
 export const linkPeopleAndAnimals: string = 'https://disk.yandex.ru/d/a7CJ9FA93iy7OA'
 const _apiUrl = 'https://cloud-api.yandex.net/v1/disk/public/resources?public_key='
+
 export let id = 0;
 
 export const urlAllWorks = `${_apiUrl}${linkAllWorks}&limit=100`

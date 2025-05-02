@@ -1,5 +1,5 @@
 .shopAnimalsContainer {
-  @apply bg-[#edeef0] w-screen
+  @apply bg-[#edeef0] w-screen pb-[50px]
 }
 
 .shopAnimals {
@@ -41,6 +41,10 @@
 
 .trashBlock {
   @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgb(30,58,138)] text-white flex justify-center items-center my-[auto] rounded-md
+}
+
+.loadMore {
+  @apply flex rounded-md items-center justify-center mx-auto mt-[15px] w-[250px] h-[60px] bg-[rgb(30,58,138)] text-[22px] text-white font-[roboto]
 }
 
 
