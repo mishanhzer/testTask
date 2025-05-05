@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from '../../../../../store/store'
 
-import { urlAnimals, linkAllWorks } from "../../../../../utils/useTest"
+import { urlAnimals } from "../../../../../utils/useTest"
 
+import { dataShop } from "../../dataShop"
 import styles from './styles/shopAnimals.module.scss'
 
 const ShopAnimals = () => {
+  const works = useStore(state => state.works)
   const animals = useStore(state => state.animals)
   const getData = useStore(state => state.getData)
+
+  console.log(animals)
+  console.log(dataShop)
 
   const loading = useStore(state => state.loading)
 
@@ -35,8 +40,23 @@ const ShopAnimals = () => {
               key={item.name}
             >
               <img className={styles.shopImg} src={item.sizes[0].url} alt={item.name} />
-              <div className={styles.salary}>1500 <span>₽</span></div>
-              <div className={styles.name}>{item.name}</div>
+              <div className={styles.salary}>
+                {dataShop.map(salary => {
+                  return (
+                    salary.nameImg === item.name ?
+                      <span>{salary.salary} </span> : ''
+                  )
+                })}
+                <span>₽</span>
+              </div>
+              <div className={styles.name}>
+                {dataShop.map(name => {
+                  return (
+                    name.nameImg === item.name ?
+                      <span>{name.name}</span> : ''
+                  )
+                })}
+              </div>
               {trashActive === item.name ?
                 <div className={styles.trash}>
                   <button className={styles.trashBlock}>В корзину</button>
