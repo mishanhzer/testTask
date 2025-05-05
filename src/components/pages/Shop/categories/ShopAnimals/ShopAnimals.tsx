@@ -7,12 +7,13 @@ import { dataShop } from "../../dataShop"
 import styles from './styles/shopAnimals.module.scss'
 
 const ShopAnimals = () => {
-  const works = useStore(state => state.works)
   const animals = useStore(state => state.animals)
   const getData = useStore(state => state.getData)
 
-  console.log(animals)
-  console.log(dataShop)
+  const commonData = dataShop.slice(0, 9).map((item2) => {
+    const item1 = animals.find((item1) => item1.name === item2.nameImg)
+    return { ...item1, ...item2 }
+  })
 
   const loading = useStore(state => state.loading)
 
@@ -30,7 +31,7 @@ const ShopAnimals = () => {
   return (
     <div className={styles.shopAnimalsContainer}>
       <div className={styles.shopAnimals}>
-        {animals.map(item => {
+        {commonData.map(item => {
           return (
             <div
               onMouseLeave={() => setTrashActive('')}
@@ -39,24 +40,12 @@ const ShopAnimals = () => {
               data-name={item.name}
               key={item.name}
             >
-              <img className={styles.shopImg} src={item.sizes[0].url} alt={item.name} />
+              <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
               <div className={styles.salary}>
-                {dataShop.map(salary => {
-                  return (
-                    salary.nameImg === item.name ?
-                      <span>{salary.salary} </span> : ''
-                  )
-                })}
+                {<span>{item.salary} </span>}
                 <span>₽</span>
               </div>
-              <div className={styles.name}>
-                {dataShop.map(name => {
-                  return (
-                    name.nameImg === item.name ?
-                      <span>{name.name}</span> : ''
-                  )
-                })}
-              </div>
+              <div className={styles.name}>{item.name}</div>
               {trashActive === item.name ?
                 <div className={styles.trash}>
                   <button className={styles.trashBlock}>В корзину</button>
