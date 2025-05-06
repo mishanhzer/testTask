@@ -27,16 +27,94 @@
   @apply object-cover w-[330px] h-[330px] rounded-t-md
 }
 
+.favourites {
+  @apply absolute top-0 right-0 w-[75px] h-[75px] flex justify-center items-center
+}
+
+.favouritesBtn {
+  width: 25px;
+  height: 25px;
+}
+
+.container {
+  @apply absolute top-0 right-0 w-[75px] h-[75px] flex justify-center items-center
+}
+
+.heartWhiteAround {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotate(45deg);
+    &::before {
+      content: '';
+      background-color: white;
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      top: -11px;
+      left: 0px;
+    }
+  &::after {
+    content: '';
+    background-color: white;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: -11px;
+  }
+}
+
+.favouritesBtn {
+  background-color: black;
+  z-index: 5;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotate(0deg);
+    &::before {
+      content: '';
+      background-color: black;
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      position: absolute;
+      top: -11px;
+      left: 0px;
+    }
+  &::after {
+    content: '';
+    background-color: black;
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: -11px;
+  }
+}
+
 .salary {
   @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44]
 }
 
 .name {
-  @apply text-[15px] ml-[10px] mt-[5px]
+  @apply text-[15px] ml-[10px] mt-[5px] font-[500]
 }
 
 .trash {
-  @apply flex justify-center absolute w-[100%] bg-[white] rounded-md h-[60px]
+  @apply flex justify-center absolute w-[100%] bg-[white] rounded-md h-[70px]
 }
 
 .trashBlock {
@@ -44,7 +122,7 @@
 }
 
 .loadMore {
-  @apply flex rounded-md items-center justify-center mx-auto mt-[15px] w-[250px] h-[60px] bg-[rgb(30,58,138)] text-[22px] text-white font-[roboto]
+  @apply flex rounded-md items-center justify-center mx-auto mt-[20px] w-[250px] h-[60px] bg-[rgb(30,58,138)] text-[22px] text-white font-[roboto]
 }
 
 

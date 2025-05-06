@@ -96,7 +96,14 @@ const ContactMeAnt = () => {
           </FormItem>
 
           <Form.Item>
-            <ButtonComponent disabled={isSubmitting} mt='mt-3' h='h-16' fz='text-sm' />
+            <ButtonComponent
+              disabled={isSubmitting}
+              mt='mt-3'
+              h='h-16'
+              fz='text-sm'
+              textBtn="Отправить"
+              turn='rotate-0'
+              translateX='translate-x-1' />
           </Form.Item>
         </Form>
       </div>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from '../../../../../store/store'
 
-import { urlAnimals } from "../../../../../utils/useTest"
+import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
 
 import { dataShop } from "../../dataShop"
+import heart from '../../../../../assets/logo/logoShop/heart1.svg'
+import { asd } from "./heart"
+
 import styles from './styles/shopAnimals.module.scss'
 
 const linkAnimals: string = 'https://disk.yandex.ru/d/K4E-ldU2sp1VbQ'
@@ -17,33 +20,32 @@ const ShopAnimals = () => {
   const loading = useStore(state => state.loading)
 
   const [trashActive, setTrashActive] = useState<string | null>('')
-  const [limit, setLimit] = useState(0)
+  const [limit, setLimit] = useState(9)
+  console.log(limit)
+
+  useEffect(() => {
+    getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
+  }, [])
 
   const commonData = dataShop.map((item2) => {
     const item1 = animals.find((item1) => item1.name === item2.nameImg)
     return { ...item1, ...item2 }
   })
 
-  console.log(commonData)
-
-  useEffect(() => {
-    getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
-  }, [])
-
   const handleEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
     setTrashActive(dataTarget)
   }
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     setLimit(limit + 9)
-    getData('animals', urlAnimals, 'offsetAnimals', limit, 'pageAnimals')
+    getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
   }
 
   return (
     <div className={styles.shopAnimalsContainer}>
       <div className={styles.shopAnimals}>
-        {commonData.slice(limit, limit + 9).map(item => {
+        {commonData.slice(0, limit).map(item => {
           return (
             <div
               onMouseLeave={() => setTrashActive('')}
@@ -53,6 +55,20 @@ const ShopAnimals = () => {
               key={item.name}
             >
               <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
+
+              <div className={styles.container}>
+                <div className={styles.heartWhiteAround}>
+                  <div className={styles.heartBlackAround}>
+                    <div className={styles.favourites}>
+                      <button className={styles.favouritesBtn}>
+                        {/* <img src={heart} alt="" /> */}
+                        <img src='' alt="" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className={`${styles.salary} flex items-center`}>
                 {<span className={`mr-[8px]`}>{item.salary}</span>}
                 <span>₽</span>
@@ -67,11 +83,17 @@ const ShopAnimals = () => {
           )
         })}
       </div>
-      <button
-        className={styles.loadMore}
-        onClick={handleClick}>
-        Load more
-      </button>
+      <ButtonComponent
+        disabled={limit > commonData.length ? true : false}
+        mt='mt-3'
+        h='h-16'
+        fz='text-[16px]'
+        textBtn="Загрузить еще"
+        mx='mx-auto'
+        turn='rotate-90'
+        translateX='translate-x-0'
+        func={handleClick}
+      />
     </div>
   )
 }
