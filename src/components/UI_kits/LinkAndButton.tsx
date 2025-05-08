@@ -45,7 +45,7 @@ export const LinkButton = ({ ml, fz }: LinkTypes) => {
   return (
     <Link
       to="/contact"
-      className={twMerge(ml, fz, 'flex py-6 px-10 bg-blue-900 text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group')}
+      className={twMerge(ml, fz, 'flex py-6 px-10 bg-[rgba(0,91,255,1)] text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group')}
     >
       СВЯЗАТЬСЯ СО МНОЙ
       <ImageBtn w="w-6" h="h-6" turn="rotate-0" translateX="translate-x-1" />
@@ -53,13 +53,13 @@ export const LinkButton = ({ ml, fz }: LinkTypes) => {
   );
 };
 
-export const ButtonComponent = ({ mt, h, fz, disabled, mx, textBtn, turn, translateX, func, type }: ButtonTypes) => {
+export const ButtonComponent = ({ mt, h, fz, disabled, mx, textBtn, turn, translateX, func }: ButtonTypes) => {
   return (
     <div>
       <button
         onClick={func}
         disabled={disabled}
-        className={twMerge(mt, h, fz, mx, 'flex py-6 px-10 bg-blue-900 text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group disabled:opacity-80')}
+        className={twMerge(mt, h, fz, mx, 'flex py-6 px-10 bg-[rgba(0,91,255,1)] text-white items-center font-sans hover:transition hover:opacity-80 rounded-lg group disabled:opacity-80')}
         type="submit"
       >
         {textBtn}

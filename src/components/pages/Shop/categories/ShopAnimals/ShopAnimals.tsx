@@ -4,10 +4,10 @@ import { useStore } from '../../../../../store/store'
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
 
 import { dataShop } from "../../dataShop"
-import heartBlack from '../../../../../assets/logo/logoShop/heartBlack.svg'
-import heartPink from '../../../../../assets/logo/logoShop/heartPink.svg'
-import heartActive from '../../../../../assets/logo/logoShop/heartActive.svg'
-import { heart } from "./heart"
+// import heartBlack from '../../../../../assets/logo/logoShop/heartBlack.svg'
+// import heartPink from '../../../../../assets/logo/logoShop/heartPink.svg'
+// import heartActive from '../../../../../assets/logo/logoShop/heartActive.svg'
+import { heartDefault, heartActive } from "./heart"
 
 import styles from './styles/shopAnimals.module.scss'
 
@@ -23,8 +23,8 @@ const ShopAnimals = () => {
 
   const [trashActive, setTrashActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
-  const [activeHover, setActiveHover] = useState('')
-  const [activeClick, setActiveClick] = useState(0)
+  const [activeTest, setActiveTest] = useState()
+  const [activeClick, setActiveClick] = useState(-1)
 
   useEffect(() => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
@@ -45,24 +45,15 @@ const ShopAnimals = () => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
   }
 
-  const handleEnterFavourite = (e) => {
-    const dataTarget = e.currentTarget.getAttribute('data-name')
-    setActiveHover(dataTarget)
-    // if (activeClick === 'active') {
-    //   setActiveHover('')
-    // }
-  }
-
-  const handleClickFavourite = (e) => {
+  const handleClickFavourite = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const active = +e.currentTarget.getAttribute('data-id')
+
     setActiveClick(active)
-    // if (activeClick !== active) {
-    //   setActiveClick(-1)
-    // }
+    if (activeClick === active) {
+      setActiveClick(-1)
+    }
   }
-
-  console.log(activeClick)
-
+  console.log(commonData)
   return (
     <div className={styles.shopAnimalsContainer}>
       <div className={styles.shopAnimals}>
@@ -80,31 +71,13 @@ const ShopAnimals = () => {
               <div className={styles.container}>
                 <button
                   onClick={handleClickFavourite}
-                  onMouseEnter={handleEnterFavourite}
-                  onMouseLeave={() => setActiveHover('')}
                   className={styles.btn}
                   data-name={item.name}
                   data-id={item.id}>
-                  <img src={activeHover === item.name ? heartPink : heartBlack && activeClick === item.id ? heartActive : heartBlack} alt="" />
-                  {/* <img src={heartBlack} alt="" />
-                  <img src={heartPink} alt="" />
-                  <img src={heartActive} alt="" /> */}
+                  {activeClick === item.id ? heartActive() : heartDefault()}
+
                 </button>
-
-                {/* {activeHover === item.name ? btnFunctional(heartPink, item.name) : (activeClick === 'active' && activeHover === item.name) ? btnFunctional(heartActive, item.name) : btnFunctional(heartBlack, item.name)} */}
               </div>
-
-              {/* <div className={styles.container}>
-                <div className={styles.heartWhiteAround}>
-                  <div className={styles.heartBlackAround}>
-                    <div className={styles.favourites}>
-                      <button className={styles.favouritesBtn}>
-                        <img src='' alt="" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
 
 
               <div className={`${styles.salary} flex items-center`}>

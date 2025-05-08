@@ -30,7 +30,7 @@
   "files": [
     "tsconfig.json"
   ],
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/components/pages/Shop/categories/ShopAnimals/heart.tsx"],
   "exclude": []
 }
 

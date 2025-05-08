@@ -40,126 +40,6 @@
   @apply absolute top-0 right-0 w-[50px] h-[50px] flex items-center justify-center
 }
 
-
-// .heartWhiteAround {
-//   background-color: white;
-//   z-index: 5;
-//   width: 16px;
-//   height: 16px;
-//   position: absolute;
-//   top: 30%;
-//   right: 30%;
-//   transform: rotate(45deg);
-//     &::before {
-//       content: '';
-//       background-color: white;
-//       display: block;
-//       width: 16px;
-//       height: 16px;
-//       border-radius: 50%;
-//       position: absolute;
-//       top: -8px;
-//       left: 0px;
-//     }
-//   &::after {
-//     content: '';
-//     background-color: white;
-//     display: block;
-//     width: 16px;
-//     height: 16px;
-//     border-radius: 50%;
-//     position: absolute;
-//     top: 0px;
-//     left: -8px;
-//   }
-// }
-
-
-// .heartWhiteAround {
-//   position: absolute;
-//   top: 30%;
-//   right: 30%;
-// }
-
-
-// .heartBlackAround {
-//   background-color: black;
-//   // filter: drop-shadow(9px 9px 0px white);
-//   z-index: 10;
-//   width: 13px;
-//   height: 13px;
-//   position: absolute;
-//   top: 1px;
-//   right: 1px;
-//   transform: rotate(45deg);
-//     &::before {
-//       content: '';
-//       background-color: black;
-//       display: block;
-//       width: 13px;
-//       height: 13px;
-//       border-radius: 50%;
-//       position: absolute;
-//       top: -7px;
-//       left: 0px;
-//       right: 0px;
-//     }
-//   &::after {
-//     content: '';
-//     background-color: black;
-//     display: block;
-//     width: 13px;
-//     height: 13px;
-//     border-radius: 50%;
-//     position: absolute;
-//     top: 0px;
-//     left: -7px;
-//     right: 0px;
-//   }
-//   &:hover {
-//     background-color: rgb(30 58 138);
-//   }
-//   &:hover::before {
-//     background-color: rgb(30 58 138);
-//   }
-//   &:hover:after {
-//     background-color: rgb(30 58 138);
-//   }
-// }
-
-// .favouritesBtn {
-//   background-color: white;
-//   z-index: 15;
-//   width: 9px;
-//   height: 9px;
-//   position: absolute;
-//   top: 1px;
-//   right: 3px;
-//   transform: rotate(0deg);
-//     &::before {
-//       content: '';
-//       background-color: white;
-//       display: block;
-//       width: 9px;
-//       height: 9px;
-//       border-radius: 50%;
-//       position: absolute;
-//       top: -5px;
-//       left: 0px;
-//     }
-//   &::after {
-//     content: '';
-//     background-color: white;
-//     display: block;
-//     width: 9px;
-//     height: 9px;
-//     border-radius: 50%;
-//     position: absolute;
-//     top: 0px;
-//     left: -5px;
-//   }
-// }
-
 .salary {
   @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44]
 }
@@ -173,11 +53,11 @@
 }
 
 .trashBlock {
-  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgb(30,58,138)] text-white flex justify-center items-center my-[auto] rounded-md
+  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md
 }
 
 .loadMore {
-  @apply flex rounded-md items-center justify-center mx-auto mt-[20px] w-[250px] h-[60px] bg-[rgb(30,58,138)] text-[22px] text-white font-[roboto]
+  @apply flex rounded-md items-center justify-center mx-auto mt-[20px] w-[250px] h-[60px] bg-[rgba(0,91,255,1)] text-[22px] text-white font-[roboto]
 }
 
 
