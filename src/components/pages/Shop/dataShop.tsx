@@ -8,6 +8,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 0
   },
 
@@ -19,6 +20,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст, акриловый грунт',
+    active: false,
     id: 1
   },
 
@@ -30,6 +32,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 2
   },
 
@@ -41,6 +44,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст на подрамникке',
+    active: false,
     id: 3
   },
 
@@ -52,6 +56,7 @@ export const dataShop = [
     description: '...',
     size: '42 x 52 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 4
   },
 
@@ -63,6 +68,7 @@ export const dataShop = [
     description: '...',
     size: '43 x 55 cm',
     materials: 'масляные краски, холст на подрамникке',
+    active: false,
     id: 5
   },
 
@@ -74,6 +80,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 6
   },
 
@@ -85,6 +92,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 7
   },
 
@@ -96,6 +104,7 @@ export const dataShop = [
     description: '...',
     size: '41 x 50 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 8
   },
 
@@ -108,6 +117,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 9
   },
 
@@ -119,6 +129,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 10
   },
 
@@ -130,6 +141,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 11
   },
 
@@ -141,6 +153,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 12
   },
 
@@ -152,6 +165,7 @@ export const dataShop = [
     description: '...',
     size: '35 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 13
   },
 
@@ -163,6 +177,7 @@ export const dataShop = [
     description: '...',
     size: '20 x 20 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 14
   },
 
@@ -174,6 +189,7 @@ export const dataShop = [
     description: '...',
     size: '35 x 50 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 15
   },
 
@@ -185,6 +201,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 16
   },
 
@@ -196,6 +213,7 @@ export const dataShop = [
     description: '...',
     size: '25 x 25 cm',
     materials: 'масляные краски, холст на картоне',
+    active: false,
     id: 17
   },
 
@@ -208,6 +226,7 @@ export const dataShop = [
     description: '...',
     size: '41 x 50 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 18
   },
 
@@ -219,6 +238,7 @@ export const dataShop = [
     description: '...',
     size: '20 x 20 cm',
     materials: 'масляные краски, холст на картоне',
+    active: false,
     id: 19
   },
 
@@ -230,6 +250,7 @@ export const dataShop = [
     description: '...',
     size: '39 x 50 cm',
     materials: 'масло, оргалит, акриловый грунт',
+    active: false,
     id: 20
   },
 
@@ -241,6 +262,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст на подрамнике',
+    active: false,
     id: 21
   },
 
@@ -252,6 +274,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 70 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 22
   },
 
@@ -263,6 +286,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 23
   },
 
@@ -274,6 +298,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст на подрамнике',
+    active: false,
     id: 24
   },
 
@@ -285,6 +310,7 @@ export const dataShop = [
     description: '...',
     size: '42 x 52 cm',
     materials: 'масляные краски, холст на подрамнике',
+    active: false,
     id: 25
   },
 
@@ -296,6 +322,7 @@ export const dataShop = [
     description: '...',
     size: '43 x 49 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 26
   },
 
@@ -308,6 +335,7 @@ export const dataShop = [
     description: '...',
     size: '42 x 52 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 27
   },
 
@@ -319,6 +347,7 @@ export const dataShop = [
     description: '...',
     size: '25 x 25 cm',
     materials: 'масляные краски, холст на картоне',
+    active: false,
     id: 28
   },
 
@@ -330,6 +359,7 @@ export const dataShop = [
     description: '...',
     size: '25 x 25 cm',
     materials: 'масляные краски, холст на картоне',
+    active: false,
     id: 29
   },
 
@@ -341,6 +371,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 30
   },
 
@@ -352,6 +383,7 @@ export const dataShop = [
     description: '...',
     size: '24 x 30 cm',
     materials: 'масляные краски, акриловый грунт, холст на подрамнике',
+    active: false,
     id: 31
   },
 
@@ -363,6 +395,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, акриловый грунт, холст на подрамнике',
+    active: false,
     id: 32
   },
 
@@ -374,6 +407,7 @@ export const dataShop = [
     description: '...',
     size: '41 x 50 cm',
     materials: 'масляные краски, огралит, акриловый грунт',
+    active: false,
     id: 33
   },
 
@@ -385,6 +419,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст на подрамнике, акриловый грунт',
+    active: false,
     id: 34
   },
 
@@ -396,6 +431,7 @@ export const dataShop = [
     description: '...',
     size: '41 x 51 cm',
     materials: 'масляные краски, огралит, акриловый грунт',
+    active: false,
     id: 35
   },
 
@@ -409,6 +445,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'холст, масло',
+    active: false,
     id: 36
   },
 
@@ -420,6 +457,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, огралит, акриловый грунт',
+    active: false,
     id: 37
   },
 
@@ -431,6 +469,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 40 cm',
     materials: 'масляные краски, огралит, акриловый грунт',
+    active: false,
     id: 38
   },
 
@@ -442,6 +481,7 @@ export const dataShop = [
     description: '...',
     size: '30 x 40 cm',
     materials: 'масляные краски, холст на подрамнике, акриловый грунт',
+    active: false,
     id: 39
   },
 
@@ -453,6 +493,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 40
   },
 
@@ -464,6 +505,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, оргалит, акриловый грунт',
+    active: false,
     id: 41
   },
 
@@ -475,6 +517,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 42
   },
 
@@ -486,6 +529,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 70 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 43
   },
 
@@ -497,6 +541,7 @@ export const dataShop = [
     description: '...',
     size: '50 x 60 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 44
   },
 
@@ -508,6 +553,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 45
   },
 
@@ -520,6 +566,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 46
   },
 
@@ -531,6 +578,7 @@ export const dataShop = [
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
+    active: false,
     id: 47
   },
 ]

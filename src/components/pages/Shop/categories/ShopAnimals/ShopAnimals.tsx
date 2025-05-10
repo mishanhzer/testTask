@@ -23,8 +23,9 @@ const ShopAnimals = () => {
 
   const [trashActive, setTrashActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
-  const [activeTest, setActiveTest] = useState()
-  const [activeClick, setActiveClick] = useState(-1)
+
+  const [active, setActive] = useState(-1)
+  const [saveActive, setSaveActive] = useState({})
 
   useEffect(() => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
@@ -45,15 +46,17 @@ const ShopAnimals = () => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
   }
 
-  const handleClickFavourite = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  const handleClickLike = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const active = +e.currentTarget.getAttribute('data-id')
+    setActive(active)
 
-    setActiveClick(active)
-    if (activeClick === active) {
-      setActiveClick(-1)
+    setSaveActive(prevArrTest => ({ ...prevArrTest, [active]: true }))
+
+    if (saveActive[active]) {
+      setSaveActive(prevArrTest => ({ ...prevArrTest, [active]: false }))
     }
   }
-  console.log(commonData)
+
   return (
     <div className={styles.shopAnimalsContainer}>
       <div className={styles.shopAnimals}>
@@ -70,12 +73,11 @@ const ShopAnimals = () => {
 
               <div className={styles.container}>
                 <button
-                  onClick={handleClickFavourite}
+                  onClick={handleClickLike}
                   className={styles.btn}
                   data-name={item.name}
                   data-id={item.id}>
-                  {activeClick === item.id ? heartActive() : heartDefault()}
-
+                  {saveActive[item.id] ? heartActive() : heartDefault()}
                 </button>
               </div>
 
