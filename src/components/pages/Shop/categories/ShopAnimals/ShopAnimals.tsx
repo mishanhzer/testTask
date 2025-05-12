@@ -4,9 +4,6 @@ import { useStore } from '../../../../../store/store'
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
 
 import { dataShop } from "../../dataShop"
-// import heartBlack from '../../../../../assets/logo/logoShop/heartBlack.svg'
-// import heartPink from '../../../../../assets/logo/logoShop/heartPink.svg'
-// import heartActive from '../../../../../assets/logo/logoShop/heartActive.svg'
 import { heartDefault, heartActive } from "./heart"
 
 import styles from './styles/shopAnimals.module.scss'
@@ -25,6 +22,8 @@ const ShopAnimals = () => {
   const [limit, setLimit] = useState(9)
 
   const [saveActive, setSaveActive] = useState({})
+  const [activeDiscount, setActiveDiscount] = useState(false)
+  const [number, setNumber] = useState(0)
 
   useEffect(() => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
@@ -53,19 +52,37 @@ const ShopAnimals = () => {
     saveActive[active] ? changeActive(false) : changeActive(true)
   }
 
+  const handleViewDiscoint = (e) => {
+    let num = number
+    const interval = setInterval(() => {
+      if (e.target.checked) {
+        num++
+        if (num >= 20) clearInterval(interval)
+      } else {
+        num--
+        if (num <= 0) clearInterval(interval)
+      }
+      setNumber(num)
+    }, 25)
+
+    e.target.checked ? setActiveDiscount(true) : setActiveDiscount(false)
+  }
+
   return (
     <div>
-      <div className="w-[300px] px-[15px] py-[5px] mx-auto mb-[20px] flex justify-center items-center border-1 border-[#868695] border-solid rounded-[20px]">
+      <div className="w-[20%] px-[15px] py-[5px] mx-auto mb-[20px] flex justify-center items-center border-[0.5px] border-[#868695] border-solid rounded-[20px]">
         <div className="flex items-center">
           <div className={`text-[#868695]`}>По подписке</div>
-          <div className={`border-1 text-[12px] font-[700] text-white bg-[#005bff] py-[3px] px-[3px] border-[#868695] border-solid rounded-[30px] ml-[10px]`}>-20%</div>
         </div>
         <div className={`ml-[10px]`}>
-          <label className={`${styles.switch}`}>
+          <label
+            className={`${styles.switch}`}
+            onClick={handleViewDiscoint}>
             <input type="checkbox" />
             <span className={`${styles.slider} ${styles.round}`}></span>
           </label>
         </div>
+        <div className={`${activeDiscount ? styles.numberAnimate : ''} text-[14px] font-[600] text-[#005bff] ml-[10px]`}>{`${number}%`}</div>
       </div>
       <div className={styles.shopAnimalsContainer}>
         <div className={styles.shopAnimals}>
@@ -91,18 +108,22 @@ const ShopAnimals = () => {
                 </div>
 
 
-                <div className={`${styles.salary} flex items-center`}>
-                  {<span className={`mr-[8px]`}>{item.salary}</span>}
-                  <span>₽</span>
-                  <div className={`text-[#868695] text-[13px] ml-[8px] line-through`}>{item.salary + item.salary * 0.2}</div>
-                  <div className={`ml-[4px] text-[13px]`}>-20</div>
-                  <span className={`text-[13px]`}>%</span>
+                <div className={item.salary > 0 ? `${styles.salary} flex items-center` : `${styles.salarySold} flex items-center`}>
+                  {<span className={`${!activeDiscount ? '' : 'animate-animateOpacityBefore'} mr-[8px]`}>
+                    {item.salary > 0 ? activeDiscount ? `${item.salary} ₽` : `${item.salary + item.salary * 0.2} ₽` : <div>Продано</div>}
+                  </span>}
+                  <div className={`${!activeDiscount ? 'hidden animate-animateOpacityBefore' : 'block animate-animateOpacityBefore'} text-[#868695] text-[13px] ml-[8px] line-through`}>
+                    {item.salary > 0 ? item.salary + item.salary * 0.2 : null}
+                  </div>
+                  <div className={`${!activeDiscount ? 'hidden animate-animateOpacityBefore' : 'block animate-animateOpacityBefore'} ml-[4px] text-[13px]`}>{item.salary > 0 ? `${number}%` : null}</div>
                 </div>
                 <div className={styles.name}>{item.name}</div>
-                {trashActive === item.name ?
-                  <div className={styles.trash}>
-                    <button className={styles.trashBlock}>В корзину</button>
-                  </div> : ''}
+                {
+                  trashActive === item.name ?
+                    <div className={styles.trash}>
+                      <button className={styles.trashBlock}>В корзину</button>
+                    </div> : ''
+                }
               </div>
             )
           })}
