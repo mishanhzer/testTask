@@ -1,4 +1,5 @@
 import React, { act, useEffect, useState } from "react"
+import classNames from "classnames"
 import { useStore } from '../../../../../store/store'
 
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
@@ -91,10 +92,12 @@ const ShopAnimals = () => {
               <div
                 onMouseLeave={() => setTrashActive('')}
                 onMouseEnter={handleEnter}
-                className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
+                // className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
+                className={classNames(trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive, item.salary > 0 ? 'opacity-100' : 'opacity-60')}
                 data-name={item.name}
                 key={item.name}
               >
+                {/* <img className={item.salary > 0 ? styles.shopImg : `${styles.shopImg} opacity-60`} src={item.sizes?.[0].url} alt={item.name} /> */}
                 <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
 
                 <div className={styles.container}>
@@ -110,7 +113,7 @@ const ShopAnimals = () => {
 
                 <div className={item.salary > 0 ? `${styles.salary} flex items-center` : `${styles.salarySold} flex items-center`}>
                   {<span className={`${!activeDiscount ? '' : 'animate-animateOpacityBefore'} mr-[8px]`}>
-                    {item.salary > 0 ? activeDiscount ? `${item.salary} ₽` : `${item.salary + item.salary * 0.2} ₽` : <div>Продано</div>}
+                    {item.salary > 0 ? activeDiscount ? `${item.salary} ₽` : `${item.salary + item.salary * 0.2} ₽` : <div className={styles.sold}>Продано</div>}
                   </span>}
                   <div className={`${!activeDiscount ? 'hidden animate-animateOpacityBefore' : 'block animate-animateOpacityBefore'} text-[#868695] text-[13px] ml-[8px] line-through`}>
                     {item.salary > 0 ? item.salary + item.salary * 0.2 : null}
@@ -120,8 +123,10 @@ const ShopAnimals = () => {
                 <div className={styles.name}>{item.name}</div>
                 {
                   trashActive === item.name ?
-                    <div className={styles.trash}>
-                      <button className={styles.trashBlock}>В корзину</button>
+                    <div className={item.salary > 0 ? styles.trash : 'hidden'}>
+                      <button
+                        disabled={item.salary > 0 ? false : true}
+                        className={styles.trashBlock}>В корзину</button>
                     </div> : ''
                 }
               </div>

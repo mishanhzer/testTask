@@ -7,7 +7,7 @@
 }
 
 .shopBlock {
-  @apply mt-[25px] bg-[white] inline-block relative opacity-100 mb-[35px] pb-[15px] rounded-md;
+  @apply mt-[25px] bg-[white] inline-block relative mb-[35px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }
@@ -17,7 +17,7 @@
 }
 
 .shopBlockNotActive {
-  @apply h-[85%] mt-[25px] bg-[white] inline-block relative opacity-100 mb-[50px] pb-[15px] rounded-md;
+  @apply h-[85%] mt-[25px] bg-[white] inline-block relative mb-[50px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }
@@ -45,7 +45,7 @@
 }
 
 .salarySold {
-  @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-red-600
+  @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44] opacity-60 
 }
 
 .name {
@@ -57,7 +57,7 @@
 }
 
 .trashBlock {
-  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md
+  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
 }
 
 .loadMore {
