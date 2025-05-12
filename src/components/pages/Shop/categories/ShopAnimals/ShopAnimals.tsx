@@ -24,7 +24,6 @@ const ShopAnimals = () => {
   const [trashActive, setTrashActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
 
-  const [active, setActive] = useState(-1)
   const [saveActive, setSaveActive] = useState({})
 
   useEffect(() => {
@@ -47,67 +46,80 @@ const ShopAnimals = () => {
   }
 
   const handleClickLike = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    const active = +e.currentTarget.getAttribute('data-id')
-    setActive(active)
+    const active = +e.currentTarget.getAttribute('data-id')!
 
-    setSaveActive(prevArrTest => ({ ...prevArrTest, [active]: true }))
+    const changeActive = (boolean: boolean) => setSaveActive((prevArrTest) => ({ ...prevArrTest, [active]: boolean }))
 
-    if (saveActive[active]) {
-      setSaveActive(prevArrTest => ({ ...prevArrTest, [active]: false }))
-    }
+    saveActive[active] ? changeActive(false) : changeActive(true)
   }
 
   return (
-    <div className={styles.shopAnimalsContainer}>
-      <div className={styles.shopAnimals}>
-        {commonData.slice(0, limit).map(item => {
-          return (
-            <div
-              onMouseLeave={() => setTrashActive('')}
-              onMouseEnter={handleEnter}
-              className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
-              data-name={item.name}
-              key={item.name}
-            >
-              <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
-
-              <div className={styles.container}>
-                <button
-                  onClick={handleClickLike}
-                  className={styles.btn}
-                  data-name={item.name}
-                  data-id={item.id}>
-                  {saveActive[item.id] ? heartActive() : heartDefault()}
-                </button>
-              </div>
-
-
-              <div className={`${styles.salary} flex items-center`}>
-                {<span className={`mr-[8px]`}>{item.salary}</span>}
-                <span>₽</span>
-                <div className={`text-[#868695] text-[14px] ml-[8px]`}>{item.salary - item.salary * 0.2}</div>
-              </div>
-              <div className={styles.name}>{item.name}</div>
-              {trashActive === item.name ?
-                <div className={styles.trash}>
-                  <button className={styles.trashBlock}>В корзину</button>
-                </div> : ''}
-            </div>
-          )
-        })}
+    <div>
+      <div className="w-[300px] px-[15px] py-[5px] mx-auto mb-[20px] flex justify-center items-center border-1 border-[#868695] border-solid rounded-[20px]">
+        <div className="flex items-center">
+          <div className={`text-[#868695]`}>По подписке</div>
+          <div className={`border-1 text-[12px] font-[700] text-white bg-[#005bff] py-[3px] px-[3px] border-[#868695] border-solid rounded-[30px] ml-[10px]`}>-20%</div>
+        </div>
+        <div className={`ml-[10px]`}>
+          <label className={`${styles.switch}`}>
+            <input type="checkbox" />
+            <span className={`${styles.slider} ${styles.round}`}></span>
+          </label>
+        </div>
       </div>
-      <ButtonComponent
-        disabled={limit > commonData.length ? true : false}
-        mt='mt-3'
-        h='h-16'
-        fz='text-[16px]'
-        textBtn="Загрузить еще"
-        mx='mx-auto'
-        turn='rotate-90'
-        translateX='translate-x-0'
-        func={handleClick}
-      />
-    </div>
+      <div className={styles.shopAnimalsContainer}>
+        <div className={styles.shopAnimals}>
+          {commonData.slice(0, limit).map(item => {
+            return (
+              <div
+                onMouseLeave={() => setTrashActive('')}
+                onMouseEnter={handleEnter}
+                className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
+                data-name={item.name}
+                key={item.name}
+              >
+                <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
+
+                <div className={styles.container}>
+                  <button
+                    onClick={handleClickLike}
+                    className={styles.btn}
+                    data-name={item.name}
+                    data-id={item.id}>
+                    {saveActive[item.id] ? heartActive() : heartDefault()}
+                  </button>
+                </div>
+
+
+                <div className={`${styles.salary} flex items-center`}>
+                  {<span className={`mr-[8px]`}>{item.salary}</span>}
+                  <span>₽</span>
+                  <div className={`text-[#868695] text-[13px] ml-[8px] line-through`}>{item.salary + item.salary * 0.2}</div>
+                  <div className={`ml-[4px] text-[13px]`}>-20</div>
+                  <span className={`text-[13px]`}>%</span>
+                </div>
+                <div className={styles.name}>{item.name}</div>
+                {trashActive === item.name ?
+                  <div className={styles.trash}>
+                    <button className={styles.trashBlock}>В корзину</button>
+                  </div> : ''}
+              </div>
+            )
+          })}
+        </div>
+        <ButtonComponent
+          disabled={limit > commonData.length ? true : false}
+          mt='mt-3'
+          h='h-16'
+          fz='text-[16px]'
+          textBtn="Загрузить еще"
+          mx='mx-auto'
+          turn='rotate-90'
+          translateX='translate-x-0'
+          func={handleClick}
+        />
+      </div>
+    </div >
   )
 }
 export default ShopAnimals
