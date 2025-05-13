@@ -99,11 +99,19 @@ const Salary = ({ item, activeDiscount }) => {
 }
 
 const BlockCart = ({ item }) => {
+  const testClick = (e) => {
+    if (e.currentTarget)
+      console.log(item)
+  }
+
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
       <button
+        className={styles.cartBlock}
         disabled={item.salary ? false : true}
-        className={styles.cartBlock}>В корзину</button>
+        onClick={testClick}
+      >В корзину
+      </button>
     </div>
   )
 }

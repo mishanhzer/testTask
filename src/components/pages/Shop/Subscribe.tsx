@@ -11,7 +11,7 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
 
   const checkboxRef = useRef<HTMLInputElement>(null);
 
-  const handleViewDiscoint = () => {
+  const handleViewDiscount = () => {
     let num = number
     const isChecked = checkboxRef.current?.checked
     const interval = setInterval(() => {
@@ -34,7 +34,7 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
       <div className={styles.containerDiscountValue}>
         <label
           className={`${styles.switch}`}
-          onClick={handleViewDiscoint}>
+          onClick={handleViewDiscount}>
           <input type="checkbox" ref={checkboxRef} />
           <span className={`${styles.slider} ${styles.round}`}></span>
         </label>
