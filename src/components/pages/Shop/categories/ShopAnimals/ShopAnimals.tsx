@@ -19,7 +19,7 @@ const ShopAnimals = () => {
 
   const loading = useStore(state => state.loading)
 
-  const [trashActive, setTrashActive] = useState<string | null>('')
+  const [cartActive, setCartActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
 
   const [saveActive, setSaveActive] = useState({})
@@ -37,7 +37,7 @@ const ShopAnimals = () => {
 
   const handleEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const dataTarget = e.currentTarget.getAttribute('data-name')
-    setTrashActive(dataTarget)
+    setCartActive(dataTarget)
   }
 
   const handleClick = () => {
@@ -71,7 +71,7 @@ const ShopAnimals = () => {
 
   return (
     <div>
-      <div className="w-[20%] px-[15px] py-[5px] mx-auto mb-[20px] flex justify-center items-center border-[0.5px] border-[#868695] border-solid rounded-[20px]">
+      <div className="relative w-[20%] px-[15px] py-[5px] mx-auto mb-[30px] flex justify-center items-center border-[0.5px] border-[#868695] border-solid rounded-[20px]">
         <div className="flex items-center">
           <div className={`text-[#868695]`}>По подписке</div>
         </div>
@@ -83,26 +83,24 @@ const ShopAnimals = () => {
             <span className={`${styles.slider} ${styles.round}`}></span>
           </label>
         </div>
-        <div className={`${activeDiscount ? styles.numberAnimate : ''} text-[14px] font-[600] text-[#005bff] ml-[10px]`}>{`${number}%`}</div>
+        <div className={`${activeDiscount ? styles.numberAnimate : ''} absolute top-[20%] right-[10%] text-[14px] font-[600] text-[#005bff] ml-[10px]`}>{`${number}%`}</div>
       </div>
       <div className={styles.shopAnimalsContainer}>
         <div className={styles.shopAnimals}>
           {commonData.slice(0, limit).map(item => {
             return (
               <div
-                onMouseLeave={() => setTrashActive('')}
+                onMouseLeave={() => setCartActive('')}
                 onMouseEnter={handleEnter}
-                // className={trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive}
-                className={classNames(trashActive === item.name ? styles.shopBlock : styles.shopBlockNotActive, item.salary > 0 ? 'opacity-100' : 'opacity-60')}
+                className={classNames(cartActive === item.name ? styles.shopBlock : styles.shopBlockNotActive, item.salary > 0 ? 'opacity-100' : 'opacity-60 h-[100%]')}
                 data-name={item.name}
                 key={item.name}
               >
-                {/* <img className={item.salary > 0 ? styles.shopImg : `${styles.shopImg} opacity-60`} src={item.sizes?.[0].url} alt={item.name} /> */}
                 <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
-
-                <div className={styles.container}>
+                <div className={styles.containerLike}>
                   <button
                     onClick={handleClickLike}
+                    disabled={item.salary > 0 ? false : true}
                     className={styles.btn}
                     data-name={item.name}
                     data-id={item.id}>
@@ -110,23 +108,22 @@ const ShopAnimals = () => {
                   </button>
                 </div>
 
-
                 <div className={item.salary > 0 ? `${styles.salary} flex items-center` : `${styles.salarySold} flex items-center`}>
-                  {<span className={`${!activeDiscount ? '' : 'animate-animateOpacityBefore'} mr-[8px]`}>
+                  {<span className={`${!activeDiscount ? `${styles.animateDiscount}` : 'animate-animateOpacityBefore'}`}>
                     {item.salary > 0 ? activeDiscount ? `${item.salary} ₽` : `${item.salary + item.salary * 0.2} ₽` : <div className={styles.sold}>Продано</div>}
                   </span>}
-                  <div className={`${!activeDiscount ? 'hidden animate-animateOpacityBefore' : 'block animate-animateOpacityBefore'} text-[#868695] text-[13px] ml-[8px] line-through`}>
+                  <div className={`${!activeDiscount ? `hidden ${styles.animateDiscount}` : 'block animate-animateOpacityBefore'} text-[#868695] text-[13px] ml-[6px] line-through`}>
                     {item.salary > 0 ? item.salary + item.salary * 0.2 : null}
                   </div>
-                  <div className={`${!activeDiscount ? 'hidden animate-animateOpacityBefore' : 'block animate-animateOpacityBefore'} ml-[4px] text-[13px]`}>{item.salary > 0 ? `${number}%` : null}</div>
+                  <div className={`${!activeDiscount ? `hidden ${styles.animateDiscount}` : `block ${styles.animateDiscount}`} ml-[6px] text-[13px]`}>{item.salary > 0 ? `-20%` : null}</div>
                 </div>
                 <div className={styles.name}>{item.name}</div>
                 {
-                  trashActive === item.name ?
-                    <div className={item.salary > 0 ? styles.trash : 'hidden'}>
+                  cartActive === item.name ?
+                    <div className={item.salary > 0 ? styles.cart : 'hidden'}>
                       <button
                         disabled={item.salary > 0 ? false : true}
-                        className={styles.trashBlock}>В корзину</button>
+                        className={styles.cartBlock}>В корзину</button>
                     </div> : ''
                 }
               </div>

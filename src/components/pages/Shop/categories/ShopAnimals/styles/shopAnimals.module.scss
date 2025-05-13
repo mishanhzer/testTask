@@ -1,3 +1,4 @@
+// Стили картин "Животные"
 .shopAnimalsContainer {
   @apply bg-[#edeef0] w-screen pb-[50px]
 }
@@ -6,17 +7,14 @@
   @apply w-[80%] flex flex-wrap justify-between mx-[auto]
 }
 
-.shopBlock {
+.shopBlock { // Стиль блока при наведении на картину
   @apply mt-[25px] bg-[white] inline-block relative mb-[35px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }
-    // &:after:hover {
-    //   @apply content-[''] z-[50] absolute top-full left-0 w-full h-[40px] bg-[white] 
-    // }
 }
 
-.shopBlockNotActive {
+.shopBlockNotActive { // Стиль блока, когда нет наведения на картину
   @apply h-[85%] mt-[25px] bg-[white] inline-block relative mb-[50px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
@@ -27,98 +25,77 @@
   @apply object-cover w-[330px] h-[330px] rounded-t-md
 }
 
-.favourites {
-  @apply absolute top-0 right-0 w-[75px] h-[75px] flex justify-center items-center
-}
-
-.favouritesBtn {
-  width: 25px;
-  height: 25px;
-}
-
-.container {
+// Стили логотипа "Избранное"
+.containerLike {
   @apply absolute top-0 right-0 w-[50px] h-[50px] flex items-center justify-center
 }
 
-.salary {
+.salary { // Cтили цен
   @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44]
 }
 
-.salarySold {
+.salarySold { // Стиль цен проданных картин
   @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44] opacity-60 
 }
 
-.name {
+.name { // Стиль названия картины
   @apply text-[15px] ml-[10px] mt-[5px] font-[500]
 }
 
-.trash {
+// Стиль блока добавления в корзину
+.cart {
   @apply flex justify-center absolute w-[100%] bg-[white] rounded-md h-[70px]
 }
 
-.trashBlock {
+.cartBlock {
   @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
 }
 
-.loadMore {
+// стили тумблера
+.switch { // контейнер для переключателя
+  @apply relative inline-block w-[45px] h-[25.5px] 
+}
+
+.switch input { // скрываем дефолтные стили тумблера
+  @apply opacity-0 w-0 h-0
+}
+
+.slider { // стили для кастомного тумблера - делаем его сначала серым (занимает все пространство контейнера)
+  @apply absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#ccc] transition duration-[.4s]
+}
+
+.slider:before { // псевдоэлемент - кружок внутри тумблера, который будет перемещаться
+  @apply absolute content-[''] h-[19.5px] w-[19.5px] left-[3px] bottom-[3px] bg-white transition duration-[.4s]
+}
+
+input:checked + .slider { // когда тумблер активен меняем цвет фона кастомного тумблера
+  @apply bg-[rgba(0,91,255,1)]
+}
+
+input:checked + .slider::before { // когда тумблер активен перемещаем кружок вправо
+  @apply translate-x-[19.5px];
+}
+
+.slider.round {
+  @apply rounded-[25.5px] 
+}
+
+.slider:before {
+  @apply rounded-[50%]
+}
+
+// стили анимаций
+.animateDiscount {
+  @apply animate-animateOpacityBefore 
+}
+
+// стиль кнопки "Загрузить ещё"
+.loadMore { 
   @apply flex rounded-md items-center justify-center mx-auto mt-[20px] w-[250px] h-[60px] bg-[rgba(0,91,255,1)] text-[22px] text-white font-[roboto]
 }
 
 
-.switch { // контейнер для переключателя
-  position: relative;
-  display: inline-block;
-  width: 45px;
-  height: 25.5px;
-}
 
-.switch input { // скрываем дефолтные стили тумблера
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider { // стили для кастомного тумблера - делаем его сначала серым (занимает все пространство контейнера)
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before { // псевдоэлемент - кружок внутри тумблера, который будет перемещаться
-  position: absolute;
-  content: "";
-  height: 19.5px;
-  width: 19.5px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider { // когда тумблер активен меняем цвет фона кастомного тумблера
-  background-color: rgba(0, 91, 255, 1);
-}
-
-input:checked + .slider:before { // когда тумблер активен перемещаем кружок вправо
-  -webkit-transform: translateX(19.5px);
-  -ms-transform: translateX(19.5px);
-  transform: translateX(19.5px);
-}
-
-.slider.round {
-  border-radius: 25.5px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
 
 
 
