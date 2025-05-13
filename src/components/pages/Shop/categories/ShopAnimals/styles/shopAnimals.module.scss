@@ -1,3 +1,20 @@
+// Стили блока по добавлению скидки
+.containerDiscount {
+  @apply relative w-[16%] px-[15px] py-[5px] mx-auto mb-[30px] flex items-center border-[0.5px] border-[#868695] border-solid rounded-[20px]
+}
+
+.titleDiscount {
+  @apply text-[#868695] ml-[10px]
+}
+
+.discountValue {
+  @apply absolute top-[20%] right-[7%] text-[14px] font-[600] text-[#005bff] ml-[10px]
+} 
+
+.containerDiscountValue {
+  @apply ml-[10px]
+}
+
 // Стили картин "Животные"
 .shopAnimalsContainer {
   @apply bg-[#edeef0] w-screen pb-[50px]
@@ -21,6 +38,14 @@
     }
 }
 
+.pictureStockOpacity { // Стиль, когда картина есть в наличии
+  @apply opacity-100
+}
+
+.pictureSoldOutOpacity { // Стиль, когда картина продана
+  @apply opacity-60 h-[100%]
+}
+
 .shopImg {
   @apply object-cover w-[330px] h-[330px] rounded-t-md
 }
@@ -31,17 +56,20 @@
 }
 
 .salary { // Cтили цен
-  @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44]
-}
-
-.salarySold { // Стиль цен проданных картин
-  @apply ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44] opacity-60 
+  @apply flex items-center ml-[10px] mt-[15px] font-bold text-[20px] leading-[24px] text-[#f44]
 }
 
 .name { // Стиль названия картины
   @apply text-[15px] ml-[10px] mt-[5px] font-[500]
 }
 
+.salaryWithOutSubscribe {
+  @apply text-[#868695] text-[13px] ml-[6px] line-through
+}
+
+.salaryViewDiscount {
+  @apply ml-[6px] text-[13px]
+}
 // Стиль блока добавления в корзину
 .cart {
   @apply flex justify-center absolute w-[100%] bg-[white] rounded-md h-[70px]

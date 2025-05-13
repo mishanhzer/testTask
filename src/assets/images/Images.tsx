@@ -9,7 +9,7 @@ import portfolioPeopleAndAnimals from './portfolioImages/portfolioPeopleAndAnima
 
 export { mainPicture }
 
-interface TypesSizes {
+export interface TypesSizes {
   name: string
   url: string
 }

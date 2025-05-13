@@ -17,8 +17,8 @@ const StillLife = lazy(() => import('../pages/Portfolio/StillLife/StillLife.tsx'
 const PeopleAndAnimals = lazy(() => import('../pages/Portfolio/PeopleAndAnimals/PeopleAndAnimals.tsx'));
 const ContactMeAnt = lazy(() => import('../pages/ContactMe/ContactMeAnt.tsx'));
 const About = lazy(() => import('../pages/About/About.tsx'))
-const Shop = lazy(() => import('../pages/Shop/Shop.tsx'))
-const ShopAnimals = lazy(() => import('../pages/Shop/categories/ShopAnimals/ShopAnimals.tsx'))
+const Shop = lazy(() => import('../pages/shop/Shop.tsx'))
+const ShopAnimals = lazy(() => import('../pages/shop/categories/ShopAnimals/ShopAnimals.tsx'))
 
 import "./app.css";
 
