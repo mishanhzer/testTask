@@ -21,9 +21,7 @@ export const AppHeader = () => {
         <LinkMainLogo />
       </div>
       <div className={styles.styleDivContainerBasket}>
-        <a className="w-4" href="#">
-          <Basket className={styles.styleBasket} />
-        </a>
+        <Basket className={styles.styleBasket} />
         <LinkButton ml='ml-8' fz='text-base' />
       </div>
     </header>

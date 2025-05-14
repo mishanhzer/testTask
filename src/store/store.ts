@@ -9,8 +9,25 @@ import {
 } from '../utils/useTest'
 
 import {
-  TypesDataWorks,
+  TypesDataWorks, TypesSizes
 } from "../assets/images/Images"
+import { number, string } from "yup";
+
+interface TypesPictureCart {
+  active: boolean
+  description: string
+  file: string
+  id: number
+  inStock: boolean
+  materials: string
+  name: string
+  nameImg: string
+  path: string
+  preview: string
+  salary: number
+  size: string
+  sizes: TypesSizes[]
+}
 
 interface TypesStore {
   works: TypesDataWorks[]
@@ -30,6 +47,9 @@ interface TypesStore {
   pageFlowers: number
   pageStillLife: number
   pagePeopleAndAnimals: number
+
+  pictureCart: TypesPictureCart
+  getPictureCart: (picture: TypesPictureCart) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -53,6 +73,13 @@ export const useStore = create<TypesStore>()(
       pageFlowers: 1,
       pageStillLife: 1,
       pagePeopleAndAnimals: 1,
+
+      pictureCart: {},
+
+      getPictureCart: (picture) => (
+        set({pictureCart: picture})
+      ),
+
       getData: async (category, url, offsetName, offset, pageName, page) => {
         set({loading: 'loading'})
         try {

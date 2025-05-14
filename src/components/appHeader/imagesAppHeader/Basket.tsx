@@ -2,11 +2,15 @@ import React from "react";
 import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
 
+import { useStore } from "../../../store/store";
+
 interface BasketProps {
   className?: string;
 }
 
 export const Basket = ({ className }: BasketProps) => {
+  const pictureCart = useStore(state => state.pictureCart)
+  console.log(pictureCart)
   return (
     <NavLink to="/cart" className="relative">
       <svg
@@ -33,7 +37,8 @@ export const Basket = ({ className }: BasketProps) => {
           </g>
         </g>
       </svg>
-      <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div>
+      {Object.keys(pictureCart).length > 0 ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div> : null}
+      {/* <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div> */}
     </NavLink>
   );
 };

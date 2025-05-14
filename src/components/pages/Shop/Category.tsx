@@ -1,10 +1,13 @@
 import React from "react";
 import classNames from "classnames";
 
+import { useStore } from '../../../store/store'
+
 import { heartActive, heartDefault } from "./categories/ShopAnimals/heart";
 
 import { TypesSizes } from '../../../assets/images/Images'
 import styles from './categories/ShopAnimals/styles/shopAnimals.module.scss'
+import { NavLink } from "react-router";
 
 interface TypesCommonData {
   name: string
@@ -61,7 +64,7 @@ export const Category = ({
             <Like handleClickLike={handleClickLike} item={item} saveActive={saveActive} />
             <Salary item={item} activeDiscount={activeDiscount} />
             <div className={styles.name}>{item.name}</div>
-            {cartActive === item.name ? <BlockCart item={item} /> : null}
+            {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null}
           </div>
         )
       })}
@@ -99,9 +102,11 @@ const Salary = ({ item, activeDiscount }) => {
 }
 
 const BlockCart = ({ item }) => {
+  const getPictureCart = useStore(state => state.getPictureCart)
+  const pictureCart = useStore(state => state.pictureCart)
   const testClick = (e) => {
     if (e.currentTarget)
-      console.log(item)
+      getPictureCart(item)
   }
 
   return (
