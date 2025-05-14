@@ -1,0 +1,35 @@
+.btnMinus {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #242424;
+    top: 50%;
+    left: calc(50% - 6px);
+  }
+}
+
+.btnPlus {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #242424;
+    top: 50%;
+    left: calc(50% - 6px);
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #242424;
+    transform: rotate(90deg);
+    top: 50%;
+    left: calc(50% - 6px)
+  }
+}
