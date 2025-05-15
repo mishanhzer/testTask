@@ -10,6 +10,7 @@ interface BasketProps {
 
 export const Basket = ({ className }: BasketProps) => {
   const pictureCart = useStore(state => state.pictureCart)
+  const amountPictures = useStore(state => state.amountPictures)
   return (
     <NavLink to="/cart" className="relative">
       <svg
@@ -36,7 +37,7 @@ export const Basket = ({ className }: BasketProps) => {
           </g>
         </g>
       </svg>
-      {Object.keys(pictureCart).length > 0 ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div> : null}
+      {Object.keys(pictureCart).length > 0 ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">{amountPictures}</div> : null}
       {/* <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div> */}
     </NavLink>
   );
