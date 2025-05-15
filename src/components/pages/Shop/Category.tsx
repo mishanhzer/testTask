@@ -64,7 +64,9 @@ export const Category = ({
             <Like handleClickLike={handleClickLike} item={item} saveActive={saveActive} />
             <Salary item={item} activeDiscount={activeDiscount} />
             <div className={styles.name}>{item.name}</div>
-            {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null}
+            {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
+            {cartActive === item.name ? <NavLink to='/shop/shop_animals'><BlockCart item={item} /></NavLink> : null}
+
           </div>
         )
       })}
@@ -103,10 +105,16 @@ const Salary = ({ item, activeDiscount }) => {
 
 const BlockCart = ({ item }) => {
   const getPictureCart = useStore(state => state.getPictureCart)
+  const getPicturesCart = useStore(state => state.getPicturesCart)
   const pictureCart = useStore(state => state.pictureCart)
+  const picturesCart = useStore(state => state.picturesCart)
+  // console.log(pictureCart)
+  console.log(picturesCart)
+
   const testClick = (e) => {
     if (e.currentTarget)
       getPictureCart(item)
+    getPicturesCart(item)
   }
 
   return (

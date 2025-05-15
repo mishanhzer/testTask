@@ -10,7 +10,6 @@ interface BasketProps {
 
 export const Basket = ({ className }: BasketProps) => {
   const pictureCart = useStore(state => state.pictureCart)
-  console.log(pictureCart)
   return (
     <NavLink to="/cart" className="relative">
       <svg

@@ -14,19 +14,19 @@ import {
 import { number, string } from "yup";
 
 interface TypesPictureCart {
-  active: boolean
-  description: string
-  file: string
-  id: number
-  inStock: boolean
-  materials: string
-  name: string
-  nameImg: string
-  path: string
-  preview: string
-  salary: number
-  size: string
-  sizes: TypesSizes[]
+  active?: boolean
+  description?: string
+  file?: string
+  id?: number
+  inStock?: boolean
+  materials?: string
+  name?: string
+  nameImg?: string
+  path?: string
+  preview?: string
+  salary?: number
+  size?: string
+  sizes?: TypesSizes[]
 }
 
 interface TypesStore {
@@ -48,8 +48,10 @@ interface TypesStore {
   pageStillLife: number
   pagePeopleAndAnimals: number
 
-  pictureCart: TypesPictureCart
+  pictureCart: any
+  picturesCart: any
   getPictureCart: (picture: TypesPictureCart) => void
+  getDeleteTest: () => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -75,9 +77,17 @@ export const useStore = create<TypesStore>()(
       pagePeopleAndAnimals: 1,
 
       pictureCart: {},
+      picturesCart: [],
 
       getPictureCart: (picture) => (
         set({pictureCart: picture})
+      ),
+      getPicturesCart: () => {
+        set((state => ({picturesCart: [...state.picturesCart, state.pictureCart]})))
+      },
+
+      getDeleteTest: () => (
+        set({pictureCart: {}})
       ),
 
       getData: async (category, url, offsetName, offset, pageName, page) => {
