@@ -50,9 +50,10 @@ interface TypesStore {
 
   pictureCart: any
   picturesCart: any
+  cleanCart: TypesPictureCart[]
   amountPictures: number
   getPictureCart: (picture: TypesPictureCart) => void
-  getDeleteTest: () => void
+  getDeleteTest: (dataId: number) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -82,7 +83,7 @@ export const useStore = create<TypesStore>()(
       picturesCart: [],
       cleanCart: [],
 
-      getAmountPictures: (pictures) => (
+      getAmountPictures: (pictures: number) => (
         set({amountPictures: pictures})
       ),
 
@@ -94,12 +95,10 @@ export const useStore = create<TypesStore>()(
       },
 
       deleteDuplicatePicture: () => {
-        set((state => ({cleanCart: state.picturesCart.filter((item, i, self) => i === self.findIndex((t) => t.id === item.id))})))
+        set((state => ({cleanCart: state.picturesCart.filter((item: TypesPictureCart, i: number, self: TypesPictureCart[]) => i === self.findIndex((t) => t.id === item.id))})))
       },
 
       getDeleteTest: (dataId) => (
-        // set((state => ({cleanCart: state.picturesCart.filter()})))
-        // set((state => ({cleanCart: state.cleanCart.filter(item => item.id !== dataId)})))
         set((state => ({cleanCart: state.cleanCart.filter(item => item.id !== dataId)})))
       ),
 

@@ -18,27 +18,28 @@ const Cart = () => {
   const cleanCart = useStore(state => state.cleanCart)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
 
+  const cartItems = [...cleanCart].reverse()
+
   useEffect(() => {
     deleteDuplicatePicture()
     getAmountPictures(cleanCart.length)
   }, [])
 
+
   return (
     <div className={`flex justify-between pt-[24px] pb-[48px] bg-[#f6f6f9] px-[32px]`}>
-      {pictureCart.id ?
+      {cleanCart.length ?
         <>
-          <CartForm cleanCart={cleanCart} getDeleteTest={getDeleteTest} />
+          <CartForm cartItems={cartItems} getDeleteTest={getDeleteTest} />
           <CartOrder cleanCart={cleanCart} />
         </> : <CartEmpty />}
     </div>
   )
 }
 
-
-const CartForm = ({ cleanCart, getDeleteTest }) => {
-  const handleTestClick = (e) => {
-    const elem = e.currentTarget.getAttribute('data-id')
-    console.log(elem)
+const CartForm = ({ cartItems, getDeleteTest }) => {
+  const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+    const elem = +e.currentTarget.getAttribute('data-id')!
     getDeleteTest(elem)
   }
 
@@ -46,11 +47,11 @@ const CartForm = ({ cleanCart, getDeleteTest }) => {
     <div className={`w-[65%] min-h-[300px] bg-white border-[1px] border-[#f2f2f2] p-[24px] rounded-[24px]`}>
       <h1 className="flex h-[32px] text-[24px] font-[700] leading-[22px] mb-[8px]">Корзина</h1>
       <h2 className="flex text-[14px] font-[400] leading-[20px] text-[#868695] mb-[28px]">
-        {cleanCart.length} картин{cleanCart.length > 1 && cleanCart.length < 5 ? 'ы' : cleanCart.length > 4 ? '' : 'а'}
+        {cartItems.length} картин{cartItems.length > 1 && cartItems.length < 5 ? 'ы' : cartItems.length > 4 ? 'а' : ''}
       </h2>
-      {cleanCart.map(picture => {
+      {cartItems.map((picture, i) => {
         return (
-          <div className="mb-[30px] last:mb-0 relative">
+          <div key={i} className="mb-[30px] last:mb-0 relative">
             <div className="flex flex-row justify-between">
               <div className="flex">
                 <img src={picture.id ? picture?.sizes[0].url : null} className='w-[124px] mr-[20px] rounded-[8px] object-cover' alt="" />
@@ -78,15 +79,9 @@ const CartForm = ({ cleanCart, getDeleteTest }) => {
                 <button className={`${styles.btnPlus} w-[32px] h-[32px] bg-[#f6f6f9] rounded-[8px]`}></button>
               </div>
 
-              {/* <div className="flex items-start">
-                <button className={`${styles.btnMinus} w-[32px] h-[32px] bg-[#f6f6f9] rounded-[8px]`}></button>
-                <div className="w-[49px] h-[32px] flex justify-center items-center">1</div>
-                <button className={`${styles.btnPlus} w-[32px] h-[32px] bg-[#f6f6f9] rounded-[8px]`}></button>
-              </div> */}
               <div className="flex text-[rgb(255,68,68)] font-[700] text-[18px]">{picture.salary} ₽</div>
             </div>
           </div>
-          // </div >
         )
       })
       }
@@ -105,11 +100,11 @@ const CartOrder = ({ cleanCart }) => {
       </div>
       <div className="flex justify-between mt-[8px] text-[14px] leading-[20px] text-[#868695]">
         <div>Моя скидка</div>
-        <div><span>−</span>{salaryDiscount} ₽</div>
+        <div><span>−</span>{salary * 0.2} ₽</div>
       </div>
       <div className="flex justify-between mt-[8px] text-[24px] font-[700] leading-[32px]">
         <div>Итого</div>
-        <div>{salary} ₽</div>
+        <div>{salaryDiscount} ₽</div>
       </div>
       <button className="w-full h-[48px] mt-[16px] bg-[#005BFF] text-white text-[16px] font-[700] leading-[22px] rounded-[12px]">Заказать</button>
     </div>
