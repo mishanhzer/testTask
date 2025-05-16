@@ -65,7 +65,7 @@ export const Category = ({
             <Salary item={item} activeDiscount={activeDiscount} />
             <div className={styles.name}>{item.name}</div>
             {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
-            {cartActive === item.name ? <NavLink to='/shop/shop_animals'><BlockCart item={item} /></NavLink> : null}
+            {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null}
 
           </div>
         )
@@ -109,12 +109,12 @@ const BlockCart = ({ item }) => {
   const pictureCart = useStore(state => state.pictureCart)
   const picturesCart = useStore(state => state.picturesCart)
   // console.log(pictureCart)
-  console.log(picturesCart)
+  // console.log(picturesCart)
 
   const testClick = (e) => {
     if (e.currentTarget)
       getPictureCart(item)
-    getPicturesCart(item)
+    getPicturesCart()
   }
 
   return (

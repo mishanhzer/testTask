@@ -1,43 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useStore } from "../../../store/store";
-
-import testImg from '../Cart/testImg.webp'
 
 import { likeCart, deleteCart } from './imagesCart'
 import emptyCart from './emptyCart.jpg'
 import styles from './styles/cart.module.scss'
 import { NavLink } from "react-router";
 
-
 const Cart = () => {
-  const pictureCart = useStore(state => state.pictureCart)
   const picturesCart = useStore(state => state.picturesCart)
 
   const getDeleteTest = useStore(state => state.getDeleteTest)
   const getAmountPictures = useStore(state => state.getAmountPictures)
-  const cleanCart = useStore(state => state.cleanCart)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
-
-  const cartItems = [...cleanCart].reverse()
 
   useEffect(() => {
     deleteDuplicatePicture()
-    getAmountPictures(cleanCart.length)
   }, [])
-
 
   return (
     <div className={`flex justify-between pt-[24px] pb-[48px] bg-[#f6f6f9] px-[32px]`}>
-      {cleanCart.length ?
+      {picturesCart.length ?
         <>
-          <CartForm cartItems={cartItems} getDeleteTest={getDeleteTest} />
-          <CartOrder cleanCart={cleanCart} />
+          <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} getAmountPictures={getAmountPictures} />
+          <CartOrder picturesCart={picturesCart} />
         </> : <CartEmpty />}
     </div>
   )
 }
 
-const CartForm = ({ cartItems, getDeleteTest }) => {
+const CartForm = ({ picturesCart, getDeleteTest, getAmountPictures }) => {
+  useEffect(() => {
+    getAmountPictures(picturesCart.length)
+  }, [picturesCart])
+
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
     getDeleteTest(elem)
@@ -47,9 +42,9 @@ const CartForm = ({ cartItems, getDeleteTest }) => {
     <div className={`w-[65%] min-h-[300px] bg-white border-[1px] border-[#f2f2f2] p-[24px] rounded-[24px]`}>
       <h1 className="flex h-[32px] text-[24px] font-[700] leading-[22px] mb-[8px]">Корзина</h1>
       <h2 className="flex text-[14px] font-[400] leading-[20px] text-[#868695] mb-[28px]">
-        {cartItems.length} картин{cartItems.length > 1 && cartItems.length < 5 ? 'ы' : cartItems.length > 4 ? 'а' : ''}
+        {picturesCart.length} картин{picturesCart.length > 1 && picturesCart.length < 5 ? 'ы' : picturesCart.length > 4 ? 'а' : ''}
       </h2>
-      {cartItems.map((picture, i) => {
+      {picturesCart.map((picture, i) => {
         return (
           <div key={i} className="mb-[30px] last:mb-0 relative">
             <div className="flex flex-row justify-between">
@@ -88,14 +83,14 @@ const CartForm = ({ cartItems, getDeleteTest }) => {
     </div>)
 }
 
-const CartOrder = ({ cleanCart }) => {
-  const salary = cleanCart.map(item => item.salary).reduce((a, b) => a + b, 0)
+const CartOrder = ({ picturesCart }) => {
+  const salary = picturesCart.map(item => item.salary).reduce((a, b) => a + b, 0)
   const salaryDiscount = salary - salary * 0.2
   return (
     <div className="w-[30%] h-[250px] bg-white border-[1px] border-[#f2f2f2] p-[24px] rounded-[24px]">
       <h2 className="text-[#005BFF] cursor-pointer text-[16px] font-[650] leading-[22px] mb-[24px] ">Выбрать адрес доставки</h2>
       <div className="flex justify-between mt-[8px] text-[14px] leading-[20px] text-[#868695]">
-        <div>Товары, {cleanCart.length} шт.</div>
+        <div>Товары, {picturesCart.length} шт.</div>
         <div>{salary} ₽</div>
       </div>
       <div className="flex justify-between mt-[8px] text-[14px] leading-[20px] text-[#868695]">
