@@ -79,6 +79,10 @@
   @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
 }
 
+.cartBlockActive {
+  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,.2)] text-[rgba(0,91,255,1)] flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
+}
+
 // стили тумблера
 .switch { // контейнер для переключателя
   @apply relative inline-block w-[45px] h-[25.5px] 

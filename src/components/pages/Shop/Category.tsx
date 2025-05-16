@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 
 import { useStore } from '../../../store/store'
@@ -64,9 +64,9 @@ export const Category = ({
             <Like handleClickLike={handleClickLike} item={item} saveActive={saveActive} />
             <Salary item={item} activeDiscount={activeDiscount} />
             <div className={styles.name}>{item.name}</div>
-            {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
-            {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null}
 
+            {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
+            {cartActive === item.name ? <BlockCart item={item} /> : null}
           </div>
         )
       })}
@@ -106,25 +106,40 @@ const Salary = ({ item, activeDiscount }) => {
 const BlockCart = ({ item }) => {
   const getPictureCart = useStore(state => state.getPictureCart)
   const getPicturesCart = useStore(state => state.getPicturesCart)
-  const pictureCart = useStore(state => state.pictureCart)
-  const picturesCart = useStore(state => state.picturesCart)
-  // console.log(pictureCart)
-  // console.log(picturesCart)
+  const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
+
+  const [activeCart, setActiveCart] = useState(false)
+  const [btnId, setBtnId] = useState(0)
 
   const testClick = (e) => {
-    if (e.currentTarget)
+    const activeBtn = +e.currentTarget.getAttribute('data-id')
+    setBtnId(activeBtn)
+    setActiveCart(!activeCart)
+    if (e.currentTarget) {
       getPictureCart(item)
-    getPicturesCart()
+      getPicturesCart()
+      deleteDuplicatePicture()
+    }
   }
 
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
-      <button
-        className={styles.cartBlock}
-        disabled={item.salary ? false : true}
-        onClick={testClick}
-      >В корзину
-      </button>
+      {activeCart && btnId === item.id ?
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} style={styles.cartBlockActive} /> :
+        <NavLink to='/cart' className={styles.cartBlock}><ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} /></NavLink>
+      }
     </div>
+  )
+}
+
+const ButtonCart = ({ item, testClick, btnText, style }) => {
+  return (
+    <button
+      className={style}
+      disabled={item.salary ? false : true}
+      onClick={testClick}
+      data-id={item.id}
+    >{btnText}
+    </button>
   )
 }
