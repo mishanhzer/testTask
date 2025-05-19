@@ -4,7 +4,8 @@ import { useStore } from '../../../../../store/store'
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
 import { SubscribePanel } from '../../Subscribe'
 import { Category } from "../../Category"
-import { Spinner } from '../../../../spinner/Spinner'
+
+import { PopupCart } from "../../PopupCart"
 
 import { dataShop } from "../../dataShop"
 
@@ -23,6 +24,8 @@ const ShopAnimals = () => {
   const [cartActive, setCartActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
 
+  const addInCart = useStore(state => state.addInCart)
+
   const [saveActive, setSaveActive] = useState({})
   const [activeDiscount, setActiveDiscount] = useState(false)
 
@@ -35,10 +38,10 @@ const ShopAnimals = () => {
     return { ...item1, ...item2 }
   })
 
-  const handleEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    const dataTarget = e.currentTarget.getAttribute('data-name')
-    setCartActive(dataTarget)
-  }
+  // const handleEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  //   const dataTarget = e.currentTarget.getAttribute('data-name')
+  //   setCartActive(dataTarget)
+  // }
 
   const handleClick = () => {
     setLimit(limit + 9)
@@ -55,6 +58,8 @@ const ShopAnimals = () => {
 
   return (
     <div>
+      {addInCart ? <PopupCart /> : null}
+      {/* <PopupCart /> */}
       <SubscribePanel activeDiscount={activeDiscount} setActiveDiscount={setActiveDiscount} />
       <div className={styles.shopAnimalsContainer}>
         <Category
@@ -62,7 +67,7 @@ const ShopAnimals = () => {
           limit={limit}
           cartActive={cartActive}
           setCartActive={setCartActive}
-          handleEnter={handleEnter}
+          // handleEnter={handleEnter}
           handleClickLike={handleClickLike}
           saveActive={saveActive}
           activeDiscount={activeDiscount} />

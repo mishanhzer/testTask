@@ -25,14 +25,14 @@
 }
 
 .shopBlock { // Стиль блока при наведении на картину
-  @apply mt-[25px] bg-[white] inline-block relative mb-[35px] pb-[15px] rounded-md;
+  @apply mt-[35px] bg-[white] inline-block relative mb-[35px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }
 }
 
 .shopBlockNotActive { // Стиль блока, когда нет наведения на картину
-  @apply h-[85%] mt-[25px] bg-[white] inline-block relative mb-[50px] pb-[15px] rounded-md;
+  @apply h-[85%] mt-[35px] bg-[white] inline-block relative mb-[75px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }

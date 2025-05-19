@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { NavLink } from "react-router";
 import classNames from "classnames";
 
 import { useStore } from '../../../store/store'
 
 import { heartActive, heartDefault } from "./categories/ShopAnimals/heart";
+import { cartInBtn } from "../Cart/imagesCart";
 
 import { TypesSizes } from '../../../assets/images/Images'
 import styles from './categories/ShopAnimals/styles/shopAnimals.module.scss'
-import { NavLink } from "react-router";
 
 interface TypesCommonData {
   name: string
@@ -39,12 +40,31 @@ interface CategoryProps {
   activeDiscount: boolean
 }
 
+interface TypesLike {
+  handleClickLike: (e: React.MouseEvent<HTMLButtonElement>) => void
+  item: TypesCommonData
+  saveActive: TypesSaveActive
+}
+
+interface TypesSalary {
+  item: TypesCommonData
+  activeDiscount: boolean
+}
+
+interface TypesButtonCart {
+  item: TypesCommonData
+  testClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  btnText: string
+  style?: string
+  img: () => React.ReactNode | null
+}
+
 export const Category = ({
   commonData,
   limit,
   cartActive,
   setCartActive,
-  handleEnter,
+  // handleEnter,
   handleClickLike,
   saveActive,
   activeDiscount,
@@ -55,7 +75,7 @@ export const Category = ({
         return (
           <div
             onMouseLeave={() => setCartActive('')}
-            onMouseEnter={handleEnter}
+            // onMouseEnter={handleEnter}
             className={classNames(cartActive === item.name ? styles.shopBlock : styles.shopBlockNotActive, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
             data-name={item.name}
             key={item.name}
@@ -66,7 +86,7 @@ export const Category = ({
             <div className={styles.name}>{item.name}</div>
 
             {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
-            {cartActive === item.name ? <BlockCart item={item} /> : null}
+            <BlockCart item={item} />
           </div>
         )
       })}
@@ -74,7 +94,7 @@ export const Category = ({
   )
 }
 
-const Like = ({ handleClickLike, item, saveActive }) => {
+const Like = ({ handleClickLike, item, saveActive }: TypesLike) => {
   return (
     <div className={styles.containerLike}>
       <button
@@ -89,7 +109,7 @@ const Like = ({ handleClickLike, item, saveActive }) => {
   )
 }
 
-const Salary = ({ item, activeDiscount }) => {
+const Salary = ({ item, activeDiscount }: TypesSalary) => {
   return (
     <div className={activeDiscount ? `${styles.salary} ${styles.animateDiscount}` : `${styles.salary} animate-animateOpacityBefore`}>
       {<div>
@@ -103,43 +123,59 @@ const Salary = ({ item, activeDiscount }) => {
   )
 }
 
-const BlockCart = ({ item }) => {
+const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const getPictureCart = useStore(state => state.getPictureCart)
   const getPicturesCart = useStore(state => state.getPicturesCart)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
 
+  const addInCart = useStore(state => state.addInCart)
+  const setAddInCart = useStore(state => state.setAddInCart)
+
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
 
-  const testClick = (e) => {
-    const activeBtn = +e.currentTarget.getAttribute('data-id')
+
+  console.log(addInCart)
+
+  const testClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const activeBtn = +e.currentTarget.getAttribute('data-id')!
     setBtnId(activeBtn)
     setActiveCart(!activeCart)
+
     if (e.currentTarget) {
+      setAddInCart(true)
       getPictureCart(item)
       getPicturesCart()
       deleteDuplicatePicture()
     }
+
+    setTimeout(() => {
+      setAddInCart(false)
+    }, 3000)
   }
 
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
       {activeCart && btnId === item.id ?
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} style={styles.cartBlockActive} /> :
-        <NavLink to='/cart' className={styles.cartBlock}><ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} /></NavLink>
+        <NavLink to='/cart' className={styles.cartBlockActive}><ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} /> </NavLink> :
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       }
     </div>
   )
 }
 
-const ButtonCart = ({ item, testClick, btnText, style }) => {
+const ButtonCart = ({ item, testClick, btnText, style, img }: TypesButtonCart) => {
   return (
     <button
       className={style}
       disabled={item.salary ? false : true}
       onClick={testClick}
       data-id={item.id}
-    >{btnText}
+    >
+      <span className={`mr-[0.7rem]`}>{img()}</span>
+      {btnText}
     </button>
   )
 }
+
+

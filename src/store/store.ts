@@ -57,6 +57,9 @@ interface TypesStore {
   getDeleteTest: (dataId: number) => void
   deleteDuplicatePicture: () => void
   getPicturesCart: () => void
+
+  addInCart: boolean
+  setAddInCart: (active: boolean) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -84,6 +87,12 @@ export const useStore = create<TypesStore>()(
       amountPictures: 0,
       pictureCart: {},
       picturesCart: [],
+
+      addInCart: false,
+
+      setAddInCart: (active: boolean) => (
+        set({addInCart: active})
+      ),
 
       getAmountPictures: (pictures: number) => (
         set({amountPictures: pictures})
