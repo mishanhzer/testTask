@@ -51,8 +51,6 @@ interface TypesStore {
   pictureCart: any
   picturesCart: any
 
-  amountPictures: number
-  getAmountPictures: (amount: number) => void
   getPictureCart: (picture: TypesPictureCart) => void
   getDeleteTest: (dataId: number) => void
   deleteDuplicatePicture: () => void
@@ -84,7 +82,6 @@ export const useStore = create<TypesStore>()(
       pageStillLife: 1,
       pagePeopleAndAnimals: 1,
 
-      amountPictures: 0,
       pictureCart: {},
       picturesCart: [],
 
@@ -92,10 +89,6 @@ export const useStore = create<TypesStore>()(
 
       setAddInCart: (active: boolean) => (
         set({addInCart: active})
-      ),
-
-      getAmountPictures: (pictures: number) => (
-        set({amountPictures: pictures})
       ),
 
       getPictureCart: (picture) => (

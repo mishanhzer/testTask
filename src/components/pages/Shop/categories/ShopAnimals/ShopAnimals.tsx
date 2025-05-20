@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react"
 import { useStore } from '../../../../../store/store'
 
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
-import { SubscribePanel } from '../../Subscribe'
-import { Category } from "../../Category"
+import { SubscribePanel } from '../../subcscribe/Subscribe'
+import { Category } from "../Category"
 
-import { PopupCart } from "../../PopupCart"
+import { PopupCart } from "../../popupCart/PopupCart"
 
 import { dataShop } from "../../dataShop"
 
@@ -18,30 +18,29 @@ const urlAnimalsShop = `${_apiUrl}${linkAnimals}&limit=100`
 const ShopAnimals = () => {
   const animals = useStore(state => state.animals)
   const getData = useStore(state => state.getData)
+  const setAddInCart = useStore(state => state.setAddInCart)
 
   const loading = useStore(state => state.loading)
 
-  const [cartActive, setCartActive] = useState<string | null>('')
   const [limit, setLimit] = useState(9)
 
   const addInCart = useStore(state => state.addInCart)
+  console.log(addInCart)
 
   const [saveActive, setSaveActive] = useState({})
   const [activeDiscount, setActiveDiscount] = useState(false)
 
   useEffect(() => {
     getData('animals', urlAnimalsShop, 'offsetAnimals', 0, 'pageAnimals')
+    setTimeout(() => {
+      setAddInCart(false)
+    }, 2700)
   }, [])
 
   const commonData = dataShop.map((item2) => {
     const item1 = animals.find((item1) => item1.name === item2.nameImg)
     return { ...item1, ...item2 }
   })
-
-  // const handleEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-  //   const dataTarget = e.currentTarget.getAttribute('data-name')
-  //   setCartActive(dataTarget)
-  // }
 
   const handleClick = () => {
     setLimit(limit + 9)
@@ -50,24 +49,18 @@ const ShopAnimals = () => {
 
   const handleClickLike = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const active = +e.currentTarget.getAttribute('data-id')!
-
     const changeActive = (boolean: boolean) => setSaveActive((prevArrTest) => ({ ...prevArrTest, [active]: boolean }))
-
     saveActive[active] ? changeActive(false) : changeActive(true)
   }
 
   return (
     <div>
-      {addInCart ? <PopupCart /> : null}
-      {/* <PopupCart /> */}
+      {addInCart ? <PopupCart text={'Товар добавлен в корзину'} /> : null}
       <SubscribePanel activeDiscount={activeDiscount} setActiveDiscount={setActiveDiscount} />
       <div className={styles.shopAnimalsContainer}>
         <Category
           commonData={commonData}
           limit={limit}
-          cartActive={cartActive}
-          setCartActive={setCartActive}
-          // handleEnter={handleEnter}
           handleClickLike={handleClickLike}
           saveActive={saveActive}
           activeDiscount={activeDiscount} />

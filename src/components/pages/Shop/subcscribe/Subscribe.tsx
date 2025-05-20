@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styles from './categories/ShopAnimals/styles/shopAnimals.module.scss'
+import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
 
 interface TypesSavePanel {
   activeDiscount: boolean

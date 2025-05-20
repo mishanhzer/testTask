@@ -3,47 +3,52 @@ import { NavLink } from "react-router";
 import classNames from "classnames";
 import { useStore } from "../../../store/store";
 
-import { likeCart, deleteCart } from './imagesCart'
-import emptyCart from './emptyCart.jpg'
+import { PopupCart } from "../shop/popupCart/PopupCart"
+
+import { likeCart, deleteCart } from "../../../assets/images/Images";
+import emptyCart from '../../../assets/images/cartImage/emptyCart.jpg'
 import styles from './styles/cart.module.scss'
 
 const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
 
   const getDeleteTest = useStore(state => state.getDeleteTest)
-  const getAmountPictures = useStore(state => state.getAmountPictures)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
+
+  const [viewDeleteBtn, setViewDeleteBtn] = useState(false)
 
   useEffect(() => {
     deleteDuplicatePicture()
   }, [])
 
   return (
-    <div className={styles.cartContainer}>
-      {picturesCart.length ?
-        <>
-          <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} getAmountPictures={getAmountPictures} />
-          <CartOrder picturesCart={picturesCart} />
-        </> : <CartEmpty />}
-    </div>
+    <>
+      {viewDeleteBtn ? <PopupCart text={'Товар удален из корзины'} /> : null}
+      <div className={styles.cartContainer}>
+        {picturesCart.length ?
+          <>
+            <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} setViewDeleteBtn={setViewDeleteBtn} />
+            <CartOrder picturesCart={picturesCart} />
+          </> : <CartEmpty />}
+      </div>
+    </>
   )
 }
 
-const CartForm = ({ picturesCart, getDeleteTest, getAmountPictures }) => {
-  const [plus, setPlus] = useState(0)
+const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
+  const [salaryTest, setSalaryTest] = useState(0)
   const [minus, setMinus] = useState(0)
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(1)
 
   const [btnId, setBtnId] = useState(0)
   const [activeLike, setActiveLike] = useState(false)
 
-  useEffect(() => {
-    getAmountPictures(picturesCart.length)
-  }, [picturesCart])
+  console.log(salaryTest)
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
     getDeleteTest(elem)
+    setViewDeleteBtn(elem)
   }
 
   const handleLikeClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
@@ -52,12 +57,23 @@ const CartForm = ({ picturesCart, getDeleteTest, getAmountPictures }) => {
     setActiveLike(!activeLike)
   }
 
-  console.log(picturesCart)
+  const handleIncreaseSalary = (e, pictureSalary) => {
+    const dataSalary = +e.currentTarget.getAttribute('data-salary')!
+    let num = 1;
+    setAmount(amount + num)
+
+    setSalaryTest(pictureSalary + pictureSalary * amount)
+  }
+
+  const handleReduceSalary = () => {
+
+  }
+
   return (
     <div className={styles.cartFormContainer}>
       <h1 className={styles.cartFormHeader}>Корзина</h1>
       <h2 className={styles.cartFormAmountPicture}>
-        {picturesCart.length} картин{picturesCart.length > 1 && picturesCart.length < 5 ? 'ы' : picturesCart.length > 4 ? 'а' : ''}
+        {picturesCart.length} картин{picturesCart.length > 0 && picturesCart.length < 2 ? 'а' : picturesCart.length > 2 && picturesCart.length < 5 ? 'ы' : ''}
       </h2>
       {picturesCart.map((picture, i) => {
         return (
@@ -90,8 +106,12 @@ const CartForm = ({ picturesCart, getDeleteTest, getAmountPictures }) => {
 
               <div className={styles.cartFormIncreaseAndDecrease}>
                 <button className={styles.btnMinus}></button>
-                <div className={styles.cartFormIncreaseAndDecreaseValue}>1</div>
-                <button className={styles.btnPlus}></button>
+                <div className={styles.cartFormIncreaseAndDecreaseValue}>{amount}</div>
+                <button
+                  onClick={(e) => handleIncreaseSalary(e, picture.salary)}
+                  className={styles.btnPlus}
+                  data-salary={picture.salary}>
+                </button>
               </div>
 
               <div className={styles.cartFormSalary}>{picture.salary} ₽</div>

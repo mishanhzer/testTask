@@ -2,69 +2,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
 
-import { useStore } from '../../../store/store'
+import { useStore } from '../../../../store/store'
 
-import { heartActive, heartDefault } from "./categories/ShopAnimals/heart";
-import { cartInBtn } from "../Cart/imagesCart";
+import { heartActive, heartDefault } from "./ShopAnimals/heart";
+import { cartInBtn } from "../../../../assets/images/Images";
 
-import { TypesSizes } from '../../../assets/images/Images'
-import styles from './categories/ShopAnimals/styles/shopAnimals.module.scss'
+import { TypesCommonData, TypesSaveActive, CategoryProps, TypesSalary, TypesLike, TypesButtonCart } from "../TypesShops"
 
-interface TypesCommonData {
-  name: string
-  nameImg: string
-  inStock: boolean
-  salary: number
-  description: string
-  size: string
-  materials: string
-  active: boolean
-  id: number
-  file?: string
-  path?: string
-  preview?: string
-  sizes?: TypesSizes[]
-}
-interface TypesSaveActive {
-  [key: number]: boolean
-}
-
-interface CategoryProps {
-  commonData: TypesCommonData[]
-  limit: number
-  cartActive: string | null
-  setCartActive: React.Dispatch<React.SetStateAction<string | null>>
-  handleEnter: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void
-  handleClickLike: (e: React.MouseEvent<HTMLButtonElement>) => void
-  saveActive: TypesSaveActive
-  activeDiscount: boolean
-}
-
-interface TypesLike {
-  handleClickLike: (e: React.MouseEvent<HTMLButtonElement>) => void
-  item: TypesCommonData
-  saveActive: TypesSaveActive
-}
-
-interface TypesSalary {
-  item: TypesCommonData
-  activeDiscount: boolean
-}
-
-interface TypesButtonCart {
-  item: TypesCommonData
-  testClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-  btnText: string
-  style?: string
-  img: () => React.ReactNode | null
-}
+import styles from './ShopAnimals/styles/shopAnimals.module.scss'
 
 export const Category = ({
   commonData,
   limit,
-  cartActive,
-  setCartActive,
-  // handleEnter,
   handleClickLike,
   saveActive,
   activeDiscount,
@@ -74,19 +23,22 @@ export const Category = ({
       {commonData.slice(0, limit).map(item => {
         return (
           <div
-            onMouseLeave={() => setCartActive('')}
-            // onMouseEnter={handleEnter}
-            className={classNames(cartActive === item.name ? styles.shopBlock : styles.shopBlockNotActive, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
+            className={classNames(styles.shopBlock, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
             data-name={item.name}
             key={item.name}
           >
             <img className={styles.shopImg} src={item.sizes?.[0].url} alt={item.name} />
-            <Like handleClickLike={handleClickLike} item={item} saveActive={saveActive} />
-            <Salary item={item} activeDiscount={activeDiscount} />
+            <Like
+              handleClickLike={handleClickLike}
+              item={item}
+              saveActive={saveActive} />
+            <Salary
+              item={item}
+              activeDiscount={activeDiscount} />
             <div className={styles.name}>{item.name}</div>
 
-            {/* {cartActive === item.name ? <NavLink to='/cart'><BlockCart item={item} /></NavLink> : null} */}
-            <BlockCart item={item} />
+            <BlockCart
+              item={item} />
           </div>
         )
       })}
@@ -134,10 +86,7 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
 
-
-  console.log(addInCart)
-
-  const testClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const testClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const activeBtn = +e.currentTarget.getAttribute('data-id')!
     setBtnId(activeBtn)
     setActiveCart(!activeCart)
@@ -151,7 +100,7 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
 
     setTimeout(() => {
       setAddInCart(false)
-    }, 3000)
+    }, 2700)
   }
 
   return (

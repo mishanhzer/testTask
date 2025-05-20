@@ -25,18 +25,18 @@
 }
 
 .shopBlock { // Стиль блока при наведении на картину
-  @apply mt-[35px] bg-[white] inline-block relative mb-[35px] pb-[15px] rounded-md;
+  @apply mt-[35px] bg-[white] inline-block relative mb-[75px] pb-[15px] rounded-md;
     &:hover {
       @apply cursor-pointer;
     }
 }
 
-.shopBlockNotActive { // Стиль блока, когда нет наведения на картину
-  @apply h-[85%] mt-[35px] bg-[white] inline-block relative mb-[75px] pb-[15px] rounded-md;
-    &:hover {
-      @apply cursor-pointer;
-    }
-}
+// .shopBlockNotActive { // Стиль блока, когда нет наведения на картину
+//   @apply h-[85%] mt-[35px] bg-[white] inline-block relative mb-[75px] pb-[15px] rounded-md;
+//     &:hover {
+//       @apply cursor-pointer;
+//     }
+// }
 
 .pictureStockOpacity { // Стиль, когда картина есть в наличии
   @apply opacity-100
@@ -76,11 +76,11 @@
 }
 
 .cartBlock {
-  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
+  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,1)] text-white flex justify-center items-center my-[auto] rounded-md disabled:opacity-60 hover:opacity-80
 }
 
 .cartBlockActive {
-  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,.2)] text-[rgba(0,91,255,1)] flex justify-center items-center my-[auto] rounded-md disabled:opacity-60
+  @apply w-[80%] text-[18px] font-[500] font-[roboto] h-[40px] bg-[rgba(0,91,255,.2)] text-[rgba(0,91,255,1)] flex justify-center items-center my-[auto] rounded-md disabled:opacity-60 hover:bg-[rgba(0,91,255,.3)]
 }
 
 // стили тумблера
