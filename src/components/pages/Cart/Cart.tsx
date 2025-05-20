@@ -37,13 +37,13 @@ const Cart = () => {
 
 const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
   const [salaryTest, setSalaryTest] = useState(0)
-  const [minus, setMinus] = useState(0)
   const [amount, setAmount] = useState(1)
+  const [cartId, setCartId] = useState(0)
+  const [testObj, setTestObj] = useState({})
+  console.log(testObj)
 
   const [btnId, setBtnId] = useState(0)
   const [activeLike, setActiveLike] = useState(false)
-
-  console.log(salaryTest)
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
@@ -58,15 +58,33 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
   }
 
   const handleIncreaseSalary = (e, pictureSalary) => {
-    const dataSalary = +e.currentTarget.getAttribute('data-salary')!
+    const cartPictureId = +e.currentTarget.getAttribute('data-id')!
+
+    setCartId(cartPictureId)
+
     let num = 1;
     setAmount(amount + num)
 
     setSalaryTest(pictureSalary + pictureSalary * amount)
+
+
+    const newData = [...picturesCart]
+
+    newData.map(item => {
+      setTestObj({
+        ...item,
+        amount: 0,
+        amountSalary: 0
+      })
+    })
   }
 
-  const handleReduceSalary = () => {
-
+  const handleDecreaseSalary = (e, pictureSalary) => {
+    if (amount > 1) {
+      let num = 1
+      setAmount(amount - num)
+      setSalaryTest(pictureSalary * amount - pictureSalary)
+    }
   }
 
   return (
@@ -105,22 +123,33 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
               </div>
 
               <div className={styles.cartFormIncreaseAndDecrease}>
-                <button className={styles.btnMinus}></button>
-                <div className={styles.cartFormIncreaseAndDecreaseValue}>{amount}</div>
-                <button
-                  onClick={(e) => handleIncreaseSalary(e, picture.salary)}
-                  className={styles.btnPlus}
-                  data-salary={picture.salary}>
-                </button>
+                {amount > 1 ?
+                  <CartFormButtonIncDec func={(e) => handleDecreaseSalary(e, picture.salary)} disabled={amount > 1 && cartId === picture.id ? false : true} style={styles.btnMinus} data={picture.id} /> :
+                  <CartFormButtonIncDec func={(e) => handleDecreaseSalary(e, picture.salary)} disabled={amount === 1 ? true : false} style={styles.btnMinus} data={picture.id} />
+                }
+                <div className={styles.cartFormIncreaseAndDecreaseValue}>{picture.id === cartId ? amount : 1}</div>
+                <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary)} disabled={amount > 1 && cartId === picture.id ? false : false} style={styles.btnPlus} data={picture.id} />
               </div>
 
-              <div className={styles.cartFormSalary}>{picture.salary} ₽</div>
+              {/* <div className={styles.cartFormSalary}>{picture.salary} ₽</div> */}
+              <div className={styles.cartFormSalary}>{picture.id === cartId ? salaryTest : picture.salary} ₽</div>
             </div>
           </div>
         )
       })
       }
     </div >)
+}
+
+const CartFormButtonIncDec = ({ func, disabled, style, data }) => {
+  return (
+    <button
+      onClick={func}
+      disabled={disabled}
+      className={style}
+      data-id={data}>
+    </button>
+  )
 }
 
 const CartOrder = ({ picturesCart }) => {
