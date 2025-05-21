@@ -11,6 +11,7 @@ export interface TypesCommonData {
   active: boolean
   id: number
   file?: string
+  amount?: number
   path?: string
   preview?: string
   sizes?: TypesSizes[]

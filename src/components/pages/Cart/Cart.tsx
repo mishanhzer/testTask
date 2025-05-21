@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
+import add from 'lodash/add'
+import { subtract } from 'lodash';
 import { useStore } from "../../../store/store";
 
 import { PopupCart } from "../shop/popupCart/PopupCart"
+
+import { TypesCommonData } from "../shop/TypesShops";
 
 import { likeCart, deleteCart } from "../../../assets/images/Images";
 import emptyCart from '../../../assets/images/cartImage/emptyCart.jpg'
@@ -36,14 +40,9 @@ const Cart = () => {
 }
 
 const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
-  const [salaryTest, setSalaryTest] = useState(0)
-
-  const [amount, setAmount] = useState(1)
-  const [obj, setObj] = useState({})
+  const [oldSalary, setOldSalary] = useState(0)
 
   const [cart, setCart] = useState(picturesCart);
-  console.log(cart)
-
   const [cartId, setCartId] = useState(0)
 
   const [btnId, setBtnId] = useState(0)
@@ -61,44 +60,23 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
     setActiveLike(!activeLike)
   }
 
-  const handleIncreaseSalary = (e, pictureSalary, value) => {
+  const handleIncreaseSalary = (e, pictureSalary: number, value, operation) => {
     const cartPictureId = +e.currentTarget.getAttribute('data-id')!
-
-    const newObj = { ...obj }
-    const newPropName = `prop${Object.keys(obj).length + 1}`
-
-    newObj[newPropName] = `${Object.keys(obj).length + 1}`
-    setObj(newObj)
-
     setCartId(cartPictureId)
 
-    let num = 1
-    setAmount(amount + num)
-
-    setSalaryTest(pictureSalary + pictureSalary * amount)
-
-    const newCart = cart.map((item) => {
-      if (item.id === cartPictureId) {
-        return { ...item, amount: item.amount + value };
-      }
-      return item;
-    });
-    setCart(newCart);
+    const selectedPicture: TypesCommonData = picturesCart.find(item => item.id === cartPictureId) // находим выбранный обьект в массиве
+    if (selectedPicture && selectedPicture.salary !== undefined) { // если обьект нашелся
+      const newSalary = operation(pictureSalary, selectedPicture.salary) // устанавливаем новую цену + старую цену (picture salary будет меняться при каждом клике), operation новый паттерн - чтобы использовать операторы в аргументах (при разных операторах при вызове функции)
+      setOldSalary(selectedPicture.salary) // добавляем в стейт старую цену
+      const newCart = cart.map((item) => { // проходимся по массиву и добавляем необходиые новые свойства
+        if (item.id === cartPictureId) { // если элементы совпадают до добавим свойства
+          return { ...item, amount: item.amount + value, salary: newSalary };
+        }
+        return item; // если нет, то верни обычный неизмененный обьект
+      });
+      setCart(newCart); // добавляем в стейт новый массив с обьектами с новыми свойствами
+    }
   }
-
-  // const handleDecreaseSalary = (e, pictureSalary, value) => {
-  //   const cartPictureId = +e.currentTarget.getAttribute('data-id')!
-  //   if (amount > 1) {
-  //     const newCart = cart.map((item) => {
-  //       if (item.id === cartPictureId) {
-  //         return { ...item, amount: item.amount + value };
-  //       }
-  //       return item;
-  //     });
-  //     setCart(newCart);
-  //     setSalaryTest(pictureSalary * amount - pictureSalary)
-  //   }
-  // }
 
   return (
     <div className={styles.cartFormContainer}>
@@ -136,15 +114,23 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
               </div>
 
               <div className={styles.cartFormIncreaseAndDecrease}>
-                {amount > 1 ?
-                  <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, -1)} disabled={picture.amount > 1 ? false : true} style={styles.btnMinus} data={picture.id} /> :
-                  <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, -1)} disabled={picture.amount === 1 ? true : false} style={styles.btnMinus} data={picture.id} />
+                {picture.amount > 1 ?
+                  <CartFormButtonIncDec
+                    func={(e) => handleIncreaseSalary(e, picture.salary, -1, (a, b) => a - b)}
+                    disabled={picture.amount > 1 ? false : true}
+                    style={styles.btnMinus}
+                    data={picture.id} /> :
+                  <CartFormButtonIncDec
+                    func={(e) => handleIncreaseSalary(e, picture.salary, -1, (a, b) => a - b)}
+                    disabled={picture.amount === 1 ? true : false}
+                    style={styles.btnMinus}
+                    data={picture.id} />
                 }
                 <div className={styles.cartFormIncreaseAndDecreaseValue}>{picture.amount}</div>
-                <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, 1)} disabled={picture.amount > 1 && cartId === picture.id ? false : false} style={styles.btnPlus} data={picture.id} />
+                <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, 1, (a, b) => a + b)} disabled={picture.amount > 1 && cartId === picture.id ? false : false} style={styles.btnPlus} data={picture.id} />
               </div>
 
-              <div className={styles.cartFormSalary}>{picture.id === cartId ? salaryTest : picture.salary} ₽</div>
+              <div className={styles.cartFormSalary}>{picture.salary} ₽</div>
             </div>
           </div>
         )
