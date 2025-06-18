@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
-import add from 'lodash/add'
-import { subtract } from 'lodash';
+
 import { useStore } from "../../../store/store";
 
 import { PopupCart } from "../shop/popupCart/PopupCart"
@@ -15,6 +14,14 @@ import styles from './styles/cart.module.scss'
 
 const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
+  const cart = useStore(state => state.cart)
+
+  const setCartTest = useStore(state => state.setCartTest)
+
+  const discount = useStore(state => state.discount)
+
+  const setDiscount = useStore(state => state.setDiscount)
+  console.log(discount)
 
   const getDeleteTest = useStore(state => state.getDeleteTest)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
@@ -25,28 +32,42 @@ const Cart = () => {
     deleteDuplicatePicture()
   }, [])
 
+  useEffect(() => {
+    console.log('update')
+  }, [discount])
+
   return (
     <>
       {viewDeleteBtn ? <PopupCart text={'Товар удален из корзины'} /> : null}
       <div className={styles.cartContainer}>
         {picturesCart.length ?
           <>
-            <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} setViewDeleteBtn={setViewDeleteBtn} />
-            <CartOrder picturesCart={picturesCart} />
+            <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} setViewDeleteBtn={setViewDeleteBtn} discount={discount} />
+            <CartOrder picturesCart={cart} discount={discount} />
           </> : <CartEmpty />}
       </div>
     </>
   )
 }
 
-const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
+const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) => {
   const [oldSalary, setOldSalary] = useState(0)
 
   const [cart, setCart] = useState(picturesCart);
+  const setCartTest = useStore(state => state.setCartTest)
+
   const [cartId, setCartId] = useState(0)
 
   const [btnId, setBtnId] = useState(0)
   const [activeLike, setActiveLike] = useState(false)
+
+  useEffect(() => {
+    setCart(picturesCart)
+  }, [picturesCart.length])
+
+  useEffect(() => {
+    setCartTest(cart)
+  }, [cart])
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
@@ -89,7 +110,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
           <div key={i} className={styles.cartFormPictureContainer}>
             <div className={styles.cartFormPictureWrapperItems}>
               <div className={styles.cartFormWrapperPictureAndDescr}>
-                <img src={picture.id ? picture?.sizes[0].url : null} className={styles.cartFormPictureImg} alt={picture.name} />
+                <img src={picture.id ? picture?.sizes?.[0].url : null} className={styles.cartFormPictureImg} alt={picture.name} />
                 <div className={styles.cartFormPictureDescr}>
                   <h3 className={styles.cartFormPictureName}>{picture.name}</h3>
                   <div className={styles.cartFormPictureSizeAndMaterials}>Размер: {picture.size}</div>
@@ -130,7 +151,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn }) => {
                 <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, 1, (a, b) => a + b)} disabled={picture.amount > 1 && cartId === picture.id ? false : false} style={styles.btnPlus} data={picture.id} />
               </div>
 
-              <div className={styles.cartFormSalary}>{picture.salary} ₽</div>
+              <div className={styles.cartFormSalary}>{discount ? picture.salary : picture.salary + picture.salary * 0.2} ₽</div>
             </div>
           </div>
         )
@@ -150,7 +171,7 @@ const CartFormButtonIncDec = ({ func, disabled, style, data }) => {
   )
 }
 
-const CartOrder = ({ picturesCart }) => {
+const CartOrder = ({ picturesCart, discount }) => {
   const salary = picturesCart.map(item => item.salary).reduce((a, b) => a + b, 0)
   const salaryDiscount = salary - salary * 0.2
   return (
@@ -158,15 +179,15 @@ const CartOrder = ({ picturesCart }) => {
       <h2 className={styles.cartOrderHeader}>Выбрать адрес доставки</h2>
       <div className={styles.cartOrderGoodsAndDiscount}>
         <div>Товары, {picturesCart.length} шт.</div>
-        <div>{salary} ₽</div>
+        <div>{discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
       </div>
-      <div className={styles.cartOrderGoodsAndDiscount}>
+      {discount ? <div className={styles.cartOrderGoodsAndDiscount}>
         <div>Моя скидка</div>
         <div><span>−</span>{salary * 0.2} ₽</div>
-      </div>
+      </div> : null}
       <div className={styles.cartOrderTotal}>
         <div>Итого</div>
-        <div>{salaryDiscount} ₽</div>
+        <div>{discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
       </div>
       <button className={styles.cartOrderBtn}>Заказать</button>
     </div>

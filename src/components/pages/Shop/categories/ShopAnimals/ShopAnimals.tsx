@@ -25,7 +25,6 @@ const ShopAnimals = () => {
   const [limit, setLimit] = useState(9)
 
   const addInCart = useStore(state => state.addInCart)
-  console.log(addInCart)
 
   const [saveActive, setSaveActive] = useState({})
   const [activeDiscount, setActiveDiscount] = useState(false)

@@ -58,6 +58,12 @@ interface TypesStore {
 
   addInCart: boolean
   setAddInCart: (active: boolean) => void
+
+  cart: any
+  setCartTest: (cart: any) => void
+
+  discount: boolean
+  setDiscount: (bool: boolean) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -85,7 +91,19 @@ export const useStore = create<TypesStore>()(
       pictureCart: {},
       picturesCart: [],
 
+      cart: [],
+
       addInCart: false,
+
+      discount: false,
+
+      setDiscount: (bool: boolean) => {
+        set({discount: bool})
+      },
+
+      setCartTest: (cart) => {
+        set({cart: cart})
+      },
 
       setAddInCart: (active: boolean) => (
         set({addInCart: active})
@@ -94,8 +112,15 @@ export const useStore = create<TypesStore>()(
       getPictureCart: (picture) => (
         set({pictureCart: picture})
       ),
-      getPicturesCart: () => {
-        set((state => ({picturesCart: [...state.picturesCart, state.pictureCart].reverse()})))
+      
+      getPicturesCart: () => { // был баг, что picturesCart не определялся как массив и выдавал ошибку, что это не итерируемый обьект
+        set((state => {
+          if (Array.isArray(state.picturesCart)) {
+            return { picturesCart: [...state.picturesCart, state.pictureCart].reverse() }
+          } else {
+            return { picturesCart: [state.pictureCart] }
+          }
+        }))
       },
 
       deleteDuplicatePicture: () => {

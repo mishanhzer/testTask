@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useStore } from "../../../../store/store";
 import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
 
 interface TypesSavePanel {
@@ -7,9 +8,14 @@ interface TypesSavePanel {
 }
 
 export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSavePanel) => {
+  const setDiscount = useStore(state => state.setDiscount)
+
   const [number, setNumber] = useState(0)
 
   const checkboxRef = useRef<HTMLInputElement>(null);
+
+  const discount = useStore(state => state.discount)
+  console.log(discount)
 
   const handleViewDiscount = () => {
     let num = number
@@ -26,6 +32,7 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
     }, 25)
 
     isChecked ? setActiveDiscount(true) : setActiveDiscount(false)
+    isChecked ? setDiscount(true) : setDiscount(false)
   }
 
   return (

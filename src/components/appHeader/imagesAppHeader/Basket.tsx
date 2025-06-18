@@ -38,8 +38,8 @@ export const Basket = ({ className }: BasketProps) => {
           </g>
         </g>
       </svg>
-      {Object.keys(pictureCart).length > 0 ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] leading-[13px] flex justify-center items-center">{picturesCart.length}</div> : null}
-      {/* <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex justify-center items-center">1</div> */}
+      {/* {Object.keys(pictureCart).length > 0 ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] leading-[13px] flex justify-center items-center">{picturesCart.length}</div> : null} */}
+      {picturesCart.length ? <div className="absolute top-[-15px] right-[-15px] z-10 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] leading-[13px] flex justify-center items-center">{picturesCart.length}</div> : null}
     </NavLink>
   );
 };
