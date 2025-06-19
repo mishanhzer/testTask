@@ -21,6 +21,8 @@ export const Category = ({
   return (
     <div className={styles.shopAnimals}>
       {commonData.slice(0, limit).map(item => {
+        activeDiscount ? item.salary : item.salary = item.salary + item.salary * 0.2
+        console.log(item.salary)
         return (
           <div
             className={classNames(styles.shopBlock, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
@@ -65,7 +67,7 @@ const Salary = ({ item, activeDiscount }: TypesSalary) => {
   return (
     <div className={activeDiscount ? `${styles.salary} ${styles.animateDiscount}` : `${styles.salary} animate-animateOpacityBefore`}>
       {<div>
-        {item.salary ? activeDiscount ? `${item.salary} ₽` : `${item.salary + item.salary * 0.2} ₽` : <div className={styles.sold}>Продано</div>}
+        {item.salary ? activeDiscount ? `${item.salary} ₽` : `${item.salary} ₽` : <div className={styles.sold}>Продано</div>}
       </div>}
       <div className={`${!activeDiscount ? `hidden` : 'block'} ${styles.salaryWithOutSubscribe}`}>
         {item.salary ? item.salary + item.salary * 0.2 : null}

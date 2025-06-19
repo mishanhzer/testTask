@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useStore } from "../../../../store/store";
 import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
 
@@ -14,26 +14,42 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
 
   const checkboxRef = useRef<HTMLInputElement>(null);
 
-  const discount = useStore(state => state.discount)
-  console.log(discount)
+  const [isChecked, setIsChecked] = useState(() => {
+    const storedValue = localStorage.getItem('isChecked');
+    console.log(storedValue) // true or false
+    return storedValue === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('isChecked', isChecked.toString());
+  }, [isChecked]);
 
   const handleViewDiscount = () => {
-    let num = number
-    const isChecked = checkboxRef.current?.checked
-    const interval = setInterval(() => {
-      if (isChecked) {
-        num++
-        if (num >= 20) clearInterval(interval)
-      } else {
-        num--
-        if (num <= 0) clearInterval(interval)
-      }
-      setNumber(num)
-    }, 25)
-
-    isChecked ? setActiveDiscount(true) : setActiveDiscount(false)
+    isChecked ? setActiveDiscount(false) : setActiveDiscount(true)
     isChecked ? setDiscount(true) : setDiscount(false)
   }
+
+  const handleToggle = () => {
+    const storedDiscount = localStorage.getItem('discount');
+    let num = storedDiscount ? parseInt(storedDiscount) : 0;
+
+    const interval = setInterval(() => {
+      if (isChecked) {
+        num--
+        if (num <= 0) {
+          clearInterval(interval)
+        }
+      } else {
+        num++
+        if (num >= 20) {
+          clearInterval(interval)
+        }
+      }
+      setNumber(num)
+      localStorage.setItem('discount', JSON.stringify(num))
+    }, 25)
+    setIsChecked(!isChecked);
+  };
 
   return (
     <div className={styles.containerDiscount}>
@@ -42,11 +58,12 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
         <label
           className={`${styles.switch}`}
           onClick={handleViewDiscount}>
-          <input type="checkbox" ref={checkboxRef} />
-          <span className={`${styles.slider} ${styles.round}`}></span>
+          <input type="checkbox" ref={checkboxRef} checked={isChecked} onChange={handleToggle} />
+          <span className={`${styles.slider} ${isChecked ? styles.active : ''} ${styles.round}`}></span>
         </label>
       </div>
-      <div className={`${activeDiscount ? styles.numberAnimate : ''} ${styles.discountValue}`}>{`${number}%`}</div>
+      {/* <div className={`${activeDiscount ? styles.numberAnimate : ''} ${styles.discountValue}`}>{`${number}%`}</div> */}
+      <div className={`${activeDiscount ? styles.numberAnimate : ''} ${styles.discountValue}`}>{`${localStorage.getItem('discount')}%`}</div>
     </div>
   )
 }

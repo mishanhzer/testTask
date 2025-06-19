@@ -116,6 +116,16 @@ input:checked + .slider::before { // когда тумблер активен п
   @apply rounded-[50%]
 }
 
+.slider.active {
+  /* стили для активного тумблера */
+  @apply bg-[rgba(0,91,255,1)];
+}
+
+.slider.active::before {
+  /* стили для активного тумблера */
+  @apply translate-x-[19.5px];
+}
+
 // стили анимаций
 .animateDiscount {
   @apply animate-animateOpacityBefore 
