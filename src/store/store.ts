@@ -97,6 +97,12 @@ export const useStore = create<TypesStore>()(
 
       discount: false,
 
+      testData: [],
+
+      setTestData: (data) => {
+        set({testData: data})
+      },
+
       setDiscount: (bool: boolean) => {
         set({discount: bool})
       },

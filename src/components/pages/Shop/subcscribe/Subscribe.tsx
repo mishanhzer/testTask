@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useStore } from "../../../../store/store";
 import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
+// import test from "node:test";
+
+// import '@testing-library/jest-dom';
+// import { render } from '@testing-library/react';
+// import { test, expect } from '@jest/globals';
 
 interface TypesSavePanel {
   activeDiscount: boolean
@@ -10,19 +15,33 @@ interface TypesSavePanel {
 export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSavePanel) => {
   const setDiscount = useStore(state => state.setDiscount)
 
+  const testData = useStore(state => state.testData)
+
   const [number, setNumber] = useState(0)
 
   const checkboxRef = useRef<HTMLInputElement>(null);
 
   const [isChecked, setIsChecked] = useState(() => {
-    const storedValue = localStorage.getItem('isChecked');
-    console.log(storedValue) // true or false
+    const storedValue = localStorage.getItem('isChecked'); // true or false
     return storedValue === 'true';
   });
 
   useEffect(() => {
     localStorage.setItem('isChecked', isChecked.toString());
   }, [isChecked]);
+
+  if (isChecked) {
+    testData.map((item) => {
+      return item.salary = item.salary - item.salary * 0.2
+    })
+  }
+
+  if (!isChecked) {
+    testData.map((item) => {
+      return item.salary
+    })
+  }
+  console.log(testData[1])
 
   const handleViewDiscount = () => {
     isChecked ? setActiveDiscount(false) : setActiveDiscount(true)
@@ -31,7 +50,7 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
 
   const handleToggle = () => {
     const storedDiscount = localStorage.getItem('discount');
-    let num = storedDiscount ? parseInt(storedDiscount) : 0;
+    let num = storedDiscount ? JSON.parse(storedDiscount) : 0; // JSON.parse (принимает строку JSON и возвращает js обьект) используем, чтобы избежать ошибки, если значение будет null, до этого юзали parseInt (принимает строку и возвращает целое число) и была ошибка, потому что значение не было явным числом, 
 
     const interval = setInterval(() => {
       if (isChecked) {
@@ -45,6 +64,7 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
           clearInterval(interval)
         }
       }
+
       setNumber(num)
       localStorage.setItem('discount', JSON.stringify(num))
     }, 25)
@@ -67,3 +87,14 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
     </div>
   )
 }
+
+// test('SubscribePanel renders correctly', () => {
+//   const component = <SubscribePanel activeDiscount={true} setActiveDiscount={() => { }} />;
+//   const html = ReactDOMServer.renderToString(component);
+//   expect(html).toContain('По подписке');
+// });
+
+// test('SubscribePanel renders correctly', () => {
+//   const { getByText } = render(<SubscribePanel activeDiscount={true} setActiveDiscount={() => { }} />)
+//   expect(getByText('По подписке')).toBeInTheDocument()
+// })

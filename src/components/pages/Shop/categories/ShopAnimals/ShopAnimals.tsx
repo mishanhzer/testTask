@@ -20,6 +20,8 @@ const ShopAnimals = () => {
   const getData = useStore(state => state.getData)
   const setAddInCart = useStore(state => state.setAddInCart)
 
+  const setTestData = useStore(state => state.setTestData)
+
   const loading = useStore(state => state.loading)
 
   const [limit, setLimit] = useState(9)
@@ -40,6 +42,8 @@ const ShopAnimals = () => {
     const item1 = animals.find((item1) => item1.name === item2.nameImg)
     return { ...item1, ...item2 }
   })
+
+  setTestData(commonData)
 
   const handleClick = () => {
     setLimit(limit + 9)

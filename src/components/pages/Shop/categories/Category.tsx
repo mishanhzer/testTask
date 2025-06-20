@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { act, useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
 
@@ -11,6 +11,9 @@ import { TypesCommonData, TypesSaveActive, CategoryProps, TypesSalary, TypesLike
 
 import styles from './ShopAnimals/styles/shopAnimals.module.scss'
 
+// Продолжить пытаться сохранить значения цены картин после обновления (в компоненте Subscribe что то получается близко к этому)
+
+
 export const Category = ({
   commonData,
   limit,
@@ -22,7 +25,6 @@ export const Category = ({
     <div className={styles.shopAnimals}>
       {commonData.slice(0, limit).map(item => {
         activeDiscount ? item.salary : item.salary = item.salary + item.salary * 0.2
-        console.log(item.salary)
         return (
           <div
             className={classNames(styles.shopBlock, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
