@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { useStore } from '../../../../../store/store'
 
 import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
@@ -43,7 +43,11 @@ const ShopAnimals = () => {
     return { ...item1, ...item2 }
   })
 
-  setTestData(commonData)
+  useCallback(() => {
+    setTestData(commonData)
+  }, [commonData])
+
+  // setTestData(commonData) - оставляю для теста
 
   const handleClick = () => {
     setLimit(limit + 9)
@@ -65,8 +69,7 @@ const ShopAnimals = () => {
           commonData={commonData}
           limit={limit}
           handleClickLike={handleClickLike}
-          saveActive={saveActive}
-          activeDiscount={activeDiscount} />
+          saveActive={saveActive} />
         <ButtonComponent
           disabled={limit > commonData.length ? true : false}
           mt='mt-3'

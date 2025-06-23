@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useStore } from "../../../../store/store";
 import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
 // import test from "node:test";
 
+// import * as ReactDOMServer from 'react-dom/server';
 // import '@testing-library/jest-dom';
 // import { render } from '@testing-library/react';
 // import { test, expect } from '@jest/globals';
@@ -30,25 +31,12 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
     localStorage.setItem('isChecked', isChecked.toString());
   }, [isChecked]);
 
-  if (isChecked) {
-    testData.map((item) => {
-      return item.salary = item.salary - item.salary * 0.2
-    })
-  }
-
-  if (!isChecked) {
-    testData.map((item) => {
-      return item.salary
-    })
-  }
-  console.log(testData[1])
-
   const handleViewDiscount = () => {
     isChecked ? setActiveDiscount(false) : setActiveDiscount(true)
     isChecked ? setDiscount(true) : setDiscount(false)
   }
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => { // юзаем хук, чтобы мемоизировать функцию (при изменении состояния isChecked, которая меняем состояние activeDiscount внутри ShopAnimals, чтобы не вызывать перерендер родительского компонента)
     const storedDiscount = localStorage.getItem('discount');
     let num = storedDiscount ? JSON.parse(storedDiscount) : 0; // JSON.parse (принимает строку JSON и возвращает js обьект) используем, чтобы избежать ошибки, если значение будет null, до этого юзали parseInt (принимает строку и возвращает целое число) и была ошибка, потому что значение не было явным числом, 
 
@@ -69,7 +57,8 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
       localStorage.setItem('discount', JSON.stringify(num))
     }, 25)
     setIsChecked(!isChecked);
-  };
+  }, [isChecked, setActiveDiscount])
+
 
   return (
     <div className={styles.containerDiscount}>
@@ -82,7 +71,6 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
           <span className={`${styles.slider} ${isChecked ? styles.active : ''} ${styles.round}`}></span>
         </label>
       </div>
-      {/* <div className={`${activeDiscount ? styles.numberAnimate : ''} ${styles.discountValue}`}>{`${number}%`}</div> */}
       <div className={`${activeDiscount ? styles.numberAnimate : ''} ${styles.discountValue}`}>{`${localStorage.getItem('discount')}%`}</div>
     </div>
   )

@@ -13,18 +13,18 @@ import styles from './ShopAnimals/styles/shopAnimals.module.scss'
 
 // Продолжить пытаться сохранить значения цены картин после обновления (в компоненте Subscribe что то получается близко к этому)
 
-
 export const Category = ({
   commonData,
   limit,
   handleClickLike,
   saveActive,
-  activeDiscount,
 }: CategoryProps) => {
+  const testData = useStore(state => state.testData)
+  const discount = useStore(state => state.discount)
+
   return (
     <div className={styles.shopAnimals}>
-      {commonData.slice(0, limit).map(item => {
-        activeDiscount ? item.salary : item.salary = item.salary + item.salary * 0.2
+      {testData.slice(0, limit).map(item => {
         return (
           <div
             className={classNames(styles.shopBlock, item.salary ? styles.pictureStockOpacity : styles.pictureSoldOutOpacity)}
@@ -38,7 +38,7 @@ export const Category = ({
               saveActive={saveActive} />
             <Salary
               item={item}
-              activeDiscount={activeDiscount} />
+              discount={discount} />
             <div className={styles.name}>{item.name}</div>
 
             <BlockCart
@@ -65,16 +65,17 @@ const Like = ({ handleClickLike, item, saveActive }: TypesLike) => {
   )
 }
 
-const Salary = ({ item, activeDiscount }: TypesSalary) => {
+const Salary = ({ item, discount }: TypesSalary) => {
+  const salarWithoutDiscount = item.salary + item.salary * 0.2
   return (
-    <div className={activeDiscount ? `${styles.salary} ${styles.animateDiscount}` : `${styles.salary} animate-animateOpacityBefore`}>
+    <div className={discount ? `${styles.salary} ${styles.animateDiscount}` : `${styles.salary} animate-animateOpacityBefore`}>
       {<div>
-        {item.salary ? activeDiscount ? `${item.salary} ₽` : `${item.salary} ₽` : <div className={styles.sold}>Продано</div>}
+        {item.salary ? !discount ? `${item.salary} ₽` : `${salarWithoutDiscount} ₽` : <div className={styles.sold}>Продано</div>}
       </div>}
-      <div className={`${!activeDiscount ? `hidden` : 'block'} ${styles.salaryWithOutSubscribe}`}>
-        {item.salary ? item.salary + item.salary * 0.2 : null}
+      <div className={`${discount ? `hidden` : 'block'} ${styles.salaryWithOutSubscribe}`}>
+        {item.salary ? salarWithoutDiscount : null}
       </div>
-      <div className={`${!activeDiscount ? `hidden` : `block`} ${styles.salaryViewDiscount}`}>{item.salary ? `-20%` : null}</div>
+      <div className={`${discount ? `hidden` : `block`} ${styles.salaryViewDiscount}`}>{item.salary && !discount ? `-20%` : null}</div>
     </div>
   )
 }

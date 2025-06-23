@@ -1,14 +1,14 @@
 import { TypesSizes } from '../../../assets/images/Images'
 
 export interface TypesCommonData {
-  name: string
-  nameImg: string
-  inStock: boolean
+  name?: string
+  nameImg?: string
+  inStock?: boolean
   salary: number
-  description: string
-  size: string
-  materials: string
-  active: boolean
+  description?: string
+  size?: string
+  materials?: string
+  active?: boolean
   id: number
   file?: string
   amount?: number
@@ -25,7 +25,6 @@ export interface CategoryProps {
   limit: number
   handleClickLike: (e: React.MouseEvent<HTMLButtonElement>) => void
   saveActive: TypesSaveActive
-  activeDiscount: boolean
 }
 
 export interface TypesLike {
@@ -36,7 +35,7 @@ export interface TypesLike {
 
 export interface TypesSalary {
   item: TypesCommonData
-  activeDiscount: boolean
+  discount: boolean
 }
 
 export interface TypesButtonCart {

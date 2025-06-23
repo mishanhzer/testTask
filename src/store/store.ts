@@ -17,14 +17,14 @@ interface TypesPictureCart {
   active?: boolean
   description?: string
   file?: string
-  id?: number
+  id: number
   inStock?: boolean
   materials?: string
   name?: string
   nameImg?: string
   path?: string
   preview?: string
-  salary?: number
+  salary: number
   size?: string
   sizes?: TypesSizes[]
 }
@@ -64,6 +64,9 @@ interface TypesStore {
 
   discount: boolean
   setDiscount: (bool: boolean) => void
+
+  testData: TypesPictureCart[]
+  setTestData: (data: TypesPictureCart[]) => void
 }
 
 export const useStore = create<TypesStore>()(
