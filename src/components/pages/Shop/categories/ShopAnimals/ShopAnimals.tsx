@@ -47,7 +47,7 @@ const ShopAnimals = () => {
     setTestData(commonData)
   }, [commonData])
 
-  // setTestData(commonData) - оставляю для теста
+  // setTestData(commonData) // оставляю для теста
 
   const handleClick = () => {
     setLimit(limit + 9)

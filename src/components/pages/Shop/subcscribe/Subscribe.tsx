@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useStore } from "../../../../store/store";
 import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
-// import test from "node:test";
-
-// import * as ReactDOMServer from 'react-dom/server';
-// import '@testing-library/jest-dom';
-// import { render } from '@testing-library/react';
-// import { test, expect } from '@jest/globals';
 
 interface TypesSavePanel {
   activeDiscount: boolean
@@ -75,14 +69,3 @@ export const SubscribePanel = ({ activeDiscount, setActiveDiscount }: TypesSaveP
     </div>
   )
 }
-
-// test('SubscribePanel renders correctly', () => {
-//   const component = <SubscribePanel activeDiscount={true} setActiveDiscount={() => { }} />;
-//   const html = ReactDOMServer.renderToString(component);
-//   expect(html).toContain('По подписке');
-// });
-
-// test('SubscribePanel renders correctly', () => {
-//   const { getByText } = render(<SubscribePanel activeDiscount={true} setActiveDiscount={() => { }} />)
-//   expect(getByText('По подписке')).toBeInTheDocument()
-// })

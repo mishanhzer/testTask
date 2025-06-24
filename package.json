@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.26.9",
+    "@babel/preset-react": "^7.27.1",
     "@csstools/postcss-global-data": "^3.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -93,7 +94,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {},
@@ -121,8 +122,8 @@
     "tailwindcss": "3.4.1"
   },
   "browser": {
-  "fs": false,
-  "path": false,
-  "os": false
-}
+    "fs": false,
+    "path": false,
+    "os": false
+  }
 }
