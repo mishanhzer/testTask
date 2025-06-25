@@ -20,6 +20,7 @@ export const Category = ({
   saveActive,
 }: CategoryProps) => {
   const testData = useStore(state => state.testData)
+  const cart = useStore(state => state.cart)
   const discount = useStore(state => state.discount)
 
   return (
@@ -91,11 +92,14 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const testData = useStore(state => state.testData)
   const setCartsSaveBtn = useStore(state => state.setCartsSaveBtn)
   const setNewData = useStore(state => state.setNewData)
+  const cart = useStore(state => state.cart)
 
-  console.log(testData)
+  // console.log(testData)
+  // console.log(cart)
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
+  const [testArr, setTestArr] = useState([])
 
   const testClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const activeBtn = +e.currentTarget.getAttribute('data-id')!
@@ -126,14 +130,9 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
 
     setNewData(zxcData)
 
-    // const handleClickLike = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    //   const changeActive = (boolean: boolean) => setSaveActive((prevArrTest) => ({ ...prevArrTest, [active]: boolean }))
-    //   saveActive[active] ? changeActive(false) : changeActive(true)
-    // }
-
-
-
   }
+
+  const picturesInStockCart = cart.find(itemCart => itemCart.name === item.name)
 
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
@@ -143,15 +142,25 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
         </NavLink> :
         <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       } */}
-      {item.active && <div className={styles.cartActive}>В корзине</div> ? <NavLink to='/cart' className={styles.cartBlockActive}>
+
+      {picturesInStockCart || activeCart && btnId === item.id ?
+        <NavLink to='/cart' className={styles.cartBlockActive}>
+          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+        </NavLink> :
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+      }
+
+      {/* {item.active && <div className={styles.cartActive}>В корзине</div> ? <NavLink to='/cart' className={styles.cartBlockActive}>
         <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
       </NavLink> :
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />}
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />} */}
     </div>
   )
 }
 
 const ButtonCart = ({ item, testClick, btnText, style, img }: TypesButtonCart) => {
+  const cart = useStore(state => state.cart);
+  const picturesInStockCart = cart.find(itemCart => itemCart.name === item.name);
   return (
     <button
       className={style}
@@ -159,8 +168,9 @@ const ButtonCart = ({ item, testClick, btnText, style, img }: TypesButtonCart) =
       onClick={testClick}
       data-id={item.id}
     >
-      <span className={`mr-[0.7rem]`}>{img()}</span>
-      {btnText}
+      {!picturesInStockCart ? <span className={`mr-[0.7rem]`}>{img()}</span> : null}
+      {/* <span className={`mr-[0.7rem]`}>{img()}</span> */}
+      {picturesInStockCart ? 'В корзине' : 'В корзину'}
     </button>
   )
 }

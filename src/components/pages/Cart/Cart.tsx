@@ -15,6 +15,7 @@ import styles from './styles/cart.module.scss'
 const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
   const cart = useStore(state => state.cart)
+  console.log(cart)
 
   const setCartTest = useStore(state => state.setCartTest)
 
