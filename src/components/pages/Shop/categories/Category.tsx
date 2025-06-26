@@ -1,4 +1,4 @@
-import React, { act, useCallback, useEffect, useState } from "react";
+import React, { act, useCallback, useEffect, useState, useMemo } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
 
@@ -10,6 +10,7 @@ import { cartInBtn } from "../../../../assets/images/Images";
 import { TypesCommonData, TypesSaveActive, CategoryProps, TypesSalary, TypesLike, TypesButtonCart } from "../TypesShops"
 
 import styles from './ShopAnimals/styles/shopAnimals.module.scss'
+import { id } from "../../../../utils/useTest";
 
 // Продолжить пытаться сохранить значения цены картин после обновления (в компоненте Subscribe что то получается близко к этому)
 
@@ -89,17 +90,19 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const addInCart = useStore(state => state.addInCart)
   const setAddInCart = useStore(state => state.setAddInCart)
 
-  const testData = useStore(state => state.testData)
-  const setCartsSaveBtn = useStore(state => state.setCartsSaveBtn)
-  const setNewData = useStore(state => state.setNewData)
-  const cart = useStore(state => state.cart)
+  const isAddedToCart = useStore(state => state.isAddedToCart)
+  // const setIsAddedToCart = useStore(state => state.setIsAddedToCart)
+  const addProperty = useStore(state => state.addProperty)
 
-  // console.log(testData)
-  // console.log(cart)
+  // const [isAddedToCart, setIsAddedToCart] = useState<AddedToCart>({})
+  const [saveActive, setSaveActive] = useState(false)
+
+  console.log(isAddedToCart)
+
+  const cart = useStore(state => state.cart)
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
-  const [testArr, setTestArr] = useState([])
 
   const testClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const activeBtn = +e.currentTarget.getAttribute('data-id')!
@@ -111,8 +114,6 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
       getPictureCart(item)
       getPicturesCart()
       deleteDuplicatePicture()
-
-      setCartsSaveBtn(activeBtn, item.id)
     }
 
     setTimeout(() => {
@@ -120,19 +121,19 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
     }, 2700)
 
 
-    const zxcData = testData.map(item => {
-      if (activeBtn === item.id) {
-        return { ...item, active: true }
-      } else {
-        return { ...item, active: false }
-      }
-    })
+    const changeActive = (boolean: boolean) => {
+      addProperty(activeBtn, boolean);
+    };
 
-    setNewData(zxcData)
-
+    changeActive(true)
   }
 
-  const picturesInStockCart = cart.find(itemCart => itemCart.name === item.name)
+  const testZxc = cart.map((item) => {
+    const picturesInCart = isAddedToCart[item.id]
+    return { ...item, picturesInCart }
+  })
+
+  console.log(testZxc)
 
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
@@ -143,24 +144,25 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
         <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       } */}
 
-      {picturesInStockCart || activeCart && btnId === item.id ?
+      {isAddedToCart[btnId] ?
         <NavLink to='/cart' className={styles.cartBlockActive}>
           <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
         </NavLink> :
         <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       }
 
-      {/* {item.active && <div className={styles.cartActive}>В корзине</div> ? <NavLink to='/cart' className={styles.cartBlockActive}>
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-      </NavLink> :
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />} */}
+      {/* {picturesInStockCart || activeCart && btnId === item.id ?
+        <NavLink to='/cart' className={styles.cartBlockActive}>
+          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+        </NavLink> :
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+      } */}
+
     </div>
   )
 }
 
 const ButtonCart = ({ item, testClick, btnText, style, img }: TypesButtonCart) => {
-  const cart = useStore(state => state.cart);
-  const picturesInStockCart = cart.find(itemCart => itemCart.name === item.name);
   return (
     <button
       className={style}
@@ -168,9 +170,8 @@ const ButtonCart = ({ item, testClick, btnText, style, img }: TypesButtonCart) =
       onClick={testClick}
       data-id={item.id}
     >
-      {!picturesInStockCart ? <span className={`mr-[0.7rem]`}>{img()}</span> : null}
-      {/* <span className={`mr-[0.7rem]`}>{img()}</span> */}
-      {picturesInStockCart ? 'В корзине' : 'В корзину'}
+      <span className={`mr-[0.7rem]`}>{img()}</span>
+      {btnText}
     </button>
   )
 }

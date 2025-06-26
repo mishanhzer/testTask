@@ -68,8 +68,12 @@ interface TypesStore {
   testData: TypesPictureCart[]
   setTestData: (data: TypesPictureCart[]) => void
 
-  setCartsSaveBtn: (activeBtn: number, id: number) => void
   setNewData: (data: TypesPictureCart[]) => void
+
+  isAddedToCart: {
+    [key: number]: boolean
+  }
+  addProperty: (property: number, value: boolean) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -105,17 +109,11 @@ export const useStore = create<TypesStore>()(
 
       testData: [],
 
-      setCartsSaveBtn: (activeBtn, id) => {
-        set((state => {
-            return state.testData.map(item => {
-              if (activeBtn === id) {
-                return {...item, active: true}
-              } else {
-                return {...item, active: false}
-              }
-            })
-        }))
-      },
+      isAddedToCart: {},
+
+      addProperty: (property: number, value: boolean) =>
+        set((state) => ({ isAddedToCart: { ...state.isAddedToCart, [property]: value } })),
+
 
       setNewData: (data) => {
         set({testData: data})

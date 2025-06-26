@@ -22,7 +22,6 @@ const Cart = () => {
   const discount = useStore(state => state.discount)
 
   const setDiscount = useStore(state => state.setDiscount)
-  console.log(discount)
 
   const getDeleteTest = useStore(state => state.getDeleteTest)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
@@ -57,6 +56,8 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
   const [cart, setCart] = useState(picturesCart);
   const setCartTest = useStore(state => state.setCartTest)
 
+  const picturesInStockCart = useStore(state => state.picturesInStockCart)
+
   const [cartId, setCartId] = useState(0)
 
   const [btnId, setBtnId] = useState(0)
@@ -69,6 +70,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
   useEffect(() => {
     setCartTest(cart)
   }, [cart])
+
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
