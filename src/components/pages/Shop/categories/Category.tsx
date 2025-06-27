@@ -128,36 +128,14 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
     changeActive(true)
   }
 
-  const testZxc = cart.map((item) => {
-    const picturesInCart = isAddedToCart[item.id]
-    return { ...item, picturesInCart }
-  })
-
-  console.log(testZxc)
-
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
-      {/* {activeCart && btnId === item.id ?
-        <NavLink to='/cart' className={styles.cartBlockActive}>
-          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-        </NavLink> :
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
-      } */}
-
-      {isAddedToCart[btnId] ?
+      {isAddedToCart[item.id] === true ?
         <NavLink to='/cart' className={styles.cartBlockActive}>
           <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
         </NavLink> :
         <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       }
-
-      {/* {picturesInStockCart || activeCart && btnId === item.id ?
-        <NavLink to='/cart' className={styles.cartBlockActive}>
-          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-        </NavLink> :
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
-      } */}
-
     </div>
   )
 }

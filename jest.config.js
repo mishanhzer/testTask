@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],
   resolver: null,
   transform: {

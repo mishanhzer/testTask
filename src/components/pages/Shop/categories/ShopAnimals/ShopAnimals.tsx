@@ -43,11 +43,11 @@ const ShopAnimals = () => {
     return { ...item1, ...item2 }
   })
 
-  useCallback(() => {
-    setTestData(commonData)
-  }, [commonData])
+  // useCallback(() => {
+  //   setTestData(commonData)
+  // }, [commonData])
 
-  // setTestData(commonData) // оставляю для теста
+  setTestData(commonData) // оставляю для теста
 
   const handleClick = () => {
     setLimit(limit + 9)

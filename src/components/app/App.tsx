@@ -22,7 +22,6 @@ const ShopAnimals = lazy(() => import('../pages/shop/categories/ShopAnimals/Shop
 const Cart = lazy(() => import('../pages/Cart/Cart.tsx'))
 
 import "./app.css";
-import { describe } from "node:test";
 
 const App = () => {
   return (

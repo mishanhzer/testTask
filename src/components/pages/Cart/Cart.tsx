@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
 
@@ -15,7 +15,6 @@ import styles from './styles/cart.module.scss'
 const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
   const cart = useStore(state => state.cart)
-  console.log(cart)
 
   const setCartTest = useStore(state => state.setCartTest)
 
@@ -51,31 +50,46 @@ const Cart = () => {
 }
 
 const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) => {
+
   const [oldSalary, setOldSalary] = useState(0)
 
   const [cart, setCart] = useState(picturesCart);
   const setCartTest = useStore(state => state.setCartTest)
 
-  const picturesInStockCart = useStore(state => state.picturesInStockCart)
+  const cartMain = useStore(state => state.cart)
+  console.log(cartMain)
+
+  const addProperty = useStore(state => state.addProperty)
 
   const [cartId, setCartId] = useState(0)
 
   const [btnId, setBtnId] = useState(0)
   const [activeLike, setActiveLike] = useState(false)
 
-  useEffect(() => {
-    setCart(picturesCart)
-  }, [picturesCart.length])
 
-  useEffect(() => {
+  useEffect(() => { // отвечает за увелечение количества товара в корзине
     setCartTest(cart)
   }, [cart])
+
+  // useEffect(() => {
+  //   setCart(cart)
+  // }, [])
+
+  useEffect(() => { // отвечает за удаление товара из корзины
+    setCartTest(picturesCart)
+  }, [picturesCart.length])
 
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
     getDeleteTest(elem)
     setViewDeleteBtn(elem)
+
+    const changeActive = (boolean: boolean) => {
+      addProperty(elem, boolean);
+    };
+
+    changeActive(false)
   }
 
   const handleLikeClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
@@ -84,7 +98,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
     setActiveLike(!activeLike)
   }
 
-  const handleIncreaseSalary = (e, pictureSalary: number, value, operation) => {
+  const handleIncreaseSalary = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>, pictureSalary: number, value, operation) => {
     const cartPictureId = +e.currentTarget.getAttribute('data-id')!
     setCartId(cartPictureId)
 
@@ -92,8 +106,8 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
     if (selectedPicture && selectedPicture.salary !== undefined) { // если обьект нашелся
       const newSalary = operation(pictureSalary, selectedPicture.salary) // устанавливаем новую цену + старую цену (picture salary будет меняться при каждом клике), operation новый паттерн - чтобы использовать операторы в аргументах (при разных операторах при вызове функции)
       setOldSalary(selectedPicture.salary) // добавляем в стейт старую цену
-      const newCart = cart.map((item) => { // проходимся по массиву и добавляем необходиые новые свойства
-        if (item.id === cartPictureId) { // если элементы совпадают до добавим свойства
+      const newCart = cart.map((item) => { // проходимся по массиву и добавляем необходимые новые свойства
+        if (item.id === cartPictureId) { // если элементы совпадают то добавим свойства
           return { ...item, amount: item.amount + value, salary: newSalary };
         }
         return item; // если нет, то верни обычный неизмененный обьект
@@ -108,7 +122,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
       <h2 className={styles.cartFormAmountPicture}>
         {picturesCart.length} картин{picturesCart.length > 0 && picturesCart.length < 2 ? 'а' : picturesCart.length > 2 && picturesCart.length < 5 ? 'ы' : ''}
       </h2>
-      {cart.map((picture, i) => {
+      {cartMain.map((picture, i) => {
         return (
           <div key={i} className={styles.cartFormPictureContainer}>
             <div className={styles.cartFormPictureWrapperItems}>
@@ -154,7 +168,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
                 <CartFormButtonIncDec func={(e) => handleIncreaseSalary(e, picture.salary, 1, (a, b) => a + b)} disabled={picture.amount > 1 && cartId === picture.id ? false : false} style={styles.btnPlus} data={picture.id} />
               </div>
 
-              <div className={styles.cartFormSalary}>{discount ? picture.salary : picture.salary + picture.salary * 0.2} ₽</div>
+              <div className={styles.cartFormSalary}>{!discount ? picture.salary : picture.salary + picture.salary * 0.2} ₽</div>
             </div>
           </div>
         )
@@ -175,22 +189,23 @@ const CartFormButtonIncDec = ({ func, disabled, style, data }) => {
 }
 
 const CartOrder = ({ picturesCart, discount }) => {
+  const amount = picturesCart.map(item => item.amount).reduce((a, b) => a + b, 0)
   const salary = picturesCart.map(item => item.salary).reduce((a, b) => a + b, 0)
-  const salaryDiscount = salary - salary * 0.2
+  const salaryDiscount = salary
   return (
     <div className={styles.cartOrderContainer}>
       <h2 className={styles.cartOrderHeader}>Выбрать адрес доставки</h2>
       <div className={styles.cartOrderGoodsAndDiscount}>
-        <div>Товары, {picturesCart.length} шт.</div>
-        <div>{discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
+        <div>Товары, {amount} шт.</div>
+        <div>{!discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
       </div>
-      {discount ? <div className={styles.cartOrderGoodsAndDiscount}>
+      {!discount ? <div className={styles.cartOrderGoodsAndDiscount}>
         <div>Моя скидка</div>
         <div><span>−</span>{salary * 0.2} ₽</div>
       </div> : null}
       <div className={styles.cartOrderTotal}>
         <div>Итого</div>
-        <div>{discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
+        <div>{!discount ? salaryDiscount : salary + salary * 0.2} ₽</div>
       </div>
       <button className={styles.cartOrderBtn}>Заказать</button>
     </div>
