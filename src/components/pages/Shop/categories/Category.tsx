@@ -91,18 +91,23 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const setAddInCart = useStore(state => state.setAddInCart)
 
   const isAddedToCart = useStore(state => state.isAddedToCart)
-  // const setIsAddedToCart = useStore(state => state.setIsAddedToCart)
+
   const addProperty = useStore(state => state.addProperty)
 
-  // const [isAddedToCart, setIsAddedToCart] = useState<AddedToCart>({})
   const [saveActive, setSaveActive] = useState(false)
-
-  console.log(isAddedToCart)
 
   const cart = useStore(state => state.cart)
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
+
+
+  const picturesCart = useStore(state => state.picturesCart)
+  const setCartTest = useStore(state => state.setCartTest)
+
+  useEffect(() => {
+    setCartTest(picturesCart)
+  }, [picturesCart])
 
   const testClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const activeBtn = +e.currentTarget.getAttribute('data-id')!
