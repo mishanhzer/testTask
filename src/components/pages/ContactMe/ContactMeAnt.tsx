@@ -42,12 +42,21 @@ const ContactMeAnt = () => {
     }
   }, [formState, reset])
 
-  const onSubmit = (data: DataForm) => {
-    console.log(data);
+  const onSubmit = async (data: DataForm) => {
+    // fetch('/mailer/smart.php', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then(response => response.text())
+    //   .then(data => console.log(data));
+    console.log(data)
   };
 
   return (
-    <>
+    <div className="mb-[50px]">
       <Title name='Elena Kozyutenko' content='Main page' />
       <div className={styles.divContainer}>
         <MainPicture />
@@ -107,9 +116,20 @@ const ContactMeAnt = () => {
           </Form.Item>
         </Form>
       </div>
-    </>
+    </div>
   );
 }
+
+// const ContactMeAnt = () => { // Альтернативный вариант 
+//   return (
+//     <div className={`text-center mt-[30px]`}>
+//       <h1 className="text-3xl text-[rgb(119,119,119)] mb-3">Контакты</h1>
+//       <div className="text-[rgb(119,119,119)] mb-1">email: Kozyutenko@mail.ru</div>
+//       <a href='https://vk.com/id264614153' className="text-[rgb(119,119,119)] mb-1">VK: vk.com/id264614153</a>
+//       <div className="text-[rgb(119,119,119)] mb-1">Телефон: +79222636130</div>
+//     </div>
+//   )
+// }
 
 export default ContactMeAnt
 

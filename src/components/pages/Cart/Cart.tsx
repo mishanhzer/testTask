@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import classNames from "classnames";
 
@@ -16,7 +16,8 @@ const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
   const cart = useStore(state => state.cart)
 
-  const setCartTest = useStore(state => state.setCartTest)
+  console.log(picturesCart)
+  console.log(cart)
 
   const discount = useStore(state => state.discount)
 
@@ -29,15 +30,11 @@ const Cart = () => {
     deleteDuplicatePicture()
   }, [])
 
-  useEffect(() => {
-    console.log('update')
-  }, [discount])
-
   return (
     <>
       {viewDeleteBtn ? <PopupCart text={'Товар удален из корзины'} /> : null}
       <div className={styles.cartContainer}>
-        {picturesCart.length ?
+        {cart.length ?
           <>
             <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} setViewDeleteBtn={setViewDeleteBtn} discount={discount} />
             <CartOrder picturesCart={cart} discount={discount} />
@@ -53,10 +50,9 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
   const [cart, setCart] = useState(picturesCart);
   const setCartTest = useStore(state => state.setCartTest)
 
-  const cartMain = useStore(state => state.cart)
+  const getDeleteItemCart = useStore(state => state.getDeleteItemCart)
 
-  console.log(picturesCart)
-  console.log(cartMain)
+  const cartMain = useStore(state => state.cart)
 
   const addProperty = useStore(state => state.addProperty)
 
@@ -74,13 +70,15 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
   }, [cartMain])
 
   useEffect(() => { // отвечает за удаление товара из корзины
-    setCart(picturesCart)
+    setCart(cartMain)
   }, [picturesCart.length])
 
   const handleTestClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const elem = +e.currentTarget.getAttribute('data-id')!
     getDeleteTest(elem)
     setViewDeleteBtn(elem)
+
+    getDeleteItemCart(elem)
 
     const changeActive = (boolean: boolean) => {
       addProperty(elem, boolean);
@@ -117,7 +115,9 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
     <div className={styles.cartFormContainer}>
       <h1 className={styles.cartFormHeader}>Корзина</h1>
       <h2 className={styles.cartFormAmountPicture}>
-        {picturesCart.length} картин{picturesCart.length > 0 && picturesCart.length < 2 ? 'а' : picturesCart.length > 2 && picturesCart.length < 5 ? 'ы' : ''}
+        {/* {cart.length} картин{cart.length > 0 && cart.length < 2 ? 'а' : cart.length >= 2 && cart.length < 5 ? 'ы' : ''} */}
+
+        {cart.length} картин{cart.length % 10 === 1 && cart.length % 100 !== 11 ? 'а' : cart.length % 10 >= 2 && cart.length % 10 <= 4 && (cart.length % 100 < 10 || cart.length % 100 >= 20) ? 'ы' : ''}
       </h2>
       {cartMain.map((picture, i) => {
         return (

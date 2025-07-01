@@ -7,6 +7,13 @@ import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
 import { images } from "./imagesAppHeader/Images";
 import styles from './styles/styleAppHeader.module.scss'
 
+const arr =
+  [
+    { name: "vkLogo", src: "vkImg" },
+    { name: "instLogo", src: "instImg" },
+    { name: "liveLogo", src: "liveImg" }
+  ]
+
 export const AppHeader = () => {
   return (
     <header className={styles.styleHeader}>

@@ -74,6 +74,8 @@ interface TypesStore {
     [key: number]: boolean
   }
   addProperty: (property: number, value: boolean) => void
+
+  getDeleteItemCart: (dataId: number) => void
 }
 
 export const useStore = create<TypesStore>()(
@@ -157,6 +159,12 @@ export const useStore = create<TypesStore>()(
       getDeleteTest: (dataId) => (
         set((state => ({
           picturesCart: state.picturesCart.filter(item => item.id !== dataId)
+        })))
+      ),
+
+      getDeleteItemCart: (dataId) => (
+        set((state => ({
+          cart: state.cart.filter(item => item.id !== dataId)
         })))
       ),
 

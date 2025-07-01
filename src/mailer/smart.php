@@ -1,28 +1,43 @@
 <?php 
 
+// $name = $_POST['name'];
+// $lastName = $_POST['lastName'];
+
+// $name = htmlspecialchars($name);
+// $lastName = htmlspecialchars($lastName);
+
+// $name = urldecode($name);
+// $lastName = urldecode($lastName);
+
+// $name = trim($name);
+// $lastName = trim($lastName);
+
+// echo $name;
+// echo "<br>";
+// echo $lastName;
+
+// if (mail("impowka@mail.ru", "Заказ с сайта", "Имя:".$name."Фамилия:".$lastName ,"From: example2@mail.ru \r\n")) {
+//   {
+//     echo "сообщение успешно отправлено";
+// } else {
+//     echo "при отправке сообщения возникли ошибки";
+// }
+// }
+
+
+// Пример использования mail()
 $name = $_POST['name'];
-$lastName = $_POST['lastName'];
-
-$name = htmlspecialchars($name);
-$lastName = htmlspecialchars($lastName);
-
-$name = urldecode($name);
-$lastName = urldecode($lastName);
-
-$name = trim($name);
-$lastName = trim($lastName);
+$lastName = $_POST['last name'];
+$email = $_POST['email'];
+$message = $_POST['message'];
 
 echo $name;
 echo "<br>";
 echo $lastName;
-
-if (mail("impowka@mail.ru", "Заказ с сайта", "Имя:".$тфьу."Фамилия:".$lastName ,"From: example2@mail.ru \r\n")) {
-  {
-    echo "сообщение успешно отправлено";
-} else {
-    echo "при отправке сообщения возникли ошибки";
-}
-}
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $message;
 
 
 
