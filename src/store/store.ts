@@ -17,16 +17,17 @@ interface TypesPictureCart {
   active?: boolean
   description?: string
   file?: string
-  id: number
+  id?: number
   inStock?: boolean
   materials?: string
   name?: string
   nameImg?: string
   path?: string
   preview?: string
-  salary: number
+  salary?: number
   size?: string
   sizes?: TypesSizes[]
+  amount?: number
 }
 
 interface TypesStore {
@@ -48,8 +49,8 @@ interface TypesStore {
   pageStillLife: number
   pagePeopleAndAnimals: number
 
-  pictureCart: any
-  picturesCart: any
+  pictureCart?: TypesPictureCart
+  picturesCart: TypesPictureCart[]
 
   getPictureCart: (picture: TypesPictureCart) => void
   getDeleteTest: (dataId: number) => void
@@ -59,7 +60,7 @@ interface TypesStore {
   addInCart: boolean
   setAddInCart: (active: boolean) => void
 
-  cart: any
+  cart: TypesPictureCart[]
   setCartTest: (cart: any) => void
 
   discount: boolean

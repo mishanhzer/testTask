@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Spinner component renders correctly 1`] = `
+<div>
+  <div
+    class="flex justify-center items-center h-[500px]"
+  >
+    <div
+      class="w-[100px] h-[100px] spinner-border text-primary"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;
