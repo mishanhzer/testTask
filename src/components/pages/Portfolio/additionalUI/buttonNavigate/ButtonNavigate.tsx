@@ -1,6 +1,6 @@
 import React from "react"
 
-import styles from '../../styles/mainStylesPictures.module.scss'
+import styles from '../../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
 
 interface TypesButtonNavigate {
   className: string

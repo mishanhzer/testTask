@@ -11,7 +11,7 @@ import 'reactjs-popup/dist/index.css';
 
 import { arrowPages } from '../../assets/logo/logo';
 
-import styles from './styles/navigateMenu.module.scss'
+import styles from '../../styles/stylesNavigateMenu/navigateMenu.module.scss'
 
 import { urlAnimals, urlFlowers, urlStillLife } from '../../utils/useTest';
 

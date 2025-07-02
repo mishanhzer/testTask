@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { Title } from "../../UI_kits/LinkAndButton.tsx";
+import { Title } from "../../UI/LinkAndButton.tsx";
 import { PortfolioItem } from "./PortfolioItem.tsx";
 import { WhatsApp } from "../../whatsapp/WhatsApp.tsx";
 

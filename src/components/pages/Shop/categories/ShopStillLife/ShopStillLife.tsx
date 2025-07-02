@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { useStore } from '../../../../../store/store'
 
-import { ButtonComponent } from "../../../../UI_kits/LinkAndButton"
+import { ButtonComponent } from "../../../../UI/LinkAndButton"
 import { SubscribePanel } from '../../subcscribe/Subscribe'
 import { Category } from "../Category"
 

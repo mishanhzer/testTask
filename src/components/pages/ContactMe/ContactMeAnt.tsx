@@ -9,14 +9,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const { TextArea } = Input;
 
-import { ButtonComponent, Title } from "../../UI_kits/LinkAndButton";
+import { ButtonComponent, Title } from "../../UI/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 import { WhatsApp } from "../../whatsapp/WhatsApp";
 
-import styles from './styles/stylesContactMe.module.scss'
+import styles from '../../../styles/stylesContactMe/stylesContactMe.module.scss'
 
-import '../ContactMe/styles/changeStyleAnt.scss'
+import '../../../styles/stylesContactMe/changeStyleAnt.scss'
 
 interface DataForm {
   name: string

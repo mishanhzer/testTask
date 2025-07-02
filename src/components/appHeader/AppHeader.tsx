@@ -1,11 +1,12 @@
 import React from "react";
 
 import { Basket } from './imagesAppHeader/Basket'
-import { LinkButton, LinkMainLogo } from "../UI_kits/LinkAndButton";
+import { LinkButton, LinkMainLogo } from "../UI/LinkAndButton";
 import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
 
 import { images } from "./imagesAppHeader/Images";
-import styles from './styles/styleAppHeader.module.scss'
+
+import styles from '../../styles/stylesAppHeader/appHeader.module.scss'
 
 const arr =
   [

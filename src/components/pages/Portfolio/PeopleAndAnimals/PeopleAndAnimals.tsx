@@ -12,7 +12,7 @@ import { WhatsApp } from "../../../whatsapp/WhatsApp.tsx";
 
 import { peopleAndAnimalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 
-import styles from '../styles/mainStylesPictures.module.scss'
+import styles from '../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
 
 const pathPeopleAndAnimals: string = '/portfolio/people_and_animals/'
 

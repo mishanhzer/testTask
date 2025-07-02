@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import 'reactjs-popup/dist/index.css';
 
-import styles from './styles/navigateMenu.module.scss'
+import styles from '../../styles/stylesNavigateMenu/navigateMenu.module.scss'
 
 interface TypesListItem {
   name: string

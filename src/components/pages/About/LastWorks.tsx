@@ -1,6 +1,6 @@
 import React from "react"
 
-import styles from './styles/about.module.scss'
+import styles from '../../../styles/stylesAbout/about.module.scss'
 
 export const LastWorksHeader = () => {
   return (

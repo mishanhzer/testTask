@@ -1,7 +1,7 @@
 import React from 'react'
 
 import aboutImage from '../../../assets/images/aboutImage/aboutPicture.jpg'
-import styles from './styles/about.module.scss'
+import styles from '../../../styles/stylesAbout/about.module.scss'
 
 export const AboutHeader = () => {
   return (

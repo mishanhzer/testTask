@@ -5,7 +5,7 @@ import { AnimationSinglePicture } from '../dataPicturesAndFuncWidget'
 
 import { positionModalTest } from '../dataPicturesAndFuncWidget';
 
-import styles from '../../styles/mainStylesPictures.module.scss'
+import styles from '../../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
 
 interface TypesModalPortal {
   position: string

@@ -8,7 +8,7 @@
       @apply cursor-pointer;
     }
     &:before {
-      @apply content-[''] w-[45px] h-[45px] bg-cover hover:bg-[url('../../../../assets/logo/logoPictures/view.png')] absolute top-[45%] m-auto right-0 left-0 block opacity-[1] z-[1];
+      @apply content-[''] w-[45px] h-[45px] bg-cover hover:bg-[url('../../assets/logo/logoPictures/view.png')] absolute top-[45%] m-auto right-0 left-0 block opacity-[1] z-[1];
     }
     &:before:hover {
       @apply animate-animateOpacityBefore
