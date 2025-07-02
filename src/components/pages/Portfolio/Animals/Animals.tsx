@@ -5,6 +5,7 @@ import { useStore } from '../../../../store/store'
 
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { WidgetPages } from "../additionalUI/unorderedListPages/WidgetPages.tsx";
+import { WhatsApp } from "../../../whatsapp/WhatsApp.tsx";
 
 import { animalsDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts"
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx"
@@ -75,6 +76,7 @@ const Animals = () => {
           stylesContainer={styles.container}
           stylesWrapperImg={styles.wrapperImg}
         />
+        <WhatsApp />
       </>
     )
   }

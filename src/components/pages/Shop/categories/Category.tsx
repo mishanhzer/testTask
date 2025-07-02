@@ -1,6 +1,9 @@
 import React, { act, useCallback, useEffect, useState, useMemo } from "react";
 import { NavLink } from "react-router";
+import { WhatsApp } from "../../../whatsapp/WhatsApp";
+
 import classNames from "classnames";
+
 
 import { useStore } from '../../../../store/store'
 
@@ -45,6 +48,8 @@ export const Category = ({
 
             <BlockCart
               item={item} />
+
+            <WhatsApp />
           </div>
         )
       })}

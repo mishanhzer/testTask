@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
 import { PortfolioItem } from "./PortfolioItem.tsx";
+import { WhatsApp } from "../../whatsapp/WhatsApp.tsx";
 
 import { useStore } from '../../../store/store.ts'
 
@@ -27,6 +28,7 @@ const Portfolio = () => {
         <Fragment key={item.id} >
           <Title name='Artworks' content='Page with list artworks' />
           <PortfolioItem Component={item.Component} headText={item.headText} text={item.text} path={item.path} key={item.id} />
+          <WhatsApp />
         </Fragment>
       )
     })

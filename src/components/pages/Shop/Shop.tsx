@@ -1,6 +1,8 @@
 import React from "react"
 import { NavLink } from "react-router"
 
+import { WhatsApp } from "../../whatsapp/WhatsApp"
+
 import shopAnimals from '../../../assets/images/shopImage/shopAnimals.jpg'
 import shopFlowers from '../../../assets/images/shopImage/shopFlowers.jpg'
 import shopStillLife from '../../../assets/images/shopImage/shopStillLife.jpg'
@@ -28,6 +30,7 @@ const Shop = () => {
           </NavLink>
         )
       })}
+      <WhatsApp />
     </div>
   )
 }

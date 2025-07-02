@@ -5,6 +5,7 @@ import { Spinner } from "../../spinner/Spinner"
 import { AboutHeader } from './AboutHeader'
 import { PicturesContent } from "../Portfolio/additionalUI/picturesContent/PicturesContent"
 import { LastWorksHeader } from './LastWorks'
+import { WhatsApp } from "../../whatsapp/WhatsApp"
 
 import styles from './styles/about.module.scss'
 
@@ -28,7 +29,9 @@ const About = () => {
         <PicturesContent
           stylesContainer={styles.lastWorksContainer}
           displayedData={works}
-          stylesWrapperImg={styles.wrapperImg} />}
+          stylesWrapperImg={styles.wrapperImg} />
+      }
+      <WhatsApp />
     </div>
   )
 }

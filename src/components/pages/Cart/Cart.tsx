@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router";
+import { WhatsApp } from "../../whatsapp/WhatsApp";
+
 import classNames from "classnames";
 
 import { useStore } from "../../../store/store";
@@ -39,6 +41,7 @@ const Cart = () => {
             <CartForm picturesCart={picturesCart} getDeleteTest={getDeleteTest} setViewDeleteBtn={setViewDeleteBtn} discount={discount} />
             <CartOrder picturesCart={cart} discount={discount} />
           </> : <CartEmpty />}
+        <WhatsApp />
       </div>
     </>
   )

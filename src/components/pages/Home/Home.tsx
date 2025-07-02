@@ -2,6 +2,7 @@ import React from "react";
 
 import { Title } from "../../UI_kits/LinkAndButton.tsx";
 import { HomePicture } from "./HomePicture.tsx";
+import { WhatsApp } from "../../whatsapp/WhatsApp.tsx";
 import { nameHome, subheaderHome, mainDescriptionHome, subDescriptionHome } from './homeText.ts'
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
         </div>
         <div><HomePicture /></div>
       </div>
+      <WhatsApp />
     </>
   )
 }

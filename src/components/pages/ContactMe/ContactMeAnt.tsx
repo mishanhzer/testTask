@@ -12,6 +12,7 @@ const { TextArea } = Input;
 import { ButtonComponent, Title } from "../../UI_kits/LinkAndButton";
 import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
+import { WhatsApp } from "../../whatsapp/WhatsApp";
 
 import styles from './styles/stylesContactMe.module.scss'
 
@@ -115,6 +116,7 @@ const ContactMeAnt = () => {
               translateX='translate-x-1' />
           </Form.Item>
         </Form>
+        <WhatsApp />
       </div>
     </div>
   );

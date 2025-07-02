@@ -8,6 +8,7 @@ import { urlFlowers } from "../../../../utils/useTest.ts";
 
 import { Spinner } from "../../../spinner/Spinner.tsx";
 import { PicturesContent } from "../additionalUI/picturesContent/PicturesContent.tsx";
+import { WhatsApp } from "../../../whatsapp/WhatsApp.tsx";
 
 import { flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
@@ -70,6 +71,7 @@ const Flowers = () => {
           stylesContainer={styles.container}
           stylesWrapperImg={styles.wrapperImg}
         />
+        <WhatsApp />
       </>
     )
   }
