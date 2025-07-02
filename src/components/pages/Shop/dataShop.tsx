@@ -630,3 +630,511 @@ export const dataShop = [
     amount: 1
   },
 ]
+
+export const flowersShop = [
+  {
+    name: 'Голубые ирисы',
+    nameImg: 'blueIrises.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 1,
+    amount: 1
+  },
+
+  {
+    name: 'Ветка сирени',
+    nameImg: 'branchOfLilac.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 2,
+    amount: 1
+  },
+
+  {
+    name: 'Яркие пионы',
+    nameImg: 'brightPeonies.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 3,
+    amount: 1
+  },
+
+  {
+    name: 'Яркие тюльпаны',
+    nameImg: 'brightTulips.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 4,
+    amount: 1
+  },
+
+  {
+    name: 'Нежная роза',
+    nameImg: 'delicateRose.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 5,
+    amount: 1
+  },
+
+  {
+    name: 'Нежный аромат пионов',
+    nameImg: 'delicateScentOfPeonies.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 6,
+    amount: 1
+  },
+
+  {
+    name: 'Нежные тюльпаны',
+    nameImg: 'delicateTulips.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 7,
+    amount: 1
+  },
+
+  {
+    name: 'Вечерние цветы',
+    nameImg: 'eveningFlowers.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 8,
+    amount: 1
+  },
+
+  {
+    name: 'Цветы для любимой',
+    nameImg: 'flowersForBeloved.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 9,
+    amount: 1
+  },
+
+  {
+    name: 'Цветочное настроение',
+    nameImg: 'flowersMood.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 10,
+    amount: 1
+  },
+
+  {
+    name: 'Ирисы',
+    nameImg: 'irises.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 11,
+    amount: 1
+  },
+
+  {
+    name: 'Большие пионы',
+    nameImg: 'largePeonies.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 12,
+    amount: 1
+  },
+
+  {
+    name: 'Роскошные пионы',
+    nameImg: 'luxuriousPeonies.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 13,
+    amount: 1
+  },
+
+  {
+    name: 'Нарциссы',
+    nameImg: 'narcissists.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 14,
+    amount: 1
+  },
+
+  {
+    name: 'Пионы у окна',
+    nameImg: 'peoniesByTheWindow.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 15,
+    amount: 1
+  },
+
+  {
+    name: 'Фестиваль пионов',
+    nameImg: 'peonyFestival.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 16,
+    amount: 1
+  },
+
+  {
+    name: 'Розовое цветение',
+    nameImg: 'pinkBlooming.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 17,
+    amount: 1
+  },
+
+  {
+    name: 'Розовая нежность',
+    nameImg: 'pinkTenderness.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 18,
+    amount: 1
+  },
+
+  {
+    name: 'Красные цветы на закате',
+    nameImg: 'redFowersAtSunset.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 19,
+    amount: 1
+  },
+
+  {
+    name: 'Роза в саду',
+    nameImg: 'roseInGarden.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 20,
+    amount: 1
+  },
+
+  {
+    name: 'Желтая роза',
+    nameImg: 'yellowRose.jpg',
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 21,
+    amount: 1
+  },
+]
+
+export const stillLifeShop = [
+  {
+    name: 'Маргаритки на чемодане',
+    nameImg: "daisiesOnOldSuitcase.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 1,
+    amount: 1
+  },
+
+  {
+    name: 'Нежная гортензия',
+    nameImg: "delicateHydrangea.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 2,
+    amount: 1
+  },
+  {
+    name: 'Грейпфруты',
+    nameImg: "grapefruits.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 3,
+    amount: 1
+  },
+  {
+    name: 'Гортензия',
+    nameImg: "hydrangea.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 4,
+    amount: 1
+  },
+  {
+    name: 'Лимоны, апельсины, лаймы',
+    nameImg: "lemonsOrangesLimes.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 5,
+    amount: 1
+  },
+  {
+    name: 'Свежий апельсиновый фреш',
+    nameImg: "orangeJuiceFresh.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 6,
+    amount: 1
+  },
+
+  {
+    name: 'Пионы у окна',
+    nameImg: "peoniesByTheWindow.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 7,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с книгой и ключами',
+    nameImg: "stillLifeWithBookAndKeys.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 8,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с ромашкой и клубникой',
+    nameImg: "stillLifeWithChamomileAndStrawberry.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 9,
+    amount: 1
+  },
+
+  {
+    name: 'натюрморт с хризантемами и фруктами',
+    nameImg: "stillLifeWithChrysanthemumsAndFruits.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 10,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с инжиром и виноградом',
+    nameImg: "stillLifeWithFigsAndGrapes.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 11,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с зеленым виноградом',
+    nameImg: "stillLifeWithGreenGrapes.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 12,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с лимонами',
+    nameImg: "stillLifeWithLemons.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 13,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с персиком',
+    nameImg: "stillLifeWithPeach.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 14,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с гранатами',
+    nameImg: "stillLifeWithPomegranates.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 15,
+    amount: 1
+  },
+
+  {
+    name: 'Натюрморт с самоваром',
+    nameImg: "stillLifeWithSamovar.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 16,
+    amount: 1
+  },
+
+  {
+    name: 'Полевые цветы в вазе',
+    nameImg: "wildflowersInAVase.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 17,
+    amount: 1
+  },
+
+  {
+    name: 'Вино и фуркты',
+    nameImg: "wineAndFruits.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 18,
+    amount: 1
+  },
+]
+

@@ -19,6 +19,7 @@ const pathStillLife = '/portfolio/still_life/'
 
 const StillLife = () => {
   const stillLife = useStore(state => state.stillLife)
+  console.log(stillLife)
 
   const loading = useStore(state => state.loading)
   const offsetStillLife = useStore(state => state.offsetStillLife)

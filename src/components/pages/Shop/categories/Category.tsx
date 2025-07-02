@@ -24,6 +24,7 @@ export const Category = ({
   saveActive,
 }: CategoryProps) => {
   const testData = useStore(state => state.testData)
+  console.log(testData)
   const cart = useStore(state => state.cart)
   const discount = useStore(state => state.discount)
 
