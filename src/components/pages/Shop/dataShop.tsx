@@ -1138,3 +1138,109 @@ export const stillLifeShop = [
   },
 ]
 
+export const peopleAndAnimalsShop = [
+  {
+    name: 'Любимый малыш',
+    nameImg: "belovedBaby.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 1,
+    amount: 1
+  },
+
+  {
+    name: 'Лучший друг',
+    nameImg: "bestFriend.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 2,
+    amount: 1
+  },
+
+  {
+    name: 'Девочка и кот',
+    nameImg: "girlAndCat.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 3,
+    amount: 1
+  },
+
+  {
+    name: 'Девочка и и утята',
+    nameImg: "girlAndDucklings.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 4,
+    amount: 1
+  },
+
+  {
+    name: 'Девочка с собакой',
+    nameImg: "girlWithDog.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 5,
+    amount: 1
+  },
+
+  {
+    name: 'Девочка с лошадкой',
+    nameImg: "girlWithHorse.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 6,
+    amount: 1
+  },
+
+  {
+    name: 'Давай споем, мой друг',
+    nameImg: "letsSingMyFriend.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 7,
+    amount: 1
+  },
+
+  {
+    name: 'Девочка с белыми кроликами',
+    nameImg: "theGirlWithTheWhiteRabbits.jpg",
+    inStock: true,
+    salary: 20000,
+    description: '...',
+    size: '40 x 50 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 8,
+    amount: 1
+  },
+]
+

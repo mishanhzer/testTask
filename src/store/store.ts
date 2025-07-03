@@ -74,7 +74,11 @@ interface TypesStore {
   isAddedToCart: {
     [key: number]: boolean
   }
+  isAddedToCartAnimals: {
+    [key: number]: boolean
+  }
   addProperty: (property: number, value: boolean) => void
+  addPropertyAnimals: (property: number, value: boolean) => void
 
   getDeleteItemCart: (dataId: number) => void
 }
@@ -113,9 +117,13 @@ export const useStore = create<TypesStore>()(
       testData: [],
 
       isAddedToCart: {},
+      isAddedToCartAnimals: {},
 
       addProperty: (property: number, value: boolean) =>
         set((state) => ({ isAddedToCart: { ...state.isAddedToCart, [property]: value } })),
+
+      addPropertyAnimals: (property: number, value: boolean) =>
+        set((state) => ({ isAddedToCartAnimals: { ...state.isAddedToCartAnimals, [property]: value } })),
 
 
       setNewData: (data) => {

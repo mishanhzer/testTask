@@ -93,6 +93,8 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const getPicturesCart = useStore(state => state.getPicturesCart)
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
 
+  const testData = useStore(state => state.testData)
+
   const addInCart = useStore(state => state.addInCart)
   const setAddInCart = useStore(state => state.setAddInCart)
 
@@ -104,6 +106,14 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const [saveActive, setSaveActive] = useState(false)
 
   const cart = useStore(state => state.cart)
+
+  console.log(cart)
+  console.log(testData)
+  const activeCartItems = testData.filter(item => cart.find((item2) => item2.name === item.name))
+  console.log(activeCartItems)
+
+  const notActiveCartsItems = testData.filter(item => !cart.find((item2) => item2.name === item.name))
+  console.log(notActiveCartsItems)
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
@@ -141,14 +151,34 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   }
 
   return (
-    <div className={item.salary ? styles.cart : 'hidden'}>
-      {isAddedToCart[item.id] === true ?
-        <NavLink to='/cart' className={styles.cartBlockActive}>
-          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-        </NavLink> :
-        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
-      }
+    <div>
+      {activeCartItems.map(item => (
+        <ButtonCart
+          item={item}
+          testClick={testClick}
+          btnText={'В корзине'}
+          style={styles.cartBlockActive}
+          img={() => null}
+          key={item.name} />
+      ))}
+      {notActiveCartsItems.map(item => (
+        <ButtonCart
+          item={item}
+          testClick={testClick}
+          btnText={'В корзину'}
+          style={styles.cartBlock}
+          img={() => cartInBtn()}
+          key={item.name} />
+      ))}
     </div>
+    // <div className={item.salary ? styles.cart : 'hidden'}>
+    //   {isAddedToCart[item.id] === true ?
+    //     <NavLink to='/cart' className={styles.cartBlockActive}>
+    //       <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+    //     </NavLink> :
+    //     <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+    //   }
+    // </div>
   )
 }
 

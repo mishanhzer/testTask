@@ -21,6 +21,7 @@ const Shop = lazy(() => import('../pages/shop/Shop.tsx'))
 const ShopAnimals = lazy(() => import('../pages/shop/categories/ShopAnimals/ShopAnimals.tsx'))
 const ShopFlowers = lazy(() => import('../pages/shop/categories/ShopFlowers/ShopFlowers.tsx'))
 const ShopStillLife = lazy(() => import('../pages/shop/categories/ShopStillLife/ShopStillLife.tsx'))
+const ShopPeopleAndAnimals = lazy(() => import('../pages/shop/categories/ShopPeopleAndAnimals/ShopPeopleAndAnimals.tsx'))
 const Cart = lazy(() => import('../pages/Cart/Cart.tsx'))
 
 import "./app.css";
@@ -54,6 +55,7 @@ const App = () => {
             <Route path='/shop/shop_animals' element={<ShopAnimals />} />
             <Route path='/shop/shop_flowers' element={<ShopFlowers />} />
             <Route path='/shop/shop_still_life' element={<ShopStillLife />} />
+            <Route path='/shop/shop_people_and_animals' element={<ShopPeopleAndAnimals />} />
 
             <Route path='/cart' element={<Cart />} />
           </Routes>
