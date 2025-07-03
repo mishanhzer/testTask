@@ -12,7 +12,7 @@ import { WhatsApp } from "../../../whatsapp/WhatsApp.tsx";
 
 import { flowersDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
-import styles from '../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
+import styles from '../mainStylesPictures.module.scss'
 
 const pathFlowers: string = '/portfolio/flowers/'
 

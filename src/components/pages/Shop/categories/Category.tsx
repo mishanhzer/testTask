@@ -4,18 +4,15 @@ import { WhatsApp } from "../../../whatsapp/WhatsApp";
 
 import classNames from "classnames";
 
-
 import { useStore } from '../../../../store/store'
 
-import { heartActive, heartDefault } from "./ShopAnimals/heart";
+import { heartActive, heartDefault } from "../../../../assets/images/shopImage/heart";
 import { cartInBtn } from "../../../../assets/images/Images";
 
 import { TypesCommonData, TypesSaveActive, CategoryProps, TypesSalary, TypesLike, TypesButtonCart } from "../TypesShops"
 
-import styles from './ShopAnimals/styles/shopAnimals.module.scss'
+import styles from '../shopAnimals.module.scss'
 import { id } from "../../../../utils/useTest";
-
-// Продолжить пытаться сохранить значения цены картин после обновления (в компоненте Subscribe что то получается близко к этому)
 
 export const Category = ({
   commonData,
@@ -107,7 +104,6 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
 
   const cart = useStore(state => state.cart)
 
-  console.log(cart)
   console.log(testData)
   const activeCartItems = testData.filter(item => cart.find((item2) => item2.name === item.name))
   console.log(activeCartItems)
@@ -151,34 +147,32 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   }
 
   return (
-    <div>
-      {activeCartItems.map(item => (
-        <ButtonCart
-          item={item}
-          testClick={testClick}
-          btnText={'В корзине'}
-          style={styles.cartBlockActive}
-          img={() => null}
-          key={item.name} />
-      ))}
-      {notActiveCartsItems.map(item => (
-        <ButtonCart
-          item={item}
-          testClick={testClick}
-          btnText={'В корзину'}
-          style={styles.cartBlock}
-          img={() => cartInBtn()}
-          key={item.name} />
-      ))}
-    </div>
     // <div className={item.salary ? styles.cart : 'hidden'}>
-    //   {isAddedToCart[item.id] === true ?
-    //     <NavLink to='/cart' className={styles.cartBlockActive}>
-    //       <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-    //     </NavLink> :
-    //     <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
-    //   }
+    //   {testData.map(item => {
+    //     return activeCartItems.map(item2 => {
+    //       if (item.name === item2.name) {
+    //         return (
+    //           <NavLink to='/cart' className={styles.cartBlockActive}>
+    //             <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+    //           </NavLink>
+    //         )
+    //       } else {
+    //         return (
+    //           <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+    //         )
+    //       }
+    //     })
+    //   })}
     // </div>
+
+    <div className={item.salary ? styles.cart : 'hidden'}>
+      {isAddedToCart[item.id] === true ?
+        <NavLink to='/cart' className={styles.cartBlockActive}>
+          <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+        </NavLink> :
+        <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+      }
+    </div>
   )
 }
 

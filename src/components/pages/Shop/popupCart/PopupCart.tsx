@@ -2,7 +2,7 @@ import React from "react";
 
 import check from '../../../../assets/images/cartImage/check.svg'
 
-import styles from '../styles/popupCart.module.scss'
+import styles from '../popupCart.module.scss'
 
 export const PopupCart = ({ text }) => {
   return (

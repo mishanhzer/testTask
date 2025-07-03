@@ -13,7 +13,7 @@ import { WhatsApp } from "../../../whatsapp/WhatsApp.tsx";
 
 import { stillLifeDataPages } from "../additionalUI/dataPicturesAndFuncWidget.ts";
 
-import styles from '../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
+import styles from '../mainStylesPictures.module.scss'
 
 const pathStillLife = '/portfolio/still_life/'
 

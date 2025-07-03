@@ -5,15 +5,15 @@ import classNames from 'classnames';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 
-import { useAnimalStore, useFlowersStore, useStillLifeStore, useStore } from '../../store/store'
+import { useAnimalStore, useFlowersStore, useStillLifeStore, useStore } from '../../../store/store'
 
 import 'reactjs-popup/dist/index.css';
 
-import { arrowPages } from '../../assets/logo/logo';
+import { arrowPages } from '../../../assets/logo/logo';
 
-import styles from '../../styles/stylesNavigateMenu/navigateMenu.module.scss'
+import styles from '../navigateMenu.module.scss'
 
-import { urlAnimals, urlFlowers, urlStillLife } from '../../utils/useTest';
+import { urlAnimals, urlFlowers, urlStillLife } from '../../../utils/useTest';
 
 interface TypesListItem {
   name: string
@@ -45,16 +45,14 @@ export const PopupItem = ({ name, path }: TypesListItem) => {
 
   const handleClick = () => {
     if (ref.current) {
-      setTimeout(() => {
-        ref.current.close();
-      }, 0)
+      ref.current.close();
+      // setTimeout(() => {
+      //   ref.current.close();
+      // }, 0)
     }
   }
 
   const dataPortfolioLinks = [
-    // { name: 'Animals', path: `/portfolio/animals/${pageAnimals}`, class: styles.stylesPortfolioLinks, func: () => { getData('animals', urlAnimals, 'offsetAnimals', offsetAnimals, 'pageAnimals', pageAnimals); handleClick() } },
-    // { name: 'Flowers', path: `/portfolio/flowers/${pageFlowers}`, class: styles.stylesPortfolioLinks, func: () => { getData('flowers', urlFlowers, 'offsetFlowers', offsetFlowers, 'pageFlowers', pageFlowers); handleClick() } },
-    // { name: 'Still life', path: `/portfolio/still_life/${pageStillLife}`, class: styles.stylesPortfolioLinks, func: () => { getData('stillLife', urlStillLife, 'offsetStillLife', offsetStillLife, 'pageStillLife', pageStillLife); handleClick() } },
     { name: 'Animals', path: `/portfolio/animals/${pageAnimals === 0 ? 1 : pageAnimals}`, class: styles.stylesPortfolioLinks, func: handleClick },
     { name: 'Flowers', path: `/portfolio/flowers/${pageFlowers === 0 ? 1 : pageFlowers}`, class: styles.stylesPortfolioLinks, func: handleClick },
     { name: 'Still life', path: `/portfolio/still_life/${pageStillLife === 0 ? 1 : pageStillLife}`, class: styles.stylesPortfolioLinks, func: handleClick },

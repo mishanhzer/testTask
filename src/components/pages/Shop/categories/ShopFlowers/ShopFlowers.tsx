@@ -9,7 +9,7 @@ import { PopupCart } from "../../popupCart/PopupCart"
 
 import { flowersShop } from "../../dataShop"
 
-import styles from './styles/shopAnimals.module.scss'
+import styles from '../../shopAnimals.module.scss'
 
 const linkFlowers: string = 'https://disk.yandex.ru/d/59Fax6UsF26zww'
 const _apiUrl = 'https://cloud-api.yandex.net/v1/disk/public/resources?public_key='

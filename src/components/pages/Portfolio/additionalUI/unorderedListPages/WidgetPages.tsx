@@ -4,7 +4,7 @@ import { ListItemsPage } from '../ListItemsPage/ListItemsPages';
 
 import { arrowPages, doubleArrowPages } from "../../../../../assets/logo/logo";
 
-import styles from '../../../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
+import styles from '../../mainStylesPictures.module.scss'
 
 export const WidgetPages = ({ getStart, paginate, getEnd, dataPages }) => {
   return (

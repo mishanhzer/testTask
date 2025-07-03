@@ -12,7 +12,7 @@ import { TypesCommonData } from "../shop/TypesShops";
 
 import { likeCart, deleteCart } from "../../../assets/images/Images";
 import emptyCart from '../../../assets/images/cartImage/emptyCart.jpg'
-import styles from '../../../styles/stylesCart/cart.module.scss'
+import styles from './cart.module.scss'
 
 const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)

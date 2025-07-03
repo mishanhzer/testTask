@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-import styles from '../../../styles/stylesPortfolio/mainStylesPictures.module.scss'
+import styles from './mainStylesPictures.module.scss'
 
 interface TypesPortfolioItem {
   Component: React.ReactNode

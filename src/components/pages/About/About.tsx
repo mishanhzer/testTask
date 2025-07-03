@@ -7,7 +7,7 @@ import { PicturesContent } from "../Portfolio/additionalUI/picturesContent/Pictu
 import { LastWorksHeader } from './LastWorks'
 import { WhatsApp } from "../../whatsapp/WhatsApp"
 
-import styles from '../../../styles/stylesAbout/about.module.scss'
+import styles from './about.module.scss'
 
 import { urlAllWorks } from "../../../utils/useTest"
 

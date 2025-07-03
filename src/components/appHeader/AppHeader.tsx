@@ -1,19 +1,12 @@
 import React from "react";
 
-import { Basket } from './imagesAppHeader/Basket'
+import { Basket } from "../UI/Basket";
 import { LinkButton, LinkMainLogo } from "../UI/LinkAndButton";
 import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
 
 import { images } from "./imagesAppHeader/Images";
 
-import styles from '../../styles/stylesAppHeader/appHeader.module.scss'
-
-const arr =
-  [
-    { name: "vkLogo", src: "vkImg" },
-    { name: "instLogo", src: "instImg" },
-    { name: "liveLogo", src: "liveImg" }
-  ]
+import styles from './appHeader.module.scss'
 
 export const AppHeader = () => {
   return (

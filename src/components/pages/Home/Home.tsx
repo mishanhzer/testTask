@@ -5,7 +5,7 @@ import { HomePicture } from "./HomePicture.tsx";
 import { WhatsApp } from "../../whatsapp/WhatsApp.tsx";
 import { nameHome, subheaderHome, mainDescriptionHome, subDescriptionHome } from './homeText.ts'
 
-import styles from '../../../styles/stylesHome/home.module.scss'
+import styles from './home.module.scss'
 
 const Home = () => {
   return (

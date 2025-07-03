@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useStore } from "../../../../store/store";
-import styles from '../categories/ShopAnimals/styles/shopAnimals.module.scss'
+import styles from '../shopAnimals.module.scss'
 
 interface TypesSavePanel {
   activeDiscount: boolean

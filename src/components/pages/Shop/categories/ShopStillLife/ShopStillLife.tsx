@@ -9,7 +9,7 @@ import { PopupCart } from "../../popupCart/PopupCart"
 
 import { stillLifeShop } from "../../dataShop"
 
-import styles from './styles/shopAnimals.module.scss'
+import styles from '../../shopAnimals.module.scss'
 
 const linkStillLife: string = 'https://disk.yandex.ru/d/5yEFzsxVPTdx7A'
 const _apiUrl = 'https://cloud-api.yandex.net/v1/disk/public/resources?public_key='

@@ -8,7 +8,7 @@ import shopFlowers from '../../../assets/images/shopImage/shopFlowers.jpg'
 import shopStillLife from '../../../assets/images/shopImage/shopStillLife.jpg'
 import shopPeopleAndAnimals from '../../../assets/images/shopImage/shopPeopleAndAnimals.jpg'
 
-import styles from './styles/shop.module.scss'
+import styles from './shop.module.scss'
 
 const dataShop = [
   { name: 'Animals', src: shopAnimals, link: '/shop/shop_animals' },

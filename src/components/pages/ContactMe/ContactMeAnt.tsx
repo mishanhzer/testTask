@@ -14,9 +14,9 @@ import { MainPicture } from "../../../assets/images/Images";
 import { Label } from "../ContactMe/Label";
 import { WhatsApp } from "../../whatsapp/WhatsApp";
 
-import styles from '../../../styles/stylesContactMe/stylesContactMe.module.scss'
+import styles from './stylesContactMe.module.scss'
 
-import '../../../styles/stylesContactMe/changeStyleAnt.scss'
+import './changeStyleAnt.scss'
 
 interface DataForm {
   name: string
