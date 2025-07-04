@@ -21,7 +21,7 @@ export const Category = ({
   saveActive,
 }: CategoryProps) => {
   const testData = useStore(state => state.testData)
-  console.log(testData)
+
   const cart = useStore(state => state.cart)
   const discount = useStore(state => state.discount)
 
@@ -96,7 +96,6 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const setAddInCart = useStore(state => state.setAddInCart)
 
   const isAddedToCart = useStore(state => state.isAddedToCart)
-  console.log(isAddedToCart)
 
   const addProperty = useStore(state => state.addProperty)
 
@@ -104,12 +103,12 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
 
   const cart = useStore(state => state.cart)
 
-  console.log(testData)
   const activeCartItems = testData.filter(item => cart.find((item2) => item2.name === item.name))
-  console.log(activeCartItems)
 
   const notActiveCartsItems = testData.filter(item => !cart.find((item2) => item2.name === item.name))
-  console.log(notActiveCartsItems)
+
+  const sliceElements = testData.map(item => cart.find((item2) => item2.name === item.name))
+  sliceElements.some(item => console.log(item))
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
@@ -147,24 +146,6 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   }
 
   return (
-    // <div className={item.salary ? styles.cart : 'hidden'}>
-    //   {testData.map(item => {
-    //     return activeCartItems.map(item2 => {
-    //       if (item.name === item2.name) {
-    //         return (
-    //           <NavLink to='/cart' className={styles.cartBlockActive}>
-    //             <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
-    //           </NavLink>
-    //         )
-    //       } else {
-    //         return (
-    //           <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
-    //         )
-    //       }
-    //     })
-    //   })}
-    // </div>
-
     <div className={item.salary ? styles.cart : 'hidden'}>
       {isAddedToCart[item.id] === true ?
         <NavLink to='/cart' className={styles.cartBlockActive}>

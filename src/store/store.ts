@@ -11,7 +11,6 @@ import {
 import {
   TypesDataWorks, TypesSizes
 } from "../assets/images/Images"
-import { number, string } from "yup";
 
 interface TypesPictureCart {
   active?: boolean
@@ -24,10 +23,10 @@ interface TypesPictureCart {
   nameImg?: string
   path?: string
   preview?: string
-  salary?: number
+  salary: number
   size?: string
   sizes?: TypesSizes[]
-  amount?: number
+  amount: number
 }
 
 interface TypesStore {
@@ -49,7 +48,7 @@ interface TypesStore {
   pageStillLife: number
   pagePeopleAndAnimals: number
 
-  pictureCart?: TypesPictureCart
+  pictureCart: TypesPictureCart
   picturesCart: TypesPictureCart[]
 
   getPictureCart: (picture: TypesPictureCart) => void
@@ -61,7 +60,7 @@ interface TypesStore {
   setAddInCart: (active: boolean) => void
 
   cart: TypesPictureCart[]
-  setCartTest: (cart: any) => void
+  setCartTest: (cart: TypesPictureCart[]) => void
 
   discount: boolean
   setDiscount: (bool: boolean) => void
@@ -105,7 +104,14 @@ export const useStore = create<TypesStore>()(
       pageStillLife: 1,
       pagePeopleAndAnimals: 1,
 
-      pictureCart: {},
+      pictureCart: {
+        amount: 0,
+        salary: 0,
+      },
+
+      // pictureCart: {},
+
+
       picturesCart: [],
 
       cart: [],
@@ -129,7 +135,6 @@ export const useStore = create<TypesStore>()(
       setNewData: (data) => {
         set({testData: data})
       },
-
     
       setTestData: (data) => {
         set({testData: data})

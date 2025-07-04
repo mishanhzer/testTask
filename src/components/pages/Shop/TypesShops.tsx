@@ -4,12 +4,12 @@ export interface TypesCommonData {
   name?: string
   nameImg?: string
   inStock?: boolean
-  salary: number
+  salary?: number
   description?: string
   size?: string
   materials?: string
   active?: boolean
-  id: number
+  id?: number
   file?: string
   amount?: number
   path?: string

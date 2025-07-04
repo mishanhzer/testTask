@@ -96,7 +96,7 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
     setActiveLike(!activeLike)
   }
 
-  const handleIncreaseSalary = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>, pictureSalary: number, value, operation) => {
+  const handleIncreaseSalary = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>, pictureSalary: number, value: number, operation: (a: number, b: number) => number = (a, b) => (a + b)) => {
     const cartPictureId = +e.currentTarget.getAttribute('data-id')!
     setCartId(cartPictureId)
 
@@ -118,16 +118,15 @@ const CartForm = ({ picturesCart, getDeleteTest, setViewDeleteBtn, discount }) =
     <div className={styles.cartFormContainer}>
       <h1 className={styles.cartFormHeader}>Корзина</h1>
       <h2 className={styles.cartFormAmountPicture}>
-        {/* {cart.length} картин{cart.length > 0 && cart.length < 2 ? 'а' : cart.length >= 2 && cart.length < 5 ? 'ы' : ''} */}
 
         {cart.length} картин{cart.length % 10 === 1 && cart.length % 100 !== 11 ? 'а' : cart.length % 10 >= 2 && cart.length % 10 <= 4 && (cart.length % 100 < 10 || cart.length % 100 >= 20) ? 'ы' : ''}
       </h2>
-      {cartMain.map((picture, i) => {
+      {cartMain.map((picture) => {
         return (
-          <div key={i} className={styles.cartFormPictureContainer}>
+          <div key={picture.id} className={styles.cartFormPictureContainer}>
             <div className={styles.cartFormPictureWrapperItems}>
               <div className={styles.cartFormWrapperPictureAndDescr}>
-                <img src={picture.id ? picture?.sizes?.[0].url : null} className={styles.cartFormPictureImg} alt={picture.name} />
+                <img src={picture.id ? picture?.sizes?.[0].url : ''} className={styles.cartFormPictureImg} alt={picture.name} />
                 <div className={styles.cartFormPictureDescr}>
                   <h3 className={styles.cartFormPictureName}>{picture.name}</h3>
                   <div className={styles.cartFormPictureSizeAndMaterials}>Размер: {picture.size}</div>
@@ -189,8 +188,8 @@ const CartFormButtonIncDec = ({ func, disabled, style, data }) => {
 }
 
 const CartOrder = ({ picturesCart, discount }) => {
-  const amount = picturesCart.map(item => item.amount).reduce((a, b) => a + b, 0)
-  const salary = picturesCart.map(item => item.salary).reduce((a, b) => a + b, 0)
+  const amount = picturesCart.map(item => item.amount).reduce((a: number, b: number) => a + b, 0)
+  const salary = picturesCart.map(item => item.salary).reduce((a: number, b: number) => a + b, 0)
   const salaryDiscount = salary
   return (
     <div className={styles.cartOrderContainer}>
