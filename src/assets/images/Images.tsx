@@ -7,6 +7,10 @@ import portfolioFlowers from './portfolioImages/portfolioFlowers.jpg'
 import portfolioStillLife from './portfolioImages/portfolioStillLife.jpg'
 import portfolioPeopleAndAnimals from './portfolioImages/portfolioPeopleAndAnimals.jpg'
 
+import vkImg from '../logo/logoHeader/linkSocialMedia/vk.svg'
+import instImg from '../logo/logoHeader/linkSocialMedia/inst.png'
+import liveImg from '../logo/logoHeader/linkSocialMedia/live.png'
+
 export { mainPicture }
 
 export interface TypesSizes {
@@ -87,4 +91,44 @@ export const cartInBtn = () => {
     </svg>
   )
 }
+
+interface TypesLogo {
+  name: string;
+  src: string;
+  link: string
+}
+
+export const images: TypesLogo[] = [
+  {
+    name: "vkLogo",
+    src: vkImg,
+    link: 'https://vk.com/id264614153',
+  },
+  {
+    name: "instLogo",
+    src: instImg,
+    link: 'https://www.instagram.com/elena_kozyutenko_art/'
+  },
+  {
+    name: "liveLogo",
+    src: liveImg,
+    link: 'https://www.livemaster.ru/elenakozyutenko',
+  },
+];
+
+interface TypesImagesAppHeader {
+  source: string
+  name: string
+  link: string
+}
+
+export const ImagesAppheader = ({ source, name, link }: TypesImagesAppHeader) => {
+  return (
+    <a href={link}>
+      <img className={`w-5 rounded-md`} src={source} alt={name} />
+    </a>
+  );
+};
+
+
 

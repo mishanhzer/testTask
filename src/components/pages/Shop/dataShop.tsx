@@ -633,15 +633,15 @@ export const dataShop = [
 
 export const flowersShop = [
   {
-    name: 'Голубые ирисы',
+    name: 'Синие ирисы',
     nameImg: 'blueIrises.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 8000,
     description: '...',
-    size: '40 x 50 cm',
+    size: '20 x 30 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 1,
+    id: 0,
     amount: 1
   },
 
@@ -649,7 +649,20 @@ export const flowersShop = [
     name: 'Ветка сирени',
     nameImg: 'branchOfLilac.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 2000,
+    description: '...',
+    size: '20 x 20 cm',
+    materials: 'масляные краски, холст',
+    active: false,
+    id: 1,
+    amount: 1
+  },
+
+  {
+    name: 'Яркие пионы',
+    nameImg: 'brightPeonies.jpg',
+    inStock: true,
+    salary: 17000,
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
@@ -659,12 +672,12 @@ export const flowersShop = [
   },
 
   {
-    name: 'Яркие пионы',
-    nameImg: 'brightPeonies.jpg',
+    name: 'Яркие тюльпаны',
+    nameImg: 'brightTulips.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 9000,
     description: '...',
-    size: '40 x 50 cm',
+    size: '30 x 40 cm',
     materials: 'масляные краски, холст',
     active: false,
     id: 3,
@@ -672,12 +685,12 @@ export const flowersShop = [
   },
 
   {
-    name: 'Яркие тюльпаны',
-    nameImg: 'brightTulips.jpg',
+    name: 'Нежная роза',
+    nameImg: 'delicateRose.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 2000,
     description: '...',
-    size: '40 x 50 cm',
+    size: '20 x 20 cm',
     materials: 'масляные краски, холст',
     active: false,
     id: 4,
@@ -685,28 +698,15 @@ export const flowersShop = [
   },
 
   {
-    name: 'Нежная роза',
-    nameImg: 'delicateRose.jpg',
-    inStock: true,
-    salary: 20000,
-    description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
-    active: false,
-    id: 5,
-    amount: 1
-  },
-
-  {
     name: 'Нежный аромат пионов',
     nameImg: 'delicateScentOfPeonies.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 10000,
     description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
+    size: '45 x 55 cm',
+    materials: 'масляные краски, оргалит',
     active: false,
-    id: 6,
+    id: 5,
     amount: 1
   },
 
@@ -714,12 +714,12 @@ export const flowersShop = [
     name: 'Нежные тюльпаны',
     nameImg: 'delicateTulips.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 9000,
     description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
+    size: '50 x 56 cm',
+    materials: 'масляные краски, оргалит, акриловый грунт',
     active: false,
-    id: 7,
+    id: 6,
     amount: 1
   },
 
@@ -727,12 +727,12 @@ export const flowersShop = [
     name: 'Вечерние цветы',
     nameImg: 'eveningFlowers.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 5500,
     description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
+    size: '43 x 53 cm',
+    materials: 'масло, оргалит, акриловый грунт',
     active: false,
-    id: 8,
+    id: 7,
     amount: 1
   },
 
@@ -740,7 +740,20 @@ export const flowersShop = [
     name: 'Цветы для любимой',
     nameImg: 'flowersForBeloved.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 9000,
+    description: '...',
+    size: '45 x 55 cm',
+    materials: 'масляные краски, оргалит',
+    active: false,
+    id: 8,
+    amount: 1
+  },
+
+  {
+    name: 'Цветочное настроение',
+    nameImg: 'flowersMood.jpg',
+    inStock: true,
+    salary: 10000,
     description: '...',
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
@@ -750,12 +763,12 @@ export const flowersShop = [
   },
 
   {
-    name: 'Цветочное настроение',
-    nameImg: 'flowersMood.jpg',
+    name: 'Ирисы',
+    nameImg: 'irises.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 7000,
     description: '...',
-    size: '40 x 50 cm',
+    size: '25 x 35 cm',
     materials: 'масляные краски, холст',
     active: false,
     id: 10,
@@ -763,28 +776,15 @@ export const flowersShop = [
   },
 
   {
-    name: 'Ирисы',
-    nameImg: 'irises.jpg',
-    inStock: true,
-    salary: 20000,
-    description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
-    active: false,
-    id: 11,
-    amount: 1
-  },
-
-  {
-    name: 'Большие пионы',
+    name: 'Крупные пионы на темном фоне',
     nameImg: 'largePeonies.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 9000,
     description: '...',
-    size: '40 x 50 cm',
-    materials: 'масляные краски, холст',
+    size: '45 x 55 cm',
+    materials: 'масляные краски, оргалит, акриловый грунт',
     active: false,
-    id: 12,
+    id: 11,
     amount: 1
   },
 
@@ -792,12 +792,12 @@ export const flowersShop = [
     name: 'Роскошные пионы',
     nameImg: 'luxuriousPeonies.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 10500,
     description: '...',
-    size: '40 x 50 cm',
+    size: '50 x 60 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 13,
+    id: 12,
     amount: 1
   },
 
@@ -805,12 +805,12 @@ export const flowersShop = [
     name: 'Нарциссы',
     nameImg: 'narcissists.jpg',
     inStock: true,
-    salary: 20000,
+    salary: 2000,
     description: '...',
-    size: '40 x 50 cm',
+    size: '20 x 20 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 14,
+    id: 13,
     amount: 1
   },
 
@@ -823,7 +823,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 15,
+    id: 14,
     amount: 1
   },
 
@@ -836,7 +836,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 16,
+    id: 15,
     amount: 1
   },
 
@@ -849,7 +849,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 17,
+    id: 16,
     amount: 1
   },
 
@@ -862,7 +862,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 18,
+    id: 17,
     amount: 1
   },
 
@@ -875,7 +875,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 19,
+    id: 18,
     amount: 1
   },
 
@@ -888,7 +888,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 20,
+    id: 19,
     amount: 1
   },
 
@@ -901,7 +901,7 @@ export const flowersShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 21,
+    id: 20,
     amount: 1
   },
 ]
@@ -916,7 +916,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 1,
+    id: 0,
     amount: 1
   },
 
@@ -929,7 +929,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 2,
+    id: 1,
     amount: 1
   },
   {
@@ -941,7 +941,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 3,
+    id: 2,
     amount: 1
   },
   {
@@ -953,7 +953,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 4,
+    id: 3,
     amount: 1
   },
   {
@@ -965,7 +965,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 5,
+    id: 4,
     amount: 1
   },
   {
@@ -977,7 +977,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 6,
+    id: 5,
     amount: 1
   },
 
@@ -990,7 +990,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 7,
+    id: 6,
     amount: 1
   },
 
@@ -1003,7 +1003,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 8,
+    id: 7,
     amount: 1
   },
 
@@ -1016,7 +1016,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 9,
+    id: 8,
     amount: 1
   },
 
@@ -1029,7 +1029,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 10,
+    id: 9,
     amount: 1
   },
 
@@ -1042,7 +1042,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 11,
+    id: 10,
     amount: 1
   },
 
@@ -1055,7 +1055,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 12,
+    id: 11,
     amount: 1
   },
 
@@ -1068,7 +1068,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 13,
+    id: 12,
     amount: 1
   },
 
@@ -1081,7 +1081,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 14,
+    id: 13,
     amount: 1
   },
 
@@ -1094,7 +1094,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 15,
+    id: 14,
     amount: 1
   },
 
@@ -1107,7 +1107,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 16,
+    id: 15,
     amount: 1
   },
 
@@ -1120,7 +1120,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 17,
+    id: 16,
     amount: 1
   },
 
@@ -1133,7 +1133,7 @@ export const stillLifeShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 18,
+    id: 17,
     amount: 1
   },
 ]
@@ -1148,7 +1148,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 1,
+    id: 0,
     amount: 1
   },
 
@@ -1161,7 +1161,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 2,
+    id: 1,
     amount: 1
   },
 
@@ -1174,7 +1174,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 3,
+    id: 2,
     amount: 1
   },
 
@@ -1187,7 +1187,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 4,
+    id: 3,
     amount: 1
   },
 
@@ -1200,7 +1200,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 5,
+    id: 4,
     amount: 1
   },
 
@@ -1213,7 +1213,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 6,
+    id: 5,
     amount: 1
   },
 
@@ -1226,7 +1226,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 7,
+    id: 6,
     amount: 1
   },
 
@@ -1239,7 +1239,7 @@ export const peopleAndAnimalsShop = [
     size: '40 x 50 cm',
     materials: 'масляные краски, холст',
     active: false,
-    id: 8,
+    id: 7,
     amount: 1
   },
 ]

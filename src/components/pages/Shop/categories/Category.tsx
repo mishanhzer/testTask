@@ -13,6 +13,7 @@ import { TypesCommonData, TypesSaveActive, CategoryProps, TypesSalary, TypesLike
 
 import styles from '../shopAnimals.module.scss'
 import { id } from "../../../../utils/useTest";
+import test from "node:test";
 
 export const Category = ({
   commonData,
@@ -91,6 +92,7 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const deleteDuplicatePicture = useStore(state => state.deleteDuplicatePicture)
 
   const testData = useStore(state => state.testData)
+  const setTestData = useStore(state => state.setTestData)
 
   const addInCart = useStore(state => state.addInCart)
   const setAddInCart = useStore(state => state.setAddInCart)
@@ -102,13 +104,14 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
   const [saveActive, setSaveActive] = useState(false)
 
   const cart = useStore(state => state.cart)
+  const testCart = useStore(state => state.testCart)
+  console.log(testCart)
 
-  const activeCartItems = testData.filter(item => cart.find((item2) => item2.name === item.name))
-
-  const notActiveCartsItems = testData.filter(item => !cart.find((item2) => item2.name === item.name))
-
-  const sliceElements = testData.map(item => cart.find((item2) => item2.name === item.name))
-  sliceElements.some(item => console.log(item))
+  const obj = testCart.reduce((acc, value, index) => {
+    acc[index] = value
+    return acc
+  }, {})
+  console.log(obj)
 
   const [activeCart, setActiveCart] = useState(false)
   const [btnId, setBtnId] = useState(0)
@@ -120,6 +123,10 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
     setCartTest(picturesCart)
     // setCartTest(cart)
   }, [picturesCart])
+
+  useEffect(() => {
+    setTestData(testCart)
+  }, [])
 
   const testClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const activeBtn = +e.currentTarget.getAttribute('data-id')!
@@ -147,13 +154,23 @@ const BlockCart = ({ item }: { item: TypesCommonData }) => {
 
   return (
     <div className={item.salary ? styles.cart : 'hidden'}>
-      {isAddedToCart[item.id] === true ?
+      {obj[item.id].active === true ?
         <NavLink to='/cart' className={styles.cartBlockActive}>
           <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
         </NavLink> :
         <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
       }
     </div>
+
+
+    // <div className={item.salary ? styles.cart : 'hidden'}>
+    //   {isAddedToCart[item.id] === true ?
+    //     <NavLink to='/cart' className={styles.cartBlockActive}>
+    //       <ButtonCart item={item} testClick={testClick} btnText={'В корзине'} img={() => null} />
+    //     </NavLink> :
+    //     <ButtonCart item={item} testClick={testClick} btnText={'В корзину'} style={styles.cartBlock} img={() => cartInBtn()} />
+    //   }
+    // </div>
   )
 }
 

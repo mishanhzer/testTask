@@ -2,9 +2,9 @@ import React from "react";
 
 import { Basket } from "../UI/Basket";
 import { LinkButton, LinkMainLogo } from "../UI/LinkAndButton";
-import { ImagesAppheader } from './imagesAppHeader/ImagesAppHeader'
+import { ImagesAppheader } from "../../assets/images/Images";
 
-import { images } from "./imagesAppHeader/Images";
+import { images } from "../../assets/images/Images";
 
 import styles from './appHeader.module.scss'
 
@@ -14,7 +14,7 @@ export const AppHeader = () => {
       <div className={styles.styleDivContainer}>
         <div className={styles.styleDivContainerImages}>
           {images.map((item) => {
-            return <ImagesAppheader key={item.name} source={item.src} name={item.name} />;
+            return <ImagesAppheader key={item.name} source={item.src} name={item.name} link={item.link} />;
           })}
         </div>
       </div>

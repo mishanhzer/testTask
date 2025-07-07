@@ -18,8 +18,17 @@ const Cart = () => {
   const picturesCart = useStore(state => state.picturesCart)
   const cart = useStore(state => state.cart)
 
-  console.log(picturesCart)
-  console.log(cart)
+  const setCartActiveItems = useStore(state => state.setCartActiveItems)
+  const testData = useStore(state => state.testData)
+  const testCart = useStore(state => state.testCart)
+  // console.log(cart)
+  // console.log(testData)
+  console.log(testCart)
+
+  const addActiveCarts = testData.map(item => {
+    const foundItem = cart.find((item2) => item2.name === item.name); // сначала ищем товар, который есть в корзине (если сразу искать товар внутри testData, то метод find не будет обновлять массив с новым обьектом, он вернет либо undefined, либо исходный обьект, а не новый)
+    return foundItem ? { ...foundItem, active: true } : { ...item, active: false }; // а затем уже от того, есть ли товар создаем нужные нам обьекты в массиве
+  })
 
   const discount = useStore(state => state.discount)
 
@@ -30,6 +39,7 @@ const Cart = () => {
 
   useEffect(() => {
     deleteDuplicatePicture()
+    setCartActiveItems(addActiveCarts)
   }, [])
 
   return (

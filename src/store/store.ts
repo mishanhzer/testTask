@@ -62,6 +62,9 @@ interface TypesStore {
   cart: TypesPictureCart[]
   setCartTest: (cart: TypesPictureCart[]) => void
 
+  testCart: TypesPictureCart[]
+  setCartActiveItems: (cart: TypesPictureCart[]) => void
+
   discount: boolean
   setDiscount: (bool: boolean) => void
 
@@ -73,11 +76,8 @@ interface TypesStore {
   isAddedToCart: {
     [key: number]: boolean
   }
-  isAddedToCartAnimals: {
-    [key: number]: boolean
-  }
+
   addProperty: (property: number, value: boolean) => void
-  addPropertyAnimals: (property: number, value: boolean) => void
 
   getDeleteItemCart: (dataId: number) => void
 }
@@ -108,10 +108,7 @@ export const useStore = create<TypesStore>()(
         amount: 0,
         salary: 0,
       },
-
       // pictureCart: {},
-
-
       picturesCart: [],
 
       cart: [],
@@ -123,14 +120,15 @@ export const useStore = create<TypesStore>()(
       testData: [],
 
       isAddedToCart: {},
-      isAddedToCartAnimals: {},
+
+      testCart: [],
+
+      setCartActiveItems: (cart) => (
+        set({testCart: cart})
+      ),
 
       addProperty: (property: number, value: boolean) =>
         set((state) => ({ isAddedToCart: { ...state.isAddedToCart, [property]: value } })),
-
-      addPropertyAnimals: (property: number, value: boolean) =>
-        set((state) => ({ isAddedToCartAnimals: { ...state.isAddedToCartAnimals, [property]: value } })),
-
 
       setNewData: (data) => {
         set({testData: data})
