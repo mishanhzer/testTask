@@ -1,12 +1,11 @@
 .appWrapper {
   display: flex;
-  position: relative;
   flex-wrap: wrap;
   width: 1440px;
   height: 100vh;
   margin: 0 auto;
   border: 0.5px solid lightgray;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .block {
@@ -17,24 +16,15 @@
 
 .footer {
   display: flex;
-  margin: 0 auto;
-  width: calc(100% - 160px);
-  position: absolute;
-  bottom: 104px;
-  left: 50%;
-  transform: translateX(-50%);
-  // overflow: hidden;
-  // position: relative;
-  // top: -200px;
-  // bottom: 50px;
+  width: 100%;
+  padding-left: 80px;
+  margin-top: -204px;
 }
 
 .element {
   display: flex;
   flex-direction: column;
-    // padding-left: 80px;
   padding-right: 80px;
-  // width: 180px;
 }
 
 .years {
@@ -67,4 +57,16 @@
   font-family: PT Sans Bold;
   font-weight: bold;
   font-size: 56px;
+}
+
+.btnNext {
+  margin-left: 30px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FFFF;
+    img {
+      margin: 0 auto;
+    }
 }

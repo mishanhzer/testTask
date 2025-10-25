@@ -1,9 +1,11 @@
-import 'swiper/css/swiper.css';
+// import 'swiper/css/swiper.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
 import { elements } from './constants'
 import styles from './appWrapper.module.scss'
+
+import arrow from '../../../assets/logo/arrow.svg'
 
 // Литература 
 export const years1: number[] = [1992, 1994, 1995, 1997] // Диапазон 1992 по 1997
@@ -58,6 +60,7 @@ export const AppWrapper = () => {
           даты
         </div>
 
+
         {elements.map(el => {
           return <div
             key={el}
@@ -65,6 +68,7 @@ export const AppWrapper = () => {
         })}
 
         <div className={styles.footer}>
+          {/* <button>1</button> */}
           {years4.map((year, i) => {
             return <div
               key={year}
@@ -73,23 +77,25 @@ export const AppWrapper = () => {
               <div className={styles.info}>{text4[i]}</div>
             </div>
           })}
-          <button>1</button>
+
+          <button className={styles.btnNext}>
+            <img src={arrow} alt="" />
+            {/* <div className={styles.btnArrow}></div> */}
+          </button>
+
         </div>
-
-
-
       </div>
     </div>
   );
 }
 
-export const MySwiper = () => {
-  return (
-    <Swiper spaceBetween={50} slidesPerView={3}>
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      {/* Добавьте больше слайдов, если необходимо */}
-    </Swiper>
-  );
-}
+// export const MySwiper = () => {
+//   return (
+//     <Swiper spaceBetween={50} slidesPerView={3}>
+//       <SwiperSlide>Slide 1</SwiperSlide>
+//       <SwiperSlide>Slide 2</SwiperSlide>
+//       <SwiperSlide>Slide 3</SwiperSlide>
+//       {/* Добавьте больше слайдов, если необходимо */}
+//     </Swiper>
+//   );
+// }
