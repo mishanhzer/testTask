@@ -15,17 +15,28 @@
 }
 
 .footer {
+  // position: relative;
   display: flex;
-  width: 100%;
+  z-index: 50;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  // width: 100%;
   padding-left: 80px;
   margin-top: -204px;
+}
+
+.elements {
+  z-index: 1;
+  display: flex;
 }
 
 .element {
   display: flex;
   flex-direction: column;
-  padding-right: 80px;
+  margin-right: 80px;
 }
+
 
 .years {
   font-family: Bebas Neue Regular;
@@ -59,16 +70,59 @@
   font-size: 56px;
 }
 
-.btnNext {
-  margin-left: 30px;
+.btnWrapper1 {
+  display: flex;
   position: absolute;
+  left: 120px;
+  align-items: center;
+  height: 165px;
+  // margin-right: 30px;
+}
+
+.btnWrapper2 {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  right: 120px;
+  align-items: center;
+  height: 165px;
+  // margin-right: 30px;
+}
+
+.btnPrev {
+  display: block;
+  position: relative;
+  transform: rotate(180deg);
+  z-index: 100;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #FFFF;
-    img {
-      margin: 0 auto;
-    }
+  background-color: #FFF;
+  overflow: hidden;
 }
 
-git@github.com:mishanhzer/testTask.git
+.btnArrow {
+  display: block;
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btnNext {
+  display: block;
+  position: relative;
+  // position: absolute;
+  // bottom: 100px;
+  // right: 150px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FFF;
+  overflow: hidden;
+}
+
