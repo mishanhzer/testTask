@@ -1,23 +1,27 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import 'swiper/swiper-bundle.css';
 import styles from '../AppWrapper/appWrapper.module.scss'
 import './sliderSwiper.scss'
+import 'swiper/css/effect-fade';
 
 import arrow from '../../../assets/logo/arrow.svg'
 
-export const FooterSlider = ({ data }) => {
+export const FooterSlider = ({ data, isAnimating }) => {
   const swiperRef = useRef<Swiper>(null);
 
-  const [lastElem, setLastElem] = useState()
-  const [firstElem, setFirstElem] = useState()
+  const [lastElem, setLastElem] = useState<boolean>()
+  const [firstElem, setFirstElem] = useState<boolean>()
 
-  // useEffect(() => {
-  //   console.log(swiperRef?.current?.swiper)
-  //   setFirstElem(swiperRef?.current?.swiper.isBeginning)
-  // })
+  console.log('update')
+
+  useEffect(() => {
+    // console.log(swiperRef?.current?.swiper)
+    // setFirstElem(swiperRef?.current?.swiper.isBeginning)
+  }, [])
 
   const handleNextSlide = () => {
     if (swiperRef.current) {
@@ -35,35 +39,38 @@ export const FooterSlider = ({ data }) => {
   };
 
   return (
-    <Swiper
-      ref={swiperRef}
-      spaceBetween={50}
-      slidesPerView={3}
-      navigation={{
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      }}
-      className="swiper-bg"
-    >
-      {data?.years.map((year, index) => (
-        <SwiperSlide key={index}>
-          <div className={styles.element}>
-            <div className='years'>{year}</div>
-            <div className='info'>{data?.text[index]}</div>
-          </div>
-        </SwiperSlide>
-      ))}
-      <button
-        className={lastElem ? "" : "swiper-button-next"}
-        onClick={handleNextSlide}>
-        <img src={arrow} className={lastElem ? "" : "btnArrow"} alt="arrow" />
-      </button>
-      <button
-        className={firstElem ? "" : "swiper-button-prev"}
-        onClick={handlePrevSlide}>
-        <img src={arrow} className={firstElem ? "" : "btnArrow"} alt="arrow" />
-      </button>
-    </Swiper>
+    <div className={`container ${isAnimating ? 'animating' : ''}`}>
+      <Swiper
+        ref={swiperRef}
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        effect="coverflow"
+        className="swiper-bg"
+      >
+        {data?.years.map((year, index) => (
+          <SwiperSlide key={index}>
+            <div className={styles.element}>
+              <div className='years'>{year}</div>
+              <div className='info'>{data?.text[index]}</div>
+            </div>
+          </SwiperSlide>
+        ))}
+        <button
+          className={lastElem ? "" : "swiper-button-next"}
+          onClick={handleNextSlide}>
+          <img src={arrow} className={lastElem ? "" : "btnArrow"} alt="arrow" />
+        </button>
+        <button
+          className={firstElem ? "" : "swiper-button-prev"}
+          onClick={handlePrevSlide}>
+          <img src={arrow} className={firstElem ? "" : "btnArrow"} alt="arrow" />
+        </button>
+      </Swiper>
+    </div>
   );
 };
 

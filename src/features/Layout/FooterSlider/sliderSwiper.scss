@@ -77,3 +77,47 @@
   transform: translate(-50%, -50%);
 }
 
+
+
+
+
+// Анимация
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.animating {
+  animation: animateNumber 1s ease-in-out;
+}
+
+@keyframes animateNumber {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.transition {
+  display: flex;
+  width: 100%;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 300ms;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
