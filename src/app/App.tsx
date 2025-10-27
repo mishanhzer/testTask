@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppWrapper />
-      <MySlider />
+      {/* <MySlider /> */}
     </div>
   );
 };

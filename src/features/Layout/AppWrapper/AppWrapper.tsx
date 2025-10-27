@@ -2,39 +2,48 @@ import React, { useEffect, useState, useRef } from 'react';
 import useStore from '../store/store';
 
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+
+import { FooterSlider } from '../FooterSlider/FooterSlider';
+
 import 'swiper/css';
 
-import { elements, years1, text1, years2, text2, years3, text3, years4, text4, objScience } from './constants'
+import { elements, dataSlides } from './constants'
 import 'swiper/swiper-bundle.css';
 
 import styles from './appWrapper.module.scss'
-import "./sliderSwiper.scss";
+// import "./sliderSwiper.scss";
 
 import arrow from '../../../assets/logo/arrow.svg'
+import arrowTest from '../../../assets/logo/arrowTest.svg'
 
 export const AppWrapper = () => {
-  const [data, setData] = useState(objScience)
-  const [active, setActive] = useState(0)
+  const [data, setData] = useState()
+  const [slide, setSlide] = useState(1)
 
-  console.log(active)
-  console.log(objScience.years[objScience.years.length - 1])
-  console.log(objScience.years.length - 1)
+  console.log(data)
 
   useEffect(() => {
-    setData(objScience)
+    setData(dataSlides[slide - 1])
+    setSlide(slide)
   })
 
-  const handleClickNext = (index: number) => {
-    index = index + 1
-    if (index < objScience.years.length - 2) { // пока так напишем (это не всегда будет последним элементом)
-      setActive(index)
+  const handleClickNext = (slide: number) => {
+    slide = slide + 1
+    if (slide <= dataSlides.length) {
+      setSlide(slide)
+    }
+    if (dataSlides.length >= slide) {
+      setData(dataSlides[slide - 1])
     }
   }
 
-  const handleClickPrev = (index: number) => {
-    index = index - 1
-    if (index >= 0 && index < objScience.years.length) {
-      setActive(index)
+  const handleClickPrev = (slide: number) => {
+    slide = slide - 1
+    if (slide >= 1) {
+      setSlide(slide)
+    }
+    if (dataSlides.length >= 1) {
+      setData(dataSlides[slide - 1])
     }
   }
 
@@ -47,6 +56,16 @@ export const AppWrapper = () => {
           даты
         </div>
 
+        {/* <CountSlider
+          slide={slide}
+          handleClickNext={handleClickNext}
+          handleClickPrev={handleClickPrev} /> */}
+
+        <CountSlider
+          slide={slide}
+          handleClickNext={handleClickNext}
+          handleClickPrev={handleClickPrev} />
+
 
         {elements.map(el => {
           return <div
@@ -55,7 +74,7 @@ export const AppWrapper = () => {
         })}
 
 
-        <MySlider data={data} />
+        <FooterSlider data={data} />
 
         {/* <FooterSlider
           data={data}
@@ -69,70 +88,115 @@ export const AppWrapper = () => {
 }
 
 
-export const MySlider = ({ data }) => {
-  const swiperRef = useRef<Swiper>(null);
+// export const MySlider = ({ data }) => {
+//   const swiperRef = useRef<Swiper>(null);
 
-  const [lastElem, setLastElem] = useState()
-  const [firstElem, setFirstElem] = useState()
+//   const [lastElem, setLastElem] = useState()
+//   const [firstElem, setFirstElem] = useState()
 
-  // useEffect(() => {
-  //   console.log(swiperRef?.current?.swiper)
-  //   setFirstElem(swiperRef?.current?.swiper.isBeginning)
-  // })
+//   // useEffect(() => {
+//   //   console.log(swiperRef?.current?.swiper)
+//   //   setFirstElem(swiperRef?.current?.swiper.isBeginning)
+//   // })
 
-  const handleNextSlide = () => {
-    if (swiperRef.current) {
-      swiperRef.current.swiper.slideNext();
-      setLastElem(swiperRef?.current?.swiper.isEnd)
-      setFirstElem(swiperRef?.current?.swiper.isBeginning)
-    }
-  };
+//   const handleNextSlide = () => {
+//     if (swiperRef.current) {
+//       swiperRef.current.swiper.slideNext();
+//       setLastElem(swiperRef?.current?.swiper.isEnd)
+//       setFirstElem(swiperRef?.current?.swiper.isBeginning)
+//     }
+//   };
 
-  const handlePrevSlide = () => {
-    swiperRef.current.swiper.slidePrev();
-    setFirstElem(swiperRef?.current?.swiper.isBeginning)
-    setLastElem(swiperRef?.current?.swiper.isEnd)
-    console.log(swiperRef?.current?.swiper)
-  };
+//   const handlePrevSlide = () => {
+//     swiperRef.current.swiper.slidePrev();
+//     setFirstElem(swiperRef?.current?.swiper.isBeginning)
+//     setLastElem(swiperRef?.current?.swiper.isEnd)
+//     console.log(swiperRef?.current?.swiper)
+//   };
 
+//   return (
+//     <Swiper
+//       ref={swiperRef}
+//       spaceBetween={50}
+//       slidesPerView={3}
+//       navigation={{
+//         nextEl: '.swiper-button-next',
+//         prevEl: '.swiper-button-prev',
+//       }}
+//       className="swiper-bg"
+//     >
+//       {data?.years.map((year, index) => (
+//         <SwiperSlide key={index}>
+//           <div className={styles.element}>
+//             <div className='years'>{year}</div>
+//             <div className='info'>{data?.text[index]}</div>
+//           </div>
+//         </SwiperSlide>
+//       ))}
+//       <button
+//         className={lastElem ? "" : "swiper-button-next"}
+//         onClick={handleNextSlide}>
+//         <img src={arrow} className={lastElem ? "" : "btnArrow"} alt="arrow" />
+//       </button>
+//       <button
+//         className={firstElem ? "" : "swiper-button-prev"}
+//         onClick={handlePrevSlide}>
+//         <img src={arrow} className={firstElem ? "" : "btnArrow"} alt="arrow" />
+//       </button>
+//     </Swiper>
+//   );
+// };
+
+
+
+
+// const CountSliderSwiper = ({ handleClickPrev, handleClickNext, slides }) => {
+//   return (
+//     <Swiper
+//       slidesPerView={1}
+//       spaceBetween={10}
+//       navigation={{
+//         nextEl: '.swiper-button-next',
+//         prevEl: '.swiper-button-prev',
+//       }}
+//       onSlideChange={(swiper) => handleClickPrev(swiper.activeIndex + 1)}
+//       onSwiper={(swiper) => {
+//         swiper.params.navigation.prevEl = '.swiper-button-prev';
+//         swiper.params.navigation.nextEl = '.swiper-button-next';
+//       }}
+//     >
+//       {slides.map((slide, index) => (
+//         <SwiperSlide key={index}>
+//           <div className={styles.countNumbers}>{`0${slide + 1} / 0${slides.length}`}</div>
+//         </SwiperSlide>
+//       ))}
+//       <div className="swiper-button-prev" onClick={() => handleClickPrev(slides[slides.length - 1] + 1)} />
+//       <div className="swiper-button-next" onClick={() => handleClickNext(slides[0] + 1)} />
+//     </Swiper>
+//   )
+// }
+
+const CountSlider = ({ slide, handleClickNext, handleClickPrev }) => {
   return (
-    <Swiper
-      ref={swiperRef}
-      spaceBetween={50}
-      slidesPerView={3}
-      navigation={{
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      }}
-      className="swiper-bg"
-    >
-      {data?.years.map((year, index) => (
-        <SwiperSlide key={index}>
-          <div className={styles.element}>
-            <div className='years'>{year}</div>
-            <div className='info'>{data.text[index]}</div>
-          </div>
-        </SwiperSlide>
-      ))}
-      <button
-        className={lastElem ? "" : "swiper-button-next"}
-        onClick={handleNextSlide}>
-        <img src={arrow} className={lastElem ? "" : "btnArrow"} alt="arrow" />
-      </button>
-      <button
-        className={firstElem ? "" : "swiper-button-prev"}
-        onClick={handlePrevSlide}>
-        <img src={arrow} className={firstElem ? "" : "btnArrow"} alt="arrow" />
-      </button>
-    </Swiper>
-  );
-};
-
-
-
-
-
-
+    <div className={styles.countSlider}>
+      <div className={styles.countNumbers}>{`0${slide} / 0${dataSlides.length}`}</div>
+      <div>
+        <div className={styles.countSliderBtnWrapper}>
+          <button
+            className={styles.countSliderBtnPrev}
+            onClick={() => handleClickPrev(slide)}>
+            <img src={arrowTest} alt="arrow" />
+          </button>
+          <button
+            className={styles.countSliderBtnNext}
+            onClick={() => handleClickNext(slide)}>
+            <img src={arrowTest} alt="arrow" />
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 
 
