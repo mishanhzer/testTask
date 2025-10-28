@@ -127,54 +127,108 @@
 }
 
 
-// .countSlider {
-//   display: flex;
-//   flex-direction: column;
-//   width: 120px;
-//   position: absolute;
-//   bottom: 35%;
-//   margin-left: 80px;
+.circleSliderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 375px;
+  height: 375px;
+  border: 1px solid rgba(66, 86, 122, 0.2);
+  border-radius: 50%;
+}
+
+.circleBlock {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px; /* Половина ширины */
+}
+
+.circleBlockActive {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(20px, -165px) rotate(0deg);
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px;
+}
+
+.circleBlockOne {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(20px, -165px) rotate(0deg);
+}
+
+.circleBlockTwo {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(210px, 20px) rotate(0deg);
+}
+
+.circleBlockThree {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(20px, 210px) rotate(0deg);
+}
+
+.circleBlockFourth {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(-165px, 20px) rotate(0deg);
+}
+
+// .circleBlockOne {
+//   transform: rotate(-140deg);
 // }
 
-// .countNumbers {
-//   margin-bottom: 20px;
-//   font-size: 14px;
-//   font-family: PT Sans bold;
-//   color: #42567A;
-//   transition: animateNumber 1s ease-in-out;
+// .circleBlockTwo {
+//   transform: rotate(45deg);
 // }
 
-// @keyframes animateNumber {
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
+// .circleBlockThree {
+//   transform: rotate(-45deg);
 // }
 
-// .countSliderBtnWrapper {
-//   display: flex;
+// .circleBlockFourth {
+//   transform: rotate(140deg);
 // }
 
-// .countSliderBtnPrev {
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 50%;
-//   border: 1px solid #42567A;
-//     img {
-//       margin: 0 auto;
-//     }
-// }
 
-// .countSliderBtnNext {
-//   width: 50px;
-//   height: 50px;
-//   margin-left: 20px;
-//   border-radius: 50%;
-//   border: 1px solid #42567A;
-//     img {
-//       margin: 0 auto;     
-//       transform: rotate(180deg); 
-//     }
-// }
+
+.circleSliderDateWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 700px;
+  top: 50%;
+  left: -50%;
+  transform: translateY(-50%);
+}
+
+.circeSliderFirstDate {
+  font-size: 144px;
+  line-height: 160px;
+  color: #5D5FEF;
+}
+
+.circeSliderSecondDate {
+  font-size: 144px;
+  line-height: 160px;
+  color: #EF5DA8;
+}
+

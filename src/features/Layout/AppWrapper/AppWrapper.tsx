@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import useStore from '../store/store';
+import React, { useEffect, useState } from 'react';
 
 import { FooterSlider } from '../FooterSlider/FooterSlider';
 import { CountSlider } from '../CountSlider/CountSlider'
 
-import 'swiper/css';
-
 import { elements, dataSlides } from './constants'
+
+import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
@@ -14,12 +13,7 @@ import 'swiper/swiper-bundle.css';
 
 import styles from './appWrapper.module.scss'
 
-// import "./sliderSwiper.scss";
-
 import { TypesSlides } from './types';
-
-import arrow from '../../../assets/logo/arrow.svg'
-import arrowTest from '../../../assets/logo/arrowTest.svg'
 
 export const AppWrapper = () => {
   const [data, setData] = useState<TypesSlides>()
@@ -66,6 +60,8 @@ export const AppWrapper = () => {
     }
   }
 
+  console.log(data)
+
   return (
     <div>
       <div className={styles.appWrapper}>
@@ -73,6 +69,19 @@ export const AppWrapper = () => {
         <div className={styles.historyDate}>
           Исторические
           даты
+        </div>
+
+        <div className={styles.circleSliderContainer}>
+          <div className={styles.circleSliderDateWrapper}>
+            <div className={styles.circeSliderFirstDate}>{data?.years[0]}</div>
+            <div className={styles.circeSliderSecondDate}>{data?.years[data.years.length - 1]}</div>
+          </div>
+
+          <div className={`${styles.circleBlock} ${slide === 1 ? styles.circleBlockActive : styles.circleBlockOne}`}>{slide}</div>
+          <div className={`${styles.circleBlock} ${styles.circleBlockTwo}`}></div>
+          <div className={`${styles.circleBlock} ${styles.circleBlockThree}`}></div>
+          <div className={`${styles.circleBlock} ${styles.circleBlockFourth}`}></div>
+
         </div>
 
         <CountSlider
