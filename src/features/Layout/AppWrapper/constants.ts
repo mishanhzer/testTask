@@ -4,7 +4,7 @@ export const elements: TypesElements = [1, 2, 3, 4];
 
 export const dataSlides: TypesDataSlides = [
     {
-    name: 'Science',
+    name: 'Наука',
     number: 1,
     years: [2015, 2016, 2017, 2018, 2019, 2020],
     text: ['13 сентября - частное солнечное затмение, видимо в Южной Африке и части Антарктиды',
@@ -14,9 +14,9 @@ export const dataSlides: TypesDataSlides = [
     'Google обьявил о создании 53-кубитного квантового компьютера.',
     'Корабль Crew Dragon вернулся на Землю из первого пилотируемого полета',]
   },
-
+  
   {
-    name: 'Cinema',
+    name: 'Кино',
     number: 2,
     years: [1987, 1988, 1989, 1990, 1991],
     text: [
@@ -28,7 +28,7 @@ export const dataSlides: TypesDataSlides = [
   ]
   },
   {
-    name: 'Theatre',
+    name: 'Театр',
     number: 3,
     years: [1999, 2000, 2002, 2003, 2004],
     text: [
@@ -40,7 +40,7 @@ export const dataSlides: TypesDataSlides = [
     ]
   },
   {
-    name: 'Literature',
+    name: 'Литература',
     number: 4,
     years: [1992, 1994, 1995, 1997],
     text:  [

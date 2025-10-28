@@ -16,9 +16,8 @@ export const FooterSlider = ({ data, isAnimating }) => {
   const [lastElem, setLastElem] = useState<boolean>()
   const [firstElem, setFirstElem] = useState<boolean>()
 
-  console.log('update')
-
   useEffect(() => {
+    setFirstElem(true)
     // console.log(swiperRef?.current?.swiper)
     // setFirstElem(swiperRef?.current?.swiper.isBeginning)
   }, [])

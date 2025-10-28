@@ -1,0 +1,155 @@
+@mixin circleContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 375px;
+  height: 375px;
+  border: 1px solid rgba(66, 86, 122, 0.2);
+  border-radius: 50%;
+}
+
+.circleWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.circleWrapperAnimate {
+  width: 100%;
+  height: 100%;
+  animation: circleAnimate 1s ease-in-out;
+}
+
+// @keyframes circleAnimate {
+//   0% {
+//     transform: rotate(0deg)
+//   }
+//   100% {
+//     transform: rotate(90deg)
+//   }
+// }
+
+.circleSliderContainer {
+  @include circleContainer;
+}
+
+.circleAnimation {
+  @include circleContainer;
+  transition: animate 1s all;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.circleBlock {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px; /* Половина ширины */
+}
+
+.circleName {
+  
+}
+
+@mixin active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #42567A;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -35px; 
+  margin-left: -35px;
+  background-color: #F4F5F9;
+   &:hover {
+      background-color: #fff;
+      transition: 0.5s all;
+    }
+}
+
+.activeOne {
+  @include active;
+  transform: translate(10px, -175px) rotate(0deg);
+}
+
+.activeTwo {
+  @include active;
+  transform: translate(200px, 10px) rotate(-90deg);
+}
+
+.activeThree {
+  @include active;
+  transform: translate(10px, 200px) rotate(180deg);
+}
+
+.activeFour {
+  @include active;
+  transform: translate(-175px, 10px) rotate(90deg);
+}
+
+@mixin circleBlocks {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.circleBlockOne {
+  @include circleBlocks;
+  transform: translate(20px, -165px) rotate(0deg);
+}
+
+.circleBlockTwo {
+  @include circleBlocks;
+  transform: translate(210px, 20px) rotate(0deg);
+}
+
+.circleBlockThree {
+  @include circleBlocks;
+  transform: translate(20px, 210px) rotate(0deg);
+}
+
+.circleBlockFourth {
+  @include circleBlocks;
+  transform: translate(-165px, 20px) rotate(0deg);
+}
+
+
+.circleSliderDateWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 700px;
+  top: 50%;
+  left: -50%;
+  transform: translateY(-50%);
+}
+
+@mixin circleDates {
+  font-size: 144px;
+  line-height: 160px;
+}
+
+.circeSliderFirstDate {
+  @include circleDates;
+  color: #5D5FEF;
+}
+
+.circeSliderSecondDate {
+  @include circleDates;
+  color: #EF5DA8;
+}

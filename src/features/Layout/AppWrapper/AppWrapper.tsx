@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { FooterSlider } from '../FooterSlider/FooterSlider';
 import { CountSlider } from '../CountSlider/CountSlider'
+import { Circle } from '../Circle/Circle'
 
 import { elements, dataSlides } from './constants'
 
@@ -22,7 +23,8 @@ export const AppWrapper = () => {
 
   const [showContent, setShowContent] = useState(false);
 
-  console.log(data)
+  const [circlePosition, setCirclePosition] = useState(0)
+
 
   useEffect(() => {
     setData(dataSlides[slide - 1])
@@ -43,6 +45,19 @@ export const AppWrapper = () => {
       setData(dataSlides[slide - 1])
     }
     setShowContent(!showContent);
+
+    if (slide === 1) {
+      setCirclePosition(0)
+    }
+    if (slide === 2) {
+      setCirclePosition(90)
+    }
+    if (slide === 3) {
+      setCirclePosition(180)
+    }
+    if (slide === 4) {
+      setCirclePosition(270)
+    }
   }
 
   const handleClickPrev = (slide: number) => {
@@ -58,6 +73,19 @@ export const AppWrapper = () => {
     if (dataSlides.length >= 1) {
       setData(dataSlides[slide - 1])
     }
+
+    if (slide === 1) {
+      setCirclePosition(0)
+    }
+    if (slide === 2) {
+      setCirclePosition(90)
+    }
+    if (slide === 3) {
+      setCirclePosition(180)
+    }
+    if (slide === 4) {
+      setCirclePosition(270)
+    }
   }
 
   console.log(data)
@@ -71,21 +99,11 @@ export const AppWrapper = () => {
           даты
         </div>
 
-        <div className={styles.circleSliderContainer}>
-          <div className={styles.circleSliderDateWrapper}>
-            <div className={styles.circeSliderFirstDate}>{data?.years[0]}</div>
-            <div className={styles.circeSliderSecondDate}>{data?.years[data.years.length - 1]}</div>
-          </div>
-
-          <div className={`${slide === 1 ? '' : styles.circleBlock} ${slide === 1 ? styles.activeOne : styles.circleBlockOne}`}>{slide === 1 ? slide : ''}</div>
-          <div className={`${slide === 2 ? '' : styles.circleBlock} ${slide === 2 ? styles.activeTwo : styles.circleBlockTwo}`}>{slide === 2 ? slide : ''}</div>
-          <div className={`${slide === 3 ? '' : styles.circleBlock} ${slide === 3 ? styles.activeThree : styles.circleBlockThree}`}>{slide === 3 ? slide : ''}</div>
-          <div className={`${slide === 4 ? '' : styles.circleBlock} ${slide === 4 ? styles.activeFour : styles.circleBlockFourth}`}>{slide === 4 ? slide : ''}</div>
-
-        </div>
-
-
-
+        <Circle
+          data={data}
+          slide={slide}
+          isAnimating={isAnimating}
+          circlePosition={circlePosition} />
 
 
         <CountSlider
