@@ -127,6 +127,8 @@
 }
 
 
+
+
 .circleSliderContainer {
   position: absolute;
   top: 50%;
@@ -149,11 +151,56 @@
   margin-left: -25px; /* Половина ширины */
 }
 
-.circleBlockActive {
+.activeOne {
   display: flex;
   justify-content: center;
   border-radius: 50%;
-  transform: translate(20px, -165px) rotate(0deg);
+  transform: translate(10px, -175px) rotate(0deg);
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px;
+}
+
+.activeTwo {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(200px, 10px) rotate(0deg);
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px;
+}
+
+.activeThree {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(10px, 200px) rotate(0deg);
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Половина высоты */
+  margin-left: -25px;
+}
+
+.activeFour {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translate(-175px, 10px) rotate(0deg);
   width: 25px;
   height: 25px;
   border: 1px solid blue;

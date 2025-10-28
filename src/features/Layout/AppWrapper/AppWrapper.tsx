@@ -77,12 +77,16 @@ export const AppWrapper = () => {
             <div className={styles.circeSliderSecondDate}>{data?.years[data.years.length - 1]}</div>
           </div>
 
-          <div className={`${styles.circleBlock} ${slide === 1 ? styles.circleBlockActive : styles.circleBlockOne}`}>{slide}</div>
-          <div className={`${styles.circleBlock} ${styles.circleBlockTwo}`}></div>
-          <div className={`${styles.circleBlock} ${styles.circleBlockThree}`}></div>
-          <div className={`${styles.circleBlock} ${styles.circleBlockFourth}`}></div>
+          <div className={`${slide === 1 ? '' : styles.circleBlock} ${slide === 1 ? styles.activeOne : styles.circleBlockOne}`}>{slide === 1 ? slide : ''}</div>
+          <div className={`${slide === 2 ? '' : styles.circleBlock} ${slide === 2 ? styles.activeTwo : styles.circleBlockTwo}`}>{slide === 2 ? slide : ''}</div>
+          <div className={`${slide === 3 ? '' : styles.circleBlock} ${slide === 3 ? styles.activeThree : styles.circleBlockThree}`}>{slide === 3 ? slide : ''}</div>
+          <div className={`${slide === 4 ? '' : styles.circleBlock} ${slide === 4 ? styles.activeFour : styles.circleBlockFourth}`}>{slide === 4 ? slide : ''}</div>
 
         </div>
+
+
+
+
 
         <CountSlider
           slide={slide}
@@ -100,7 +104,7 @@ export const AppWrapper = () => {
           data={data}
           isAnimating={isAnimating} />
       </div>
-    </div>
+    </div >
   );
 }
 
