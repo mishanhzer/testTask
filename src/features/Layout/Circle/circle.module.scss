@@ -38,14 +38,14 @@
   transition: animate 1s all;
 }
 
-@keyframes animate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
+// @keyframes animate {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(180deg);
+//   }
+// }
 
 .circleBlock {
   width: 5px;
@@ -58,8 +58,20 @@
   margin-left: -25px; /* Половина ширины */
 }
 
+.circleNumber {
+  font-family: PT Sans Regular;
+  font-size: 20px;
+  line-height: 30px;
+  color: #42567A;
+}
+
 .circleName {
-  
+  position: absolute;
+  left: 60px;
+  font-family: PT Sans Bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: #42567A;
 }
 
 @mixin active {
@@ -69,7 +81,7 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  border: 1px solid #42567A;
+  border: 1px solid rgba(48, 62, 88, 0.5);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,6 +92,11 @@
       background-color: #fff;
       transition: 0.5s all;
     }
+}
+
+.active {
+  @include active;
+  transform: translate(10px, -175px) rotate(0deg);
 }
 
 .activeOne {

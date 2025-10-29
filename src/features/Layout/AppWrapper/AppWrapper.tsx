@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState, useCallback } from 'react';
 
 import { FooterSlider } from '../FooterSlider/FooterSlider';
 import { CountSlider } from '../CountSlider/CountSlider'
@@ -25,13 +25,55 @@ export const AppWrapper = () => {
 
   const [circlePosition, setCirclePosition] = useState(0)
 
+  const [currentValue, setCurrentValue] = useState(0);
+  const [prevValue, setPrevValue] = useState(0);
+
+  console.log(currentValue)
+  console.log(prevValue)
+
+  // Countup.js использовать для анимации бегущего числа react
 
   useEffect(() => {
+    setCurrentValue(data?.years[0])
     setData(dataSlides[slide - 1])
     setSlide(slide)
   })
 
+  const handleToggle = useCallback(() => {
+    let num = currentValue;
+
+    const interval = setInterval(() => {
+      if (isChecked) {
+        num--
+        if (num <= currentValue) {
+          clearInterval(interval)
+        }
+      } else {
+        num++
+        if (num >= currentValue) {
+          clearInterval(interval)
+        }
+      }
+
+      setNumber(num)
+    }, 25)
+  }, [])
+
   const handleClickNext = (slide: number) => {
+    setPrevValue(currentValue);
+    setCurrentValue((prevValue) => {
+      if (prevValue === 2015) {
+        return 1987;
+      }
+      if (prevValue === 1987) {
+        return 1999
+      }
+      if (prevValue === 1999) {
+        return 1992
+      }
+    });
+
+
     setIsAnimating(true)
     setTimeout(() => {
       setIsAnimating(false)
@@ -61,6 +103,19 @@ export const AppWrapper = () => {
   }
 
   const handleClickPrev = (slide: number) => {
+    setPrevValue(currentValue);
+    setCurrentValue((prevValue) => {
+      if (prevValue === 2015) {
+        return 1987;
+      }
+      if (prevValue === 1987) {
+        return 1999
+      }
+      if (prevValue === 1999) {
+        return 1992
+      }
+    });
+
     setIsAnimating(true)
     setTimeout(() => {
       setIsAnimating(false)
@@ -87,8 +142,6 @@ export const AppWrapper = () => {
       setCirclePosition(270)
     }
   }
-
-  console.log(data)
 
   return (
     <div>
