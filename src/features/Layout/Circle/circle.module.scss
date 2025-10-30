@@ -14,22 +14,13 @@
   height: 100%;
 }
 
-.circleWrapperAnimate {
+.wrapperAnimate {
   width: 100%;
   height: 100%;
   animation: circleAnimate 1s ease-in-out;
 }
 
-// @keyframes circleAnimate {
-//   0% {
-//     transform: rotate(0deg)
-//   }
-//   100% {
-//     transform: rotate(90deg)
-//   }
-// }
-
-.circleSliderContainer {
+.sliderContainer {
   @include circleContainer;
 }
 
@@ -38,16 +29,8 @@
   transition: animate 1s all;
 }
 
-// @keyframes animate {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   100% {
-//     transform: rotate(180deg);
-//   }
-// }
 
-.circleBlock {
+.block {
   width: 5px;
   height: 5px;
   background-color: black;
@@ -58,14 +41,14 @@
   margin-left: -25px; /* Половина ширины */
 }
 
-.circleNumber {
+.number {
   font-family: PT Sans Regular;
   font-size: 20px;
   line-height: 30px;
   color: #42567A;
 }
 
-.circleName {
+.name {
   position: absolute;
   left: 60px;
   font-family: PT Sans Bold;
@@ -125,28 +108,28 @@
   border-radius: 50%;
 }
 
-.circleBlockOne {
+.blockOne {
   @include circleBlocks;
   transform: translate(20px, -165px) rotate(0deg);
 }
 
-.circleBlockTwo {
+.blockTwo {
   @include circleBlocks;
   transform: translate(210px, 20px) rotate(0deg);
 }
 
-.circleBlockThree {
+.blockThree {
   @include circleBlocks;
   transform: translate(20px, 210px) rotate(0deg);
 }
 
-.circleBlockFourth {
+.blockFourth {
   @include circleBlocks;
   transform: translate(-165px, 20px) rotate(0deg);
 }
 
 
-.circleSliderDateWrapper {
+.sliderDateWrapper {
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -161,12 +144,12 @@
   line-height: 160px;
 }
 
-.circeSliderFirstDate {
+.sliderFirstDate {
   @include circleDates;
   color: #5D5FEF;
 }
 
-.circeSliderSecondDate {
+.sliderSecondDate {
   @include circleDates;
   color: #EF5DA8;
 }

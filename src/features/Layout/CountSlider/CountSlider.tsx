@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 
 import styles from './countSlider.module.scss'
+
+import { TypesCountSlider } from './types'
+
 import arrowTest from '../../../assets/logo/arrowTest.svg'
 
-export const CountSlider = ({ slide, handleClickNext, handleClickPrev, dataSlides }) => {
+export const CountSlider = ({ slide, handleClickNext, handleClickPrev, dataSlides }: TypesCountSlider) => {
   const [currentSlide, setCurrentSlide] = useState(slide)
 
   useEffect(() => {

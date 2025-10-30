@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
 import 'swiper/swiper-bundle.css';
-import styles from '../AppWrapper/appWrapper.module.scss'
 import './sliderSwiper.scss'
 import 'swiper/css/effect-fade';
 
+import { TypesFooterSlider } from './types';
+
 import arrow from '../../../assets/logo/arrow.svg'
 
-export const FooterSlider = ({ data, isAnimating }) => {
+export const FooterSlider = ({ data, isAnimating }: TypesFooterSlider) => {
   const swiperRef = useRef<Swiper>(null);
 
   const [lastElem, setLastElem] = useState<boolean>()
@@ -18,8 +17,6 @@ export const FooterSlider = ({ data, isAnimating }) => {
 
   useEffect(() => {
     setFirstElem(true)
-    // console.log(swiperRef?.current?.swiper)
-    // setFirstElem(swiperRef?.current?.swiper.isBeginning)
   }, [])
 
   const handleNextSlide = () => {
@@ -52,7 +49,7 @@ export const FooterSlider = ({ data, isAnimating }) => {
       >
         {data?.years.map((year, index) => (
           <SwiperSlide key={index}>
-            <div className={styles.element}>
+            <div>
               <div className='years'>{year}</div>
               <div className='info'>{data?.text[index]}</div>
             </div>
@@ -61,58 +58,20 @@ export const FooterSlider = ({ data, isAnimating }) => {
         <button
           className={lastElem ? "" : "swiper-button-next"}
           onClick={handleNextSlide}>
-          <img src={arrow} className={lastElem ? "" : "btnArrow"} alt="arrow" />
+          <img
+            src={arrow}
+            className={lastElem ? "" : "btnArrow"}
+            alt="arrow" />
         </button>
         <button
           className={firstElem ? "" : "swiper-button-prev"}
           onClick={handlePrevSlide}>
-          <img src={arrow} className={firstElem ? "" : "btnArrow"} alt="arrow" />
+          <img
+            src={arrow}
+            className={firstElem ? "" : "btnArrow"}
+            alt="arrow" />
         </button>
       </Swiper>
     </div>
   );
 };
-
-
-
-
-
-
-// const FooterSlider = ({ data, active, handleClickNext, handleClickPrev }) => {
-//   return (
-//     <div className={styles.footer}>
-//       <div className={styles.btnWrapper1}>
-//         <button
-//           className={active > 0 ? styles.btnPrev : ''}
-//           onClick={() => handleClickPrev(active)}>
-//           <img
-//             src={arrow}
-//             className={styles.btnArrow}
-//             alt="arrow" />
-//         </button>
-//       </div>
-
-//       <div className={styles.elements}>
-//         {data.years.map((year, i) => {
-//           return <div
-//             key={year}
-//             className={styles.element}>
-//             <div className={styles.years}>{data.years[i + active]}</div>
-//             <div className={styles.info}>{data.text[i + active]}</div>
-//           </div>
-//         })}
-
-//       </div>
-//       <div className={styles.btnWrapper2}>
-//         <button
-//           className={active < 3 ? styles.btnNext : ''}
-//           onClick={() => handleClickNext(active)} >
-//           <img
-//             src={arrow}
-//             className={styles.btnArrow}
-//             alt="arrow" />
-//         </button>
-//       </div>
-//     </div>
-//   )
-// }

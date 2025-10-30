@@ -8,3 +8,5 @@ export interface TypesSlides {
   years: number[]
   text: string[]
 }
+
+export type TypesState = number | undefined

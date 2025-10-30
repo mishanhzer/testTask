@@ -1,0 +1,1 @@
+export const historyDate: string = 'Исторические даты'
