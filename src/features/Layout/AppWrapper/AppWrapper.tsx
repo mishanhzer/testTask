@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState, useCallback, SetStateAction } from 'react';
+import React, { useRef, useEffect, useState, useCallback, SetStateAction } from 'react';
 
 import { HistoryDate } from '../HistoryDate/HistoryDate';
 import { FooterSlider } from '../FooterSlider/FooterSlider';
@@ -27,16 +27,16 @@ export const AppWrapper = () => {
   const [circlePosition, setCirclePosition] = useState(0)
 
   const [currentValue, setCurrentValue] = useState<TypesState>(0);
-  const [prevValue, setPrevValue] = useState<TypesState>(0);
+  const [prevValue, setPrevValue] = useState<TypesState>(1987);
+
+  const [currentValueEnd, setCurrentValueEnd] = useState<TypesState>(0)
+  const [prevValueEnd, setPrevValueEnd] = useState<TypesState>(1991)
 
   const [value, setValue] = useState<TypesState>(0);
 
-  console.log(currentValue)
-  console.log(prevValue)
-  console.log(value)
-
   useEffect(() => {
     setCurrentValue(data?.years[0])
+    setCurrentValueEnd(data?.years[data.years.length - 1])
     setData(dataSlides[slide - 1])
     setSlide(slide)
 
@@ -45,6 +45,7 @@ export const AppWrapper = () => {
 
   const mainLogics = (slide: number, operation: number) => {
     setPrevValue(currentValue);
+    setPrevValueEnd(currentValueEnd)
     prevValue === 2015 ? 1987 : prevValue === 1987 ? 1999 : prevValue === 1999 ? 1992 : prevValue
 
     setIsAnimating(true)
@@ -63,7 +64,6 @@ export const AppWrapper = () => {
     }
 
     slide === 1 ? setCirclePosition(0) : slide === 2 ? setCirclePosition(90) : slide === 3 ? setCirclePosition(180) : slide === 4 ? setCirclePosition(270) : ''
-
   }
 
   const handleClickNext = (slide: number) => {
@@ -86,8 +86,9 @@ export const AppWrapper = () => {
           circlePosition={circlePosition}
           currentValue={currentValue}
           prevValue={prevValue}
+          currentValueEnd={currentValueEnd}
+          prevValueEnd={prevValueEnd}
           value={value} />
-
 
         <CountSlider
           slide={slide}

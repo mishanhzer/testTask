@@ -9,4 +9,4 @@ export interface TypesSlides {
   text: string[]
 }
 
-export type TypesState = number | undefined
+export type TypesState = number

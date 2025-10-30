@@ -5,7 +5,9 @@ export interface CircleTypes {
   slide: number
   isAnimating: boolean
   circlePosition: number
-  currentValue: number | undefined
-  prevValue: number | undefined
-  value: number | undefined
+  currentValue: number 
+  prevValue: number 
+  currentValueEnd: number 
+  prevValueEnd: number 
+  value: number 
 }

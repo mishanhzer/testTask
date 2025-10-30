@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react'
-
-import { CountUp } from 'countup.js';
-
-import React from 'react';
-import SwiperCore from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Counter } from '../AppWrapper/Counter/Counter';
 
 import { CircleTypes } from './types'
 
 import './swiper.scss'
 import styles from './circle.module.scss'
 
-export const Circle = ({ data, slide, isAnimating, circlePosition, currentValue, prevValue, value }: CircleTypes) => {
+export const Circle = ({ data, slide, isAnimating, circlePosition, currentValue, prevValue, currentValueEnd, prevValueEnd }: CircleTypes) => {
 
   const styleTransform = {
     transform: `rotate(${circlePosition}deg)`,
@@ -22,8 +15,13 @@ export const Circle = ({ data, slide, isAnimating, circlePosition, currentValue,
   return (
     <div className={styles.sliderContainer}>
       <div className={styles.sliderDateWrapper}>
-        <div className={styles.sliderFirstDate}>{value}</div>
-        <div className={styles.sliderSecondDate}>{data?.years[data.years.length - 1]}</div>
+        <div className={styles.sliderFirstDate}>
+          <Counter prev={prevValue} curr={currentValue} currentCount={prevValue} />
+        </div>
+        <div className={styles.sliderSecondDate}>
+          <Counter prev={prevValueEnd} curr={currentValueEnd} currentCount={prevValueEnd} />
+        </div>
+
       </div>
 
       <div className={`${styles.wrapperAnimate}`} style={styleTransform}>
