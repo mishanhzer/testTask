@@ -22,12 +22,14 @@ export const CountSlider = ({ slide, handleClickNext, handleClickPrev, dataSlide
         <div className={styles.countSliderBtnWrapper}>
           <button
             className={styles.countSliderBtnPrev}
-            onClick={() => handleClickPrev(slide)}>
+            onClick={(e) => handleClickPrev(e, slide)}
+            data-btn='prev'>
             <img src={arrowTest} alt="arrow" />
           </button>
           <button
             className={styles.countSliderBtnNext}
-            onClick={() => handleClickNext(slide)}>
+            onClick={(e) => handleClickNext(e, slide)}
+            data-btn='next'>
             <img src={arrowTest} alt="arrow" />
           </button>
         </div>

@@ -5,7 +5,7 @@ import { CircleTypes } from './types'
 import './swiper.scss'
 import styles from './circle.module.scss'
 
-export const Circle = ({ data, slide, isAnimating, circlePosition, currentValue, prevValue, currentValueEnd, prevValueEnd }: CircleTypes) => {
+export const Circle = ({ data, slide, prevSlide, isAnimating, circlePosition, currentValue, prevValue, currentValueEnd, prevValueEnd }: CircleTypes) => {
 
   const styleTransform = {
     transform: `rotate(${circlePosition}deg)`,
@@ -16,10 +16,20 @@ export const Circle = ({ data, slide, isAnimating, circlePosition, currentValue,
     <div className={styles.sliderContainer}>
       <div className={styles.sliderDateWrapper}>
         <div className={styles.sliderFirstDate}>
-          <Counter prev={prevValue} curr={currentValue} currentCount={prevValue} />
+          <Counter
+            prev={prevValue}
+            curr={currentValue}
+            currentCount={prevValue}
+            slide={slide}
+            prevSlide={prevSlide} />
         </div>
         <div className={styles.sliderSecondDate}>
-          <Counter prev={prevValueEnd} curr={currentValueEnd} currentCount={prevValueEnd} />
+          <Counter
+            prev={prevValueEnd}
+            curr={currentValueEnd}
+            currentCount={prevValueEnd}
+            slide={slide}
+            prevSlide={prevSlide} />
         </div>
 
       </div>

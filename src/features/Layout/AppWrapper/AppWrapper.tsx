@@ -22,6 +22,7 @@ import { TypesSlides, TypesState } from './types';
 export const AppWrapper = () => {
   const [data, setData] = useState<TypesSlides>()
   const [slide, setSlide] = useState(1)
+  const [prevSlide, setPrevSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
   const [circlePosition, setCirclePosition] = useState(0)
@@ -66,12 +67,18 @@ export const AppWrapper = () => {
     slide === 1 ? setCirclePosition(0) : slide === 2 ? setCirclePosition(90) : slide === 3 ? setCirclePosition(180) : slide === 4 ? setCirclePosition(270) : ''
   }
 
-  const handleClickNext = (slide: number) => {
+  const handleClickNext = (e, slide: number) => {
+    const btn = e.currentTarget.getAttribute('data-btn')
+    console.log(btn)
     mainLogics(slide, slide + 1)
+    setPrevSlide(slide)
   }
 
-  const handleClickPrev = (slide: number) => {
+  const handleClickPrev = (e, slide: number) => {
+    const btn = e.currentTarget.getAttribute('data-btn')
+    console.log(btn)
     mainLogics(slide, slide - 1)
+    setPrevSlide(slide)
   }
 
   return (
@@ -82,6 +89,7 @@ export const AppWrapper = () => {
         <Circle
           data={data}
           slide={slide}
+          prevSlide={prevSlide}
           isAnimating={isAnimating}
           circlePosition={circlePosition}
           currentValue={currentValue}
