@@ -21,37 +21,45 @@ export const Circle = ({
   prevValueEnd }: CircleTypes) => {
 
   const circleRef = useRef(null);
+
   const [active, setActive] = useState('')
-  console.log(active)
-  // Использование useGSAP для автоматической очистки анимаций при размонтировании компонента
-  // useGSAP(() => {
-  //   // Установка начального состояния (если нужно, например, убедиться, что scale = 1)
-  //   gsap.set(circleRef.current, { scale: 1, transformOrigin: 'center center' });
-  // }, []); // Пустой массив зависимостей гарантирует, что эффект запустится только один раз при монтировании
+
+  const circleElementStylesActive = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '50%',
+    width: '50px',
+    height: '50px',
+    border: '1px solid rgba(48, 62, 88, 0.5)',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: '-50px',
+    marginLeft: '-50px',
+    backgroundColor: '#F4F5F9',
+  }
+
+  const circleElementStylesNotActive = {
+    width: '6px',
+    height: '6px',
+    backgroundColor: '#42567A',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: '-25px', /* Половина высоты */
+    marginLeft: '-25px',
+  }
 
 
   const handleMouseEnter = (e) => {
     const btnActive = e.currentTarget.getAttribute('data-btn')
     setActive(btnActive)
     // Анимация сжатия в точку (scale: 0) при наведении
-    gsap.to(circleRef.current, {
+    gsap.to(e.currentTarget, {
+      ...circleElementStylesActive,
       duration: 0.5,
       scale: 1,
-
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '50%',
-      width: '50px',
-      height: '50px',
-      border: '1px solid rgba(48, 62, 88, 0.5)',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      marginTop: '-35px',
-      marginLeft: '-35px',
-      backgroundColor: '#F4F5F9',
-
       ease: "power4.inOut",
     });
   };
@@ -59,19 +67,11 @@ export const Circle = ({
   const handleMouseLeave = (e) => {
     setActive('notActive')
     // Анимация возврата к исходному размеру (scale: 1) при уходе курсора
-    gsap.to(circleRef.current, {
+    gsap.to(e.currentTarget, {
+      ...circleElementStylesNotActive,
       duration: 0.5,
       scale: 1,
       ease: "power4.inOut",
-
-      width: '6px',
-      height: '6px',
-      backgroundColor: '#42567A',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      marginTop: '-25px', /* Половина высоты */
-      marginLeft: '-25px',
     });
   };
 
@@ -104,8 +104,8 @@ export const Circle = ({
 
         <div
           ref={circleRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          // onMouseEnter={handleMouseEnter}
+          // onMouseLeave={handleMouseLeave}
           className={`${styles.block} ${styles.active}`}>
           {/* <div className={`${styles.block}`}> */}
           <div className={styles.number}>
@@ -118,16 +118,32 @@ export const Circle = ({
 
         <div
           ref={circleRef}
-          data-btn='active'
+          data-btn='activeTwo'
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           className={`${styles.block} ${styles.blockTwo}`}>
-          {active === 'active' ? slide + 1 : ''}
+          {active === 'activeTwo' ? slide + 1 : ''}
         </div>
 
 
-        <div className={`${styles.block} ${styles.blockThree}`}></div>
-        <div className={`${styles.block} ${styles.blockFourth}`}></div>
+        <div
+          ref={circleRef}
+          data-btn='activeThree'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`${styles.block} ${styles.blockThree}`}>
+          {active === 'activeThree' ? slide + 2 : ''}
+        </div>
+
+
+        <div
+          ref={circleRef}
+          data-btn='activeFour'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`${styles.block} ${styles.blockFourth}`}>
+          {active === 'activeFour' ? slide + 3 : ''}
+        </div>
       </div>
 
     </div>
