@@ -1,0 +1,1 @@
+.appWrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;width:1440px;height:1080px;margin:0 auto;border:.5px solid #d3d3d3}.gridContainer{display:grid;height:100%;grid-template-rows:40% 60%;grid-template-columns:50% 50%;width:100%}.gridElem{border:.5px solid #d3d3d3}/*# sourceMappingURL=appWrapper.module.min.css.map */

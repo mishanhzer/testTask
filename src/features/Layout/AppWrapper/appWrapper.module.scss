@@ -2,14 +2,24 @@
   display: flex;
   flex-wrap: wrap;
   width: 1440px;
-  height: 100vh;
+  // height: 100vh;
+  height: 1080px;
   margin: 0 auto;
   border: 0.5px solid lightgray;
 }
 
-.block {
-  width: 50%;
-  height: 50vh;
+.gridContainer {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 40% 60%;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+}
+
+.gridElem {
   border: 0.5px solid lightgray;
 }
+
+
+
 

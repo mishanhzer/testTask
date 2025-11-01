@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { ButtonFooter } from './ButtonFooter/ButtonFooter';
+
 import 'swiper/swiper-bundle.css';
 import './sliderSwiper.scss'
 import 'swiper/css/effect-fade';
@@ -55,22 +57,18 @@ export const FooterSlider = ({ data, isAnimating }: TypesFooterSlider) => {
             </div>
           </SwiperSlide>
         ))}
-        <button
-          className={lastElem ? "" : "swiper-button-next"}
-          onClick={handleNextSlide}>
-          <img
-            src={arrow}
-            className={lastElem ? "" : "btnArrow"}
-            alt="arrow" />
-        </button>
-        <button
-          className={firstElem ? "" : "swiper-button-prev"}
-          onClick={handlePrevSlide}>
-          <img
-            src={arrow}
-            className={firstElem ? "" : "btnArrow"}
-            alt="arrow" />
-        </button>
+
+        <ButtonFooter
+          elem={lastElem}
+          func={handleNextSlide}
+          source={arrow}
+          swiperClass={'swiper-button-next'} />
+
+        <ButtonFooter
+          elem={firstElem}
+          func={handlePrevSlide}
+          source={arrow}
+          swiperClass={'swiper-button-prev'} />
       </Swiper>
     </div>
   );

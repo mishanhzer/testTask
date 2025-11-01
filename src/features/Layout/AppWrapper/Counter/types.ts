@@ -1,5 +1,5 @@
 export interface TypesCounter {
-  curr: number 
-  prev: number 
-  currentCount: number 
+  startNumber: number | undefined
+  endNumber: number | undefined
+  duration: number | undefined
 }

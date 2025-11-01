@@ -1,6 +1,6 @@
 import { TypesElements, TypesDataSlides } from './types'
 
-export const elements: TypesElements = [1, 2, 3, 4];
+export const elements: TypesElements = ['one', 'two', 'three', 'four'];
 
 export const dataSlides: TypesDataSlides = [
   {

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 
 import { HistoryDate } from '../HistoryDate/HistoryDate';
 import { FooterSlider } from '../FooterSlider/FooterSlider';
@@ -6,8 +6,6 @@ import { CountSlider } from '../CountSlider/CountSlider'
 import { Circle } from '../Circle/Circle'
 
 import { elements, dataSlides } from './constants'
-
-import { gsap } from 'gsap';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -22,7 +20,7 @@ import { TypesSlides, TypesState } from './types';
 export const AppWrapper = () => {
   const [data, setData] = useState<TypesSlides>()
   const [slide, setSlide] = useState(1)
-  const [prevSlide, setPrevSlide] = useState(0)
+
   const [isAnimating, setIsAnimating] = useState(false)
 
   const [circlePosition, setCirclePosition] = useState(0)
@@ -33,15 +31,11 @@ export const AppWrapper = () => {
   const [currentValueEnd, setCurrentValueEnd] = useState<TypesState>(0)
   const [prevValueEnd, setPrevValueEnd] = useState<TypesState>(1991)
 
-  const [value, setValue] = useState<TypesState>(0);
-
   useEffect(() => {
     setCurrentValue(data?.years[0])
     setCurrentValueEnd(data?.years[data.years.length - 1])
     setData(dataSlides[slide - 1])
     setSlide(slide)
-
-    setValue(currentValue)
   })
 
   const mainLogics = (slide: number, operation: number) => {
@@ -67,18 +61,12 @@ export const AppWrapper = () => {
     slide === 1 ? setCirclePosition(0) : slide === 2 ? setCirclePosition(90) : slide === 3 ? setCirclePosition(180) : slide === 4 ? setCirclePosition(270) : ''
   }
 
-  const handleClickNext = (e, slide: number) => {
-    const btn = e.currentTarget.getAttribute('data-btn')
-    console.log(btn)
+  const handleClickNext = (slide: number) => {
     mainLogics(slide, slide + 1)
-    setPrevSlide(slide)
   }
 
-  const handleClickPrev = (e, slide: number) => {
-    const btn = e.currentTarget.getAttribute('data-btn')
-    console.log(btn)
+  const handleClickPrev = (slide: number) => {
     mainLogics(slide, slide - 1)
-    setPrevSlide(slide)
   }
 
   return (
@@ -89,14 +77,13 @@ export const AppWrapper = () => {
         <Circle
           data={data}
           slide={slide}
-          prevSlide={prevSlide}
           isAnimating={isAnimating}
           circlePosition={circlePosition}
           currentValue={currentValue}
           prevValue={prevValue}
           currentValueEnd={currentValueEnd}
           prevValueEnd={prevValueEnd}
-          value={value} />
+        />
 
         <CountSlider
           slide={slide}
@@ -104,11 +91,13 @@ export const AppWrapper = () => {
           handleClickPrev={handleClickPrev}
           dataSlides={dataSlides} />
 
-        {elements.map(el => {
-          return <div
-            key={el}
-            className={styles.block}></div>
-        })}
+        <div className={styles.gridContainer}>
+          {elements.map(el => {
+            return <div
+              key={el}
+              className={styles.gridElem}></div>
+          })}
+        </div>
 
         <FooterSlider
           data={data}

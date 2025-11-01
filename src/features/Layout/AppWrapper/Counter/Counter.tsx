@@ -1,29 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+
+import { gsap } from "gsap";
 
 import { TypesCounter } from './types'
 
-export const Counter = ({ curr, prev, currentCount, slide, prevSlide }: TypesCounter) => {
-  const [count, setCount] = useState(currentCount);
-
-  // console.log(slide)
-  // console.log(prevSlide)
+export const Counter = ({ startNumber = 1987, endNumber = 1991, duration = 1.5 }: TypesCounter) => {
+  const numberRef = useRef(null);
+  const animatedValue = useRef({ value: startNumber });
 
   useEffect(() => {
-    const step = curr >= prev ? 1 : -1;
+    gsap.to(animatedValue.current, {
+      value: endNumber,
+      duration: duration,
+      ease: 'power4.out',
+      onUpdate: () => {
+        numberRef.current.textContent = Math.round(animatedValue.current.value);
+      },
+    });
 
-    const interval = setInterval(() => {
-      setCount(currentCount => {
-        // if (Math.abs(currentCount + step) > Math.abs(curr)) {
-        if (currentCount + step > curr) {
-          clearInterval(interval);
-          return curr;
-        }
-        return currentCount + step;
-      });
-    }, 50);
+  }, [endNumber, duration]);
 
-    return () => clearInterval(interval);
-  }, [curr]);
-
-  return <div>{count}</div>;
-}
+  return (
+    <span ref={numberRef}>{Math.round(startNumber)}</span>
+  );
+};

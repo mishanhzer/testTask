@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { ButtonCount } from './ButtonCount/ButtonCount';
+
 import styles from './countSlider.module.scss'
 
 import { TypesCountSlider } from './types'
@@ -20,18 +22,14 @@ export const CountSlider = ({ slide, handleClickNext, handleClickPrev, dataSlide
       </div>
       <div>
         <div className={styles.countSliderBtnWrapper}>
-          <button
-            className={styles.countSliderBtnPrev}
-            onClick={(e) => handleClickPrev(e, slide)}
-            data-btn='prev'>
-            <img src={arrowTest} alt="arrow" />
-          </button>
-          <button
-            className={styles.countSliderBtnNext}
-            onClick={(e) => handleClickNext(e, slide)}
-            data-btn='next'>
-            <img src={arrowTest} alt="arrow" />
-          </button>
+          <ButtonCount
+            classBtn={styles.countSliderBtnPrev}
+            func={() => handleClickPrev(slide)}
+            source={arrowTest} />
+          <ButtonCount
+            classBtn={styles.countSliderBtnNext}
+            func={() => handleClickNext(slide)}
+            source={arrowTest} />
         </div>
       </div>
     </div>

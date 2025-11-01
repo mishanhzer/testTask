@@ -1,4 +1,4 @@
-export type TypesElements = number[]
+export type TypesElements = string[]
 
 export type TypesDataSlides = TypesSlides[]
 
@@ -9,4 +9,4 @@ export interface TypesSlides {
   text: string[]
 }
 
-export type TypesState = number
+export type TypesState = number | undefined
