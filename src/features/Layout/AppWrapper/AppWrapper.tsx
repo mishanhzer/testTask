@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import gsap from "gsap";
+
 import { HistoryDate } from '../HistoryDate/HistoryDate';
 import { FooterSlider } from '../FooterSlider/FooterSlider';
 import { CountSlider } from '../CountSlider/CountSlider'
@@ -63,6 +65,7 @@ export const AppWrapper = () => {
 
   const handleClickNext = (slide: number) => {
     mainLogics(slide, slide + 1)
+
   }
 
   const handleClickPrev = (slide: number) => {
