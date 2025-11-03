@@ -9,6 +9,7 @@ import { CircleTypes } from './types'
 
 import './swiper.scss'
 import styles from './circle.module.scss'
+import test from "node:test";
 
 export const Circle = ({
   data,
@@ -25,11 +26,11 @@ export const Circle = ({
   const [active, setActive] = useState('')
 
   const [activeTopElement, setActiveTopElement] = useState('activeOne');
-  console.log(activeTopElement)
+
+  const [isTextVisible, setIsTextVisible] = useState(true);
 
   const getActiveElementIndex = (currentAngle) => {
     const normalizedAngle = (currentAngle % 360 + 360) % 360;
-    console.log((90 % 360 + 360) % 360)
 
     if (normalizedAngle === 0) return 'activeOne';
     if (normalizedAngle === 90) return 'activeFour';
@@ -50,6 +51,12 @@ export const Circle = ({
       setActiveTopElement(activeIdx);
       // Возможно, вам нужно установить active в 'activeOne', 'activeTwo' и т.д.
       // setActive(mapIndexToActiveState(activeIdx)); 
+    }
+    if (isAnimating) {
+      const timeoutId = setTimeout(() => setIsTextVisible(false), 0);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setIsTextVisible(true);
     }
   }, [isAnimating, circlePosition]);
 
@@ -83,6 +90,10 @@ export const Circle = ({
 
   const handleMouseEnter = (e) => {
     const btnActive = e.currentTarget.getAttribute('data-btn')
+    const btnName = e.currentTarget.getAttribute('data-name')
+    if (activeTopElement === `active${btnName}`) {
+      return;
+    }
     setActive(btnActive)
     gsap.to(e.currentTarget, {
       ...circleElementStylesActive,
@@ -93,7 +104,11 @@ export const Circle = ({
   };
 
   const handleMouseLeave = (e) => {
-    setActive('notActive')
+    const btnName = e.currentTarget.getAttribute('data-name')
+    if (activeTopElement === `active${btnName}`) {
+      return;
+    }
+    setActive('')
     gsap.to(e.currentTarget, {
       ...circleElementStylesNotActive,
       duration: 0.4,
@@ -103,9 +118,34 @@ export const Circle = ({
   };
 
   const styleTransform = {
-    transform: `rotate(${circlePosition}deg)`,
+    transform: `rotate(${-circlePosition}deg)`,
     transition: isAnimating ? 'transform 1s ease-in-out' : '',
   }
+
+  const getCombinedStyle = (elementId) => {
+    let translateString = '';
+
+    switch (elementId) {
+      case 1:
+        translateString = 'translate(20px, -242px)';
+        break;
+      case 2:
+        translateString = 'translate(287px, 20px)';
+        break;
+      case 3:
+        translateString = 'translate(20px, 287px)';
+        break;
+      case 4:
+        translateString = 'translate(-242px, 20px)';
+        break;
+      default:
+        translateString = 'translate(0, 0)';
+    }
+
+    return {
+      transform: `${translateString} rotate(${circlePosition}deg)`,
+    };
+  };
 
   return (
     <div className={styles.sliderContainer}>
@@ -131,50 +171,85 @@ export const Circle = ({
           ref={circleRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          data-btn='activeOne'
+          data-name={'One'}
+          data-btn={1}
+          style={getCombinedStyle(1)}
           className={`${activeTopElement === 'activeOne' ? `${styles.active}` : `${styles.block} ${styles.blockOne}`} ${styles.blockOne}`}>
-          {/* <div className={`${styles.block}`}> */}
           <div className={styles.number}>
             {activeTopElement === 'activeOne' ? 1 : ''}
+            {active === '1' ? active : ''}
           </div>
-          <div className={styles.name}>
-            {activeTopElement === 'activeOne' ? data?.name : ''}
-          </div>
+
+          {isTextVisible && activeTopElement === 'activeOne' && (
+            <>
+              <div className={styles.name}>
+                {data?.name}
+              </div>
+            </>
+          )}
         </div>
 
+        <div
+          // ref={circleRef}
+          data-name={'Two'}
+          data-btn={2}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={getCombinedStyle(2)}
+          className={`${activeTopElement === 'activeFour' ? `${styles.active}` : `${styles.block} ${styles.blockTwo}`} ${styles.blockTwo}`}>
+          {activeTopElement === 'activeFour' ? 2 : ''}
 
+          {active === '2' ? active : ''}
+
+          {isTextVisible && activeTopElement === 'activeFour' && (
+            <>
+              <div className={styles.name}>
+                {data?.name}
+              </div>
+            </>
+          )}
+
+        </div>
 
 
         <div
           // ref={circleRef}
-          data-btn='activeTwo'
+          data-name={'Three'}
+          data-btn={3}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className={`${activeTopElement === 'activeTwo' ? `${styles.active}` : `${styles.block} ${styles.blockTwo}`} ${styles.blockTwo}`}>
-          {/* className={`${styles.block} ${styles.blockTwo}`}> */}
-          {activeTopElement === 'activeTwo' ? 2 : ''}
-        </div>
-
-
-        <div
-          // ref={circleRef}
-          data-btn='activeThree'
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          style={getCombinedStyle(3)}
           className={`${activeTopElement === 'activeThree' ? `${styles.active}` : `${styles.block} ${styles.blockThree}`} ${styles.blockThree}`}>
-          {/* className={`${styles.block} ${styles.blockThree}`}> */}
           {activeTopElement === 'activeThree' ? 3 : ''}
+          {active === '3' ? active : ''}
+
+          {isTextVisible && activeTopElement === 'activeThree' && (
+            <>
+              <div className={styles.name}>
+                {data?.name}
+              </div>
+            </>
+          )}
         </div>
 
 
         <div
           // ref={circleRef}
-          data-btn='activeFour'
+          data-name={'Four'}
+          data-btn={4}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className={`${activeTopElement === 'activeFour' ? `${styles.active}` : `${styles.block} ${styles.blockFourth}`} ${styles.blockFourth}`}>
-          {/* className={`${styles.block} ${styles.blockFourth}`}> */}
-          {activeTopElement === 'activeFour' ? 4 : ''}
+          style={getCombinedStyle(4)}
+          className={`${activeTopElement === 'activeTwo' ? `${styles.active}` : `${styles.block} ${styles.blockFourth}`} ${styles.blockFourth}`}>
+          {activeTopElement === 'activeTwo' ? 4 : ''}
+          {active === '4' ? active : ''}
+          {isTextVisible && activeTopElement === 'activeTwo' && (
+            <>
+              <div className={styles.name}>
+                {data?.name}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
