@@ -32,6 +32,13 @@ export const CountSlider = ({ slide, handleClickNext, handleClickPrev, dataSlide
             source={arrowTest} />
         </div>
       </div>
+
+      <div className={styles.countSliderElements}>
+        <div className={slide === 1 ? styles.countSliderElementActive : styles.countSliderElement}></div>
+        <div className={slide === 2 ? styles.countSliderElementActive : styles.countSliderElement}></div>
+        <div className={slide === 3 ? styles.countSliderElementActive : styles.countSliderElement}></div>
+        <div className={slide === 4 ? styles.countSliderElementActive : styles.countSliderElement}></div>
+      </div>
     </div>
   )
 }

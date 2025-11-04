@@ -3,8 +3,66 @@
   flex-direction: column;
   width: 120px;
   position: absolute;
-  bottom: 56px;
+  bottom: 0px;
   margin-left: 80px;
+}
+
+@media (max-width: 320px) {
+  .countSlider {
+    width: 58px;
+    position: absolute;
+    bottom: 30px;
+    margin-left: 20px;
+  }
+  .countNumbers {
+    font-size: 14px;
+  }
+
+  .countSliderBtnNext {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 1px solid #42567A;
+      &:hover {
+        background-color: #fff;
+        transition: 0.5s all;
+      }
+      img {
+        margin: 0 auto;     
+        transform: rotate(180deg); 
+      }
+    }
+}
+
+.countSliderElements {
+  display: none;
+} 
+
+@media (max-width: 320px) {
+  .countSliderElements {
+      display: flex;
+      justify-content: space-between;
+      width: 86px;
+      height: 6px;
+      margin-left: 100px;
+      margin-top: -25px;
+   } 
+   .countSliderElement {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #42567A;
+    opacity: 0.4;
+   }
+
+   .countSliderElementActive {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #42567A;
+    opacity: 1;
+   }
 }
 
 .countNumbers {
@@ -13,6 +71,13 @@
   font-family: PT Sans bold;
   color: #42567A;
   transition: animateNumber 1s ease-in-out;
+}
+
+@media (max-width: 320px) {
+  .countNumbers {
+    margin-bottom: 10px;
+  }
+  
 }
 
 .animating {
@@ -46,6 +111,23 @@
     }
 }
 
+@media (max-width: 320px) {
+  .countSliderBtnPrev {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #42567A;
+       &:hover {
+        background-color: #fff;
+        transition: 0.5s all;
+      }
+      img {
+        width: 6px;
+        margin: 0 auto;
+      }
+  }
+}
+
 .countSliderBtnNext {
   width: 50px;
   height: 50px;
@@ -60,4 +142,23 @@
       margin: 0 auto;     
       transform: rotate(180deg); 
     }
+}
+
+@media (max-width: 320px) {
+  .countSliderBtnNext {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 1px solid #42567A;
+      &:hover {
+        background-color: #fff;
+        transition: 0.5s all;
+      }
+      img {
+        width: 6px;
+        margin: 0 auto;     
+        transform: rotate(180deg); 
+      }
+}
 }

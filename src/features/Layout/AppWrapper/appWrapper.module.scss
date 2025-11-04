@@ -20,6 +20,19 @@
   border: 0.5px solid lightgray;
 }
 
+@media (max-width: 320px) {
+  .appWrapper {
+    width: 320px;
+    height: 568px;
+    border: none;
+  }
+
+  .gridContainer {
+    display: block;
+    margin-left: 20px;
+  }
+}
+
 
 
 

@@ -3,3 +3,11 @@
   height: 1080px;
   background-color: #F4F5F9;
 }
+
+@media (max-width: 320px) {
+  .app {
+    background-color: #F4F5F9; /* Меняем цвет только на очень маленьких экранах */
+    width: 320px;
+    height: 568px;
+  }
+}
