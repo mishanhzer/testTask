@@ -78,6 +78,9 @@ export const AppWrapper = () => {
         <HistoryDate />
 
         <Circle
+          handleClickNext={handleClickNext}
+          handleClickPrev={handleClickPrev}
+
           data={data}
           slide={slide}
           isAnimating={isAnimating}

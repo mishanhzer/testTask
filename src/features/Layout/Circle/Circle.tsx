@@ -2,16 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { Counter } from '../AppWrapper/Counter/Counter';
 
-import gsap from "gsap";
-import { useGSAP } from '@gsap/react';
-
 import { CircleTypes } from './types'
 
 import './swiper.scss'
 import styles from './circle.module.scss'
-import test from "node:test";
 
 export const Circle = ({
+  handleClickNext,
+  handleClickPrev,
   data,
   slide,
   isAnimating,
@@ -24,10 +22,23 @@ export const Circle = ({
   const circleRef = useRef(null);
 
   const [active, setActive] = useState('')
-
   const [activeTopElement, setActiveTopElement] = useState('activeOne');
 
   const [isTextVisible, setIsTextVisible] = useState(true);
+
+  useEffect(() => {
+    if (!isAnimating) {
+      const activeIdx = getActiveElementIndex(circlePosition);
+      setActiveTopElement(activeIdx);
+    }
+    if (isAnimating) {
+      const timeoutId = setTimeout(() => setIsTextVisible(false), 0);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setIsTextVisible(true);
+    }
+  }, [isAnimating, circlePosition]);
+
 
   const getActiveElementIndex = (currentAngle) => {
     const normalizedAngle = (currentAngle % 360 + 360) % 360;
@@ -40,82 +51,93 @@ export const Circle = ({
     return null;
   };
 
-
-  const activeIndex = getActiveElementIndex(circlePosition);
-  console.log("Активный элемент (сверху):", activeIndex);
-
-
-  useEffect(() => {
-    if (!isAnimating) {
-      const activeIdx = getActiveElementIndex(circlePosition);
-      setActiveTopElement(activeIdx);
-      // Возможно, вам нужно установить active в 'activeOne', 'activeTwo' и т.д.
-      // setActive(mapIndexToActiveState(activeIdx)); 
-    }
-    if (isAnimating) {
-      const timeoutId = setTimeout(() => setIsTextVisible(false), 0);
-      return () => clearTimeout(timeoutId);
-    } else {
-      setIsTextVisible(true);
-    }
-  }, [isAnimating, circlePosition]);
-
-  const circleElementStylesActive = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    border: '1px solid rgba(48, 62, 88, 0.5)',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: '-50px',
-    marginLeft: '-50px',
-    backgroundColor: '#F4F5F9',
-  }
-
-  const circleElementStylesNotActive = {
-    width: '6px',
-    height: '6px',
-    backgroundColor: '#42567A',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: '-25px', /* Половина высоты */
-    marginLeft: '-25px',
-  }
-
-
-  const handleMouseEnter = (e) => {
-    const btnActive = e.currentTarget.getAttribute('data-btn')
-    const btnName = e.currentTarget.getAttribute('data-name')
-    if (activeTopElement === `active${btnName}`) {
-      return;
-    }
-    setActive(btnActive)
-    gsap.to(e.currentTarget, {
-      ...circleElementStylesActive,
-      duration: 0.4,
-      scale: 1,
-      ease: "power4.inOut",
-    });
+  const ELEMENT_ANGLES = {
+    'activeOne': 0,
+    'activeFour': 90,   // Элемент 2 в вашей разметке (data-name='Four')
+    'activeThree': 180, // Элемент 3 в вашей разметке (data-name='Three')
+    'activeTwo': 270,   // Элемент 4 в вашей разметке (data-name='Two')
   };
 
-  const handleMouseLeave = (e) => {
-    const btnName = e.currentTarget.getAttribute('data-name')
-    if (activeTopElement === `active${btnName}`) {
+  const isTopActive = (elementName) => activeTopElement === elementName;
+
+  console.log(circlePosition)
+  console.log(activeTopElement)
+  console.log(active)
+  const handleClick = (e) => {
+    const clickedElementName = e.currentTarget.getAttribute('data-name');
+    const clickedElementId = `active${clickedElementName}`;
+
+    // Если элемент уже наверху, ничего не делаем
+    if (activeTopElement === clickedElementId) {
       return;
     }
-    setActive('')
-    gsap.to(e.currentTarget, {
-      ...circleElementStylesNotActive,
-      duration: 0.4,
-      scale: 1,
-      ease: "power4.inOut",
-    });
-  };
+
+    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '2') {
+      handleClickNext(1)
+    }
+
+    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '3') {
+      handleClickNext(2)
+    }
+
+    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '4') {
+      handleClickNext(3)
+    }
+
+
+    // 90
+    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '3') {
+      handleClickNext(2)
+    }
+
+    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '4') {
+      handleClickNext(3)
+    }
+
+    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '1') {
+      handleClickPrev(2)
+    }
+
+    // 180
+    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '4') {
+      handleClickNext(2)
+    }
+
+    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '2') {
+      handleClickPrev(2)
+    }
+
+    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '1') {
+      handleClickPrev(2)
+    }
+    // switch (clickedElementBtn) {
+    //     case '1':
+    //         // Элемент 1 всегда находится на 0deg в базовой разметке
+    //         if (circlePosition === 90) handleClickPrev(1); // 1 шаг назад
+    //         if (circlePosition === 180) handleClickPrev(2); // 2 шага назад
+    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(3); // 3 шага назад (или 1 вперед, если хотите кратчайший путь)
+    //         break;
+    //     case '2':
+    //         // Элемент 2 находится на 90deg в базовой разметке
+    //         if (circlePosition === 0) handleClickNext(1); // 1 шаг вперед
+    //         if (circlePosition === 180) handleClickPrev(1); // 1 шаг назад
+    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(2); // 2 шага назад
+    //         break;
+    //     case '3':
+    //         // Элемент 3 находится на 180deg в базовой разметке
+    //         if (circlePosition === 0) handleClickNext(2); // 2 шага вперед
+    //         if (circlePosition === 90 || circlePosition === -270) handleClickNext(1); // 1 шаг вперед
+    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(1); // 1 шаг назад
+    //         break;
+    //     case '4':
+    //         // Элемент 4 находится на 270deg в базовой разметке
+    //         if (circlePosition === 0) handleClickNext(3); // 3 шага вперед
+    //         if (circlePosition === 90 || circlePosition === -270) handleClickNext(2); // 2 шага вперед
+    //         if (circlePosition === 180) handleClickNext(1); // 1 шаг вперед
+    //         break;
+    // }
+
+  }
 
   const styleTransform = {
     transform: `rotate(${-circlePosition}deg)`,
@@ -169,12 +191,14 @@ export const Circle = ({
 
         <div
           ref={circleRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => !isTopActive('activeOne') && setActive('1')}
+          onMouseLeave={() => !isTopActive('activeOne') && setActive('')}
+          onClick={handleClick}
           data-name={'One'}
           data-btn={1}
           style={getCombinedStyle(1)}
-          className={`${activeTopElement === 'activeOne' ? `${styles.active}` : `${styles.block} ${styles.blockOne}`} ${styles.blockOne}`}>
+
+          className={`${styles.block} ${isTopActive('activeOne') ? styles.activeTop : ''} ${active === '1' ? styles.hover : ''}`}>
           <div className={styles.number}>
             {activeTopElement === 'activeOne' ? 1 : ''}
             {active === '1' ? active : ''}
@@ -191,12 +215,13 @@ export const Circle = ({
 
         <div
           // ref={circleRef}
-          data-name={'Two'}
+          data-name={'Four'}
           data-btn={2}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onClick={handleClick}
+          onMouseEnter={() => !isTopActive('activeFour') && setActive('2')}
+          onMouseLeave={() => !isTopActive('activeFour') && setActive('')}
           style={getCombinedStyle(2)}
-          className={`${activeTopElement === 'activeFour' ? `${styles.active}` : `${styles.block} ${styles.blockTwo}`} ${styles.blockTwo}`}>
+          className={`${styles.block} ${isTopActive('activeFour') ? styles.activeTop : ''} ${active === '2' ? styles.hover : ''}`}>
           {activeTopElement === 'activeFour' ? 2 : ''}
 
           {active === '2' ? active : ''}
@@ -216,10 +241,11 @@ export const Circle = ({
           // ref={circleRef}
           data-name={'Three'}
           data-btn={3}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => !isTopActive('activeThree') && setActive('3')}
+          onMouseLeave={() => !isTopActive('activeThree') && setActive('')}
+          onClick={handleClick}
           style={getCombinedStyle(3)}
-          className={`${activeTopElement === 'activeThree' ? `${styles.active}` : `${styles.block} ${styles.blockThree}`} ${styles.blockThree}`}>
+          className={`${styles.block} ${isTopActive('activeThree') ? styles.activeTop : ''} ${active === '3' ? styles.hover : ''}`}>
           {activeTopElement === 'activeThree' ? 3 : ''}
           {active === '3' ? active : ''}
 
@@ -235,12 +261,13 @@ export const Circle = ({
 
         <div
           // ref={circleRef}
-          data-name={'Four'}
+          data-name={'Two'}
           data-btn={4}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => !isTopActive('activeTwo') && setActive('4')}
+          onMouseLeave={() => !isTopActive('activeTwo') && setActive('')}
+          onClick={handleClick}
           style={getCombinedStyle(4)}
-          className={`${activeTopElement === 'activeTwo' ? `${styles.active}` : `${styles.block} ${styles.blockFourth}`} ${styles.blockFourth}`}>
+          className={`${styles.block} ${isTopActive('activeTwo') ? styles.activeTop : ''} ${active === '4' ? styles.hover : ''}`}>
           {activeTopElement === 'activeTwo' ? 4 : ''}
           {active === '4' ? active : ''}
           {isTextVisible && activeTopElement === 'activeTwo' && (
