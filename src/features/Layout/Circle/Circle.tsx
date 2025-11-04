@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Counter } from '../AppWrapper/Counter/Counter';
+import { CircleElement } from "./CircleElement/CircleElement";
 
 import { CircleTypes } from './types'
 
@@ -11,7 +12,6 @@ export const Circle = ({
   handleClickNext,
   handleClickPrev,
   data,
-  slide,
   isAnimating,
   circlePosition,
   currentValue,
@@ -19,10 +19,8 @@ export const Circle = ({
   currentValueEnd,
   prevValueEnd }: CircleTypes) => {
 
-  const circleRef = useRef(null);
-
   const [active, setActive] = useState('')
-  const [activeTopElement, setActiveTopElement] = useState('activeOne');
+  const [activeTopElement, setActiveTopElement] = useState<string | null>('activeOne');
 
   const [isTextVisible, setIsTextVisible] = useState(true);
 
@@ -51,100 +49,51 @@ export const Circle = ({
     return null;
   };
 
-  const ELEMENT_ANGLES = {
-    'activeOne': 0,
-    'activeFour': 90,   // Элемент 2 в вашей разметке (data-name='Four')
-    'activeThree': 180, // Элемент 3 в вашей разметке (data-name='Three')
-    'activeTwo': 270,   // Элемент 4 в вашей разметке (data-name='Two')
-  };
-
   const isTopActive = (elementName) => activeTopElement === elementName;
 
-  console.log(circlePosition)
-  console.log(activeTopElement)
-  console.log(active)
-  const handleClick = (e) => {
-    const clickedElementName = e.currentTarget.getAttribute('data-name');
-    const clickedElementId = `active${clickedElementName}`;
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isAnimating) {
+      return;
+    }
 
-    // Если элемент уже наверху, ничего не делаем
+    const clickedElementId = `active${e.currentTarget.getAttribute('data-name')}`;
     if (activeTopElement === clickedElementId) {
       return;
     }
 
-    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '2') {
-      handleClickNext(1)
+    switch (circlePosition) {
+      case 0:
+        if (active === '2') handleClickNext(1);
+        if (active === '3') handleClickNext(2);
+        if (active === '4') handleClickNext(3);
+        break;
+      case 90:
+        if (active === '3') handleClickNext(2);
+        if (active === '4') handleClickNext(3);
+        if (active === '1') handleClickPrev(2);
+        break;
+      case 180:
+        if (active === '4') handleClickNext(3);
+        if (active === '2') handleClickNext(1);
+        if (active === '1') handleClickPrev(2);
+        break;
+      case 270:
+        if (active === '3') handleClickNext(2);
+        if (active === '1') handleClickPrev(2);
+        if (active === '2') handleClickNext(1);
+        break;
+      default:
+        break;
     }
+  };
 
-    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '3') {
-      handleClickNext(2)
-    }
-
-    if (circlePosition === 0 && activeTopElement === 'activeOne' && active === '4') {
-      handleClickNext(3)
-    }
-
-
-    // 90
-    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '3') {
-      handleClickNext(2)
-    }
-
-    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '4') {
-      handleClickNext(3)
-    }
-
-    if (circlePosition === 90 && activeTopElement === 'activeFour' && active === '1') {
-      handleClickPrev(2)
-    }
-
-    // 180
-    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '4') {
-      handleClickNext(2)
-    }
-
-    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '2') {
-      handleClickPrev(2)
-    }
-
-    if (circlePosition === 180 && activeTopElement === 'activeThree' && active === '1') {
-      handleClickPrev(2)
-    }
-    // switch (clickedElementBtn) {
-    //     case '1':
-    //         // Элемент 1 всегда находится на 0deg в базовой разметке
-    //         if (circlePosition === 90) handleClickPrev(1); // 1 шаг назад
-    //         if (circlePosition === 180) handleClickPrev(2); // 2 шага назад
-    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(3); // 3 шага назад (или 1 вперед, если хотите кратчайший путь)
-    //         break;
-    //     case '2':
-    //         // Элемент 2 находится на 90deg в базовой разметке
-    //         if (circlePosition === 0) handleClickNext(1); // 1 шаг вперед
-    //         if (circlePosition === 180) handleClickPrev(1); // 1 шаг назад
-    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(2); // 2 шага назад
-    //         break;
-    //     case '3':
-    //         // Элемент 3 находится на 180deg в базовой разметке
-    //         if (circlePosition === 0) handleClickNext(2); // 2 шага вперед
-    //         if (circlePosition === 90 || circlePosition === -270) handleClickNext(1); // 1 шаг вперед
-    //         if (circlePosition === 270 || circlePosition === -90) handleClickPrev(1); // 1 шаг назад
-    //         break;
-    //     case '4':
-    //         // Элемент 4 находится на 270deg в базовой разметке
-    //         if (circlePosition === 0) handleClickNext(3); // 3 шага вперед
-    //         if (circlePosition === 90 || circlePosition === -270) handleClickNext(2); // 2 шага вперед
-    //         if (circlePosition === 180) handleClickNext(1); // 1 шаг вперед
-    //         break;
-    // }
-
-  }
 
   const styleTransform = {
     transform: `rotate(${-circlePosition}deg)`,
     transition: isAnimating ? 'transform 1s ease-in-out' : '',
   }
 
-  const getCombinedStyle = (elementId) => {
+  const getCombinedStyle = (elementId: number) => {
     let translateString = '';
 
     switch (elementId) {
@@ -188,98 +137,66 @@ export const Circle = ({
       </div>
 
       <div className={`${styles.wrapperAnimate}`} style={styleTransform}>
+        <CircleElement
+          dataName={'One'}
+          dataBtn={1}
+          nameTopActive={'activeOne'}
+          func={handleClick}
+          isTopActive={isTopActive}
+          setActive={setActive}
+          numberActive='1'
+          getCombinedStyle={getCombinedStyle}
+          active={active}
+          styles={styles}
+          isTextVisible={isTextVisible}
+          activeTopElement={activeTopElement}
+          data={data} />
 
-        <div
-          ref={circleRef}
-          onMouseEnter={() => !isTopActive('activeOne') && setActive('1')}
-          onMouseLeave={() => !isTopActive('activeOne') && setActive('')}
-          onClick={handleClick}
-          data-name={'One'}
-          data-btn={1}
-          style={getCombinedStyle(1)}
+        <CircleElement
+          dataName={'Four'}
+          dataBtn={2}
+          nameTopActive={'activeFour'}
+          func={handleClick}
+          isTopActive={isTopActive}
+          setActive={setActive}
+          numberActive='2'
+          getCombinedStyle={getCombinedStyle}
+          active={active}
+          styles={styles}
+          isTextVisible={isTextVisible}
+          activeTopElement={activeTopElement}
+          data={data} />
 
-          className={`${styles.block} ${isTopActive('activeOne') ? styles.activeTop : ''} ${active === '1' ? styles.hover : ''}`}>
-          <div className={styles.number}>
-            {activeTopElement === 'activeOne' ? 1 : ''}
-            {active === '1' ? active : ''}
-          </div>
+        <CircleElement
+          dataName={'Three'}
+          dataBtn={3}
+          nameTopActive={'activeThree'}
+          func={handleClick}
+          isTopActive={isTopActive}
+          setActive={setActive}
+          numberActive='3'
+          getCombinedStyle={getCombinedStyle}
+          active={active}
+          styles={styles}
+          isTextVisible={isTextVisible}
+          activeTopElement={activeTopElement}
+          data={data} />
 
-          {isTextVisible && activeTopElement === 'activeOne' && (
-            <>
-              <div className={styles.name}>
-                {data?.name}
-              </div>
-            </>
-          )}
-        </div>
-
-        <div
-          // ref={circleRef}
-          data-name={'Four'}
-          data-btn={2}
-          onClick={handleClick}
-          onMouseEnter={() => !isTopActive('activeFour') && setActive('2')}
-          onMouseLeave={() => !isTopActive('activeFour') && setActive('')}
-          style={getCombinedStyle(2)}
-          className={`${styles.block} ${isTopActive('activeFour') ? styles.activeTop : ''} ${active === '2' ? styles.hover : ''}`}>
-          {activeTopElement === 'activeFour' ? 2 : ''}
-
-          {active === '2' ? active : ''}
-
-          {isTextVisible && activeTopElement === 'activeFour' && (
-            <>
-              <div className={styles.name}>
-                {data?.name}
-              </div>
-            </>
-          )}
-
-        </div>
-
-
-        <div
-          // ref={circleRef}
-          data-name={'Three'}
-          data-btn={3}
-          onMouseEnter={() => !isTopActive('activeThree') && setActive('3')}
-          onMouseLeave={() => !isTopActive('activeThree') && setActive('')}
-          onClick={handleClick}
-          style={getCombinedStyle(3)}
-          className={`${styles.block} ${isTopActive('activeThree') ? styles.activeTop : ''} ${active === '3' ? styles.hover : ''}`}>
-          {activeTopElement === 'activeThree' ? 3 : ''}
-          {active === '3' ? active : ''}
-
-          {isTextVisible && activeTopElement === 'activeThree' && (
-            <>
-              <div className={styles.name}>
-                {data?.name}
-              </div>
-            </>
-          )}
-        </div>
-
-
-        <div
-          // ref={circleRef}
-          data-name={'Two'}
-          data-btn={4}
-          onMouseEnter={() => !isTopActive('activeTwo') && setActive('4')}
-          onMouseLeave={() => !isTopActive('activeTwo') && setActive('')}
-          onClick={handleClick}
-          style={getCombinedStyle(4)}
-          className={`${styles.block} ${isTopActive('activeTwo') ? styles.activeTop : ''} ${active === '4' ? styles.hover : ''}`}>
-          {activeTopElement === 'activeTwo' ? 4 : ''}
-          {active === '4' ? active : ''}
-          {isTextVisible && activeTopElement === 'activeTwo' && (
-            <>
-              <div className={styles.name}>
-                {data?.name}
-              </div>
-            </>
-          )}
-        </div>
+        <CircleElement
+          dataName={'Two'}
+          dataBtn={4}
+          nameTopActive={'activeTwo'}
+          func={handleClick}
+          isTopActive={isTopActive}
+          setActive={setActive}
+          numberActive='4'
+          getCombinedStyle={getCombinedStyle}
+          active={active}
+          styles={styles}
+          isTextVisible={isTextVisible}
+          activeTopElement={activeTopElement}
+          data={data} />
       </div>
-
     </div >
   )
 }
